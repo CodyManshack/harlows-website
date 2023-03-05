@@ -24,7 +24,13 @@
           </q-item-section>
         </q-item>
         <q-space/>
-        <q-btn round color="transparent" icon="navigation" />
+        <div>
+          <q-btn dense flat icon="ion-logo-instagram"/>
+          <q-btn dense flat icon="ion-logo-facebook"/>
+          <q-btn dense flat icon="ion-logo-twitter"/>
+        </div>
+        <q-space />
+        <q-btn color="primary" icon="ion-navigate" />
       </q-toolbar>
     </q-footer>
   </q-layout>
