@@ -7,7 +7,7 @@
     </q-card-section>
     <q-card-actions align="center">
       <template v-for="(spirit, index) in cocktail.spirits" :key="index">
-        <div class="text-h6 text-caption q-px-lg">{{ spirit }}</div>
+        <div class="text-h6 text-subtitle2 text-weight-light q-px-lg">{{ spirit }}</div>
       </template>
     </q-card-actions>
   </q-card>
