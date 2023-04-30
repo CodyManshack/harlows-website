@@ -1,15 +1,13 @@
 <template>
-  <q-layout view="hHh lpr fFf">
-    <q-header class="transparent">
-      <q-toolbar class="transparent">
-        <q-space />
-        <div class="column items-center q-mt-xl">
-          <h1 class="poiret-one no-margin text-h2 text-white text-center text-shadow">HARLOW<span>'</span>s</h1>
-          <DiamondDivider style="width: 340px;" class="q-pt-xs"/>
-        </div>
-        <q-space />
-      </q-toolbar>
-    </q-header>
+  <q-layout view="hhh lpr fFf">
+    <q-toolbar class="transparent">
+      <q-space />
+      <div class="column items-center q-mt-xl">
+        <h1 class="poiret-one no-margin text-h2 text-center text-shadow">HARLOW<span>'</span>s</h1>
+        <DiamondDivider style="width: 340px;" class="q-pt-xs"/>
+      </div>
+      <q-space />
+    </q-toolbar>
 
     <q-page-container>
       <router-view />
@@ -19,18 +17,15 @@
       <q-toolbar class="transparent">
         <q-item dense>
           <q-item-section>
-            <q-item-label class="poiret-one text-white text-shadow">wednesday – sunday</q-item-label>
-            <q-item-label class="poiret-one text-white text-shadow font-weight-thin">17:00 – 01:00</q-item-label>
+            <q-item-label class="poiret-one text-shadow">wednesday – sunday</q-item-label>
+            <q-item-label class="poiret-one text-shadow font-weight-thin">17:00 – 01:00</q-item-label>
           </q-item-section>
         </q-item>
         <q-space/>
-        <div>
-          <q-btn dense flat icon="ion-logo-instagram"/>
-          <q-btn dense flat icon="ion-logo-facebook"/>
-          <q-btn dense flat icon="ion-logo-twitter"/>
-        </div>
-        <q-space />
-        <q-btn color="primary" icon="ion-navigate" />
+        <q-btn flat icon="ion-logo-instagram"/>
+        <q-btn flat icon="ion-logo-facebook"/>
+        <q-btn flat icon="ion-call"/>
+        <q-btn flat icon="ion-navigate" />
       </q-toolbar>
     </q-footer>
   </q-layout>
