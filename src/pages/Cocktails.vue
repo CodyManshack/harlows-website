@@ -1,21 +1,36 @@
 <template>
   <q-page>
-    <div class="row justify-center q-mt-xl">
+    <div class="row justify-center">
       <div class="col-12 col-md-10">
-        <template v-for="cocktail in cocktails" :key="cocktail.name">
-          <CocktailCard :cocktail="cocktail"/>
-        </template>
+        <q-carousel
+          v-model="slide"
+          transition-prev="slide-down"
+          transition-next="slide-up"
+          swipeable
+          animated
+          :padding="false"
+          :vertical="true"
+          :arrows="true"
+          height="100%"
+          class="bg-transparent"
+        >
+          <template v-for="cocktail in cocktails" :key="cocktail.name">
+            <q-carousel-slide :name="cocktail.name" class="q-pa-none">
+              <CocktailCard :cocktail="cocktail" />
+            </q-carousel-slide>
+          </template>
+        </q-carousel>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import CocktailCard from 'src/components/CocktailCard.vue'
 
 export default defineComponent({
-  name: 'IndexPage',
+  name: 'Cocktails',
   components: { CocktailCard },
   setup () {
     const cocktails = [
@@ -39,7 +54,8 @@ export default defineComponent({
       }
     ]
     return {
-      cocktails
+      cocktails,
+      slide: ref(cocktails[0].name)
     }
   }
 })

@@ -1,12 +1,14 @@
 <template>
   <q-layout view="hhh lpr fFf">
-    <q-toolbar class="transparent">
+    <q-toolbar class="bg-green">
       <q-space />
+      <q-btn flat round dense icon="ion-menu" />
+      <!-- <q-space />
       <div class="column items-center q-mt-xl">
         <h1 class="poiret-one no-margin text-h2 text-center text-shadow">HARLOW<span>'</span>s</h1>
         <DiamondDivider style="width: 340px;" class="q-pt-xs"/>
       </div>
-      <q-space />
+      <q-space /> -->
     </q-toolbar>
 
     <q-page-container>
@@ -33,11 +35,11 @@
 
 <script>
 import { defineComponent } from 'vue'
-import DiamondDivider from '../components/DiamondDivider.vue'
+// import DiamondDivider from '../components/DiamondDivider.vue'
 
 export default defineComponent({
   name: 'MainLayout',
-  components: { DiamondDivider },
+  // components: { DiamondDivider },
   setup () {
     return {}
   }

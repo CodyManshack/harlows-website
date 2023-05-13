@@ -1,18 +1,14 @@
 <template>
-  <q-card square>
-    <q-img :src="cocktail.image" height="700px"></q-img>
-    <q-card-section class="q-pl-md q-py-md" horizontal>
-      <div class="row">
-        <div class="col-6">
-          <div class="text-h3 poiret-one q-py-lg">{{ cocktail.name }}</div>
-          <div class="text-body1 text-justify">{{ cocktail.description }}</div>
-        </div>
-        <q-separator vertical inset class="q-mx-lg"/>
-        <q-card-section class="col-5 q-py-none">
-          <div class="text-h5 text-center text-weight-thin q-pt-lg">Flavor Profile</div>
-          <FlavorProfileChart v-bind="cocktail"/>
-        </q-card-section>
-      </div>
+  <q-card square flat>
+    <q-img :src="cocktail.image" height="400px"></q-img>
+    <q-card-section class="q-py-none">
+      <div class="text-h3 poiret-one q-py-lg">{{ cocktail.name }}</div>
+      <div class="text-h5 text-center text-weight-thin q-pt-lg">Flavor Profile</div>
+      <FlavorProfileChart v-bind="cocktail"/>
+    </q-card-section>
+    <q-separator inset />
+    <q-card-section class="q-pl-md q-py-md">
+      <div class="text-body2 text-justify">{{ cocktail.description }}</div>
     </q-card-section>
   </q-card>
 </template>
