@@ -69,6 +69,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'vue/multi-word-component-names': 'off',
     
     'prefer-promise-reject-errors': 'off',
 
