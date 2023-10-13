@@ -62,10 +62,4 @@ video {
   width: 100%;
   height: 100%;
 }
-.harlows-orange {
-  background-color: #D65F27;
-}
-.harlows-light-green {
-  background-color: #334D44;
-}
 </style>
