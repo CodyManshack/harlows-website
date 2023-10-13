@@ -29,7 +29,7 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
-        <q-btn flat transparent label="About Us" class="text-weight-regular"></q-btn>
+        <q-btn flat transparent label="About Us" class="text-weight-regular" :to="{ name: 'about' }"></q-btn>
         <q-btn flat transparent label="Reserve A Table" class="text-weight-regular"></q-btn>
         <q-space />
       </q-toolbar>
