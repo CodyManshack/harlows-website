@@ -18,6 +18,21 @@
         </div>
       </div>
     </section>
+    <section>
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <img src="~/assets/cocktails/Sidecar.jpg" style="width: 100%; height: 100%"/>
+        </div>
+        <div class="col-md-4 col-sm-12 harlows-orange text-center flex items-center">
+          <div class="row justify-center q-pa-lg">
+            <div style="width: 80%;"><DiamondDivider /></div>
+            <h2 class="poiret-one text-uppercase">Tradition & Heritage</h2>
+            <p class="text-subtitle1">Indulge in a carefully curated selection of traditional cocktails. We are passionate about preserving the authenticity of the classics. Our work is our art, and our commitment to precision ensures that every cocktail we create is a continuance of the craftsmanship of the past.</p>
+            <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </q-page>
 </template>
 
@@ -46,6 +61,9 @@ video {
   display: block; // block fixes pixel buffer issue on bottom of video element
   width: 100%;
   height: 100%;
+}
+.harlows-orange {
+  background-color: #D65F27;
 }
 .harlows-light-green {
   background-color: #334D44;
