@@ -7,6 +7,18 @@ const routes = [
         path: '',
         name: 'home',
         component: () => import('pages/Index.vue')
+      },
+      {
+        path: 'menu',
+        redirect: { name: 'menu' },
+        children: [
+          {
+            path: ':lang',
+            name: 'menu',
+            component: () => import('pages/RestaurantMenu.vue'),
+            props: true
+          }
+        ]
       }
     ]
     // redirect: { name: 'cocktails' },

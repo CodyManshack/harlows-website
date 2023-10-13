@@ -8,27 +8,29 @@
       </q-bar>
       <q-toolbar class="q-pa-lg harlows-green">
         <q-space />
-        <q-img src="~/assets/logo.png" width="360px" class="q-mt-md"/>
+        <router-link :to="{ name: 'home' }">
+          <q-img src="~/assets/logo.png" width="360px" class="q-mt-md"/>
+        </router-link>
         <q-space />
       </q-toolbar>
       <q-toolbar class="harlows-green">
         <q-space />
-        <q-btn-dropdown flat transparent label="Menu">
+        <q-btn-dropdown flat transparent label="Menu" class="text-weight-regular">
           <q-list class="harlows-green">
-            <q-item clickable v-close-popup>
+            <q-item :to="{ name: 'menu', params: { lang: 'es'} }" v-close-popup>
               <q-item-section>
                 <q-item-label>Espanol</q-item-label>
               </q-item-section>
             </q-item>
-            <q-item clickable v-close-popup>
+            <q-item :to="{ name: 'menu', params: { lang: 'en'} }" v-close-popup>
               <q-item-section>
                 <q-item-label>English</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
         </q-btn-dropdown>
-        <q-btn flat transparent label="About Us"></q-btn>
-        <q-btn flat transparent label="Reserve A Table"></q-btn>
+        <q-btn flat transparent label="About Us" class="text-weight-regular"></q-btn>
+        <q-btn flat transparent label="Reserve A Table" class="text-weight-regular"></q-btn>
         <q-space />
       </q-toolbar>
     </q-header>
