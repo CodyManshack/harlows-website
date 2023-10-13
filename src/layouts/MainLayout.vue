@@ -1,20 +1,20 @@
 <template>
   <q-layout view="hhh lpr fff">
     <q-header>
-      <!-- <q-bar dense>
-        <div class="row items-center no-wrap">
-          <q-btn flat transparent class="poiret-one justify-center">C. Lepant 4, Valencia</q-btn>
-        </div>
-      </q-bar> -->
-      <q-toolbar class="q-pa-lg">
+      <q-bar class="harlows-orange">
+        <q-space/>
+        <q-btn flat transparent class="text-weight-regular" size="md">C. Lepant 4, Valencia</q-btn>
+        <q-space/>
+      </q-bar>
+      <q-toolbar class="q-pa-lg harlows-green">
         <q-space />
         <q-img src="~/assets/logo.png" width="360px" class="q-mt-md"/>
         <q-space />
       </q-toolbar>
-      <q-toolbar>
+      <q-toolbar class="harlows-green">
         <q-space />
         <q-btn-dropdown flat transparent label="Menu">
-          <q-list>
+          <q-list class="harlows-green">
             <q-item clickable v-close-popup>
               <q-item-section>
                 <q-item-label>Espanol</q-item-label>
@@ -37,7 +37,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer bordered>
+    <q-footer bordered class="harlows-orange">
       <q-toolbar class="transparent q-pa-md no-wrap justify-center">
         <q-item dense>
           <q-item-section>
@@ -71,11 +71,5 @@ export default defineComponent({
 body {
   background-image: linear-gradient(0deg, rgba(0,0,0,0.75), rgba(0,0,0,0.6)), url('../assets/dope-background.svg');
   background-position: 26.75% 12%;
-}
-.q-footer {
-  background-color: #D65F27;
-}
-.q-toolbar {
-  background-color: #16342A;
 }
 </style>
