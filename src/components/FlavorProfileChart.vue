@@ -41,6 +41,10 @@ export default defineComponent({
             fontSize: '10px'
           }
         }
+      },
+      yaxis: {
+        min: 0,
+        max: 5
       }
     }
     const series = computed(() => {
