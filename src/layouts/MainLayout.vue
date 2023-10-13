@@ -1,15 +1,37 @@
 <template>
   <q-layout view="hhh lpr fFf">
-    <q-toolbar class="bg-green">
-      <q-space />
-      <q-btn flat round dense icon="ion-menu" />
-      <!-- <q-space />
-      <div class="column items-center q-mt-xl">
-        <h1 class="poiret-one no-margin text-h2 text-center text-shadow">HARLOW<span>'</span>s</h1>
-        <DiamondDivider style="width: 340px;" class="q-pt-xs"/>
-      </div>
-      <q-space /> -->
-    </q-toolbar>
+    <q-header>
+      <!-- <q-bar dense>
+        <div class="row items-center no-wrap">
+          <q-btn flat transparent class="poiret-one justify-center">C. Lepant 4, Valencia</q-btn>
+        </div>
+      </q-bar> -->
+      <q-toolbar class="q-pa-lg">
+        <q-space />
+        <q-img src="~/assets/logo.png" width="360px" class="q-mt-md"/>
+        <q-space />
+      </q-toolbar>
+      <q-toolbar>
+        <q-space />
+        <q-btn-dropdown flat transparent label="Menu">
+          <q-list>
+            <q-item clickable v-close-popup>
+              <q-item-section>
+                <q-item-label>Espanol</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section>
+                <q-item-label>English</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+        <q-btn flat transparent label="About Us"></q-btn>
+        <q-btn flat transparent label="Reserve A Table"></q-btn>
+        <q-space />
+      </q-toolbar>
+    </q-header>
 
     <q-page-container>
       <router-view />
@@ -51,7 +73,7 @@ body {
   background-image: linear-gradient(0deg, rgba(0,0,0,0.75), rgba(0,0,0,0.6)), url('../assets/dope-background.svg');
   background-position: 26.75% 12%;
 }
-.full-width {
-  width: 100%;
+.q-toolbar {
+  background-color: #16342A;
 }
 </style>

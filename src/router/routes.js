@@ -1,16 +1,22 @@
-
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    redirect: { name: 'cocktails' },
     children: [
       {
-        path: 'cocktails',
-        name: 'cocktails',
-        component: () => import('pages/Cocktails.vue')
+        path: '',
+        name: 'home',
+        component: () => import('pages/Index.vue')
       }
     ]
+    // redirect: { name: 'cocktails' },
+    // children: [
+    //   {
+    //     path: 'cocktails',
+    //     name: 'cocktails',
+    //     component: () => import('pages/Cocktails.vue')
+    //   }
+    // ]
   },
 
   // Always leave this as last one,
