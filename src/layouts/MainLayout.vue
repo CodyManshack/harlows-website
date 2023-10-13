@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hhh lpr fFf">
+  <q-layout view="hhh lpr fff">
     <q-header>
       <!-- <q-bar dense>
         <div class="row items-center no-wrap">
@@ -37,18 +37,17 @@
       <router-view />
     </q-page-container>
 
-    <q-footer class="transparent">
-      <q-toolbar class="transparent">
+    <q-footer bordered>
+      <q-toolbar class="transparent q-pa-md no-wrap justify-center">
         <q-item dense>
           <q-item-section>
-            <q-item-label class="poiret-one text-shadow">wednesday – sunday</q-item-label>
-            <q-item-label class="poiret-one text-shadow font-weight-thin">17:00 – 01:00</q-item-label>
+            <q-item-label>Wednesday – Sunday</q-item-label>
+            <q-item-label>20:00 – 01:30</q-item-label>
           </q-item-section>
         </q-item>
-        <q-space/>
         <q-btn flat icon="ion-logo-instagram"/>
         <q-btn flat icon="ion-logo-facebook"/>
-        <q-btn flat icon="ion-call"/>
+        <q-btn flat icon="ion-mail"/>
         <q-btn flat icon="ion-navigate" />
       </q-toolbar>
     </q-footer>
@@ -72,6 +71,9 @@ export default defineComponent({
 body {
   background-image: linear-gradient(0deg, rgba(0,0,0,0.75), rgba(0,0,0,0.6)), url('../assets/dope-background.svg');
   background-position: 26.75% 12%;
+}
+.q-footer {
+  background-color: #D65F27;
 }
 .q-toolbar {
   background-color: #16342A;
