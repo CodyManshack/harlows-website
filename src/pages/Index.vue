@@ -33,6 +33,22 @@
         </div>
       </div>
     </section>
+    <section>
+      <div class="row">
+        <div class="col-md-4 col-sm-12 harlows-green text-center flex items-center">
+          <div class="row justify-center q-pa-lg">
+            <div style="width: 80%;"><DiamondDivider /></div>
+            <h2 class="poiret-one text-uppercase">Get Bent</h2>
+            <p class="text-subtitle1">Elevate your private gatherings to unparalleled heights by hosting your event at Harlows. Our intimate venue offers a captivating blend of timeless glamour and modern luxury, setting the stage for a celebration like no other. Whether it's an intimate soirée or a lively gathering, our dedicated team will work closely with you to curate an experience tailored to your vision. Indulge in handcrafted cocktails, complemented by a diverse selection of high-quality spirits, all served by neighbors you know and trust. With our attention to detail and commitment to excellence, your event will be an unforgettable affair.</p>
+            <q-btn label="Inquire" class="harlows-orange q-mt-lg"></q-btn>
+            <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
+          </div>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <img src="~/assets/cocktails/HemingwaySpecial.jpg" style="width: 100%; height: 100%"/>
+        </div>
+      </div>
+    </section>
   </q-page>
 </template>
 
