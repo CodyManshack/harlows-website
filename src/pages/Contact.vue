@@ -1,8 +1,21 @@
 <template>
-  <q-page padding>
+  <q-page>
+    <section class="row justify-center">
+      <div class="col-12">
+        <q-carousel
+          animated
+          v-model="state.slide"
+          navigation
+          infinite
+          autoplay
+        >
+          <q-carousel-slide v-for="(image, index) in images" :key="index" :name="index" :img-src="image" />
+        </q-carousel>
+      </div>
+    </section>
     <section class="row justify-center items-center">
       <q-card square flat class="col-md-6 col-sm-12 bg-primary">
-        <q-card-section>
+        <q-card-section class="text-center">
           <div class="poiret-one text-h2">Contact Us</div>
         </q-card-section>
         <q-card-section>
@@ -44,7 +57,11 @@
               type="textarea"
               label="Message"
               rows="10"
-            />
+            >
+              <template v-slot:prepend>
+                <q-icon name="ion-create" />
+              </template>
+            </q-input>
           </q-form>
         </q-card-section>
         <q-card-actions class="q-px-md q-pb-md">
@@ -66,7 +83,8 @@ export default defineComponent({
     const state = reactive({
       name: '',
       email: '',
-      message: ''
+      message: '',
+      slide: 1
     })
     const rules = {
       name: { required, minLength: minLength(3), maxLength: maxLength(64) },
@@ -76,7 +94,9 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, state)
 
-    return { state, v$ }
+    const images = ['cocktails/Sidecar.jpg', 'cocktails/BlackMojito.jpg', 'cocktails/HemingwaySpecial.jpg']
+
+    return { state, v$, images }
   },
   methods: {}
 })

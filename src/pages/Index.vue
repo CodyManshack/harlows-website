@@ -14,14 +14,14 @@
           </div>
         </div>
         <div class="col-md-8 col-sm-12">
-          <img src="~/assets/cocktails/BlackMojito.jpg" style="width: 100%; height: 100%"/>
+          <img src="cocktails/BlackMojito.jpg" style="width: 100%; height: 100%"/>
         </div>
       </div>
     </section>
     <section>
       <div class="row">
         <div class="col-md-8 col-sm-12">
-          <img src="~/assets/cocktails/Sidecar.jpg" style="width: 100%; height: 100%"/>
+          <img src="cocktails/Sidecar.jpg" style="width: 100%; height: 100%"/>
         </div>
         <div class="col-md-4 col-sm-12 bg-accent text-center flex items-center">
           <div class="row justify-center q-pa-lg">
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="col-md-8 col-sm-12">
-          <img src="~/assets/cocktails/HemingwaySpecial.jpg" style="width: 100%; height: 100%"/>
+          <img src="cocktails/HemingwaySpecial.jpg" style="width: 100%; height: 100%"/>
         </div>
       </div>
     </section>
