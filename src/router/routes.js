@@ -20,7 +20,7 @@ const routes = [
           {
             path: ':lang',
             name: 'menu',
-            component: () => import('pages/RestaurantMenu.vue'),
+            component: () => import('pages/BarMenu.vue'),
             props: true
           }
         ]

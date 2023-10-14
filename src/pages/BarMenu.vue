@@ -13,7 +13,7 @@
 import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
-  name: 'RestaurantMenu',
+  name: 'BarMenu',
   props: {
     lang: {
       type: String,
