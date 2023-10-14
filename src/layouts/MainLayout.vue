@@ -3,7 +3,16 @@
     <q-header>
       <q-bar class="harlows-orange">
         <q-space/>
-        <q-btn flat transparent class="text-weight-regular" size="md">C. Lepant 4, Valencia</q-btn>
+        <q-btn
+          flat
+          transparent
+          class="text-weight-regular"
+          size="md"
+          href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9"
+          target="_blank"
+        >
+        C. Lepant 4, Valencia <span class="spacer"/>Wednesday – Sunday <span class="spacer"/>20:00 – 01:30
+        </q-btn>
         <q-space/>
       </q-bar>
       <q-toolbar class="q-pa-lg harlows-green">
@@ -43,14 +52,19 @@
       <q-toolbar class="transparent q-pa-md no-wrap justify-center">
         <q-item dense>
           <q-item-section>
+            <q-item-label>C. Lepant 4, Valencia</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item dense>
+          <q-item-section>
             <q-item-label>Wednesday – Sunday</q-item-label>
             <q-item-label>20:00 – 01:30</q-item-label>
           </q-item-section>
         </q-item>
-        <q-btn flat icon="ion-logo-instagram"/>
-        <q-btn flat icon="ion-logo-facebook"/>
-        <q-btn flat icon="ion-mail"/>
-        <q-btn flat icon="ion-navigate" />
+        <q-btn flat icon="ion-logo-instagram" href="https://www.instagram.com/harlows.bar/" target="_blank"/>
+        <q-btn flat icon="ion-logo-facebook" href="https://www.facebook.com/people/Harlows-Bar/100093700941605/" target="_blank"/>
+        <q-btn flat icon="ion-mail" href="mailto:kalen@harlows.bar"/>
+        <q-btn flat icon="ion-navigate" href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9" target="_blank"/>
       </q-toolbar>
     </q-footer>
   </q-layout>
@@ -73,5 +87,8 @@ export default defineComponent({
 body {
   background-image: linear-gradient(0deg, rgba(0,0,0,0.75), rgba(0,0,0,0.6)), url('../assets/dope-background.svg');
   background-position: 26.75% 12%;
+}
+.spacer {
+  padding: 0 10px;
 }
 </style>
