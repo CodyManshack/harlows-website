@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hhh lpr fff">
     <q-header>
-      <q-bar class="harlows-orange">
+      <q-bar class="bg-accent">
         <q-space/>
         <q-btn
           flat
@@ -15,17 +15,17 @@
         </q-btn>
         <q-space/>
       </q-bar>
-      <q-toolbar class="q-pa-lg harlows-green">
+      <q-toolbar class="q-pa-lg">
         <q-space />
         <router-link :to="{ name: 'home' }">
           <q-img src="~/assets/logo.png" width="360px" class="q-mt-md"/>
         </router-link>
         <q-space />
       </q-toolbar>
-      <q-toolbar class="harlows-green">
+      <q-toolbar>
         <q-space />
         <q-btn-dropdown flat transparent label="Menu" class="text-weight-regular">
-          <q-list class="harlows-green">
+          <q-list>
             <q-item :to="{ name: 'menu', params: { lang: 'es'} }" v-close-popup>
               <q-item-section>
                 <q-item-label>Espanol</q-item-label>
@@ -48,7 +48,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer bordered class="harlows-orange">
+    <q-footer bordered class="bg-accent">
       <q-toolbar class="transparent q-pa-md no-wrap justify-center">
         <q-item dense>
           <q-item-section>

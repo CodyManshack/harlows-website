@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <section class="row justify-center items-center">
-      <q-card class="col-md-6 col-sm-12 harlows-light-green">
+      <q-card square flat class="col-md-6 col-sm-12 bg-primary">
         <q-card-section>
           <div class="poiret-one text-h2">Contact Us</div>
         </q-card-section>
@@ -48,7 +48,7 @@
           </q-form>
         </q-card-section>
         <q-card-actions class="q-px-md q-pb-md">
-          <q-btn label="Send Message" type="submit" icon-right="ion-send" size="md" class="harlows-orange" />
+          <q-btn label="Send Message" type="submit" icon-right="ion-send" size="md" color="accent" />
         </q-card-actions>
       </q-card>
     </section>
