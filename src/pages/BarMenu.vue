@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="flex justify-center">
+  <q-page class="flex justify-center">
     <iframe
       :key="menuPath"
       :src="menuPath"
