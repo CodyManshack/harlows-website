@@ -11,8 +11,10 @@
           href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9"
           target="_blank"
         >
-        C. Lepant 4, Valencia <span class="spacer"/>Wednesday – Sunday <span class="spacer"/>20:00 – 01:30
+        C. Lepant 4, Valencia
         </q-btn>
+        <div class="text-uppercase" style="font-size: 14px;">Wed. – Sun.</div>
+        <div style="font-size: 14px;">20:00 – 01:30</div>
         <q-space/>
       </q-bar>
       <q-toolbar class="q-pa-lg">
@@ -39,7 +41,6 @@
           </q-list>
         </q-btn-dropdown>
         <q-btn :to="{ name: 'contact' }" flat transparent label="Contact" class="text-weight-regular"></q-btn>
-        <q-btn flat transparent label="Reserve A Table" class="text-weight-regular"></q-btn>
         <q-space />
       </q-toolbar>
     </q-header>
