@@ -1,4 +1,6 @@
 export default {
   daysOpen: 'Wed. – Sun.',
-  menu: 'menu'
+  menu: 'menu',
+  contact: 'contact',
+  inquire: 'inquire'
 }

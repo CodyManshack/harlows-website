@@ -6,7 +6,7 @@
   </q-toolbar>
   <q-toolbar class="justify-center">
     <q-btn :to="{ name: 'menu' }" flat transparent :label="t('menu')" class="text-weight-regular"></q-btn>
-    <q-btn :to="{ name: 'contact' }" flat transparent label="Contact" class="text-weight-regular"></q-btn>
+    <q-btn :to="{ name: 'contact' }" flat transparent :label="t('contact')" class="text-weight-regular"></q-btn>
     <q-btn-dropdown flat transparent icon="ion-globe" class="text-weight-regular">
       <q-list class="bg-primary">
         <q-item

@@ -15,7 +15,7 @@
     <section class="row justify-center items-center">
       <q-card square flat class="col-md-6 col-sm-12 bg-primary q-mb-lg">
         <q-card-section class="text-center">
-          <div class="poiret-one text-h2">Contact Us</div>
+          <div class="poiret-one text-h2">{{ t('title') }}</div>
         </q-card-section>
         <q-card-section>
           <q-form @submit.stop="onSubmit" class="q-gutter-sm">
@@ -26,7 +26,7 @@
               :error-message="v$.name.$error ? v$.name.$errors[0].$message : ''"
               filled
               type="text"
-              label="Name"
+              :label="t('name')"
               required
             >
               <template v-slot:prepend>
@@ -40,7 +40,7 @@
               :error-message="v$.email.$error ? v$.email.$errors[0].$message : ''"
               filled
               type="email"
-              label="Email"
+              :label="t('email')"
               required
             >
               <template v-slot:prepend>
@@ -54,7 +54,7 @@
               :error-message="v$.message.$error ? v$.message.$errors[0].$message : ''"
               filled
               type="textarea"
-              label="Message"
+              :label="t('message')"
               rows="10"
             >
               <template v-slot:prepend>
@@ -64,7 +64,7 @@
           </q-form>
         </q-card-section>
         <q-card-actions class="q-px-md q-pb-md">
-          <q-btn label="Send Message" type="submit" icon-right="ion-send" size="md" color="accent" />
+          <q-btn :label="t('submit')" type="submit" icon-right="ion-send" size="md" color="accent" />
         </q-card-actions>
       </q-card>
     </section>
@@ -75,6 +75,7 @@
 import { defineComponent, reactive } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { email, required, minLength, maxLength } from '@vuelidate/validators'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'Contact',
@@ -95,8 +96,33 @@ export default defineComponent({
 
     const images = ['cocktails/Sidecar.jpg', 'cocktails/BlackMojito.jpg', 'cocktails/HemingwaySpecial.jpg']
 
-    return { state, v$, images }
+    const { t } = useI18n({
+      messages: {
+        en: {
+          title: 'Contact Us',
+          name: 'name',
+          email: 'email',
+          message: 'message',
+          submit: 'send message'
+        },
+        es: {
+          title: 'Contactar',
+          name: 'nombre',
+          email: 'correo electrónico',
+          message: 'mensaje',
+          submit: 'enviar mensaje'
+        }
+      }
+    })
+
+    return { state, v$, images, t }
   },
   methods: {}
 })
 </script>
+
+<style lang="scss">
+.q-field__label::first-letter { // ensure that all fields have a capital letter
+  text-transform: capitalize;
+}
+</style>

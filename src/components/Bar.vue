@@ -9,7 +9,7 @@
       href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9"
       target="_blank"
     >
-      C. Lepant 4, Valencia
+      C. Lepant 4, València
     </q-btn>
     <div class="text-uppercase" style="font-size: 14px;">{{ t('daysOpen') }}</div>
     <div style="font-size: 14px;">20:00 – 01:30</div>

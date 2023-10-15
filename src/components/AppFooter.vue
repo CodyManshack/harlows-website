@@ -3,7 +3,7 @@
     <q-toolbar class="transparent q-pa-md no-wrap justify-center">
       <q-item dense>
         <q-item-section>
-          <q-item-label>C. Lepant 4, Valencia</q-item-label>
+          <q-item-label>C. Lepant 4, València</q-item-label>
         </q-item-section>
       </q-item>
       <q-item dense>
