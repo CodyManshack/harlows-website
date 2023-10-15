@@ -60,6 +60,7 @@ module.exports = {
     'one-var': 'off',
     'no-void': 'off',
     'multiline-ternary': 'off',
+    'quotes': 'off',
 
     'import/first': 'off',
     'import/named': 'error',
