@@ -5,7 +5,6 @@
         <q-carousel
           animated
           v-model="state.slide"
-          navigation
           infinite
           autoplay
         >
@@ -14,7 +13,7 @@
       </div>
     </section>
     <section class="row justify-center items-center">
-      <q-card square flat class="col-md-6 col-sm-12 bg-primary">
+      <q-card square flat class="col-md-6 col-sm-12 bg-primary q-mb-lg">
         <q-card-section class="text-center">
           <div class="poiret-one text-h2">Contact Us</div>
         </q-card-section>
