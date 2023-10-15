@@ -8,7 +8,7 @@
       </q-item>
       <q-item dense>
         <q-item-section>
-          <q-item-label>Wednesday – Sunday</q-item-label>
+          <q-item-label>{{ t('daysOpen') }}</q-item-label>
           <q-item-label>20:00 – 01:30</q-item-label>
         </q-item-section>
       </q-item>
@@ -27,17 +27,7 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'AppFooter',
   setup () {
-    const { t } = useI18n({
-      locale: 'en',
-      messages: {
-        en: {
-          daysOpen: 'Wed. – Sun.'
-        },
-        es: {
-          daysOpen: 'X – D'
-        }
-      }
-    })
+    const { t } = useI18n()
     return { t }
   }
 })

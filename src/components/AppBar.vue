@@ -5,20 +5,7 @@
     </router-link>
   </q-toolbar>
   <q-toolbar class="justify-center">
-    <q-btn-dropdown flat transparent label="Menu" class="text-weight-regular">
-      <q-list class="bg-primary">
-        <q-item :to="{ name: 'menu', params: { lang: 'es'} }" v-close-popup>
-          <q-item-section>
-            <q-item-label>Espanol</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item :to="{ name: 'menu', params: { lang: 'en'} }" v-close-popup>
-          <q-item-section>
-            <q-item-label>English</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
+    <q-btn :to="{ name: 'menu' }" flat transparent :label="t('menu')" class="text-weight-regular"></q-btn>
     <q-btn :to="{ name: 'contact' }" flat transparent label="Contact" class="text-weight-regular"></q-btn>
     <q-btn-dropdown flat transparent icon="ion-globe" class="text-weight-regular">
       <q-list class="bg-primary">
@@ -45,12 +32,13 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'AppBar',
   setup () {
-    const { locale } = useI18n({ useScope: 'global' })
+    const { t, locale } = useI18n({ useScope: 'global' })
     return {
+      t,
       locale,
       localeOptions: [
         { value: 'en', label: 'English' },
-        { value: 'es', label: 'Espanol' }
+        { value: 'es', label: 'Español' }
       ]
     }
   },

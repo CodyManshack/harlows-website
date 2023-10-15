@@ -15,15 +15,8 @@ const routes = [
       },
       {
         path: 'menu',
-        redirect: { name: 'menu' },
-        children: [
-          {
-            path: ':lang',
-            name: 'menu',
-            component: () => import('pages/BarMenu.vue'),
-            props: true
-          }
-        ]
+        name: 'menu',
+        component: () => import('pages/BarMenu.vue')
       }
     ]
     // redirect: { name: 'cocktails' },

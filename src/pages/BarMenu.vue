@@ -10,21 +10,14 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'BarMenu',
-  props: {
-    lang: {
-      type: String,
-      default: 'es'
-    }
-  },
-  setup (props) {
-    const menuPath = ref(`${props.lang.toUpperCase()}_Harlows_Menu.pdf`)
-    watch(() => props.lang, (lang) => {
-      menuPath.value = `${lang.toUpperCase()}_Harlows_Menu.pdf`
-    })
+  setup () {
+    const { locale } = useI18n({ useScope: 'global' })
+    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlows_Menu.pdf` })
     return {
       menuPath
     }
