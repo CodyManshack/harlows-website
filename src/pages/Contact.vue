@@ -93,14 +93,14 @@
               square
               class="col-md-3 col-sm-8 bg-secondary"
               style="height: 200px;"
-              href="https://api.whatsapp.com/send?phone=34653777777"
+              href="https://api.whatsapp.com/send?phone=34692940844"
             >
               <div class="row justify-center items-center">
                 <div class="col-12">
                   <q-icon name="ion-logo-whatsapp" size="lg" color="accent" class="q-py-lg"/>
                 </div>
                 <h5 class="q-my-sm text-weight-medium col-12">{{ t('phone') }}</h5>
-                <p class="text-caption">(+34) 653 777 777</p>
+                <p class="text-caption">(+34) 692 940 844</p>
               </div>
             </q-btn>
             <q-btn
