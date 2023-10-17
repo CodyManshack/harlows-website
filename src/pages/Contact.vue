@@ -12,62 +12,6 @@
         </q-carousel>
       </div>
     </section>
-    <!-- <section class="row justify-center items-center">
-      <q-card square flat class="col-md-6 col-sm-12 bg-primary q-mb-lg">
-        <q-card-section class="text-center">
-          <div class="poiret-one text-h2">{{ t('title') }}</div>
-        </q-card-section>
-        <q-card-section>
-          <q-form @submit.stop="onSubmit" class="q-gutter-sm">
-            <q-input
-              v-model="state.name"
-              @blur="v$.name.$touch()"
-              :error="v$.name.$error"
-              :error-message="v$.name.$error ? v$.name.$errors[0].$message : ''"
-              filled
-              type="text"
-              :label="t('name')"
-              required
-            >
-              <template v-slot:prepend>
-                <q-icon name="ion-happy" />
-              </template>
-            </q-input>
-            <q-input
-              v-model="state.email"
-              @blur="v$.email.$touch()"
-              :error="v$.email.$error"
-              :error-message="v$.email.$error ? v$.email.$errors[0].$message : ''"
-              filled
-              type="email"
-              :label="t('email')"
-              required
-            >
-              <template v-slot:prepend>
-                <q-icon name="ion-mail" />
-              </template>
-            </q-input>
-            <q-input
-              v-model="state.message"
-              @blur="v$.message.$touch()"
-              :error="v$.message.$error"
-              :error-message="v$.message.$error ? v$.message.$errors[0].$message : ''"
-              filled
-              type="textarea"
-              :label="t('message')"
-              rows="10"
-            >
-              <template v-slot:prepend>
-                <q-icon name="ion-create" />
-              </template>
-            </q-input>
-          </q-form>
-        </q-card-section>
-        <q-card-actions class="q-px-md q-pb-md">
-          <q-btn :label="t('submit')" type="submit" icon-right="ion-send" size="md" color="accent" />
-        </q-card-actions>
-      </q-card>
-    </section> -->
     <section>
       <div class="row justify-center items-center text-center q-my-lg">
         <div class="col-md-8 col-sm-12">
@@ -166,20 +110,14 @@ export default defineComponent({
           subtitle: "For reservations and inquiries, simply send a carrier pigeon to the address listed. We can't wait to make your acquaintance!",
           address: "address",
           phone: "WhatsApp",
-          name: 'name',
-          email: 'email',
-          message: 'message',
-          submit: 'send message'
+          email: 'email'
         },
         es: {
           title: 'Contactar',
           subtitle: "Para reservas y consultas, basta con enviar una paloma mensajera a la dirección indicada. Estamos impacientes por conocerle.",
           address: 'dirección',
           phone: "WhatsApp",
-          name: 'nombre',
-          email: 'correo electrónico',
-          message: 'mensaje',
-          submit: 'enviar mensaje'
+          email: 'correo electrónico'
         }
       }
     })
@@ -192,9 +130,6 @@ export default defineComponent({
 
 <style lang="scss">
 .q-field__label::first-letter { // ensure that all fields have a capital letter
-  text-transform: capitalize;
-}
-.capitalize::first-letter {
   text-transform: capitalize;
 }
 iframe {
