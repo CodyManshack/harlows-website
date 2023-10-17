@@ -40,7 +40,7 @@
             <div style="width: 80%;"><DiamondDivider /></div>
             <h2 class="poiret-one text-uppercase">{{ t('sections[2].title') }}</h2>
             <p class="text-subtitle1">{{ t('sections[2].content') }}</p>
-            <q-btn :label="t('inquire')" class="q-mt-lg" color="accent"></q-btn>
+            <q-btn :label="t('inquire')" class="q-mt-lg" color="accent" href="mailto:info@harlows.bar"></q-btn>
             <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
           </div>
         </div>

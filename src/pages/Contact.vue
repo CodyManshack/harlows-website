@@ -51,7 +51,7 @@
               square
               class="col-md-3 col-sm-8 bg-secondary"
               style="height: 200px;"
-              href="mailto:kalen@harlows.bar"
+              href="mailto:info@harlows.bar"
             >
               <div class="row justify-center items-center">
                 <div class="col-12">
