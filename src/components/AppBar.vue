@@ -5,7 +5,7 @@
     </router-link>
   </q-toolbar>
   <q-toolbar class="justify-center">
-    <q-btn :to="{ name: 'menu' }" flat transparent :label="t('menu')" class="text-weight-regular"></q-btn>
+    <q-btn :href="menuPath" target="_blank" flat transparent :label="t('menu')" class="text-weight-regular"></q-btn>
     <q-btn :to="{ name: 'contact' }" flat transparent :label="t('contact')" class="text-weight-regular"></q-btn>
     <q-btn-dropdown flat transparent icon="ion-globe" class="text-weight-regular">
       <q-list class="bg-primary">
@@ -26,14 +26,16 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'AppBar',
   setup () {
     const { t, locale } = useI18n({ useScope: 'global' })
+    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlows_Menu.pdf` })
     return {
+      menuPath,
       t,
       locale,
       localeOptions: [
