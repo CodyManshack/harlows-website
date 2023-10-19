@@ -1,7 +1,7 @@
 <template>
   <q-toolbar class="q-pa-lg justify-center">
     <router-link :to="{ name: 'home' }">
-      <q-img src="~/assets/logo.png" width="360px" class="q-mt-md"/>
+      <q-img src="~/assets/logo.png" :width="$q.screen.lt.sm ? '300px' : '360px'" class="q-mt-md"/>
     </router-link>
   </q-toolbar>
   <q-toolbar class="justify-center">
@@ -28,13 +28,16 @@
 <script>
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'AppBar',
   setup () {
+    const $q = useQuasar()
     const { t, locale } = useI18n({ useScope: 'global' })
     const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlows_Menu.pdf` })
     return {
+      $q,
       menuPath,
       t,
       locale,
