@@ -5,7 +5,7 @@
     </video>
     <section>
       <div class="row">
-        <div class="col-md-4 col-sm-12 bg-secondary text-center flex items-center">
+        <div class="col-md-4 col-12 bg-secondary text-center flex items-center">
           <div class="row justify-center q-pa-lg">
             <div style="width: 80%;"><DiamondDivider /></div>
             <h2 class="poiret-one text-uppercase">{{ t('sections[0].title') }}</h2>
@@ -13,17 +13,17 @@
             <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
           </div>
         </div>
-        <div class="col-md-8 col-sm-12">
+        <div class="col-md-8 col-12">
           <img src="cocktails/BlackMojito.jpg" style="width: 100%; height: 100%"/>
         </div>
       </div>
     </section>
     <section>
       <div class="row">
-        <div class="col-md-8 col-sm-12">
+        <div :class="[$q.screen.lt.sm ? 'order-last' : '', 'col-md-8', 'col-12']">
           <img src="cocktails/Sidecar.jpg" style="width: 100%; height: 100%"/>
         </div>
-        <div class="col-md-4 col-sm-12 bg-accent text-center flex items-center">
+        <div class="col-md-4 col-12 bg-accent text-center flex items-center">
           <div class="row justify-center q-pa-lg">
             <div style="width: 80%;"><DiamondDivider /></div>
             <h2 class="poiret-one text-uppercase">{{ t('sections[1].title') }}</h2>
@@ -35,7 +35,7 @@
     </section>
     <section>
       <div class="row">
-        <div class="col-md-4 col-sm-12 text-center flex items-center">
+        <div class="col-md-4 col-12 text-center flex items-center">
           <div class="row justify-center q-pa-lg">
             <div style="width: 80%;"><DiamondDivider /></div>
             <h2 class="poiret-one text-uppercase">{{ t('sections[2].title') }}</h2>
@@ -44,7 +44,7 @@
             <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
           </div>
         </div>
-        <div class="col-md-8 col-sm-12">
+        <div class="col-md-8 col-12">
           <img src="cocktails/HemingwaySpecial.jpg" style="width: 100%; height: 100%"/>
         </div>
       </div>
@@ -56,11 +56,13 @@
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import DiamondDivider from 'src/components/DiamondDivider.vue'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'Home',
   components: { DiamondDivider },
   setup () {
+    const $q = useQuasar()
     const { t } = useI18n({
       messages: {
         en: {
@@ -98,6 +100,7 @@ export default defineComponent({
       }
     })
     return {
+      $q,
       t,
       sources: [
         {
