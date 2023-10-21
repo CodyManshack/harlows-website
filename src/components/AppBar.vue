@@ -5,7 +5,21 @@
     </router-link>
   </q-toolbar>
   <q-toolbar class="justify-center">
-    <q-btn :href="menuPath" target="_blank" flat transparent :label="t('menu')" class="text-weight-regular"></q-btn>
+    <q-btn-dropdown flat transparent :label="t('menu')" class="text-weight-regular">
+      <q-list class="bg-primary">
+        <q-item
+          v-for="(lang, i) in localeOptions"
+          :key="i"
+          @click="goToMenu(lang.value)"
+          v-close-popup
+          clickable
+        >
+          <q-item-section>
+            <q-item-label>{{ lang.label }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
     <q-btn :to="{ name: 'contact' }" flat transparent :label="t('contact')" class="text-weight-regular"></q-btn>
     <q-btn-dropdown flat transparent icon="ion-globe" class="text-weight-regular">
       <q-list class="bg-primary">
@@ -27,16 +41,19 @@
 
 <script>
 import { computed, defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'AppBar',
   setup () {
+    const router = useRouter()
     const $q = useQuasar()
     const { t, locale } = useI18n({ useScope: 'global' })
     const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlows_Menu.pdf` })
     return {
+      router,
       $q,
       menuPath,
       t,
@@ -50,6 +67,11 @@ export default defineComponent({
   methods: {
     selectLocale (lang) {
       this.locale = lang
+    },
+    goToMenu (lang) {
+      this.selectLocale(lang)
+      const routeData = this.router.resolve({ path: this.menuPath })
+      window.open(routeData.href, '_blank')
     }
   }
 })
