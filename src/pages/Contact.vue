@@ -2,17 +2,18 @@
   <q-page>
     <section class="row justify-center">
       <div class="col-12">
-        <q-carousel
+        <!-- <q-carousel
           animated
           v-model="state.slide"
           infinite
           autoplay
+          height="600px"
         >
           <q-carousel-slide v-for="(image, index) in images" :key="index" :name="index" :img-src="image" />
-        </q-carousel>
+        </q-carousel> -->
       </div>
     </section>
-    <section>
+    <section class="bg-secondary q-pb-xl">
       <div class="row justify-center items-center text-center q-my-lg">
         <div class="col-md-8 col-sm-12">
           <h2 class="q-mb-sm">{{ t('title') }}</h2>
@@ -39,11 +40,11 @@
         </div>
       </div>
     </section>
-    <section class="q-pt-xl">
+    <section>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.7956147359905!2d-0.38684602266516505!3d39.47394581247808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604fe3f94d65cf%3A0x4471acc1b9c7ad98!2sHarlow&#39;s%20Bar!5e0!3m2!1sen!2ses!4v1697395155698!5m2!1sen!2ses"
         width="100%"
-        height="450"
+        height="510"
         style="border:0;"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -75,7 +76,7 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, state)
 
-    const images = ['cocktails/Sidecar.jpg', 'cocktails/BlackMojito.jpg', 'cocktails/HemingwaySpecial.jpg']
+    const images = ['cocktails/sidecar/0.25x.png', 'cocktails/blackmojito/0.33x.png', 'cocktails/hemingwayspecial/0.25x.png']
 
     const { t } = useI18n({
       messages: {
