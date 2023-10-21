@@ -12,21 +12,8 @@ const routes = [
         path: 'contact',
         name: 'contact',
         component: () => import('pages/Contact.vue')
-      },
-      {
-        path: 'menu',
-        name: 'menu',
-        component: () => import('pages/BarMenu.vue')
       }
     ]
-    // redirect: { name: 'cocktails' },
-    // children: [
-    //   {
-    //     path: 'cocktails',
-    //     name: 'cocktails',
-    //     component: () => import('pages/Cocktails.vue')
-    //   }
-    // ]
   },
 
   // Always leave this as last one,
