@@ -66,6 +66,7 @@ export default defineComponent({
     const { t } = useI18n({
       messages: {
         en: {
+          inquire: 'inquire',
           sections: [
             {
               title: 'American Revival',
@@ -82,6 +83,7 @@ export default defineComponent({
           ]
         },
         es: {
+          inquire: 'consultar',
           sections: [
             {
               title: 'Renacimiento Americano',
