@@ -16,8 +16,8 @@
     <section class="bg-secondary q-pb-xl">
       <div class="row justify-center items-center text-center q-py-lg">
         <div class="col-md-8 col-sm-12">
-          <h2 class="q-mb-sm">{{ t('title') }}</h2>
-          <h3 class="text-subtitle1 q-px-md">{{  t('subtitle') }}</h3>
+          <h2 class="poiret-one q-mb-sm">{{ t('title') }}</h2>
+          <h3 class="text-subtitle1 q-px-md text-grey-4">{{  t('subtitle') }}</h3>
           <div class="row justify-center items-center q-gutter-lg q-my-md">
             <q-btn
               square
@@ -32,8 +32,8 @@
                 <div class="col-12">
                   <q-icon :name="`ion-${button.icon}`" size="lg" color="accent" class="q-py-lg"/>
                 </div>
-                <h5 class="q-my-sm text-weight-medium col-12">{{ t(button.title) }}</h5>
-                <p class="text-caption col-7 col-md-10">{{ button.subtitle }}</p>
+                <h5 class="poiret-one q-my-sm text-weight-bold col-12">{{ t(button.title) }}</h5>
+                <p class="text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
               </div>
             </q-btn>
           </div>

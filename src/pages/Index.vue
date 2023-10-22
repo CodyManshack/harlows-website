@@ -9,8 +9,8 @@
           <div class="col-xs-12 col-md-4 text-center flex items-center">
             <div class="row justify-center q-pa-lg">
               <div style="width: 80%;"><DiamondDivider /></div>
-              <h2 class="poiret-one text-uppercase">{{ t(`sections[${index}].title`) }}</h2>
-              <p class="text-subtitle1">{{ t(`sections[${index}].content`) }}</p>
+              <h3 class="poiret-one text-uppercase">{{ t(`sections[${index}].title`) }}</h3>
+              <p class="text-subtitle1 text-grey-4">{{ t(`sections[${index}].content`) }}</p>
               <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default defineComponent({
         img: 'cocktails/blackmojito/0.25x.png'
       },
       {
-        background: 'bg-secondary',
+        background: 'bg-accent',
         img: 'cocktails/brandyalexander/0.25x.png'
       },
       {
