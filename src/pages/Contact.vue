@@ -1,8 +1,8 @@
 <template>
   <q-page>
-    <section class="row justify-center">
+    <!-- <section class="row justify-center">
       <div class="col-12">
-        <!-- <q-carousel
+        <q-carousel
           animated
           v-model="state.slide"
           infinite
@@ -10,11 +10,11 @@
           height="600px"
         >
           <q-carousel-slide v-for="(image, index) in images" :key="index" :name="index" :img-src="image" />
-        </q-carousel> -->
+        </q-carousel>
       </div>
-    </section>
+    </section> -->
     <section class="bg-secondary q-pb-xl">
-      <div class="row justify-center items-center text-center q-my-lg">
+      <div class="row justify-center items-center text-center q-py-lg">
         <div class="col-md-8 col-sm-12">
           <h2 class="q-mb-sm">{{ t('title') }}</h2>
           <h3 class="text-subtitle1 q-px-md">{{  t('subtitle') }}</h3>
