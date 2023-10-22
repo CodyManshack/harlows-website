@@ -3,49 +3,20 @@
     <video autoplay loop muted>
       <source type="video/mp4" src="~/assets/video/cadillac-margarita.mp4">
     </video>
-    <section>
-      <div class="row">
-        <div class="col-md-4 col-12 bg-secondary text-center flex items-center">
-          <div class="row justify-center q-pa-lg">
-            <div style="width: 80%;"><DiamondDivider /></div>
-            <h2 class="poiret-one text-uppercase">{{ t('sections[0].title') }}</h2>
-            <p class="text-subtitle1">{{ t('sections[0].content') }}</p>
-            <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
+    <section v-for="(section, index) in sections" :key="index" :class="[section.background, 'row', 'justify-center']">
+      <div class="col-xs-12 col-md-10 col-lg-6">
+        <div class="row justify-center">
+          <div class="col-xs-12 col-md-4 text-center flex items-center">
+            <div class="row justify-center q-pa-lg">
+              <div style="width: 80%;"><DiamondDivider /></div>
+              <h2 class="poiret-one text-uppercase">{{ t(`sections[${index}].title`) }}</h2>
+              <p class="text-subtitle1">{{ t(`sections[${index}].content`) }}</p>
+              <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-8 col-12">
-          <img src="cocktails/BlackMojito.jpg" style="width: 100%; height: 100%"/>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="row">
-        <div :class="[$q.screen.lt.sm ? 'order-last' : '', 'col-md-8', 'col-12']">
-          <img src="cocktails/Sidecar.jpg" style="width: 100%; height: 100%"/>
-        </div>
-        <div class="col-md-4 col-12 bg-accent text-center flex items-center">
-          <div class="row justify-center q-pa-lg">
-            <div style="width: 80%;"><DiamondDivider /></div>
-            <h2 class="poiret-one text-uppercase">{{ t('sections[1].title') }}</h2>
-            <p class="text-subtitle1">{{ t('sections[1].content') }}</p>
-            <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
+          <div :class="[flipOrder(index) ? 'order-first' : '', 'col-md-6', 'col-12', 'flex', 'items-center']">
+            <img :src="section.img" style="max-width: 100%;" />
           </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="row">
-        <div class="col-md-4 col-12 text-center flex items-center">
-          <div class="row justify-center q-pa-lg">
-            <div style="width: 80%;"><DiamondDivider /></div>
-            <h2 class="poiret-one text-uppercase">{{ t('sections[2].title') }}</h2>
-            <p class="text-subtitle1">{{ t('sections[2].content') }}</p>
-            <q-btn :label="t('inquire')" class="q-mt-lg" color="accent" href="mailto:info@harlows.bar"></q-btn>
-            <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
-          </div>
-        </div>
-        <div class="col-md-8 col-12">
-          <img src="cocktails/HemingwaySpecial.jpg" style="width: 100%; height: 100%"/>
         </div>
       </div>
     </section>
@@ -70,7 +41,7 @@ export default defineComponent({
           sections: [
             {
               title: 'American Revival',
-              content: "Nestled in the heart of El Botanic, Harlow's teleports you to the gilded ages of the 1920s with its opulent geometric motifs, jazz melodies, and marble surfaces. Whether you're savoring a classic martini or discovering a signature concoction, Harlow's promises an unparalleled experience, where every sip is a journey into the golden age of glamour."
+              content: "Nestled in the heart of El Botanic, Harlow's teleports you to the gilded ages of the 1920s with its opulent geometric motifs, jazz melodies, and marble surfaces. Whether you're savoring a classic martini or discovering a signature concoction, Harlow's promises an unparalleled experience."
             },
             {
               title: 'Tradition & Heritage',
@@ -78,7 +49,7 @@ export default defineComponent({
             },
             {
               title: "Let's Party",
-              content: "Elevate your private gatherings to unparalleled heights by hosting your event at Harlows. Our intimate venue offers a captivating blend of timeless glamour and modern luxury, setting the stage for a celebration like no other. Whether it's an intimate soirée or a lively gathering, our dedicated team will work closely with you to curate an experience tailored to your vision. Indulge in handcrafted cocktails, complemented by a diverse selection of high-quality spirits, all served by neighbors you know and trust. With our attention to detail and commitment to excellence, your event will be an unforgettable affair."
+              content: "Elevate your private gatherings to unparalleled heights by hosting your event at Harlows. Our intimate venue offers a captivating blend of timeless glamour and modern luxury, setting the stage for a celebration like no other. Whether it's an intimate soirée or a lively gathering, our dedicated team will work closely with you to curate an experience tailored to your vision. Indulge in handcrafted cocktails, complemented by a diverse selection of high-quality spirits, all served by neighbors you know and trust."
             }
           ]
         },
@@ -87,7 +58,7 @@ export default defineComponent({
           sections: [
             {
               title: 'Renacimiento Americano',
-              content: "Enclavado en el corazón de El Botánico, Harlow's te teletransporta a la época dorada de los años 20 con sus opulentos motivos geométricos, melodías de jazz y superficies de mármol. Ya sea saboreando un martini clásico o descubriendo un brebaje de autor, Harlow's promete una experiencia sin igual, donde cada sorbo es un viaje a la edad dorada del glamour."
+              content: "Enclavado en el corazón de El Botánico, Harlow's te teletransporta a la época dorada de los años 20 con sus opulentos motivos geométricos, melodías de jazz y superficies de mármol. Ya sea saboreando un martini clásico o descubriendo un brebaje de autor, Harlow's promete una experiencia sin igual."
             },
             {
               title: 'Tradición & Patrimonio',
@@ -95,21 +66,41 @@ export default defineComponent({
             },
             {
               title: 'Vamos de Fiesta',
-              content: "Eleve sus reuniones privadas a cotas incomparables celebrando su evento en Harlows. Nuestro íntimo local ofrece una cautivadora mezcla de glamour atemporal y lujo moderno, preparando el escenario para una celebración sin igual. Tanto si se trata de una velada íntima como de una animada reunión, nuestro equipo trabajará estrechamente con usted para crear una experiencia a la medida de sus deseos. Deléitese con cócteles artesanales, complementados con una variada selección de licores de alta calidad, todo ello servido por vecinos que conoce y en los que confía. Con nuestra atención al detalle y nuestro compromiso con la excelencia, su evento será inolvidable."
+              content: "Eleve sus reuniones privadas a cotas incomparables celebrando su evento en Harlows. Nuestro íntimo local ofrece una cautivadora mezcla de glamour atemporal y lujo moderno, preparando el escenario para una celebración sin igual. Tanto si se trata de una velada íntima como de una animada reunión, nuestro equipo trabajará estrechamente con usted para crear una experiencia a la medida de sus deseos. Deléitese con cócteles artesanales, complementados con una variada selección de licores de alta calidad, todo ello servido por vecinos que conoce y en los que confía."
             }
           ]
         }
       }
     })
+    const sections = [
+      {
+        background: 'bg-primary',
+        img: 'cocktails/blackmojito/0.25x.png'
+      },
+      {
+        background: 'bg-secondary',
+        img: 'cocktails/brandyalexander/0.25x.png'
+      },
+      {
+        background: 'bg-primary',
+        img: 'cocktails/hemingwayspecial/0.25x.png'
+      }
+    ]
     return {
       $q,
       t,
+      sections,
       sources: [
         {
           src: '~/assets/video/cadillac-margarita.mp4',
           type: 'video/mp4'
         }
       ]
+    }
+  },
+  methods: {
+    flipOrder (index) {
+      return index === 1 && this.$q.screen.gt.sm
     }
   }
 })
