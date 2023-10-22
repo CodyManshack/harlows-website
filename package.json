@@ -1,8 +1,8 @@
 {
   "name": "harlows",
   "version": "0.0.1",
-  "description": "Harlows Bar",
-  "productName": "Harlows Bar",
+  "description": "Harlow's Bar",
+  "productName": "Harlow's Bar",
   "author": "cody.manshack@gmail.com",
   "private": true,
   "scripts": {
