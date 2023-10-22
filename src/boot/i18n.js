@@ -10,7 +10,7 @@ export default boot(({ app }) => {
       fr: 'es',
       it: 'es',
       de: 'en',
-      default: 'en'
+      default: 'es'
     },
     globalInjection: true,
     messages
