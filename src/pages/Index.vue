@@ -40,16 +40,16 @@ export default defineComponent({
           inquire: 'inquire',
           sections: [
             {
-              title: 'American Revival',
-              content: "Nestled in the heart of El Botanic, Harlow's teleports you to the gilded ages of the 1920s with its opulent geometric motifs, jazz melodies, and marble surfaces. Whether you're savoring a classic martini or discovering a signature concoction, Harlow's promises an unparalleled experience."
+              title: '1920s Classics',
+              content: "A new member in the El Botànic neighborhood of Valencia, Harlow's Bar specializes in classic prohibition-era cocktails and focuses on staying true to the original recipes. This cozy little hole in the wall offers the perfect place to for a night out: comfortable vintage seating, early 20th-century jazz, and an extensive list of both famous cocktails and new surprises for you to discover."
             },
             {
-              title: 'Tradition & Heritage',
-              content: "Indulge in a carefully curated selection of traditional cocktails. We are passionate about preserving the authenticity of the classics. Our work is our art, and our commitment to precision ensures that every cocktail we create is a continuance of the craftsmanship of the past."
+              title: 'A Cut Above',
+              content: "We take pride in our curated list of liquors and wines. We forego what is common and what it easy and instead stock our shelves with some of the highest-quality liquors from the peninsula and around the world. Our selection of tapas includes items inspired by mediterranean cuisine and our home state of Texas."
             },
             {
-              title: "Let's Party",
-              content: "Elevate your private gatherings to unparalleled heights by hosting your event at Harlows. Our intimate venue offers a captivating blend of timeless glamour and modern luxury, setting the stage for a celebration like no other. Whether it's an intimate soirée or a lively gathering, our dedicated team will work closely with you to curate an experience tailored to your vision. Indulge in handcrafted cocktails, complemented by a diverse selection of high-quality spirits, all served by neighbors you know and trust."
+              title: "Party like it's 1929",
+              content: "Add a touch of class and coziness to your next gathering by hosting your event at Harlow's. Whether you choose a small gathering in the loft or would like the entire bar to yourself, the team at Harlow's will ensure your event has the perfect ambiance and fantastic cocktails and tapas."
             }
           ]
         },
@@ -57,16 +57,16 @@ export default defineComponent({
           inquire: 'consultar',
           sections: [
             {
-              title: 'Renacimiento Americano',
-              content: "Enclavado en el corazón de El Botánico, Harlow's te teletransporta a la época dorada de los años 20 con sus opulentos motivos geométricos, melodías de jazz y superficies de mármol. Ya sea saboreando un martini clásico o descubriendo un brebaje de autor, Harlow's promete una experiencia sin igual."
+              title: 'Clásicos de los años 20',
+              content: "Un nuevo miembro en el barrio valenciano de El Botànic, el Harlow's Bar se especializa en cócteles clásicos de la época de la prohibición y se centra en mantenerse fiel a las recetas originales. Esta pequeña y acogedora joya ofrece el lugar perfecto para una noche de copas: cómodos asientos de época, jazz de principios del siglo XX y una extensa lista tanto de cócteles famosos como de nuevas sorpresas por descubrir."
             },
             {
-              title: 'Tradición & Patrimonio',
-              content: "Deléitese con una cuidada selección de cócteles tradicionales. Nos apasiona preservar la autenticidad de los clásicos. Nuestro trabajo es nuestro arte, y nuestro compromiso con la precisión garantiza que cada cóctel que creamos sea una continuación de la artesanía del pasado."
+              title: 'Por encima de los demás',
+              content: "Estamos orgullosos de nuestra selecta lista de licores y vinos. Renunciamos a lo común y a lo fácil y, en su lugar, abastecemos nuestras estanterías con algunos de los licores de mayor calidad de la península y de todo el mundo. Nuestra selección de tapas incluye artículos inspirados en la cocina mediterránea y en nuestro estado de origen, Texas."
             },
             {
-              title: 'Vamos de Fiesta',
-              content: "Eleve sus reuniones privadas a cotas incomparables celebrando su evento en Harlows. Nuestro íntimo local ofrece una cautivadora mezcla de glamour atemporal y lujo moderno, preparando el escenario para una celebración sin igual. Tanto si se trata de una velada íntima como de una animada reunión, nuestro equipo trabajará estrechamente con usted para crear una experiencia a la medida de sus deseos. Deléitese con cócteles artesanales, complementados con una variada selección de licores de alta calidad, todo ello servido por vecinos que conoce y en los que confía."
+              title: 'Fiesta como si fuera 1929',
+              content: "Añada un toque de clase y calidez a su próxima reunión celebrando su evento en Harlow's. Tanto si elige una pequeña reunión en el loft como si desea todo el bar para usted solo, el equipo de Harlow's se asegurará de que su evento tenga el ambiente perfecto y unos cócteles y tapas fantásticos."
             }
           ]
         }
