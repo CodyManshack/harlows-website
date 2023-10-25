@@ -101,7 +101,7 @@ export default defineComponent({
       {
         icon: 'pin',
         title: 'address',
-        subtitle: 'Carrer de Lepant 4, 46008 València',
+        subtitle: 'Carrer de Lepant 4, 46008 Valencia',
         href: 'https://maps.app.goo.gl/y8zXASHuxx2pLbyf9'
       },
       {
