@@ -10,8 +10,10 @@
       target="_blank"
     >
       C. Lepant 4, Valencia
-      <span :class="[ $q.screen.lt.sm ? 'q-px-sm' : 'q-px-md' ]">{{ t('daysOpen') }}</span>
+      <span :class="[ $q.screen.lt.sm ? 'q-px-sm' : 'q-px-md', 'wrap' ]">{{ t('daysOpen1') }}</span>
       19:00 – 01:30
+      <span :class="[ $q.screen.lt.sm ? 'q-px-sm' : 'q-px-md' ]">{{ t('daysOpen2') }}</span>
+      17:00 – 01:30
     </q-btn>
     <q-space/>
   </q-bar>
