@@ -23,7 +23,7 @@ export default defineComponent({
     })
     const sideBorder = props.size * (5 / 6) + 'px'
     const topBorder = props.size + 'px'
-    const stemHeight = props.size / 5 + 'px'
+    const stemHeight = props.size / 4 + 'px'
     const stemHeightNeg = '-' + stemHeight
     return {
       sideBorder,
