@@ -4,7 +4,7 @@
       v-for="(flavor, index) in flavorOrder"
       :key="index"
       :rotate="72 * index"
-      size="100"
+      :size="martiniGlassSize"
     />
   </div>
 </template>
@@ -54,12 +54,20 @@ export default defineComponent({
       validator (value) {
         return flavorRangeValidator(value)
       }
+    },
+    size: {
+      type: Number,
+      default: 200
     }
   },
   setup (props) {
     const flavorOrder = ['bitter', 'boozy', 'tart', 'citrus', 'sweet']
+    const martiniGlassSize = props.size * (1 / 3)
+    const containerSize = props.size + 'px'
     return {
-      flavorOrder
+      containerSize,
+      flavorOrder,
+      martiniGlassSize
     }
   }
 })
@@ -69,9 +77,8 @@ export default defineComponent({
   .flavor-chart {
     display: flex;
     justify-content: center;
-    align-items: center;
     position: relative;
-    height: 200px;
-    width: 200px;
+    height: v-bind(containerSize);
+    width: v-bind(containerSize);
   }
 </style>

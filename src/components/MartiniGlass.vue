@@ -23,7 +23,7 @@ export default defineComponent({
     })
     const sideBorder = props.size * (5 / 6) + 'px'
     const topBorder = props.size + 'px'
-    const stemHeight = props.size / 6 + 'px'
+    const stemHeight = props.size / 5 + 'px'
     const stemHeightNeg = '-' + stemHeight
     return {
       sideBorder,
@@ -39,9 +39,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .martini-glass {
   position: absolute;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-top: 60px solid #c3eef4;
+  border-left: v-bind(sideBorder) solid transparent;
+  border-right: v-bind(sideBorder) solid transparent;
+  border-top: v-bind(topBorder) solid #c3eef4;
   transform: rotate(v-bind(rotation)) translate(0, v-bind(stemHeightNeg));
   transform-origin: bottom center;
 
@@ -52,19 +52,19 @@ export default defineComponent({
 
   &::before {
     z-index: -2;
-    width: 2px;
+    width: 4px;
     height: v-bind(stemHeight);
-    top: -1px;
-    left: -1px;
+    top: -2px;
+    left: -2px;
     background: #c3eef4;
   }
 
-  // &::after {
-  //   width: 40px;
-  //   height: 2px;
-  //   top: 51px;
-  //   left: -19px;
-  //   background: #c3eef4;
-  // }
+  &::after {
+    width: 8px;
+    height: 8px;
+    top: 51px;
+    left: -19px;
+    background: #c3eef4;
+  }
 }
 </style>
