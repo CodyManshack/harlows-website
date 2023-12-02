@@ -4,6 +4,7 @@
       v-for="(flavor, index) in flavorOrder"
       :key="index"
       :rotate="72 * index"
+      size="100"
     />
   </div>
 </template>
@@ -70,7 +71,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
   }
 </style>
