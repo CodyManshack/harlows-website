@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <section>
-      <FlavorProfile style="height: 100%"></FlavorProfile>
+      <FlavorProfile v-bind="testProfile"></FlavorProfile>
     </section>
   </q-page>
 </template>
@@ -21,8 +21,16 @@ export default defineComponent({
         price: 11
       }
     ]
+    const testProfile = {
+      bitter: 3,
+      boozy: 2,
+      tart: 1,
+      citrus: 5,
+      sweet: 4
+    }
     return {
-      cocktails
+      cocktails,
+      testProfile
     }
   }
 })

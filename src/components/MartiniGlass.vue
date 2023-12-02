@@ -3,22 +3,35 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'MartiniGlass',
-  setup () {
-    return {}
+  props: {
+    rotate: {
+      type: Number,
+      default: 0
+    }
+  },
+  setup (props) {
+    const rotation = computed(() => {
+      return props.rotate + "deg"
+    })
+    return {
+      rotation
+    }
   }
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .martini-glass {
-  position: relative;
+  position: absolute;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
   border-top: 60px solid #c3eef4;
+  transform: rotate(v-bind(rotation)) translate(0, -20px);
+  transform-origin: bottom center;
 
   &::before, &::after {
     position: absolute;
