@@ -110,6 +110,8 @@ export default defineComponent({
       border-left: v-bind(liquidSideBorder) solid transparent;
       border-right: v-bind(liquidSideBorder) solid transparent;
       border-top: v-bind(liquidTopBorder) solid v-bind(liquidColor);
+      z-index: 1;
+      opacity: 0.8;
     }
   }
 }

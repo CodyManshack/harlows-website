@@ -1,5 +1,5 @@
 <template>
-  <BaseGlass v-bind="props">
+  <BaseGlass v-bind="props" liquidColor="#7c3138">
     <div class="pick">
       <div class="olive"></div>
       <div class="olive"></div>
@@ -63,8 +63,8 @@ export default defineComponent({
   height: calc(v-bind(pickSize) * 1.25);
   width: 2px;
   transform: skewX(140deg);
-  bottom: 10px;
-  left: calc(v-bind(pickSize) * 1.5);
+  bottom: calc(v-bind(pickSize) * .15);
+  left: calc((v-bind(pickSize) * 1.45));
 
   &::before, &::after {
     position: absolute;
@@ -76,9 +76,8 @@ export default defineComponent({
     width: v-bind(oliveSize);
     height: v-bind(oliveSize);
     transform: skewX(35deg);
-    background: rgb(101, 112, 97);
-    // left: calc(v-bind(oliveSize) * 1.5);
-    left: calc(v-bind(oliveSize) * -1 / 2);
+    background: rgb(129, 134, 74);
+    left: calc((v-bind(oliveSize) * -1 / 2));
 
     &:nth-child(1) {
       bottom: calc(v-bind(oliveSize) * .3);
