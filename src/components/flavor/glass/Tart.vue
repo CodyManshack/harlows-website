@@ -30,7 +30,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const lemonSize = Math.ceil(props.size * (1 / 3)) + 'px'
+    const lemonSize = Math.ceil(props.size * (2 / 3)) + 'px'
     return {
       lemonSize,
       props
@@ -47,9 +47,9 @@ $glassColor: rgba(230,229,234, 0.4);
   height: v-bind(lemonSize);
   border: 3px solid #f0c309;
   border-radius: 50%;
-  background: repeating-conic-gradient(#f6f0c5 25deg, #f6f0c5 30deg, #ffea00 35deg, #ffea00 70deg);
+  background: repeating-conic-gradient(#D1CCA7 25deg, #D1CCA7 30deg, #B3A400 35deg, #B3A400 70deg);
   top: calc(v-bind(lemonSize) * -1 / 2);
-  right: calc(v-bind(lemonSize) * -1 / 3);
-  z-index: -1;
+  right: calc(v-bind(lemonSize) * -1 / 2);
+  z-index: -3;
 }
 </style>
