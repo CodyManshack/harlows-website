@@ -1,5 +1,5 @@
 <template>
-  <BaseGlass v-bind="props" liquidColor="rgba(84, 55, 50, 0.8)">
+  <BaseGlass v-bind="props" liquidColor="rgba(84,55,50,0.85)">
   </BaseGlass>
 </template>
 
