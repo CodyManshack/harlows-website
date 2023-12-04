@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <FlavorProfile v-bind="testProfile"></FlavorProfile>
+    <FlavorProfile v-bind="testProfile" size="200" style="margin-top: 50px;"></FlavorProfile>
   </q-page>
 </template>
 
