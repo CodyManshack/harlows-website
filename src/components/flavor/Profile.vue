@@ -1,7 +1,8 @@
 <template>
   <div class="flavor-chart">
-    <FlavorProfileGlass
+    <component
       v-for="(flavor, index) in flavorOrder"
+      :is="flavor"
       :key="index"
       :rotate="72 * index"
       :size="martiniGlassSize"
@@ -12,14 +13,24 @@
 
 <script>
 import { defineComponent } from 'vue'
-import FlavorProfileGlass from 'src/components/flavor/glass/Boozy.vue'
+import Bitter from 'src/components/flavor/glass/Bitter.vue'
+import Boozy from 'src/components/flavor/glass/Boozy.vue'
+import Citrus from 'src/components/flavor/glass/Citrus.vue'
+import Sweet from 'src/components/flavor/glass/Sweet.vue'
+import Tart from 'src/components/flavor/glass/Tart.vue'
 
 const flavorRangeValidator = function (value) {
   return (value >= 0 && value <= 5)
 }
 export default defineComponent({
   name: 'FlavorProfile',
-  components: { FlavorProfileGlass },
+  components: {
+    Bitter,
+    Boozy,
+    Citrus,
+    Sweet,
+    Tart
+  },
   props: {
     bitter: {
       type: Number,

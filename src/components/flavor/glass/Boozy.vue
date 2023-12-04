@@ -13,7 +13,7 @@ import { defineComponent } from 'vue'
 import BaseGlass from 'src/components/flavor/glass/Base.vue'
 
 export default defineComponent({
-  name: 'BitterGlass',
+  name: 'Boozy',
   components: { BaseGlass },
   props: {
     liquidColor: {
@@ -52,7 +52,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .pick {
   position: absolute;
   background: rgb(138, 98, 50);
