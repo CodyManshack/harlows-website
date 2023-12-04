@@ -13,10 +13,6 @@ import { computed, defineComponent } from 'vue'
 export default defineComponent({
   name: 'BaseGlass',
   props: {
-    glassColor: {
-      type: String,
-      default: '#c3eef4'
-    },
     liquidColor: {
       type: String,
       default: '#60D4CB'
@@ -66,6 +62,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+$glassColor: rgba(230,229,234, 0.4);
 .martini {
   position: absolute;
   transform: rotate(v-bind(rotation)) translate(0, calc(-1 * v-bind(stemHeight)));
@@ -75,7 +72,7 @@ export default defineComponent({
     position: relative;
     border-left: v-bind(sideBorder) solid transparent;
     border-right: v-bind(sideBorder) solid transparent;
-    border-top: v-bind(topBorder) solid v-bind(glassColor);
+    border-top: v-bind(topBorder) solid $glassColor;
 
     &::before, &::after {
       content: '';
@@ -92,7 +89,7 @@ export default defineComponent({
       height: v-bind(stemHeight);
       top: calc(v-bind(stemWidth) / -2);
       left: calc(v-bind(stemWidth) / -2);
-      background: v-bind(glassColor);
+      background: $glassColor;
     }
 
     &::after { // central circle
@@ -100,7 +97,7 @@ export default defineComponent({
       height: v-bind(circleSize);
       top: v-bind(circleSpacer);
       left: calc(v-bind(circleSize) / -2 );
-      background: v-bind(glassColor);
+      background: $glassColor;
       border-radius: 50%;
     }
 
@@ -111,7 +108,6 @@ export default defineComponent({
       border-right: v-bind(liquidSideBorder) solid transparent;
       border-top: v-bind(liquidTopBorder) solid v-bind(liquidColor);
       z-index: 1;
-      opacity: 0.8;
     }
   }
 }

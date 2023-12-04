@@ -1,5 +1,5 @@
 <template>
-  <BaseGlass v-bind="props" liquidColor="#7c3138">
+  <BaseGlass v-bind="props" liquidColor="rgba(224, 218, 207, 0.7)">
     <div class="pick">
       <div class="olive"></div>
       <div class="olive"></div>
@@ -16,10 +16,6 @@ export default defineComponent({
   name: 'BitterGlass',
   components: { BaseGlass },
   props: {
-    glassColor: {
-      type: String,
-      default: '#c3eef4'
-    },
     liquidColor: {
       type: String,
       default: '#60D4CB'
