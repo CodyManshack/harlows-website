@@ -1,12 +1,12 @@
 <template>
   <q-page padding>
-    <FlavorProfile v-bind="testProfile" size="200" style="margin-top: 50px;"></FlavorProfile>
+    <FlavorProfile v-bind="testProfile" :size="200" style="margin-top: 50px;"></FlavorProfile>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import FlavorProfile from 'src/components/FlavorProfile.vue'
+import FlavorProfile from 'src/components/flavor/Profile.vue'
 
 export default defineComponent({
   name: 'BarMenu',

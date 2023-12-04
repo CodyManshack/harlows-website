@@ -3,6 +3,7 @@
     <div class="glass">
       <div class="liquid"></div>
     </div>
+    <slot />
   </div>
 </template>
 
@@ -10,7 +11,7 @@
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'MartiniGlass',
+  name: 'BaseGlass',
   props: {
     glassColor: {
       type: String,
