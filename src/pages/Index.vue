@@ -80,7 +80,7 @@ export default defineComponent({
         }
       }
     })
-    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_21.12.pdf` })
+    const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_21.12.pdf` })
     const sections = [
       {
         background: 'bg-primary',
