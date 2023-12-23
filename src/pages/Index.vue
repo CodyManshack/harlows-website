@@ -1,8 +1,12 @@
 <template>
   <q-page>
-    <video autoplay loop muted>
-      <source type="video/mp4" src="~/assets/video/cadillac-margarita.mp4">
-    </video>
+    <section>
+      <q-img src="cocktails/Whiskey_Sour.png">
+        <div class="absolute-full flex flex-center">
+          <q-btn :label="t('viewMenu')" color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" @click="goToMenu()" />
+        </div>
+      </q-img>
+    </section>
     <section v-for="(section, index) in sections" :key="index" :class="[section.background, 'row', 'justify-center']">
       <div class="col-xs-12 col-md-10 col-lg-6">
         <div class="row justify-center">
@@ -24,7 +28,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import DiamondDivider from 'src/components/DiamondDivider.vue'
 import { useQuasar } from 'quasar'
@@ -33,8 +38,9 @@ export default defineComponent({
   name: 'Home',
   components: { DiamondDivider },
   setup () {
+    const router = useRouter()
     const $q = useQuasar()
-    const { t } = useI18n({
+    const { t, locale } = useI18n({
       messages: {
         en: {
           inquire: 'inquire',
@@ -51,7 +57,8 @@ export default defineComponent({
               title: "Party like it's 1929",
               content: "Add a touch of class and coziness to your next gathering by hosting your event at Harlow's. Whether you choose a small gathering in the loft or would like the entire bar to yourself, the team at Harlow's will ensure your event has the perfect ambiance and fantastic cocktails and tapas."
             }
-          ]
+          ],
+          viewMenu: 'view the menu'
         },
         es: {
           inquire: 'consultar',
@@ -68,10 +75,12 @@ export default defineComponent({
               title: 'Fiesta como si fuera 1929',
               content: "Añada un toque de clase y calidez a su próxima reunión celebrando su evento en Harlow's. Tanto si elige una pequeña reunión en el loft como si desea todo el bar para usted solo, el equipo de Harlow's se asegurará de que su evento tenga el ambiente perfecto y unos cócteles y tapas fantásticos."
             }
-          ]
+          ],
+          viewMenu: 'ver la carta'
         }
       }
     })
+    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_21.12.pdf` })
     const sections = [
       {
         background: 'bg-primary',
@@ -89,6 +98,8 @@ export default defineComponent({
     return {
       $q,
       t,
+      menuPath,
+      router,
       sections,
       sources: [
         {
@@ -99,6 +110,10 @@ export default defineComponent({
     }
   },
   methods: {
+    goToMenu () {
+      const routeData = this.router.resolve({ path: this.menuPath })
+      window.open(routeData.href, '_blank')
+    },
     flipOrder (index) {
       return index === 1 && this.$q.screen.gt.sm
     }
