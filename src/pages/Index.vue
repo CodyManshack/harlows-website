@@ -51,11 +51,11 @@ export default defineComponent({
             },
             {
               title: 'A Cut Above',
-              content: "We take pride in our curated list of liquors and wines. We forego what is common and what it easy and instead stock our shelves with some of the highest-quality liquors from the peninsula and around the world. Our selection of tapas includes items inspired by mediterranean cuisine and our home state of Texas."
+              content: "We take pride in our curated list of liquors and wines. We forego what is common and what it easy and instead stock our shelves with some of the highest-quality liquors from the peninsula and around the world. Our selection of gourmet and artisan snacks offer you new flavors to explore."
             },
             {
               title: "Party like it's 1929",
-              content: "Add a touch of class and coziness to your next gathering by hosting your event at Harlow's. Whether you choose a small gathering in the loft or would like the entire bar to yourself, the team at Harlow's will ensure your event has the perfect ambiance and fantastic cocktails and tapas."
+              content: "Add a touch of class and coziness to your next gathering by hosting your event at Harlow's. Whether you choose a small gathering in the loft or would like the entire bar to yourself, the team at Harlow's will ensure your event has the perfect ambiance and fantastic cocktails and treats."
             }
           ],
           viewMenu: 'view the menu'
@@ -69,18 +69,18 @@ export default defineComponent({
             },
             {
               title: 'Por encima de los demás',
-              content: "Estamos orgullosos de nuestra selecta lista de licores y vinos. Renunciamos a lo común y a lo fácil y, en su lugar, abastecemos nuestras estanterías con algunos de los licores de mayor calidad de la península y de todo el mundo. Nuestra selección de tapas incluye artículos inspirados en la cocina mediterránea y en nuestro estado de origen, Texas."
+              content: "Estamos orgullosos de nuestra selecta lista de licores y vinos. Renunciamos a lo común y a lo fácil y, en su lugar, abastecemos nuestras estanterías con algunos de los licores de mayor calidad de la península y de todo el mundo. Nuestra selección de aperitivos gourmet y artesanos te ofrece nuevos sabores para explorar."
             },
             {
               title: 'Fiesta como si fuera 1929',
-              content: "Añada un toque de clase y calidez a su próxima reunión celebrando su evento en Harlow's. Tanto si elige una pequeña reunión en el loft como si desea todo el bar para usted solo, el equipo de Harlow's se asegurará de que su evento tenga el ambiente perfecto y unos cócteles y tapas fantásticos."
+              content: "Añada un toque de clase y calidez a su próxima reunión celebrando su evento en Harlow's. Tanto si elige una pequeña reunión en el loft como si desea todo el bar para usted solo, el equipo de Harlow's se asegurará de que su evento tenga el ambiente perfecto y unos cócteles y delicias fantásticos."
             }
           ],
           viewMenu: 'ver la carta'
         }
       }
     })
-    const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_21.12.pdf` })
+    const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_23.12.pdf` })
     const sections = [
       {
         background: 'bg-primary',
