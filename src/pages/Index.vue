@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <section>
-      <q-img src="cocktails/whiskey_sour/0.5x.png">
+      <q-img :src="$q.screen.md ? 'cocktails/whiskey_sour/0.5x.png' : 'cocktails/whiskey_sour/0.33x.png'">
         <div class="absolute-full flex flex-center">
           <q-btn :label="t('viewMenu')" color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" @click="goToMenu()" />
         </div>
