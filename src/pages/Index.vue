@@ -3,7 +3,21 @@
     <section>
       <q-img :src="$q.screen.md ? 'cocktails/whiskey_sour/0.5x.png' : 'cocktails/whiskey_sour/0.33x.png'">
         <div class="absolute-full flex flex-center">
-          <q-btn :label="t('viewMenu')" color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" @click="goToMenu()" />
+          <q-btn-dropdown color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" :label="t('viewMenu')" class="text-weight-regular">
+            <q-list class="bg-primary">
+              <q-item
+                v-for="(lang, i) in localeOptions"
+                :key="i"
+                @click="goToMenu(lang.value)"
+                v-close-popup
+                clickable
+              >
+                <q-item-section>
+                  <q-item-label>{{ lang.label }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </div>
       </q-img>
     </section>
@@ -80,6 +94,10 @@ export default defineComponent({
         }
       }
     })
+    const localeOptions = [
+      { value: 'en', label: 'English' },
+      { value: 'es', label: 'Español' }
+    ]
     const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_23.12.pdf` })
     const sections = [
       {
@@ -98,6 +116,8 @@ export default defineComponent({
     return {
       $q,
       t,
+      locale,
+      localeOptions,
       menuPath,
       router,
       sections,
@@ -110,7 +130,8 @@ export default defineComponent({
     }
   },
   methods: {
-    goToMenu () {
+    goToMenu (lang) {
+      this.locale = lang
       const routeData = this.router.resolve({ path: this.menuPath })
       window.open(routeData.href, '_blank')
     },
