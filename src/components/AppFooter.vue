@@ -1,5 +1,5 @@
 <template>
-  <q-footer bordered class="bg-accent">
+  <q-footer class="bg-transparent">
     <div class="row justify-center items-center q-py-md">
       <div class="col-md-9 col-12 flex items-center justify-center">
         <q-btn flat icon="ion-logo-instagram" href="https://www.instagram.com/harlows.bar/" target="_blank"/>
@@ -7,11 +7,6 @@
         <q-btn flat icon="ion-logo-whatsapp" href="https://api.whatsapp.com/send?phone=34692940844" />
         <q-btn flat icon="ion-mail" href="mailto:kalen@harlows.bar"/>
         <q-btn flat icon="ion-navigate" href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9" target="_blank"/>
-      </div>
-    </div>
-    <div class="row justify-center items-center">
-      <div class="col-md-9 col-12 text-center">
-        <div class="text-caption text-grey-4">© 2023 Harlow's Bar</div>
       </div>
     </div>
   </q-footer>
