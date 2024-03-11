@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <section>
+    <!-- <section>
       <q-img :src="$q.screen.md ? 'location/0.33x.png' : 'location/0.1x.png'">
         <div class="absolute-full flex flex-center">
           <q-btn-dropdown color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" :label="t('viewMenu')" class="text-weight-regular">
@@ -38,6 +38,16 @@
         </div>
       </div>
     </section>
+    <section>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.7956147359905!2d-0.38684602266516505!3d39.47394581247808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604fe3f94d65cf%3A0x4471acc1b9c7ad98!2sHarlow&#39;s%20Bar!5e0!3m2!1sen!2ses!4v1697395155698!5m2!1sen!2ses"
+        width="100%"
+        height="510"
+        style="border:0;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </section> -->
   </q-page>
 </template>
 
@@ -45,12 +55,12 @@
 import { computed, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import DiamondDivider from 'src/components/DiamondDivider.vue'
+// import DiamondDivider from 'src/components/DiamondDivider.vue'
 import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'Home',
-  components: { DiamondDivider },
+  components: { },
   setup () {
     const router = useRouter()
     const $q = useQuasar()

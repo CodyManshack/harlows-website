@@ -1,9 +1,6 @@
 <template>
-  <q-layout view="hhh lpr fff">
-    <q-header>
-      <Bar />
-      <AppBar />
-    </q-header>
+  <q-layout view="hHh lpr fff">
+    <AppBar />
 
     <q-page-container>
       <router-view />
@@ -16,21 +13,14 @@
 <script>
 import { defineComponent } from 'vue'
 import AppBar from '../components/AppBar.vue'
-import Bar from '../components/Bar.vue'
+// import Bar from '../components/Bar.vue'
 import AppFooter from '../components/AppFooter.vue'
 
 export default defineComponent({
   name: 'MainLayout',
-  components: { AppBar, Bar, AppFooter },
+  components: { AppBar, AppFooter },
   setup () {
     return {}
   }
 })
 </script>
-
-<style lang="scss">
-body {
-  background-image: linear-gradient(0deg, rgba(0,0,0,0.75), rgba(0,0,0,0.6)), url('../assets/dope-background.svg');
-  background-position: 26.75% 12%;
-}
-</style>
