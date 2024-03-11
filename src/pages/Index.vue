@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <section>
-      <q-img :src="$q.screen.md ? 'cocktails/whiskey_sour/0.5x.png' : 'cocktails/whiskey_sour/0.33x.png'">
+      <q-img :src="$q.screen.md ? 'location/0.33x.png' : 'location/0.1x.png'">
         <div class="absolute-full flex flex-center">
           <q-btn-dropdown color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" :label="t('viewMenu')" class="text-weight-regular">
             <q-list class="bg-primary">
@@ -102,15 +102,15 @@ export default defineComponent({
     const sections = [
       {
         background: 'bg-primary',
-        img: 'cocktails/blackmojito/0.25x.png'
+        img: 'cocktails/dirtymartini/0.25x.png'
       },
       {
         background: 'bg-accent',
-        img: 'cocktails/brandyalexander/0.25x.png'
+        img: 'cocktails/amarettosour/0.25x.png'
       },
       {
         background: 'bg-primary',
-        img: 'cocktails/hemingwayspecial/0.25x.png'
+        img: 'cocktails/aviation/0.25x.png'
       }
     ]
     return {
