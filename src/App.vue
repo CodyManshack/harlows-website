@@ -24,3 +24,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+body.body--dark {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('./assets/location/0.25x.png') no-repeat fixed;
+  background-blend-mode: darken;
+  background-size: cover;
+  background-position: 57% 0%;
+}
+</style>
