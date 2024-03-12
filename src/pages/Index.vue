@@ -1,5 +1,37 @@
 <template>
-  <q-page>
+  <q-page class="max-height-full">
+    <section>
+      <div class="row justify-center" style="padding-top: 20%;">
+        <div class="col-xs-10 text-h3 text-weight-light">Classic cocktails & vintage charm</div>
+      </div>
+      <div class="row justify-center" style="padding-top: 50%;">
+        <div class="col-xs-10 items-center text-center">
+          <q-btn-dropdown
+            square
+            color="accent"
+            padding="sm lg"
+            :size="$q.screen.xs ? 'lg' : 'xl'"
+            :label="t('viewMenu')"
+            class="text-weight-regular"
+            content-class="bg-accent no-border-radius"
+          >
+            <q-list separator>
+              <q-item
+                v-for="(lang, i) in localeOptions"
+                :key="i"
+                @click="goToMenu(lang.value)"
+                v-close-popup
+                clickable
+              >
+                <q-item-section>
+                  <q-item-label>{{ lang.label }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+        </div>
+      </div>
+    </section>
     <!-- <section>
       <q-img :src="$q.screen.md ? 'location/0.33x.png' : 'location/0.1x.png'">
         <div class="absolute-full flex flex-center">
@@ -157,5 +189,8 @@ video {
   display: block; // block fixes pixel buffer issue on bottom of video element
   width: 100%;
   height: 100%;
+}
+.max-height-full {
+  max-height: calc(100% - 68px - 50px);
 }
 </style>
