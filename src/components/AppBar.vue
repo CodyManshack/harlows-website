@@ -1,110 +1,76 @@
 <template>
-  <q-header class="bg-transparent">
-    <q-toolbar class="q-py-md justify-center">
+  <q-header class="bg-primary">
+    <q-toolbar class="q-py-sm justify-center">
       <q-btn
         flat
         dense
         icon="menu"
-        style="position: absolute; left: 12px; top: 12px;"
+        style="position: absolute; left: 12px; top: 8px;"
         @click="drawer = !drawer"
       />
       <router-link :to="{ name: 'home' }">
         <q-img
-          src="~/assets/logo.png"
-          :width="$q.screen.gt.md ? '260px' : '180px'"
-          style="color: white;"
+          src="~/assets/logo-0.1x.png"
+          :width="$q.screen.gt.md ? '260px' : '140px'"
+          style="color: #7a3c18;"
         />
       </router-link>
-      <!-- <q-btn-dropdown
-        flat
-        square
-        transparent
-        :label="t('menuCondensed')"
-        class="text-weight-regular"
-        content-class="no-border-radius no-box-shadow"
-      >
-        <q-list separator>
-          <q-item
-            v-for="(lang, i) in localeOptions"
-            :key="i"
-            @click="goToMenu(lang.value)"
-            v-close-popup
-            clickable
-          >
-            <q-item-section>
-              <q-item-label>{{ lang.label }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown>
-      <q-btn
-        flat
-        square
-        transparent
-        label="gallery"
-      />
-      <q-btn
-        flat
-        square
-        transparent
-        :label="t('contact')"
-      /> -->
-
     </q-toolbar>
-      <!-- <q-btn-dropdown v-if="$q.screen.gt.sm" flat transparent icon="ion-globe" class="text-weight-regular">
-        <q-list class="bg-primary">
-          <q-item
-            v-for="(lang, i) in localeOptions"
-            :key="i"
-            @click="selectLocale(lang.value)"
-            v-close-popup
-            clickable
-          >
-            <q-item-section>
-              <q-item-label>{{ lang.label }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown> -->
   </q-header>
   <q-drawer
     v-model="drawer"
     show-if-above
-    bordered
+    class="bg-primary"
+    :width="180"
+    dark
   >
     <q-list padding>
+      <q-item-label header>{{ t('menuCondensed') }}</q-item-label>
       <q-item
+        v-for="(lang, i) in localeOptions"
+        :key="i"
+        @click="goToMenu(lang.value)"
+        v-close-popup
         clickable
         v-ripple
+        class="q-pl-lg"
       >
         <q-item-section>
-          <q-item-label>Menu</q-item-label>
+          <q-item-label>{{ lang.label }}</q-item-label>
         </q-item-section>
       </q-item>
-    </q-list>
-    <q-list padding>
+
+      <q-separator spaced />
+
       <q-item
         clickable
         v-ripple
       >
         <q-item-section>
           <q-item-label>Gallery</q-item-label>
+          <q-item-label caption>Our pride and joy</q-item-label>
         </q-item-section>
       </q-item>
-    </q-list>
-    <q-list padding>
-      <q-item
+      <!-- <q-item
         clickable
         v-ripple
       >
         <q-item-section>
           <q-item-label>About Us</q-item-label>
         </q-item-section>
+      </q-item> -->
+      <q-item
+        clickable
+        v-ripple
+      >
+        <q-item-section>
+          <q-item-label>{{ t('contact') }}</q-item-label>
+        </q-item-section>
       </q-item>
     </q-list>
 
     <div class="full-width text-center" style="position: fixed; bottom: 12px;">
-      <div class="text-caption text-grey-4">© 2023 Harlow's Bar</div>
+      <div class="text-caption text-grey-6">© {{ new Date().getFullYear() }} Harlow's Bar</div>
     </div>
   </q-drawer>
 </template>
@@ -149,8 +115,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.q-toolbar .q-btn-dropdown:last-child {
-  position: absolute;
-  right: 12px;
+.q-item__label::first-letter {
+  text-transform: capitalize;
 }
 </style>
