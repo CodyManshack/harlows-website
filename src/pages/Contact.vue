@@ -1,19 +1,6 @@
 <template>
   <q-page>
-    <!-- <section class="row justify-center">
-      <div class="col-12">
-        <q-carousel
-          animated
-          v-model="state.slide"
-          infinite
-          autoplay
-          height="600px"
-        >
-          <q-carousel-slide v-for="(image, index) in images" :key="index" :name="index" :img-src="image" />
-        </q-carousel>
-      </div>
-    </section> -->
-    <section class="bg-secondary q-pb-xl">
+    <section class="bg-transparent q-pb-xl">
       <div class="row justify-center items-center text-center q-py-lg">
         <div class="col-md-8 col-sm-12">
           <h2 class="poiret-one q-mb-sm">{{ t('title') }}</h2>
