@@ -45,6 +45,7 @@
       <q-item
         clickable
         v-ripple
+        :to="{ name: 'gallery' }"
         active-class="bg-secondary text-white"
       >
         <q-item-section>
