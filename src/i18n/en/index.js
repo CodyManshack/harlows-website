@@ -3,5 +3,6 @@ export default {
   daysOpen2: 'Fri. & Sat.',
   menu: 'view the menu',
   menuCondensed: 'menu',
-  contact: 'contact'
+  contact: 'contact',
+  gallery: 'gallery'
 }

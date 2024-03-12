@@ -3,5 +3,6 @@ export default {
   daysOpen2: 'V & S',
   menu: 'ver la carta',
   menuCondensed: 'la carta',
-  contact: 'contactar'
+  contact: 'contactar',
+  gallery: 'galería'
 }
