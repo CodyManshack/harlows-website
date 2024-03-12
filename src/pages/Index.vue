@@ -2,7 +2,7 @@
   <q-page class="max-height-full">
     <section>
       <div class="row justify-center" style="padding-top: 20%;">
-        <div class="col-xs-10 text-h3 text-weight-light">Classic cocktails & vintage charm</div>
+        <div class="col-xs-10 text-h3 font-weight-light the-seasons text-italic">Classic cocktails & vintage charm</div>
       </div>
       <div class="row justify-center" style="padding-top: 50%;">
         <div class="col-xs-10 items-center text-center">
@@ -11,10 +11,13 @@
             color="accent"
             padding="sm lg"
             :size="$q.screen.xs ? 'lg' : 'xl'"
-            :label="t('viewMenu')"
-            class="text-weight-regular"
             content-class="bg-accent no-border-radius"
+            no-caps
           >
+            <template v-slot:label>
+              <span class="text-h5 poiret-one text-italic">{{ t('viewMenu') }}</span>
+            </template>
+
             <q-list separator>
               <q-item
                 v-for="(lang, i) in localeOptions"
@@ -24,7 +27,7 @@
                 clickable
               >
                 <q-item-section>
-                  <q-item-label>{{ lang.label }}</q-item-label>
+                  <q-item-label class="text-h6 text-weight-bold text-italic poiret-one">{{ lang.label }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -192,5 +195,8 @@ video {
 }
 .max-height-full {
   max-height: calc(100% - 68px - 50px);
+}
+.poiret-one::first-letter {
+  text-transform: uppercase;
 }
 </style>
