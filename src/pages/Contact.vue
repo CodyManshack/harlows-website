@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <section class="bg-transparent q-pb-xl">
+    <section class="q-pb-xl" style="background: rgba(0,0,0,.5)">
       <div class="row justify-center items-center text-center q-py-lg">
         <div class="col-md-8 col-sm-12">
           <h2 class="poiret-one q-mb-sm">{{ t('title') }}</h2>
