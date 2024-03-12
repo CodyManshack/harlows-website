@@ -41,30 +41,13 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
-import { useVuelidate } from '@vuelidate/core'
-import { email, required, minLength, maxLength } from '@vuelidate/validators'
+import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'Contact',
   setup () {
-    const state = reactive({
-      name: '',
-      email: '',
-      message: '',
-      slide: 1
-    })
-    const rules = {
-      name: { required, minLength: minLength(3), maxLength: maxLength(64) },
-      email: { required, email, maxLength: maxLength(64) },
-      message: { required, minLength: minLength(5), maxLength: maxLength(800) }
-    }
-
-    const v$ = useVuelidate(rules, state)
-
     const images = ['cocktails/sidecar/0.25x.png', 'cocktails/blackmojito/0.33x.png', 'cocktails/hemingwayspecial/0.25x.png']
-
     const { t } = useI18n({
       messages: {
         en: {
@@ -105,7 +88,7 @@ export default defineComponent({
       }
     ]
 
-    return { buttons, state, v$, images, t }
+    return { buttons, images, t }
   },
   methods: {}
 })
