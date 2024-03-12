@@ -5,7 +5,7 @@
         <q-btn flat icon="ion-logo-instagram" href="https://www.instagram.com/harlows.bar/" target="_blank"/>
         <q-btn flat icon="ion-logo-facebook" href="https://www.facebook.com/people/Harlows-Bar/100093700941605/" target="_blank"/>
         <q-btn flat icon="ion-logo-whatsapp" href="https://api.whatsapp.com/send?phone=34692940844" />
-        <q-btn flat icon="ion-mail" href="mailto:kalen@harlows.bar"/>
+        <q-btn flat icon="ion-mail" href="mailto:info@harlows.bar"/>
         <q-btn flat icon="ion-navigate" href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9" target="_blank"/>
       </div>
     </div>
