@@ -45,6 +45,7 @@
       <q-item
         clickable
         v-ripple
+        active-class="bg-secondary text-white"
       >
         <q-item-section>
           <q-item-label>{{ t('gallery') }}</q-item-label>
@@ -54,9 +55,20 @@
         clickable
         v-ripple
         :to="{ name: 'contact' }"
+        active-class="bg-secondary text-white"
       >
         <q-item-section>
           <q-item-label>{{ t('contact') }}</q-item-label>
+        </q-item-section>
+      </q-item>
+      <q-item
+        clickable
+        v-ripple
+        href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9"
+        target="_blank"
+      >
+        <q-item-section>
+          <q-item-label>{{ t('navigate') }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
