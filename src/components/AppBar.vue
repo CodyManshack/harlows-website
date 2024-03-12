@@ -47,21 +47,13 @@
         v-ripple
       >
         <q-item-section>
-          <q-item-label>Gallery</q-item-label>
-          <q-item-label caption>Our pride and joy</q-item-label>
+          <q-item-label>{{ t('gallery') }}</q-item-label>
         </q-item-section>
       </q-item>
-      <!-- <q-item
-        clickable
-        v-ripple
-      >
-        <q-item-section>
-          <q-item-label>About Us</q-item-label>
-        </q-item-section>
-      </q-item> -->
       <q-item
         clickable
         v-ripple
+        :to="{ name: 'contact' }"
       >
         <q-item-section>
           <q-item-label>{{ t('contact') }}</q-item-label>
