@@ -24,8 +24,8 @@
     :width="180"
     dark
   >
-    <q-list padding class="spectral">
-      <q-item-label header>{{ t('menuCondensed') }}</q-item-label>
+    <q-list padding class="spectral text-italic">
+      <q-item-label header class="text-body1">{{ t('menuCondensed') }}</q-item-label>
       <q-item
         v-for="(lang, i) in localeOptions"
         :key="i"
@@ -36,7 +36,7 @@
         class="q-pl-lg"
       >
         <q-item-section>
-          <q-item-label>{{ lang.label }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ lang.label }}</q-item-label>
         </q-item-section>
       </q-item>
 
@@ -49,7 +49,7 @@
         active-class="bg-secondary text-white"
       >
         <q-item-section>
-          <q-item-label>{{ t('gallery') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ t('gallery') }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item
@@ -59,7 +59,7 @@
         active-class="bg-secondary text-white"
       >
         <q-item-section>
-          <q-item-label>{{ t('contact') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ t('contact') }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item
@@ -69,7 +69,7 @@
         target="_blank"
       >
         <q-item-section>
-          <q-item-label>{{ t('navigate') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ t('navigate') }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
