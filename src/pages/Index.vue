@@ -2,7 +2,7 @@
   <q-page class="max-height-full">
     <section>
       <div class="row justify-center" style="padding-top: 14%;">
-        <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">Classic cocktails & vintage charm</div>
+        <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">{{ t('headline') }}</div>
       </div>
       <div class="row justify-center" style="padding-top: 60%;">
         <div class="col-xs-10 items-center text-center">
@@ -55,6 +55,7 @@ export default defineComponent({
       messages: {
         en: {
           inquire: 'inquire',
+          headline: 'Classic cocktails & vintage charm',
           sections: [
             {
               title: '1920s Classics',
@@ -73,6 +74,7 @@ export default defineComponent({
         },
         es: {
           inquire: 'consultar',
+          headline: 'Cócteles clásicos y encanto vintage',
           sections: [
             {
               title: 'Clásicos de los años 20',
