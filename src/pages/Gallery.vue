@@ -13,9 +13,11 @@
             :key="i"
             transition="scale"
           >
-            <q-img
-              :src="image.src"
-            />
+            <q-card flat class="bg-transparent q-mb-xl">
+              <q-img :src="image.src">
+                <div class="spectral text-h5 absolute-bottom text-right">{{ image.title }}</div>
+              </q-img>
+            </q-card>
           </q-intersection>
         </div>
       </div>
@@ -29,8 +31,13 @@ import { useI18n } from 'vue-i18n'
 
 import amarettosour010 from '../assets/cocktails/amarettosour/0.1x.png'
 import aviation010 from '../assets/cocktails/aviation/0.1x.png'
-import blackmojito033 from '../assets/cocktails/blackmojito/0.33x.png'
+import bacardicocktail010 from '../assets/cocktails/bacardicocktail/0.1x.png'
+import blackmojito025 from '../assets/cocktails/blackmojito/0.25x.png'
 import dirtymartini010 from '../assets/cocktails/dirtymartini/0.1x.png'
+import hemingwayspecial010 from '../assets/cocktails/hemingwayspecial/0.1x.png'
+import mulledwine010 from '../assets/cocktails/mulledwine/0.1x.png'
+import orangeblossom010 from '../assets/cocktails/orangeblossom/0.1x.png'
+import rustynail010 from '../assets/cocktails/rustynail/0.1x.png'
 import whiskeysour033 from '../assets/cocktails/whiskeysour/0.33x.png'
 
 export default defineComponent({
@@ -50,12 +57,32 @@ export default defineComponent({
         title: 'Aviation'
       },
       {
+        src: orangeblossom010,
+        title: 'Orange Blossom'
+      },
+      {
+        src: rustynail010,
+        title: 'The Rusty Nail'
+      },
+      {
         src: amarettosour010,
         title: 'Amaretto Sour'
       },
       {
-        src: blackmojito033,
+        src: bacardicocktail010,
+        title: 'Bacardi Cocktail'
+      },
+      {
+        src: mulledwine010,
+        title: 'Mulled Wine'
+      },
+      {
+        src: blackmojito025,
         title: 'Black Mojito'
+      },
+      {
+        src: hemingwayspecial010,
+        title: 'Hemingway Special'
       }
     ]
     const { t } = useI18n({})
