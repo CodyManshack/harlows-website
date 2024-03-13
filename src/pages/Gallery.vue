@@ -15,7 +15,7 @@
           >
             <q-card flat class="bg-transparent q-mb-xl">
               <q-img :src="image.src">
-                <div class="spectral text-h5 absolute-bottom text-right">{{ image.title }}</div>
+                <div v-if="image.title" class="spectral text-h5 absolute-bottom text-right">{{ image.title }}</div>
               </q-img>
             </q-card>
           </q-intersection>
@@ -39,6 +39,7 @@ import hemingwayspecial010 from '../assets/cocktails/hemingwayspecial/0.1x.png'
 import mulledwine010 from '../assets/cocktails/mulledwine/0.1x.png'
 import orangeblossom010 from '../assets/cocktails/orangeblossom/0.1x.png'
 import rustynail010 from '../assets/cocktails/rustynail/0.1x.png'
+import stairs010 from '../assets/location/stairs/0.1x.png'
 import whiskeysour033 from '../assets/cocktails/whiskeysour/0.33x.png'
 
 export default defineComponent({
@@ -88,6 +89,9 @@ export default defineComponent({
       {
         src: hemingwayspecial010,
         title: 'Hemingway Special'
+      },
+      {
+        src: stairs010
       }
     ]
     const { t } = useI18n({})
