@@ -4,7 +4,6 @@
       <div class="row justify-center items-center text-center">
         <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
           <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-italic' ]">{{ t('followUs') }}</div>
-          <div :class="[$q.screen.gt.sm ? 'text-h6' : 'text-body1', 'text-weight-regular q-mt-md']">{{ t('vibePics') }}</div>
           <q-btn
             square
             color="accent"
@@ -12,6 +11,9 @@
             :size="$q.screen.xs ? 'lg' : 'xl'"
             no-caps
             class="q-mt-lg"
+            icon-right="ion-logo-instagram"
+            href="https://www.instagram.com/harlows.bar/"
+            target="_blank"
           >
             <span class="text-h5 text-weight-regular capitalize-first-letter">{{ t('viewInsta') }}</span>
           </q-btn>
