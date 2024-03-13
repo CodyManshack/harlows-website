@@ -1,10 +1,10 @@
 <template>
   <q-page class="max-height-full">
     <section>
-      <div class="row justify-center" style="padding-top: 10%;">
+      <div class="row justify-center" style="padding-top: 20%;">
         <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">Classic cocktails & vintage charm</div>
       </div>
-      <div class="row justify-center" style="padding-top: 50%;">
+      <div class="row justify-center" style="padding-top: 60%;">
         <div class="col-xs-10 items-center text-center">
           <q-btn-dropdown
             square
@@ -15,7 +15,7 @@
             no-caps
           >
             <template v-slot:label>
-              <span class="text-h6 spectral text-italic text-weight-thin">{{ t('viewMenu') }}</span>
+              <span class="text-h5 spectral text-italic text-weight-regular capitalize-first-letter">{{ t('viewMenu') }}</span>
             </template>
 
             <q-list separator>
@@ -27,7 +27,7 @@
                 clickable
               >
                 <q-item-section>
-                  <q-item-label class="text-body1 text-weight-thin text-italic spectral">{{ lang.label }}</q-item-label>
+                  <q-item-label class="text-h6 text-weight-regular text-italic spectral">{{ lang.label }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -196,7 +196,7 @@ video {
 .max-height-full {
   max-height: calc(100% - 68px - 50px);
 }
-.poiret-one::first-letter {
+.capitalize-first-letter::first-letter {
   text-transform: uppercase;
 }
 </style>
