@@ -33,6 +33,7 @@ import amarettosour010 from '../assets/cocktails/amarettosour/0.1x.png'
 import aviation010 from '../assets/cocktails/aviation/0.1x.png'
 import bacardicocktail010 from '../assets/cocktails/bacardicocktail/0.1x.png'
 import blackmojito025 from '../assets/cocktails/blackmojito/0.25x.png'
+import boulevardier010 from '../assets/cocktails/boulevardier/0.1x.png'
 import dirtymartini010 from '../assets/cocktails/dirtymartini/0.1x.png'
 import hemingwayspecial010 from '../assets/cocktails/hemingwayspecial/0.1x.png'
 import mulledwine010 from '../assets/cocktails/mulledwine/0.1x.png'
@@ -75,6 +76,10 @@ export default defineComponent({
       {
         src: mulledwine010,
         title: 'Mulled Wine'
+      },
+      {
+        src: boulevardier010,
+        title: 'Boulevardier'
       },
       {
         src: blackmojito025,
