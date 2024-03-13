@@ -15,7 +15,7 @@
             no-caps
           >
             <template v-slot:label>
-              <span class="text-h5 spectral text-italic text-weight-thin">{{ t('viewMenu') }}</span>
+              <span class="text-h6 spectral text-italic text-weight-thin">{{ t('viewMenu') }}</span>
             </template>
 
             <q-list separator>
@@ -27,7 +27,7 @@
                 clickable
               >
                 <q-item-section>
-                  <q-item-label class="text-h6 text-weight-bold text-italic poiret-one">{{ lang.label }}</q-item-label>
+                  <q-item-label class="text-body1 text-weight-thin text-italic spectral">{{ lang.label }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
