@@ -11,13 +11,13 @@
       <router-link :to="{ name: 'home' }">
         <q-img
           src="~/assets/logo-0.1x.png"
-          :width="$q.screen.gt.md ? '260px' : '140px'"
+          :width="$q.screen.gt.sm ? '260px' : '140px'"
           style="color: #7a3c18;"
         />
       </router-link>
     </q-toolbar>
     <q-bar dense class="bg-accent">
-      <div class="row no-wrap full-width justify-evenly space text-caption spectral" style="font-size: 12px;">
+      <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral']" style="font-size: 12px;">
         <div>
           <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ t('daysOpen1') }}</span>
           17:00 – 00:00
@@ -31,9 +31,8 @@
   </q-header>
   <q-drawer
     v-model="drawer"
-    show-if-above
     class="bg-primary"
-    :width="180"
+    :width="$q.screen.gt.sm ? 240 : 180"
     dark
   >
     <q-list padding class="spectral">
