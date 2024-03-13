@@ -27,7 +27,7 @@ export default defineComponent({
 
 <style lang="scss">
 body.body--dark {
-  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.5) 34%, rgba(0,0,0,0.2) 36%, rgba(0,0,0,0) 36% 46%, rgba(0, 0, 0, 0.5) 49%, rgba(0,0,0,0.65) 100%), url('./assets/location/0.25x.png') no-repeat fixed;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.5) 34%, rgba(0,0,0,0.2) 36%, rgba(0,0,0,0) 36% 46%, rgba(0, 0, 0, 0.5) 49%, rgba(0,0,0,0.65) 100%), url('./assets/location/bar/0.25x.png') no-repeat fixed;
   background-size: cover;
   background-position: 57% 0%;
 }
