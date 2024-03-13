@@ -3,7 +3,9 @@
     <section class="">
       <div class="row justify-center text-center">
         <div class="col-xs-12">
-          <h3 class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">{{ t('gallery') }}</h3>
+          <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
+            <h3 key="text" class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">{{ t('gallery') }}</h3>
+          </transition>
         </div>
       </div>
       <div class="row justify-center">
