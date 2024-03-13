@@ -30,5 +30,6 @@ body.body--dark {
   background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./assets/location/bar/0.25x.png') no-repeat fixed;
   background-size: cover;
   background-position: 57% 0%;
+  background-attachment: fixed;
 }
 </style>
