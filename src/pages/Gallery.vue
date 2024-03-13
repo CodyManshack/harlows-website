@@ -30,6 +30,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useQuasar } from 'quasar'
 
 import amarettosour010 from '../assets/cocktails/amarettosour/0.1x.png'
 import aviation010 from '../assets/cocktails/aviation/0.1x.png'
@@ -38,6 +39,7 @@ import bar010 from '../assets/location/bar/0.1x.png'
 import blackmojito025 from '../assets/cocktails/blackmojito/0.25x.png'
 import boulevardier010 from '../assets/cocktails/boulevardier/0.1x.png'
 import dirtymartini010 from '../assets/cocktails/dirtymartini/0.1x.png'
+import dirtymartini033 from '../assets/cocktails/dirtymartini/0.33x.png'
 import hemingwayspecial010 from '../assets/cocktails/hemingwayspecial/0.1x.png'
 import mulledwine010 from '../assets/cocktails/mulledwine/0.1x.png'
 import orangeblossom010 from '../assets/cocktails/orangeblossom/0.1x.png'
@@ -48,9 +50,11 @@ import whiskeysour033 from '../assets/cocktails/whiskeysour/0.33x.png'
 export default defineComponent({
   name: 'Gallery',
   setup () {
+    const $q = useQuasar()
+
     const images = [
       {
-        src: dirtymartini010,
+        src: $q.screen.gt.sm ? dirtymartini033 : dirtymartini010,
         title: 'Dirty Martini'
       },
       {
