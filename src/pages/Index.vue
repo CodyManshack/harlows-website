@@ -35,6 +35,9 @@
               <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
                 {{ t('headline') }}
               </div>
+              <div class="gt-sm text-h6 text-weight-regular q-mt-md">
+                {{  t('subtitle') }}
+              </div>
             </div>
           </div>
       </section>
@@ -58,41 +61,13 @@ export default defineComponent({
     const { t, locale } = useI18n({
       messages: {
         en: {
-          inquire: 'inquire',
           headline: 'Classic cocktails & vintage charm',
-          sections: [
-            {
-              title: '1920s Classics',
-              content: "A new member in the El Carmen neighborhood of Valencia, Harlow's Bar specializes in classic prohibition-era cocktails and focuses on staying true to the original recipes. This cozy little hole in the wall offers the perfect place to for a night out: comfortable vintage seating, early 20th-century jazz, and an extensive list of both famous cocktails and new surprises for you to discover."
-            },
-            {
-              title: 'A Cut Above',
-              content: "We take pride in our curated list of liquors and wines. We forego what is common and what it easy and instead stock our shelves with some of the highest-quality liquors from the peninsula and around the world. Our selection of gourmet and artisan snacks offer you new flavors to explore."
-            },
-            {
-              title: "Party like it's 1929",
-              content: "Add a touch of class and coziness to your next gathering by hosting your event at Harlow's. Whether you choose a small gathering in the loft or would like the entire bar to yourself, the team at Harlow's will ensure your event has the perfect ambiance and fantastic cocktails and treats."
-            }
-          ],
+          subtitle: 'Classic prohibition-era cocktails with a focus on staying true to the original recipes',
           viewMenu: 'view the menu'
         },
         es: {
-          inquire: 'consultar',
           headline: 'Cócteles clásicos y encanto vintage',
-          sections: [
-            {
-              title: 'Clásicos de los años 20',
-              content: "Un nuevo miembro en el barrio valenciano del Carmen, el Harlow's Bar se especializa en cócteles clásicos de la época de la prohibición y se centra en mantenerse fiel a las recetas originales. Esta pequeña y acogedora joya ofrece el lugar perfecto para una noche de copas: cómodos asientos de época, jazz de principios del siglo XX y una extensa lista tanto de cócteles famosos como de nuevas sorpresas por descubrir."
-            },
-            {
-              title: 'Por encima de los demás',
-              content: "Estamos orgullosos de nuestra selecta lista de licores y vinos. Renunciamos a lo común y a lo fácil y, en su lugar, abastecemos nuestras estanterías con algunos de los licores de mayor calidad de la península y de todo el mundo. Nuestra selección de aperitivos gourmet y artesanos te ofrece nuevos sabores para explorar."
-            },
-            {
-              title: 'Fiesta como si fuera 1929',
-              content: "Añada un toque de clase y calidez a su próxima reunión celebrando su evento en Harlow's. Tanto si elige una pequeña reunión en el loft como si desea todo el bar para usted solo, el equipo de Harlow's se asegurará de que su evento tenga el ambiente perfecto y unos cócteles y delicias fantásticos."
-            }
-          ],
+          subtitle: 'Cócteles clásicos de la época de la prohibición con un enfoque que se mantiene fiel a las recetas originales',
           viewMenu: 'ver la carta'
         }
       }
@@ -168,7 +143,7 @@ video {
 }
 @media (min-width: $breakpoint-md-min) {
   .hero-content {
-    margin-top: -25%;
+    margin-top: 10%;
   }
 }
 </style>
