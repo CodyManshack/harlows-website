@@ -10,17 +10,23 @@
       </div>
       <div class="row justify-center">
         <div class="col-xs-12 col-sm-10 col-lg-8 col-xl-6">
-          <div class="row justify-center q-gutter-xl">
+          <div :class="[$q.screen.gt.sm ? 'q-gutter-xl' : 'q-gutter-y-xl', 'row justify-center']">
             <div
               class="col-xs-12 col-sm-10 col-md-4 col-lg-3"
               v-for="(image, i) in images"
               :key="i"
             >
-              <q-card flat class="bg-transparent">
-                <q-img :src="image.src" loading="lazy" :alt="image.title">
-                  <div v-if="image.title" class="spectral text-h5 absolute-bottom text-right">{{ image.title }}</div>
-                </q-img>
-              </q-card>
+              <q-intersection
+                :key="i"
+                once
+                transition="fade"
+              >
+                <q-card flat class="bg-transparent">
+                  <q-img :src="image.src" loading="lazy" :alt="image.title">
+                    <div v-if="image.title" class="spectral text-h5 absolute-bottom text-right">{{ image.title }}</div>
+                  </q-img>
+                </q-card>
+              </q-intersection>
             </div>
           </div>
         </div>
@@ -132,7 +138,7 @@ export default defineComponent({
       }
     ]
     const { t } = useI18n({})
-    return { images, t }
+    return { images, t, $q }
   },
   methods: {}
 })
