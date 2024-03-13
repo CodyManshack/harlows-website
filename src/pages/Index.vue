@@ -2,7 +2,7 @@
   <q-page class="max-height-full">
     <section>
       <div class="row justify-center" style="padding-top: 14%;">
-        <transition appear enter-active-class="animated fadeIn slower">
+        <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
           <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic" key="text">
             {{ t('headline') }}
           </div>
@@ -10,32 +10,34 @@
       </div>
       <div class="row justify-center" style="padding-top: 60%;">
         <div class="col-xs-10 items-center text-center">
-          <q-btn-dropdown
-            square
-            color="accent"
-            padding="sm lg"
-            :size="$q.screen.xs ? 'lg' : 'xl'"
-            content-class="bg-accent no-border-radius"
-            no-caps
-          >
-            <template v-slot:label>
-              <span class="text-h5 spectral text-weight-regular capitalize-first-letter">{{ t('viewMenu') }}</span>
-            </template>
+          <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
+            <q-btn-dropdown
+              square
+              color="accent"
+              padding="sm lg"
+              :size="$q.screen.xs ? 'lg' : 'xl'"
+              content-class="bg-accent no-border-radius"
+              no-caps
+            >
+              <template v-slot:label>
+                <span class="text-h5 spectral text-weight-regular capitalize-first-letter">{{ t('viewMenu') }}</span>
+              </template>
 
-            <q-list separator>
-              <q-item
-                v-for="(lang, i) in localeOptions"
-                :key="i"
-                @click="goToMenu(lang.value)"
-                v-close-popup
-                clickable
-              >
-                <q-item-section>
-                  <q-item-label class="text-h6 text-weight-regular spectral">{{ lang.label }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
+              <q-list separator>
+                <q-item
+                  v-for="(lang, i) in localeOptions"
+                  :key="i"
+                  @click="goToMenu(lang.value)"
+                  v-close-popup
+                  clickable
+                >
+                  <q-item-section>
+                    <q-item-label class="text-h6 text-weight-regular spectral">{{ lang.label }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+          </transition>
         </div>
       </div>
     </section>

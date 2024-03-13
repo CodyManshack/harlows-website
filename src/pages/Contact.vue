@@ -1,28 +1,32 @@
 <template>
   <q-page>
-    <section class="q-pb-xl" style="background: rgba(0,0,0,.5)">
-      <div class="row justify-center items-center text-center q-py-lg">
+    <section class="q-pb-xl">
+      <div class="row justify-center items-center text-center q-pb-lg">
         <div class="col-md-8 col-sm-12">
-          <h3 class="spectral text-weight-thin q-mb-sm">{{ t('title') }}</h3>
-          <h3 class="spectral text-subtitle1 q-px-md text-grey-4">{{  t('subtitle') }}</h3>
+          <transition-group appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
+            <h3 key="title" class="spectral text-weight-regular text-italic q-mb-sm">{{ t('title') }}</h3>
+            <h3 key="subtitle" class="spectral text-body1 q-px-md text-grey-2">{{  t('subtitle') }}</h3>
+          </transition-group>
           <div class="row justify-center items-center q-gutter-lg q-my-md">
-            <q-btn
-              square
-              class="col-md-3 col-8 bg-secondary"
-              style="height: 200px;"
-              v-for="button in buttons"
-              :key="button.title"
-              :href="button.href"
-              target="_blank"
-            >
-              <div class="row justify-center items-center">
-                <div class="col-12">
-                  <q-icon :name="`ion-${button.icon}`" size="lg" color="accent" class="q-py-lg"/>
+            <transition-group appear enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+              <q-btn
+                square
+                class="col-md-3 col-8 bg-secondary"
+                style="height: 200px;"
+                v-for="button in buttons"
+                :key="button.title"
+                :href="button.href"
+                target="_blank"
+              >
+                <div class="row justify-center items-center">
+                  <div class="col-12">
+                    <q-icon :name="`ion-${button.icon}`" size="lg" color="accent" class="q-py-lg"/>
+                  </div>
+                  <h5 class="spectral text-weight-thin q-my-sm col-12">{{ t(button.title) }}</h5>
+                  <p class="spectral text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
                 </div>
-                <h5 class="spectral text-weight-thin q-my-sm col-12">{{ t(button.title) }}</h5>
-                <p class="spectral text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
-              </div>
-            </q-btn>
+              </q-btn>
+            </transition-group>
           </div>
         </div>
       </div>
