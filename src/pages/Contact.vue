@@ -3,8 +3,8 @@
     <section class="q-pb-xl" style="background: rgba(0,0,0,.5)">
       <div class="row justify-center items-center text-center q-py-lg">
         <div class="col-md-8 col-sm-12">
-          <h2 class="poiret-one q-mb-sm">{{ t('title') }}</h2>
-          <h3 class="text-subtitle1 q-px-md text-grey-4">{{  t('subtitle') }}</h3>
+          <h3 class="spectral text-weight-thin q-mb-sm">{{ t('title') }}</h3>
+          <h3 class="spectral text-subtitle1 q-px-md text-grey-4">{{  t('subtitle') }}</h3>
           <div class="row justify-center items-center q-gutter-lg q-my-md">
             <q-btn
               square
@@ -19,8 +19,8 @@
                 <div class="col-12">
                   <q-icon :name="`ion-${button.icon}`" size="lg" color="accent" class="q-py-lg"/>
                 </div>
-                <h5 class="poiret-one q-my-sm text-weight-bold col-12">{{ t(button.title) }}</h5>
-                <p class="text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
+                <h5 class="spectral text-weight-thin q-my-sm col-12">{{ t(button.title) }}</h5>
+                <p class="spectral text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
               </div>
             </q-btn>
           </div>
@@ -95,7 +95,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.q-field__label::first-letter { // ensure that all fields have a capital letter
+.q-field__label::first-letter {
   text-transform: capitalize;
 }
 iframe {
