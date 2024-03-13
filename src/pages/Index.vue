@@ -1,46 +1,44 @@
 <template>
-  <q-page class="max-height-full">
-    <section>
-      <div class="row justify-center" style="padding-top: 14%;">
-        <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
-          <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic" key="text">
-            {{ t('headline') }}
-          </div>
-      </transition>
-      </div>
-      <div class="row justify-center" style="padding-top: 60%;">
-        <div class="col-xs-10 items-center text-center">
-          <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
-            <q-btn-dropdown
-              square
-              color="accent"
-              padding="sm lg"
-              :size="$q.screen.xs ? 'lg' : 'xl'"
-              content-class="bg-accent no-border-radius"
-              no-caps
-            >
-              <template v-slot:label>
-                <span class="text-h5 spectral text-weight-regular capitalize-first-letter">{{ t('viewMenu') }}</span>
-              </template>
+  <q-page class="flex">
+    <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
+      <section class="hero">
+          <div class="row justify-center full-width hero-content">
+            <div class="col-xs-10 col-md-4 col-lg-3 col-xl-2 items-center text-center">
+              <q-btn-dropdown
+                square
+                color="accent"
+                padding="sm lg"
+                :size="$q.screen.xs ? 'lg' : 'xl'"
+                content-class="bg-accent no-border-radius"
+                no-caps
+              >
+                <template v-slot:label>
+                  <span class="text-h5 spectral text-weight-regular capitalize-first-letter">{{ t('viewMenu') }}</span>
+                </template>
 
-              <q-list separator>
-                <q-item
-                  v-for="(lang, i) in localeOptions"
-                  :key="i"
-                  @click="goToMenu(lang.value)"
-                  v-close-popup
-                  clickable
-                >
-                  <q-item-section>
-                    <q-item-label class="text-h6 text-weight-regular spectral">{{ lang.label }}</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
-          </transition>
-        </div>
-      </div>
-    </section>
+                <q-list separator>
+                  <q-item
+                    v-for="(lang, i) in localeOptions"
+                    :key="i"
+                    @click="goToMenu(lang.value)"
+                    v-close-popup
+                    clickable
+                  >
+                    <q-item-section>
+                      <q-item-label class="text-h6 text-weight-regular spectral">{{ lang.label }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-btn-dropdown>
+            </div>
+            <div class="col-xs-10 col-md-4 col-lg-3 spectral" key="text">
+              <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
+                {{ t('headline') }}
+              </div>
+            </div>
+          </div>
+      </section>
+    </transition>
   </q-page>
 </template>
 
@@ -152,5 +150,25 @@ video {
 }
 .capitalize-first-letter::first-letter {
   text-transform: uppercase;
+}
+.hero {
+  display: flex;
+  flex: 1;
+}
+.hero-content {
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: $breakpoint-sm-max) {
+  .hero-content {
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    margin-top: -40%;
+  }
+}
+@media (min-width: $breakpoint-md-min) {
+  .hero-content {
+    margin-top: -25%;
+  }
 }
 </style>
