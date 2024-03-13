@@ -2,7 +2,11 @@
   <q-page class="max-height-full">
     <section>
       <div class="row justify-center" style="padding-top: 14%;">
-        <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">{{ t('headline') }}</div>
+        <transition appear enter-active-class="animated fadeIn slower">
+          <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic" key="text">
+            {{ t('headline') }}
+          </div>
+      </transition>
       </div>
       <div class="row justify-center" style="padding-top: 60%;">
         <div class="col-xs-10 items-center text-center">
