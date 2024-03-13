@@ -34,6 +34,7 @@
     class="bg-primary"
     :width="$q.screen.gt.sm ? 240 : 180"
     dark
+    behavior="mobile"
   >
     <q-list padding class="spectral">
       <q-item-label header class="text-body1">{{ t('menuCondensed') }}</q-item-label>
