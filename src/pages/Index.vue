@@ -35,54 +35,6 @@
         </div>
       </div>
     </section>
-    <!-- <section>
-      <q-img :src="$q.screen.md ? 'location/0.33x.png' : 'location/0.1x.png'">
-        <div class="absolute-full flex flex-center">
-          <q-btn-dropdown color="accent" padding="sm lg" :size="$q.screen.xs ? 'lg' : 'xl'" :label="t('viewMenu')" class="text-weight-regular">
-            <q-list class="bg-primary">
-              <q-item
-                v-for="(lang, i) in localeOptions"
-                :key="i"
-                @click="goToMenu(lang.value)"
-                v-close-popup
-                clickable
-              >
-                <q-item-section>
-                  <q-item-label>{{ lang.label }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-        </div>
-      </q-img>
-    </section>
-    <section v-for="(section, index) in sections" :key="index" :class="[section.background, 'row', 'justify-center']">
-      <div class="col-xs-12 col-md-10 col-lg-6">
-        <div class="row justify-center">
-          <div class="col-xs-12 col-md-4 text-center flex items-center">
-            <div class="row justify-center q-pa-lg">
-              <div style="width: 80%;"><DiamondDivider /></div>
-              <h3 class="poiret-one text-uppercase">{{ t(`sections[${index}].title`) }}</h3>
-              <p class="text-subtitle1 text-grey-4">{{ t(`sections[${index}].content`) }}</p>
-              <div class="q-mt-xl" style="width: 80%;"><DiamondDivider /></div>
-            </div>
-          </div>
-          <div :class="[flipOrder(index) ? 'order-first' : '', 'col-md-6', 'col-12', 'flex', 'items-center']">
-            <img :src="section.img" style="max-width: 100%;" />
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.7956147359905!2d-0.38684602266516505!3d39.47394581247808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604fe3f94d65cf%3A0x4471acc1b9c7ad98!2sHarlow&#39;s%20Bar!5e0!3m2!1sen!2ses!4v1697395155698!5m2!1sen!2ses"
-        width="100%"
-        height="510"
-        style="border:0;"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </section> -->
   </q-page>
 </template>
 
@@ -165,13 +117,7 @@ export default defineComponent({
       localeOptions,
       menuPath,
       router,
-      sections,
-      sources: [
-        {
-          src: '~/assets/video/cadillac-margarita.mp4',
-          type: 'video/mp4'
-        }
-      ]
+      sections
     }
   },
   methods: {
