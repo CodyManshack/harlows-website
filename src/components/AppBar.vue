@@ -16,6 +16,18 @@
         />
       </router-link>
     </q-toolbar>
+    <q-bar dense class="bg-accent">
+      <div class="row no-wrap full-width justify-evenly space text-caption spectral" style="font-size: 12px;">
+        <div>
+          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ t('daysOpen1') }}</span>
+          17:00 – 00:00
+        </div>
+        <div>
+          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-xs' ]">{{ t('daysOpen2') }}</span>
+          17:00 – 01:30
+        </div>
+      </div>
+    </q-bar>
   </q-header>
   <q-drawer
     v-model="drawer"

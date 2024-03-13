@@ -13,7 +13,6 @@
 <script>
 import { defineComponent } from 'vue'
 import AppBar from '../components/AppBar.vue'
-// import Bar from '../components/Bar.vue'
 import AppFooter from '../components/AppFooter.vue'
 
 export default defineComponent({
