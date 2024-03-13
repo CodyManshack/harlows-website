@@ -1,12 +1,26 @@
 <template>
   <q-page>
+    <section class="q-py-xl">
+      <div class="row justify-center items-center text-center">
+        <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
+          <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-italic' ]">{{ t('followUs') }}</div>
+          <div :class="[$q.screen.gt.sm ? 'text-h6' : 'text-body1', 'text-weight-regular q-mt-md']">{{ t('vibePics') }}</div>
+          <q-btn
+            square
+            color="accent"
+            padding="sm lg"
+            :size="$q.screen.xs ? 'lg' : 'xl'"
+            no-caps
+            class="q-mt-lg"
+          >
+            <span class="text-h5 text-weight-regular capitalize-first-letter">{{ t('viewInsta') }}</span>
+          </q-btn>
+        </div>
+      </div>
+    </section>
     <section class="q-pb-xl">
       <div class="row justify-center items-center text-center q-pb-lg">
-        <div class="col-md-8 col-sm-12">
-          <transition-group appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
-            <h3 key="title" class="spectral text-weight-regular text-italic q-mb-sm">{{ t('title') }}</h3>
-            <h3 key="subtitle" class="spectral text-body1 q-px-md text-grey-2">{{  t('subtitle') }}</h3>
-          </transition-group>
+        <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
           <div class="row justify-center items-center q-gutter-lg q-my-md">
             <transition-group appear enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
               <q-btn
@@ -22,8 +36,8 @@
                   <div class="col-12">
                     <q-icon :name="`ion-${button.icon}`" size="lg" color="accent" class="q-py-lg"/>
                   </div>
-                  <h5 class="spectral text-weight-thin q-my-sm col-12">{{ t(button.title) }}</h5>
-                  <p class="spectral text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
+                  <h5 class="text-weight-thin q-my-sm col-12">{{ t(button.title) }}</h5>
+                  <p class="text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
                 </div>
               </q-btn>
             </transition-group>
@@ -59,14 +73,20 @@ export default defineComponent({
           subtitle: "For reservations and inquiries, simply send a carrier pigeon to the address listed. We can't wait to make your acquaintance!",
           address: "address",
           phone: "WhatsApp",
-          email: 'email'
+          email: 'email',
+          followUs: 'Follow us on Instagram',
+          vibePics: 'For vibe pics and mouth-watering cocktails',
+          viewInsta: 'View our Instagram'
         },
         es: {
           title: 'Contactar',
           subtitle: "Para reservas y consultas, basta con enviar una paloma mensajera a la dirección indicada. Estamos impacientes por conocerle.",
           address: 'dirección',
           phone: "WhatsApp",
-          email: 'correo electrónico'
+          email: 'correo electrónico',
+          followUs: 'Síguenos en Instagram',
+          vibePics: 'Para fotos de ambiente y cócteles deliciosos',
+          viewInsta: 'Ver nuestro Instagram'
         }
       }
     })
