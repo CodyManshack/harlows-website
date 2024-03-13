@@ -24,7 +24,7 @@
     :width="180"
     dark
   >
-    <q-list padding class="spectral text-italic">
+    <q-list padding class="spectral">
       <q-item-label header class="text-body1">{{ t('menuCondensed') }}</q-item-label>
       <q-item
         v-for="(lang, i) in localeOptions"
