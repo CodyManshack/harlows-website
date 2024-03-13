@@ -1,7 +1,7 @@
 <template>
   <q-page class="max-height-full">
     <section>
-      <div class="row justify-center" style="padding-top: 20%;">
+      <div class="row justify-center" style="padding-top: 14%;">
         <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">Classic cocktails & vintage charm</div>
       </div>
       <div class="row justify-center" style="padding-top: 60%;">
@@ -194,7 +194,7 @@ video {
   height: 100%;
 }
 .max-height-full {
-  max-height: calc(100% - 68px - 50px);
+  max-height: calc(100% - 68px - 50px - 24px);
 }
 .capitalize-first-letter::first-letter {
   text-transform: uppercase;
