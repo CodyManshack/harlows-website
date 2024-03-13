@@ -2,7 +2,7 @@
   <q-page class="max-height-full">
     <section>
       <div class="row justify-center" style="padding-top: 20%;">
-        <div class="col-xs-10 text-h3 font-weight-light the-seasons text-italic">Classic cocktails & vintage charm</div>
+        <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">Classic cocktails & vintage charm</div>
       </div>
       <div class="row justify-center" style="padding-top: 50%;">
         <div class="col-xs-10 items-center text-center">
@@ -15,7 +15,7 @@
             no-caps
           >
             <template v-slot:label>
-              <span class="text-h5 poiret-one text-italic">{{ t('viewMenu') }}</span>
+              <span class="text-h5 spectral text-italic text-weight-thin">{{ t('viewMenu') }}</span>
             </template>
 
             <q-list separator>
