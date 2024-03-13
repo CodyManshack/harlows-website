@@ -1,7 +1,7 @@
 <template>
   <q-page class="max-height-full">
     <section>
-      <div class="row justify-center" style="padding-top: 20%;">
+      <div class="row justify-center" style="padding-top: 10%;">
         <div class="col-xs-10 text-h3 text-weight-regular spectral text-italic">Classic cocktails & vintage charm</div>
       </div>
       <div class="row justify-center" style="padding-top: 50%;">
