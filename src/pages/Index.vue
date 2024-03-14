@@ -49,8 +49,7 @@
 import { computed, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-// import DiamondDivider from 'src/components/DiamondDivider.vue'
-import { useQuasar } from 'quasar'
+import { useMeta, useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'Home',
@@ -91,6 +90,14 @@ export default defineComponent({
         img: 'cocktails/aviation/0.25x.png'
       }
     ]
+
+    useMeta({
+      title: 'Harlow\'s Bar – Vintage Cocktail Lounge',
+      meta: {
+        description: { name: 'description', content: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.' }
+      }
+    })
+
     return {
       $q,
       t,
