@@ -14,10 +14,9 @@ export default defineComponent({
     const $q = useQuasar()
     $q.dark.set(true)
     useMeta({
-      title: 'Harlow\'s Bar - Vintage Cocktail Lounge',
       meta: {
-        description: { name: 'description', content: 'Vintage, prohibition-era cocktails in a relaxed 1920s lounge.' },
-        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, cocteleria, copas' }
+        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, copas' },
+        equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
       }
     })
     return { t, locale }
