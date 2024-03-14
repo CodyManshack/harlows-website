@@ -65,6 +65,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useMeta } from 'quasar'
 
 export default defineComponent({
   name: 'Contact',
@@ -115,6 +116,13 @@ export default defineComponent({
         href: 'mailto:info@harlows.bar'
       }
     ]
+
+    useMeta({
+      title: 'Harlow\'s Bar – Contact Us',
+      meta: {
+        description: { name: 'description', content: 'Contact us by email, whatsapp, or get directions using google maps' }
+      }
+    })
 
     return { buttons, images, t }
   },
