@@ -17,7 +17,7 @@ export default defineComponent({
       title: 'Harlow\'s Bar - Vintage Cocktail Lounge',
       meta: {
         description: { name: 'description', content: 'Vintage, prohibition-era cocktails in a relaxed 1920s lounge.' },
-        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, coctelería, bars, valencia, bares, cocteleria, copas' }
+        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, cocteleria, copas' }
       }
     })
     return { t, locale }
