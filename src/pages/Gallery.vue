@@ -38,7 +38,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useQuasar } from 'quasar'
+import { useMeta, useQuasar } from 'quasar'
 
 import amarettosour010 from '../assets/cocktails/amarettosour/0.1x.png'
 import amarettosour033 from '../assets/cocktails/amarettosour/0.33x.png'
@@ -138,6 +138,14 @@ export default defineComponent({
       }
     ]
     const { t } = useI18n({})
+    useMeta({
+      title: 'Harlow\'s Bar – Gallery',
+      meta: {
+        description: { name: 'description', content: 'Photo gallery of our classic cocktails and location' },
+        keywords: { name: 'keywords', content: 'gin tonic, amaretto sour, aviation, bacardi cocktail, black mojito, mojito, boulevardier, martini, dirty martini, vesper martini, daiquiri, hemingway special, wine, mulled wine, orange blossom, rusty nail, whiskey sour' }
+      }
+    })
+
     return { images, t, $q }
   },
   methods: {}
