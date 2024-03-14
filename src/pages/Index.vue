@@ -32,12 +32,12 @@
               </q-btn-dropdown>
             </div>
             <div class="col-xs-10 col-md-4 col-lg-3 spectral" key="text">
-              <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
+              <h1 :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
                 {{ t('headline') }}
-              </div>
-              <div class="gt-sm text-h6 text-weight-regular q-mt-md">
+              </h1>
+              <h2 class="gt-sm text-h6 text-weight-regular q-mt-md">
                 {{  t('subtitle') }}
-              </div>
+              </h2>
             </div>
           </div>
       </section>
