@@ -92,7 +92,7 @@ export default defineComponent({
     ]
 
     useMeta({
-      title: 'Harlow\'s Bar – Vintage Cocktail Lounge',
+      title: 'Harlow\'s Bar – Classic Cocktail Lounge',
       meta: {
         description: { name: 'description', content: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.' }
       }
