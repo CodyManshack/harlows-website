@@ -4,7 +4,7 @@
       <div class="row justify-center text-center">
         <div class="col-xs-12">
           <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
-            <h3 key="text" class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">{{ t('gallery') }}</h3>
+            <h1 key="text" class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">{{ t('gallery') }}</h1>
           </transition>
         </div>
       </div>
