@@ -25,10 +25,28 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-body.body--dark {
-  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./assets/location/bar/0.25x.png') no-repeat fixed;
-  background-size: cover;
-  background-position: 57% 0%;
-  background-attachment: fixed;
+@media (max-width: $breakpoint-sm-max) {
+  body.body--dark {
+    background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./assets/location/bar/0.25x.png') no-repeat fixed;
+    background-position: 57% 0%;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+}
+@media (max-width: $breakpoint-lg-max) {
+  body.body--dark {
+    background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./assets/location/bar/0.33x.png') no-repeat fixed;
+    background-position: 57% 0%;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+}
+@media (min-width: $breakpoint-xl-min) {
+  body.body--dark {
+    background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./assets/location/bar/0.5x.png') no-repeat fixed;
+    background-position: 57% 45%;
+    background-size: cover;
+    background-attachment: fixed;
+  }
 }
 </style>
