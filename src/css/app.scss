@@ -1,80 +1,99 @@
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-Regular.woff') format('woff');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-Italic.woff') format('woff');
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-ExtraBold.woff') format('woff');
   font-weight: 800;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-ExtraBoldItalic.woff') format('woff');
   font-weight: 800;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-Bold.woff') format('woff');
   font-weight: 700;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-BoldItalic.woff') format('woff');
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-SemiBold.woff') format('woff');
   font-weight: 600;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-SemiBoldItalic.woff') format('woff');
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-Medium.woff') format('woff');
   font-weight: 500;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-MediumItalic.woff') format('woff');
   font-weight: 500;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-Light.woff') format('woff');
   font-weight: 300;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-LightItalic.woff') format('woff');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-ExtraLight.woff') format('woff');
   font-weight: 200;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Spectral';
   src: url('/fonts/spectral/Spectral-ExtraLightItalic.woff') format('woff');
   font-weight: 200;
   font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Adjusted Times New Roman Fallback';
+  src: local('Times New Roman');
+  size-adjust: 94%;
 }
 .spectral {
-  font-family: 'Spectral';
+  font-family: 'Spectral', 'Adjusted Times New Roman Fallback';
 }
 .text-shadow {
   text-shadow: 2px 2px #000;
