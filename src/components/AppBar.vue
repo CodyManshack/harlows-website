@@ -7,12 +7,14 @@
         icon="menu"
         style="position: absolute; left: 12px; top: 8px;"
         @click="drawer = !drawer"
+        aria-label="Menu"
       />
-      <router-link :to="{ name: 'home' }">
+      <router-link :to="{ name: 'home' }" aria-label="Home">
         <q-img
           src="~/assets/logo-0.1x.png"
           :width="$q.screen.gt.sm ? '260px' : '140px'"
           style="color: #7a3c18;"
+          alt="Harlow's Bar Logo"
         />
       </router-link>
     </q-toolbar>
