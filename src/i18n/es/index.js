@@ -1,6 +1,7 @@
 export default {
-  daysOpen1: 'J & D',
+  daysOpen1: 'X & J',
   daysOpen2: 'V & S',
+  daysOpen3: 'D',
   menu: 'ver la carta',
   menuCondensed: 'la carta',
   navigate: 'navegar',
