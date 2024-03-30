@@ -22,11 +22,15 @@
       <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral']" style="font-size: 12px;">
         <div>
           <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ t('daysOpen1') }}</span>
-          17:00 – 00:00
+          17 – 00
         </div>
         <div>
           <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-xs' ]">{{ t('daysOpen2') }}</span>
-          17:00 – 01:30
+          17 – 01:30
+        </div>
+        <div>
+          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-xs' ]">{{ t('daysOpen3') }}</span>
+          17 – 01
         </div>
       </div>
     </q-bar>
