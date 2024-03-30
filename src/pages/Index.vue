@@ -2,8 +2,8 @@
   <q-page class="flex">
     <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
       <section class="hero">
-          <div class="row justify-center full-width hero-content">
-            <div class="col-xs-10 col-md-4 col-lg-3 col-xl-2 items-center text-center">
+          <div :class="[$q.screen.xs ? 'justify-between' : 'justify-center', 'row full-width hero-content']">
+            <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 col-xl-2 items-center text-center">
               <q-btn-dropdown
                 square
                 color="accent"
@@ -31,11 +31,11 @@
                 </q-list>
               </q-btn-dropdown>
             </div>
-            <div class="col-xs-10 col-md-4 col-lg-3 spectral" key="text">
-              <h1 :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
+            <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 spectral" key="text">
+              <h1 :class="[$q.screen.gt.xs ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
                 {{ t('headline') }}
               </h1>
-              <h2 class="gt-sm text-h6 text-weight-regular q-mt-md">
+              <h2 class="gt-xs text-h6 text-weight-regular q-mt-md">
                 {{  t('subtitle') }}
               </h2>
             </div>
@@ -141,14 +141,14 @@ video {
   align-items: center;
   justify-content: center;
 }
-@media (max-width: $breakpoint-sm-max) {
+@media (max-width: $breakpoint-xs-max) {
   .hero-content {
     flex-direction: column-reverse;
     justify-content: space-evenly;
     margin-top: -40%;
   }
 }
-@media (min-width: $breakpoint-md-min) {
+@media (min-width: $breakpoint-sm-min) {
   .hero-content {
     margin-top: 10%;
   }
