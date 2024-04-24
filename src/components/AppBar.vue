@@ -110,7 +110,7 @@ export default defineComponent({
     const router = useRouter()
     const $q = useQuasar()
     const { t, locale } = useI18n({ useScope: 'global' })
-    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_15.04.pdf` })
+    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_24.04.pdf` })
     return {
       drawer: ref(false),
       router,
