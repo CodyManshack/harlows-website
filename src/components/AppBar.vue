@@ -30,7 +30,7 @@
         </div>
         <div>
           <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-xs' ]">{{ t('daysOpen3') }}</span>
-          17 – 01:30
+          18 – 01
         </div>
       </div>
     </q-bar>
