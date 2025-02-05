@@ -15,7 +15,7 @@ export default defineComponent({
     $q.dark.set(true)
     useMeta({
       meta: {
-        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, copas' },
+        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, copas, speakeasy' },
         equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
       }
     })
