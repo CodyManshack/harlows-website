@@ -75,7 +75,7 @@ export default defineComponent({
       { value: 'en', label: 'English' },
       { value: 'es', label: 'Español' }
     ]
-    const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_02.04.pdf` })
+    const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_16.04.pdf` })
     const sections = [
       {
         background: 'bg-primary',
