@@ -1,156 +1,144 @@
 <template>
   <q-page class="flex">
-    <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
+    <transition
+      appear
+      enter-active-class="animated fadeIn slower"
+      leave-active-class="animated fadeOut"
+      mode="out-in"
+    >
       <section class="hero">
-          <div :class="[$q.screen.xs ? 'justify-between' : 'justify-center', 'row full-width hero-content']">
-            <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 col-xl-2 items-center text-center">
-              <q-btn-dropdown
-                square
-                color="accent"
-                padding="sm lg"
-                :size="$q.screen.xs ? 'lg' : 'xl'"
-                content-class="bg-accent no-border-radius"
-                no-caps
-              >
-                <template v-slot:label>
-                  <span class="text-h5 spectral text-weight-regular capitalize-first-letter">{{ t('viewMenu') }}</span>
-                </template>
+        <div :class="heroContentClasses">
+          <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 col-xl-2 items-center text-center">
+            <q-btn-dropdown
+              square
+              color="accent"
+              padding="sm lg"
+              :size="$q.screen.xs ? 'lg' : 'xl'"
+              content-class="bg-accent no-border-radius"
+              no-caps
+              aria-label="View Menu"
+            >
+              <template v-slot:label>
+                <span class="text-h5 spectral text-weight-regular capitalize-first-letter">
+                  {{ t('viewMenu') }}
+                </span>
+              </template>
 
-                <q-list separator>
-                  <q-item
-                    v-for="(lang, i) in localeOptions"
-                    :key="i"
-                    @click="goToMenu(lang.value)"
-                    v-close-popup
-                    clickable
-                  >
-                    <q-item-section>
-                      <q-item-label class="text-h6 text-weight-regular spectral">{{ lang.label }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </q-btn-dropdown>
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 spectral" key="text">
-              <h1 :class="[$q.screen.gt.xs ? 'text-h2' : 'text-h3', 'text-weight-regular text-italic' ]">
-                {{ t('headline') }}
-              </h1>
-              <h2 class="gt-xs text-h6 text-weight-regular q-mt-md">
-                {{  t('subtitle') }}
-              </h2>
-            </div>
+              <q-list separator>
+                <q-item
+                  v-for="lang in localeOptions"
+                  :key="lang.value"
+                  @click="goToMenu(lang.value)"
+                  v-close-popup
+                  clickable
+                  v-ripple
+                >
+                  <q-item-section>
+                    <q-item-label class="text-h6 text-weight-regular spectral">
+                      {{ lang.label }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
           </div>
+          <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 spectral">
+            <h1 :class="headlineClasses">
+              {{ t('headline') }}
+            </h1>
+            <h2 class="gt-xs text-h6 text-weight-regular q-mt-md">
+              {{ t('subtitle') }}
+            </h2>
+          </div>
+        </div>
       </section>
     </transition>
   </q-page>
 </template>
 
-<script>
-import { computed, defineComponent } from 'vue'
+<script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useMeta, useQuasar } from 'quasar'
 
-export default defineComponent({
-  name: 'Home',
-  components: { },
-  setup () {
-    const router = useRouter()
-    const $q = useQuasar()
-    const { t, locale } = useI18n({
-      messages: {
-        en: {
-          headline: 'Classic cocktails & vintage charm',
-          subtitle: 'Classic prohibition-era cocktails with a focus on staying true to the original recipes',
-          viewMenu: 'view the menu'
-        },
-        es: {
-          headline: 'Cócteles clásicos y encanto vintage',
-          subtitle: 'Cócteles clásicos de la época de la prohibición con un enfoque que se mantiene fiel a las recetas originales',
-          viewMenu: 'ver la carta'
-        }
-      }
-    })
-    const localeOptions = [
-      { value: 'en', label: 'English' },
-      { value: 'es', label: 'Español' }
-    ]
-    const menuPath = computed(() => { return `${locale.value.substring(0, 2).toUpperCase()}_Harlow's Menu_16.04.pdf` })
-    const sections = [
-      {
-        background: 'bg-primary',
-        img: 'cocktails/dirtymartini/0.25x.png'
-      },
-      {
-        background: 'bg-accent',
-        img: 'cocktails/amarettosour/0.25x.png'
-      },
-      {
-        background: 'bg-primary',
-        img: 'cocktails/aviation/0.25x.png'
-      }
-    ]
+const router = useRouter()
+const $q = useQuasar()
+const { t, locale } = useI18n({ useScope: 'global' })
 
-    useMeta({
-      title: 'Harlow\'s Bar – Classic Cocktail Lounge',
-      meta: {
-        description: { name: 'description', content: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.' }
-      }
-    })
+// Move static data outside of reactive context
+const localeOptions = [
+  { value: 'en', label: 'English' },
+  { value: 'es', label: 'Español' }
+]
 
-    return {
-      $q,
-      t,
-      locale,
-      localeOptions,
-      menuPath,
-      router,
-      sections
-    }
-  },
-  methods: {
-    goToMenu (lang) {
-      this.locale = lang
-      const routeData = this.router.resolve({ path: this.menuPath })
-      window.open(routeData.href, '_blank')
-    },
-    flipOrder (index) {
-      return index === 1 && this.$q.screen.gt.sm
+// Optimize computed property
+const menuPath = computed(() => `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf`)
+
+// Computed classes for better performance
+const heroContentClasses = computed(() => [
+  $q.screen.xs ? 'justify-between' : 'justify-center',
+  'row full-width hero-content'
+])
+
+const headlineClasses = computed(() => [
+  $q.screen.gt.xs ? 'text-h2' : 'text-h3',
+  'text-weight-regular text-italic'
+])
+
+// Optimize meta setup
+useMeta(() => ({
+  title: t('pageTitle') || 'Harlow\'s Bar – Classic Cocktail Lounge',
+  meta: {
+    description: {
+      name: 'description',
+      content: t('pageDescription') || 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.'
     }
   }
-})
+}))
+
+const goToMenu = (lang) => {
+  locale.value = lang
+  const routeData = router.resolve({ path: menuPath.value })
+  window.open(routeData.href, '_blank')
+}
 </script>
 
-<style lang="scss">
-video {
-  display: block; // block fixes pixel buffer issue on bottom of video element
-  width: 100%;
-  height: 100%;
-}
-.max-height-full {
-  max-height: calc(100% - 68px - 50px - 24px);
-}
+<style lang="scss" scoped>
 .capitalize-first-letter::first-letter {
   text-transform: uppercase;
 }
+
 .hero {
   display: flex;
   flex: 1;
 }
+
 .hero-content {
   align-items: center;
   justify-content: center;
-}
-@media (max-width: $breakpoint-xs-max) {
-  .hero-content {
+
+  // Use more specific breakpoints and combine rules
+  @media (max-width: $breakpoint-xs-max) {
     flex-direction: column-reverse;
     justify-content: space-evenly;
     margin-top: -40%;
   }
-}
-@media (min-width: $breakpoint-sm-min) {
-  .hero-content {
+
+  @media (min-width: $breakpoint-sm-min) {
     margin-top: 10%;
   }
+}
+
+// Add performance optimizations
+.animated {
+  animation-fill-mode: both;
+}
+
+// Optimize for better text rendering
+.spectral {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 </style>
