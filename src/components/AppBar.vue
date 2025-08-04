@@ -20,17 +20,9 @@
     </q-toolbar>
     <q-bar dense class="bg-accent">
       <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral']" style="font-size: 12px;">
-        <div>
-          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ t('daysOpen1') }}</span>
-          19 – 01
-        </div>
-        <div>
-          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-xs' ]">{{ t('daysOpen2') }}</span>
-          18 – 01:30
-        </div>
-        <div>
-          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-xs' ]">{{ t('daysOpen3') }}</span>
-          18 – 01
+        <div v-for="dayHour in dayHourCombos" :key="`${dayHour.day}-${locale.value}`">
+          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ dayHour.day }}</span>
+          {{ dayHour.hours }}
         </div>
       </div>
     </q-bar>
@@ -98,43 +90,42 @@
   </q-drawer>
 </template>
 
-<script>
-import { computed, defineComponent, ref } from 'vue'
+<script setup>
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
 
-export default defineComponent({
-  name: 'AppBar',
-  setup () {
-    const router = useRouter()
-    const $q = useQuasar()
-    const { t, locale } = useI18n({ useScope: 'global' })
-    const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
-    return {
-      drawer: ref(false),
-      router,
-      $q,
-      menuPath,
-      t,
-      locale,
-      localeOptions: [
-        { value: 'en', label: 'English' },
-        { value: 'es', label: 'Español' }
-      ]
-    }
-  },
-  methods: {
-    selectLocale (lang) {
-      this.locale = lang
-    },
-    goToMenu (lang) {
-      this.selectLocale(lang)
-      const routeData = this.router.resolve({ path: this.menuPath })
-      window.open(routeData.href, '_blank')
-    }
-  }
+const router = useRouter()
+const $q = useQuasar()
+const { t, locale } = useI18n({ useScope: 'global' })
+const localeOptions = [
+  { value: 'en', label: 'English' },
+  { value: 'es', label: 'Español' }
+]
+const drawer = ref(false)
+const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
+const dayHourCombos = computed(() => {
+  // Explicitly access locale.value to ensure reactivity
+  const currentLocale = locale.value
+  console.log(`Changed locale to: ${currentLocale}`)
+  return [
+    { day: t('wedThurs'), hours: '19 – 01' },
+    { day: t('friyay'), hours: '19 – 01:30' },
+    { day: t('sat'), hours: '18 – 01:30' },
+    { day: t('sun'), hours: '19 – 00' }
+  ]
 })
+
+const selectLocale = (lang) => {
+  locale.value = lang
+}
+
+const goToMenu = (lang) => {
+  selectLocale(lang)
+  const routeData = router.resolve({ path: menuPath.value })
+  window.open(routeData.href, '_blank')
+}
 </script>
 
 <style lang="scss">
