@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useMeta, useQuasar } from 'quasar'
@@ -96,6 +96,20 @@ useMeta(() => ({
     }
   }
 }))
+
+// Preload menu PDFs on component mount for instant access
+onMounted(() => {
+  // Preload both menu PDFs for instant viewing
+  const menuPaths = ['EN_Harlow\'s Menu_16.04.pdf', 'ES_Harlow\'s Menu_16.04.pdf']
+
+  menuPaths.forEach(path => {
+    const link = document.createElement('link')
+    link.rel = 'prefetch'
+    link.href = path
+    link.as = 'document'
+    document.head.appendChild(link)
+  })
+})
 
 const goToMenu = (lang) => {
   locale.value = lang
