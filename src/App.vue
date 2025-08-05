@@ -2,24 +2,15 @@
   <router-view />
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import { useMeta, useQuasar } from 'quasar'
-import { useI18n } from 'vue-i18n'
 
-export default defineComponent({
-  name: 'App',
-  setup () {
-    const { t, locale } = useI18n()
-    const $q = useQuasar()
-    $q.dark.set(true)
-    useMeta({
-      meta: {
-        keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, copas, speakeasy' },
-        equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
-      }
-    })
-    return { t, locale }
+const $q = useQuasar()
+$q.dark.set(true)
+useMeta({
+  meta: {
+    keywords: { name: 'keywords', content: 'bar, cocktail bar, cocktail, great cocktails, coctelería, bars, valencia, bares, copas, speakeasy' },
+    equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
   }
 })
 </script>
