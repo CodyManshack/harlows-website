@@ -8,6 +8,7 @@ export default {
   navigate: 'navegar',
   contact: 'contactar',
   gallery: 'galería',
+  galleryDescription: 'Galería de fotos de nuestros cócteles clásicos y ubicación',
   headline: 'Cócteles clásicos y encanto vintage',
   subtitle: 'Cócteles clásicos de la época de la prohibición con un enfoque que se mantiene fiel a las recetas originales',
   viewMenu: 'ver la carta',

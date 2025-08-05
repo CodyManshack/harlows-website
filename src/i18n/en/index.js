@@ -8,6 +8,7 @@ export default {
   navigate: 'navigate',
   contact: 'contact',
   gallery: 'gallery',
+  galleryDescription: 'Photo gallery of our classic cocktails and location',
   headline: 'Classic cocktails & vintage charm',
   subtitle: 'Classic prohibition-era cocktails with a focus on staying true to the original recipes',
   viewMenu: 'view the menu',
