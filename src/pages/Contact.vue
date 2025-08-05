@@ -62,71 +62,63 @@
   </q-page>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import { useI18n } from 'vue-i18n'
 import { useMeta } from 'quasar'
 
-export default defineComponent({
-  name: 'Contact',
-  setup () {
-    const images = ['cocktails/sidecar/0.25x.png', 'cocktails/blackmojito/0.33x.png', 'cocktails/hemingwayspecial/0.25x.png']
-    const { t } = useI18n({
-      messages: {
-        en: {
-          title: 'Contact Us',
-          subtitle: "For reservations and inquiries, simply send a carrier pigeon to the address listed. We can't wait to make your acquaintance!",
-          address: "address",
-          phone: "WhatsApp",
-          email: 'email',
-          followUs: 'Follow us on Instagram',
-          vibePics: 'For vibe pics and mouth-watering cocktails',
-          viewInsta: 'View our Instagram'
-        },
-        es: {
-          title: 'Contactar',
-          subtitle: "Para reservas y consultas, basta con enviar una paloma mensajera a la dirección indicada. Estamos impacientes por conocerle.",
-          address: 'dirección',
-          phone: "WhatsApp",
-          email: 'correo electrónico',
-          followUs: 'Síguenos en Instagram',
-          vibePics: 'Para fotos de ambiente y cócteles deliciosos',
-          viewInsta: 'Ver nuestro Instagram'
-        }
-      }
-    })
+const { t } = useI18n({
+  messages: {
+    en: {
+      title: 'Contact Us',
+      subtitle: "For reservations and inquiries, simply send a carrier pigeon to the address listed. We can't wait to make your acquaintance!",
+      address: "address",
+      phone: "WhatsApp",
+      email: 'email',
+      followUs: 'Follow us on Instagram',
+      vibePics: 'For vibe pics and mouth-watering cocktails',
+      viewInsta: 'View our Instagram',
+      contact: 'Contact Us'
+    },
+    es: {
+      title: 'Contactar',
+      subtitle: "Para reservas y consultas, basta con enviar una paloma mensajera a la dirección indicada. Estamos impacientes por conocerle.",
+      address: 'dirección',
+      phone: "WhatsApp",
+      email: 'correo electrónico',
+      followUs: 'Síguenos en Instagram',
+      vibePics: 'Para fotos de ambiente y cócteles deliciosos',
+      viewInsta: 'Ver nuestro Instagram',
+      contact: 'Contáctanos'
+    }
+  }
+})
 
-    const buttons = [
-      {
-        icon: 'pin',
-        title: 'address',
-        subtitle: 'Carrer de Lepant 4, 46008 Valencia',
-        href: 'https://maps.app.goo.gl/y8zXASHuxx2pLbyf9'
-      },
-      {
-        icon: 'logo-whatsapp',
-        title: 'phone',
-        subtitle: '(+34) 692 940 844',
-        href: 'https://api.whatsapp.com/send?phone=34692940844'
-      },
-      {
-        icon: 'mail',
-        title: 'email',
-        subtitle: 'info@harlows.bar',
-        href: 'mailto:info@harlows.bar'
-      }
-    ]
-
-    useMeta({
-      title: 'Harlow\'s Bar – Contact Us',
-      meta: {
-        description: { name: 'description', content: 'Contact us by email, whatsapp, or get directions using google maps' }
-      }
-    })
-
-    return { buttons, images, t }
+const buttons = [
+  {
+    icon: 'pin',
+    title: 'address',
+    subtitle: 'Carrer de Lepant 4, 46008 Valencia',
+    href: 'https://maps.app.goo.gl/y8zXASHuxx2pLbyf9'
   },
-  methods: {}
+  {
+    icon: 'logo-whatsapp',
+    title: 'phone',
+    subtitle: '(+34) 692 940 844',
+    href: 'https://api.whatsapp.com/send?phone=34692940844'
+  },
+  {
+    icon: 'mail',
+    title: 'email',
+    subtitle: 'info@harlows.bar',
+    href: 'mailto:info@harlows.bar'
+  }
+]
+
+useMeta({
+  title: `${t('contact')} – Harlow's Bar`,
+  meta: {
+    description: { name: 'description', content: 'Contact us by email, whatsapp, or get directions using google maps' }
+  }
 })
 </script>
 

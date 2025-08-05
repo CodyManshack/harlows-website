@@ -1,29 +1,52 @@
 <template>
   <q-page>
-    <section class="">
+    <section class="gallery-section">
       <div class="row justify-center text-center">
         <div class="col-xs-12">
-          <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
-            <h1 key="text" class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">{{ t('gallery') }}</h1>
+          <transition
+            appear
+            enter-active-class="animated fadeIn slower"
+            leave-active-class="animated fadeOut"
+            mode="out-in"
+          >
+            <h1 class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">
+              {{ t('gallery') }}
+            </h1>
           </transition>
         </div>
       </div>
       <div class="row justify-center">
         <div class="col-xs-12 col-sm-10 col-lg-8 col-xl-6">
-          <div :class="[$q.screen.gt.sm ? 'q-gutter-xl' : 'q-gutter-y-xl', 'row justify-center']">
+          <div :class="gutterClasses">
             <div
+              v-for="image in images"
+              :key="image.id"
               class="col-xs-12 col-sm-10 col-md-4 col-lg-3"
-              v-for="(image, i) in images"
-              :key="i"
             >
               <q-intersection
-                :key="i"
                 once
                 transition="fade"
+                :threshold="0.1"
               >
-                <q-card flat class="bg-transparent">
-                  <q-img :src="image.src" loading="lazy" :alt="image.title">
-                    <div v-if="image.title" class="spectral text-h5 absolute-bottom text-right">{{ image.title }}</div>
+                <q-card flat class="bg-transparent gallery-card">
+                  <q-img
+                    :src="image.src"
+                    :srcset="image.srcset"
+                    :alt="image.alt"
+                    loading="lazy"
+                    spinner-color="accent"
+                    :ratio="4/3"
+                    fit="cover"
+                    class="gallery-image"
+                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    no-spinner-delay
+                  >
+                    <div
+                      v-if="image.title"
+                      class="spectral text-h5 absolute-bottom text-right image-title"
+                    >
+                      {{ image.title }}
+                    </div>
                   </q-img>
                 </q-card>
               </q-intersection>
@@ -35,125 +58,224 @@
   </q-page>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useMeta, useQuasar } from 'quasar'
 
-import amarettosour010 from '../assets/cocktails/amarettosour/0.1x.png'
-import amarettosour033 from '../assets/cocktails/amarettosour/0.33x.png'
-import amarettosour050 from '../assets/cocktails/amarettosour/0.5x.png'
-import aviation010 from '../assets/cocktails/aviation/0.1x.png'
-import aviation033 from '../assets/cocktails/aviation/0.33x.png'
-import aviation050 from '../assets/cocktails/aviation/0.5x.png'
-import bacardicocktail010 from '../assets/cocktails/bacardicocktail/0.1x.png'
-import bacardicocktail025 from '../assets/cocktails/bacardicocktail/0.25x.png'
-import bacardicocktail033 from '../assets/cocktails/bacardicocktail/0.33x.png'
-import bar010 from '../assets/location/bar/0.1x.png'
-import bar033 from '../assets/location/bar/0.33x.png'
-import bar050 from '../assets/location/bar/0.5x.png'
-import blackmojito010 from '../assets/cocktails/blackmojito/0.1x.png'
-import blackmojito033 from '../assets/cocktails/blackmojito/0.33x.png'
-import blackmojito050 from '../assets/cocktails/blackmojito/0.5x.png'
-import boulevardier010 from '../assets/cocktails/boulevardier/0.1x.png'
-import boulevardier025 from '../assets/cocktails/boulevardier/0.25x.png'
-import boulevardier033 from '../assets/cocktails/boulevardier/0.33x.png'
-import dirtymartini010 from '../assets/cocktails/dirtymartini/0.1x.png'
-import dirtymartini033 from '../assets/cocktails/dirtymartini/0.33x.png'
-import dirtymartini050 from '../assets/cocktails/dirtymartini/0.5x.png'
-import hemingwayspecial010 from '../assets/cocktails/hemingwayspecial/0.1x.png'
-import hemingwayspecial033 from '../assets/cocktails/hemingwayspecial/0.33x.png'
-import hemingwayspecial050 from '../assets/cocktails/hemingwayspecial/0.5x.png'
-import mulledwine010 from '../assets/cocktails/mulledwine/0.1x.png'
-import mulledwine025 from '../assets/cocktails/mulledwine/0.25x.png'
-import mulledwine033 from '../assets/cocktails/mulledwine/0.33x.png'
-import orangeblossom010 from '../assets/cocktails/orangeblossom/0.1x.png'
-import orangeblossom033 from '../assets/cocktails/orangeblossom/0.33x.png'
-import orangeblossom050 from '../assets/cocktails/orangeblossom/0.5x.png'
-import rustynail010 from '../assets/cocktails/rustynail/0.1x.png'
-import rustynail033 from '../assets/cocktails/rustynail/0.33x.png'
-import rustynail050 from '../assets/cocktails/rustynail/0.5x.png'
-import stairs010 from '../assets/location/stairs/0.1x.png'
-import stairs025 from '../assets/location/stairs/0.25x.png'
-import stairs033 from '../assets/location/stairs/0.33x.png'
-import whiskeysour010 from '../assets/cocktails/whiskeysour/0.1x.png'
-import whiskeysour033 from '../assets/cocktails/whiskeysour/0.33x.png'
-import whiskeysour050 from '../assets/cocktails/whiskeysour/0.5x.png'
+const $q = useQuasar()
+const { t } = useI18n({ useScope: 'global' })
 
-export default defineComponent({
-  name: 'Gallery',
-  setup () {
-    const $q = useQuasar()
-
-    const images = [
-      {
-        src: $q.screen.gt.md ? dirtymartini050 : $q.screen.gt.sm ? dirtymartini033 : dirtymartini010,
-        title: 'Dirty Martini'
-      },
-      {
-        src: $q.screen.gt.md ? whiskeysour050 : $q.screen.gt.sm ? whiskeysour033 : whiskeysour010,
-        title: 'Whiskey Sour'
-      },
-      {
-        src: $q.screen.gt.md ? aviation050 : $q.screen.gt.sm ? aviation033 : aviation010,
-        title: 'Aviation'
-      },
-      {
-        src: $q.screen.gt.md ? orangeblossom050 : $q.screen.gt.sm ? orangeblossom033 : orangeblossom010,
-        title: 'Orange Blossom'
-      },
-      {
-        src: $q.screen.gt.md ? rustynail050 : $q.screen.gt.sm ? rustynail033 : rustynail010,
-        title: 'Rusty Nail'
-      },
-      {
-        src: $q.screen.gt.md ? amarettosour050 : $q.screen.gt.sm ? amarettosour033 : amarettosour010,
-        title: 'Amaretto Sour'
-      },
-      {
-        src: $q.screen.gt.md ? bacardicocktail033 : $q.screen.gt.sm ? bacardicocktail025 : bacardicocktail010,
-        title: 'Bacardi Cocktail'
-      },
-      {
-        src: $q.screen.gt.md ? mulledwine033 : $q.screen.gt.sm ? mulledwine025 : mulledwine010,
-        title: 'Mulled Wine'
-      },
-      {
-        src: $q.screen.gt.md ? boulevardier033 : $q.screen.gt.sm ? boulevardier025 : boulevardier010,
-        title: 'Boulevardier'
-      },
-      {
-        src: $q.screen.gt.md ? stairs033 : $q.screen.gt.sm ? stairs025 : stairs010
-      },
-      {
-        src: $q.screen.gt.md ? bar050 : $q.screen.gt.sm ? bar033 : bar010
-      },
-      {
-        src: $q.screen.gt.md ? blackmojito050 : $q.screen.gt.sm ? blackmojito033 : blackmojito010,
-        title: 'Black Mojito'
-      },
-      {
-        src: $q.screen.gt.md ? hemingwayspecial050 : $q.screen.gt.sm ? hemingwayspecial033 : hemingwayspecial010,
-        title: 'Hemingway Special'
-      }
-    ]
-    const { t } = useI18n({})
-    useMeta({
-      title: 'Harlow\'s Bar – Gallery',
-      meta: {
-        description: { name: 'description', content: 'Photo gallery of our classic cocktails and location' },
-        keywords: { name: 'keywords', content: 'gin tonic, amaretto sour, aviation, bacardi cocktail, black mojito, mojito, boulevardier, martini, dirty martini, vesper martini, daiquiri, hemingway special, wine, mulled wine, orange blossom, rusty nail, whiskey sour' }
-      }
-    })
-
-    return { images, t, $q }
+// Optimized image configuration with lazy imports
+const imageConfigs = [
+  {
+    basePath: 'cocktails/dirtymartini',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Dirty Martini'
   },
-  methods: {}
+  {
+    basePath: 'cocktails/whiskeysour',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Whiskey Sour'
+  },
+  {
+    basePath: 'cocktails/aviation',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Aviation'
+  },
+  {
+    basePath: 'cocktails/orangeblossom',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Orange Blossom'
+  },
+  {
+    basePath: 'cocktails/rustynail',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Rusty Nail'
+  },
+  {
+    basePath: 'cocktails/amarettosour',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Amaretto Sour'
+  },
+  {
+    basePath: 'cocktails/bacardicocktail',
+    sizes: { small: '0.1x', medium: '0.25x', large: '0.33x' },
+    title: 'Bacardi Cocktail'
+  },
+  {
+    basePath: 'cocktails/mulledwine',
+    sizes: { small: '0.1x', medium: '0.25x', large: '0.33x' },
+    title: 'Mulled Wine'
+  },
+  {
+    basePath: 'cocktails/boulevardier',
+    sizes: { small: '0.1x', medium: '0.25x', large: '0.33x' },
+    title: 'Boulevardier'
+  },
+  {
+    basePath: 'location/stairs',
+    sizes: { small: '0.1x', medium: '0.25x', large: '0.33x' },
+    title: null
+  },
+  {
+    basePath: 'location/bar',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: null
+  },
+  {
+    basePath: 'cocktails/blackmojito',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Black Mojito'
+  },
+  {
+    basePath: 'cocktails/hemingwayspecial',
+    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
+    title: 'Hemingway Special'
+  }
+]
+
+// Computed property for responsive images with stable loading
+const images = computed(() =>
+  imageConfigs.map((config, index) => {
+    // Use the largest available size to avoid reloading on resize
+    const preferredSize = config.sizes.large || config.sizes.medium || config.sizes.small
+
+    return {
+      id: `gallery-image-${index}`,
+      src: new URL(`../assets/${config.basePath}/${preferredSize}.png`, import.meta.url).href,
+      srcset: `
+        ${new URL(`../assets/${config.basePath}/${config.sizes.small}.png`, import.meta.url).href} 1x,
+        ${config.sizes.medium ? new URL(`../assets/${config.basePath}/${config.sizes.medium}.png`, import.meta.url).href + ' 2x,' : ''}
+        ${config.sizes.large ? new URL(`../assets/${config.basePath}/${config.sizes.large}.png`, import.meta.url).href + ' 3x' : ''}
+      `.trim().replace(/,\s*$/, ''), // Clean up trailing comma
+      title: config.title,
+      alt: config.title || `${config.basePath.split('/').pop()} image`
+    }
+  })
+)
+
+// Computed classes
+const gutterClasses = computed(() => [
+  $q.screen.gt.sm ? 'q-gutter-xl' : 'q-gutter-y-xl',
+  'row justify-center'
+])
+
+// Preload critical images for better performance
+onMounted(() => {
+  // Preload the first few images for better perceived performance
+  images.value.slice(0, 4).forEach(image => {
+    const link = document.createElement('link')
+    link.rel = 'preload'
+    link.as = 'image'
+    link.href = image.src
+    document.head.appendChild(link)
+  })
 })
+
+// Reactive meta tags
+useMeta(() => ({
+  title: `${t('gallery')} – Harlow's Bar`,
+  meta: {
+    description: {
+      name: 'description',
+      content: t('galleryDescription') || 'Photo gallery of our classic cocktails and location'
+    },
+    keywords: {
+      name: 'keywords',
+      content: 'gin tonic, amaretto sour, aviation, bacardi cocktail, black mojito, mojito, boulevardier, martini, dirty martini, vesper martini, daiquiri, hemingway special, wine, mulled wine, orange blossom, rusty nail, whiskey sour'
+    }
+  }
+}))
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .capitalize-first-letter::first-letter {
   text-transform: capitalize;
+}
+
+.gallery-section {
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.gallery-card {
+  border-radius: 8px;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.gallery-image {
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+
+  // Ensure smooth loading states
+  &.q-img--loading {
+    opacity: 0.8;
+  }
+
+  &.q-img--loaded {
+    opacity: 1;
+  }
+}
+
+// Prevent layout shift during image loading
+.q-img__container {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+// Optimize spinner appearance
+.q-img__loading {
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.image-title {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  font-size: 1.6rem;
+  padding: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+// Performance optimizations
+.spectral {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Intersection observer optimization
+.q-intersection {
+  min-height: 200px; // Prevent layout shift
+}
+
+// Animation optimizations
+.animated {
+  animation-fill-mode: both;
+}
+
+// Responsive optimizations
+@media (max-width: $breakpoint-sm-max) {
+  .gallery-section {
+    padding: 1rem 0;
+  }
+
+  .image-title {
+    font-size: 1.4rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-card {
+    transition: none;
+  }
+
+  .animated {
+    animation: none;
+  }
 }
 </style>

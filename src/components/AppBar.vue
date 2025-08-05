@@ -107,8 +107,8 @@ const drawer = ref(false)
 const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
 const dayHourCombos = computed(() => {
   // Explicitly access locale.value to ensure reactivity
+  // eslint-disable-next-line no-unused-vars
   const currentLocale = locale.value
-  console.log(`Changed locale to: ${currentLocale}`)
   return [
     { day: t('wedThurs'), hours: '19 – 01' },
     { day: t('friyay'), hours: '19 – 01:30' },

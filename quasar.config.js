@@ -74,7 +74,30 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf (viteConf) {
+        // Performance optimizations
+        viteConf.build = viteConf.build || {}
+        viteConf.build.rollupOptions = viteConf.build.rollupOptions || {}
+        viteConf.build.rollupOptions.output = viteConf.build.rollupOptions.output || {}
+        
+        // Enable chunk splitting for better caching
+        viteConf.build.rollupOptions.output.manualChunks = {
+          vendor: ['vue', 'vue-router', 'vue-i18n'],
+          quasar: ['quasar']
+        }
+        
+        // Optimize chunk size
+        viteConf.build.chunkSizeWarningLimit = 1000
+        
+        // Enable minification and compression
+        viteConf.build.minify = 'terser'
+        viteConf.build.terserOptions = {
+          compress: {
+            drop_console: true,
+            drop_debugger: true
+          }
+        }
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [

@@ -1,0 +1,36 @@
+# Cache control for static assets
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.pdf
+  Cache-Control: public, max-age=86400
+
+# Cache for images with shorter duration for potential updates
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.jpg
+  Cache-Control: public, max-age=604800
+
+/*.jpeg
+  Cache-Control: public, max-age=604800
+
+# Short cache for HTML files to ensure updates are seen quickly
+/*.html
+  Cache-Control: public, max-age=3600
+
+# JavaScript and CSS files
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

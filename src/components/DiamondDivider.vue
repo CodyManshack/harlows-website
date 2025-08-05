@@ -8,13 +8,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DiamondDivider',
-  setup () {
-    return {}
-  }
-}
+<script setup>
 </script>
 
 <style lang="scss" scoped>

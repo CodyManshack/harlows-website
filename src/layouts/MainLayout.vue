@@ -10,16 +10,7 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import AppBar from '../components/AppBar.vue'
 import AppFooter from '../components/AppFooter.vue'
-
-export default defineComponent({
-  name: 'MainLayout',
-  components: { AppBar, AppFooter },
-  setup () {
-    return {}
-  }
-})
 </script>
