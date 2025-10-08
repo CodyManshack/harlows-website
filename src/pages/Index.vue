@@ -9,47 +9,49 @@
         mode="out-in"
       >
         <div :class="heroContentClasses">
-          <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 col-xl-2 items-center text-center">
-            <q-btn-dropdown
-              square
-              color="accent"
-              padding="sm lg"
-              :size="$q.screen.xs ? 'lg' : 'xl'"
-              content-class="bg-accent no-border-radius"
-              no-caps
-              aria-label="View Menu"
-            >
-              <template v-slot:label>
-                <span class="text-h5 spectral text-weight-regular capitalize-first-letter">
-                  {{ t('menu.view') }}
-                </span>
-              </template>
-
-              <q-list separator>
-                <q-item
-                  v-for="lang in localeOptions"
-                  :key="lang.value"
-                  @click="goToMenu(lang.value)"
-                  v-close-popup
-                  clickable
-                  v-ripple
+          <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 col-xl-4 spectral">
+            <q-card class="hero-card">
+              <q-card-section class="text-center">
+                <h1 :class="headlineClasses">
+                  {{ t('hero.headline') }}
+                </h1>
+                <h2 class="gt-xs text-h6 text-weight-regular q-mt-md q-mb-lg">
+                  {{ t('hero.subtitle') }}
+                </h2>
+                <q-btn-dropdown
+                  color="accent"
+                  padding="sm lg"
+                  :size="$q.screen.xs ? 'lg' : 'xl'"
+                  content-class="bg-accent"
+                  no-caps
+                  aria-label="View Menu"
+                  class="hero-menu-btn"
                 >
-                  <q-item-section>
-                    <q-item-label class="text-h6 text-weight-regular spectral">
-                      {{ lang.label }}
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
-          </div>
-          <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 spectral">
-              <h1 :class="headlineClasses">
-                {{ t('hero.headline') }}
-              </h1>
-              <h2 class="gt-xs text-h6 text-weight-regular q-mt-md">
-                {{ t('hero.subtitle') }}
-              </h2>
+                  <template v-slot:label>
+                    <span class="text-h5 spectral text-weight-regular capitalize-first-letter">
+                      {{ t('menu.view') }}
+                    </span>
+                  </template>
+
+                  <q-list separator>
+                    <q-item
+                      v-for="lang in localeOptions"
+                      :key="lang.value"
+                      @click="goToMenu(lang.value)"
+                      v-close-popup
+                      clickable
+                      v-ripple
+                    >
+                      <q-item-section>
+                        <q-item-label class="text-h6 text-weight-regular spectral">
+                          {{ lang.label }}
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
+              </q-card-section>
+            </q-card>
           </div>
         </div>
       </transition>
@@ -118,7 +120,6 @@
             <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
               <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-italic' ]">{{ t('instagram.follow') }}</div>
               <q-btn
-                square
                 color="accent"
                 padding="sm lg"
                 :size="$q.screen.xs ? 'lg' : 'xl'"
@@ -140,7 +141,6 @@
             <div class="row justify-center items-center q-gutter-lg q-my-md">
               <transition-group appear enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
                 <q-btn
-                  square
                   class="col-md-3 col-8 bg-secondary"
                   style="height: 200px;"
                   v-for="button in contactButtons"
@@ -358,14 +358,33 @@ const goToMenu = (lang) => {
 
   // Use more specific breakpoints and combine rules
   @media (max-width: $breakpoint-xs-max) {
-    flex-direction: column-reverse;
-    justify-content: space-evenly;
-    margin-top: -40%;
+    flex-direction: column;
+    justify-content: center;
   }
 
   @media (min-width: $breakpoint-sm-min) {
     margin-top: 10%;
   }
+}
+
+.hero-card {
+  background: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(2px);
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  .q-card__section {
+    color: white !important;
+  }
+
+  h1, h2 {
+    color: white !important;
+  }
+}
+
+.hero-menu-btn {
+  margin-top: 1rem;
 }
 
 // Gallery section styles - restored with better spacing
@@ -405,7 +424,7 @@ const goToMenu = (lang) => {
 }
 
 .gallery-card {
-  border-radius: 8px;
+  border-radius: 24px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -416,7 +435,7 @@ const goToMenu = (lang) => {
 }
 
 .gallery-image {
-  border-radius: 8px;
+  border-radius: 24px;
 }
 
 .image-title {
