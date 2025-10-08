@@ -235,14 +235,6 @@ const imageConfigs = [
     sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' },
     title: 'Hemingway Special'
   },
-  {
-    basePath: 'location/bar',
-    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' }
-  },
-  {
-    basePath: 'location/stairs',
-    sizes: { small: '0.1x', medium: '0.33x', large: '0.5x' }
-  }
 ]
 
 // Contact buttons data
