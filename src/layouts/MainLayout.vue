@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpr fff">
+  <q-layout container style="height: 100svh;" view="hHh lpr fff">
     <AppBar />
 
     <q-page-container>
