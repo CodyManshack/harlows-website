@@ -6,7 +6,6 @@ export default {
   fri: 'F.',
   sat: 'S.',
   sun: 'Su.',
-  wedThurs: 'W. & Th.',
   menu: 'View the menu',
   menuCondensed: 'Menu',
   navigate: 'Navigate',
