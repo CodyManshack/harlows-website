@@ -1,5 +1,5 @@
 <template>
-  <q-footer class="bg-transparent">
+  <div class="footer bg-transparent">
     <div class="row justify-center items-center q-py-md">
       <div class="col-md-9 col-12 flex items-center justify-center">
         <q-btn flat icon="ion-logo-instagram" href="https://www.instagram.com/harlows.bar/" target="_blank" aria-label="Instagram"/>
@@ -9,7 +9,7 @@
         <q-btn flat icon="ion-navigate" href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9" target="_blank" aria-label="Google Maps"/>
       </div>
     </div>
-  </q-footer>
+  </div>
 </template>
 
 <script setup>

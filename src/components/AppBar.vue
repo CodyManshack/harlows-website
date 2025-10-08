@@ -38,7 +38,7 @@
     behavior="mobile"
   >
     <q-list padding class="spectral">
-      <q-item-label header class="text-body1">{{ t('menuCondensed') }}</q-item-label>
+  <q-item-label header class="text-body1">{{ t('menu.condensed') }}</q-item-label>
       <q-item
         v-for="(lang, i) in localeOptions"
         :key="i"
@@ -62,7 +62,7 @@
         v-close-popup
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ t('gallery') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ t('gallery.title') }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item
@@ -72,7 +72,7 @@
         v-close-popup
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ t('contact') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ t('navigation.contact') }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item
@@ -82,7 +82,7 @@
         target="_blank"
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ t('navigate') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{ t('navigation.navigate') }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
@@ -143,7 +143,7 @@ import { businessHoursByDay, jsDayToKey } from './businessHours.js'
 const todayIdx = new Date().getDay()
 const todayKey = jsDayToKey[todayIdx]
 // List of days in display order (edit as needed)
-const displayDays = ['wed', 'thu', 'fri', 'sat', 'sun']
+const displayDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 function groupDaysByHours() {
   const groups = []
@@ -167,16 +167,18 @@ function formatHourString(hours) {
 }
 
 const dayHourCombos = computed(() => {
-  return groupDaysByHours().map(group => {
-    const isToday = group.days.includes(todayKey)
-    // Localize each day, join with ampersand
-    const localizedDays = group.days.map(dk => t(dk)).join(' & ')
-    return {
-      label: localizedDays,
-      hours: formatHourString(group.hours),
-      isToday
-    }
-  })
+  return groupDaysByHours()
+    .filter(group => group.hours && group.hours.trim() !== '')
+    .map(group => {
+      const isToday = group.days.includes(todayKey)
+      // Localize each day, join with ampersand
+      const localizedDays = group.days.map(dk => t('days.' + dk)).join(' & ')
+      return {
+        label: localizedDays,
+        hours: formatHourString(group.hours),
+        isToday
+      }
+    })
 })
 
 const selectLocale = (lang) => {

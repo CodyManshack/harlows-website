@@ -1,26 +1,44 @@
 export default {
-  mon: 'M.',
-  tue: 'T.',
-  wed: 'W.',
-  thu: 'Th.',
-  fri: 'F.',
-  sat: 'S.',
-  sun: 'Su.',
-  menu: 'View the menu',
-  menuCondensed: 'Menu',
-  navigate: 'Navigate',
-  contact: 'Contact',
-  gallery: 'Gallery',
-  galleryDescription: 'Photo gallery of our classic cocktails and location',
-  headline: 'Classic cocktails & vintage charm',
-  subtitle: 'Classic prohibition-era cocktails with a focus on staying true to the original recipes',
-  viewMenu: 'View the menu',
-  pageTitle: 'Harlow\'s Bar – Classic Cocktail Lounge',
-  pageDescription: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.',
-  followUs: 'Follow us on Instagram',
-  viewInsta: 'View our Instagram',
-  address: 'address',
-  whatsapp: 'WhatsApp',
-  email: 'email',
-  hours: 'Hours'
+  days: {
+    mon: 'M.',
+    tue: 'T.',
+    wed: 'W.',
+    thu: 'Th.',
+    fri: 'F.',
+    sat: 'S.',
+    sun: 'Su.'
+  },
+  menu: {
+    view: 'View the menu',
+    condensed: 'Menu'
+  },
+  navigation: {
+    navigate: 'Navigate',
+    contact: 'Contact'
+  },
+  gallery: {
+    title: 'Gallery',
+    description: 'Photo gallery of our classic cocktails and location'
+  },
+  hero: {
+    headline: 'Classic cocktails & vintage charm',
+    subtitle: 'Classic prohibition-era cocktails with a focus on staying true to the original recipes'
+  },
+  page: {
+    title: 'Harlow\'s Bar – Classic Cocktail Lounge',
+    description: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.'
+  },
+  instagram: {
+    follow: 'Follow us on Instagram',
+    view: 'View our Instagram'
+  },
+  contact: {
+    address: 'Address',
+    whatsapp: 'WhatsApp',
+    email: 'Email'
+  },
+  hours: {
+    label: 'Hours',
+    open: 'Open from {open} to {close}'
+  }
 }
