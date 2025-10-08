@@ -10,48 +10,50 @@
       >
         <div :class="heroContentClasses">
           <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 col-xl-4 spectral">
-            <q-card class="hero-card">
-              <q-card-section class="text-center">
-                <h1 :class="headlineClasses">
-                  {{ t('hero.headline') }}
-                </h1>
-                <h2 class="gt-xs text-h6 text-weight-regular q-mt-md q-mb-lg">
+            <div class="hero-content-wrapper text-center">
+              <div class="hero-separation-card">
+                <div class="hero-text-overlay">
+                  <h1 :class="headlineClasses">
+                    {{ t('hero.headline') }}
+                  </h1>
+                                  <h2 class="text-h6 text-weight-regular q-mt-md q-mb-xl hero-subtitle">
                   {{ t('hero.subtitle') }}
                 </h2>
+                </div>
                 <q-btn-dropdown
-                  color="accent"
-                  padding="sm lg"
-                  :size="$q.screen.xs ? 'lg' : 'xl'"
-                  content-class="bg-accent"
-                  no-caps
-                  aria-label="View Menu"
-                  class="hero-menu-btn"
-                >
-                  <template v-slot:label>
-                    <span class="text-h5 spectral text-weight-regular capitalize-first-letter">
-                      {{ t('menu.view') }}
-                    </span>
-                  </template>
+                color="accent"
+                padding="lg xl"
+                :size="$q.screen.xs ? 'lg' : 'xl'"
+                content-class="bg-accent"
+                no-caps
+                aria-label="View Menu"
+                class="hero-menu-btn"
+              >
+                <template v-slot:label>
+                  <span class="text-h5 spectral text-weight-regular capitalize-first-letter">
+                    {{ t('menu.view') }}
+                  </span>
+                </template>
 
-                  <q-list separator>
-                    <q-item
-                      v-for="lang in localeOptions"
-                      :key="lang.value"
-                      @click="goToMenu(lang.value)"
-                      v-close-popup
-                      clickable
-                      v-ripple
-                    >
-                      <q-item-section>
-                        <q-item-label class="text-h6 text-weight-regular spectral">
-                          {{ lang.label }}
-                        </q-item-label>
-                      </q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-btn-dropdown>
-              </q-card-section>
-            </q-card>
+                <q-list separator>
+                  <q-item
+                    v-for="lang in localeOptions"
+                    :key="lang.value"
+                    @click="goToMenu(lang.value)"
+                    v-close-popup
+                    clickable
+                    v-ripple
+                  >
+                    <q-item-section>
+                      <q-item-label class="text-h6 text-weight-regular spectral">
+                        {{ lang.label }}
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-btn-dropdown>
+              </div>
+            </div>
           </div>
         </div>
       </transition>
@@ -349,7 +351,7 @@ const goToMenu = (lang) => {
 .hero {
   display: flex;
   flex: 1;
-  min-height: 100vh;
+  min-height: calc(100vh - 92px); // Adjust for header height
 }
 
 .hero-content {
@@ -361,33 +363,50 @@ const goToMenu = (lang) => {
     flex-direction: column;
     justify-content: center;
   }
+}
 
-  @media (min-width: $breakpoint-sm-min) {
-    margin-top: 10%;
+.hero-content-wrapper {
+  padding: 1rem;
+}
+
+.hero-separation-card {
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  @media (max-width: $breakpoint-xs-max) {
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
   }
 }
 
-.hero-card {
-  background: rgba(0, 0, 0, 0.45) !important;
-  backdrop-filter: blur(2px);
-  border-radius: 24px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.hero-text-overlay {
+  margin-bottom: 2rem;
 
-  .q-card__section {
+  h1 {
     color: white !important;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
   }
 
-  h1, h2 {
-    color: white !important;
+  h2 {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 300;
+    line-height: 1.4;
   }
+}
+
+.hero-subtitle {
+  max-width: 400px;
+  margin: 1rem auto 0 auto;
 }
 
 .hero-menu-btn {
   margin-top: 1rem;
-}
-
-// Gallery section styles - restored with better spacing
+}// Gallery section styles - restored with better spacing
 
 .gallery-section {
   background-color: rgba(0, 0, 0, 0.02);
