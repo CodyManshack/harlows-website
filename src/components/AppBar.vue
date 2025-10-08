@@ -121,21 +121,20 @@ const selectLocale = (lang) => {
   locale.value = lang
 }
 
-const scrollToSection = (sectionId) => {
-  drawer.value = false
-  // Small delay to allow drawer to close
-  setTimeout(() => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }, 300)
-}
-
 const goToMenu = (lang) => {
   selectLocale(lang)
   const routeData = router.resolve({ path: menuPath.value })
   window.open(routeData.href, '_blank')
+}
+
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
 }
 </script>
 

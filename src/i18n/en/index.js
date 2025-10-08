@@ -8,18 +8,15 @@ export default {
   navigate: 'Navigate',
   contact: 'Contact',
   gallery: 'Gallery',
-  galleryDescription: 'Discover our signature cocktails and elegant atmosphere',
+  galleryDescription: 'Photo gallery of our classic cocktails and location',
   headline: 'Classic cocktails & vintage charm',
   subtitle: 'Classic prohibition-era cocktails with a focus on staying true to the original recipes',
   viewMenu: 'View the menu',
+  pageTitle: 'Harlow\'s Bar – Classic Cocktail Lounge',
+  pageDescription: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.',
   followUs: 'Follow us on Instagram',
   viewInsta: 'View our Instagram',
-  address: 'Address',
+  address: 'address',
   phone: 'WhatsApp',
-  email: 'Email',
-  getDirections: 'Get Directions',
-  sendMessage: 'Send Message',
-  sendEmail: 'Send Email',
-  pageTitle: 'Harlow\'s Bar – Classic Cocktail Lounge',
-  pageDescription: 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.'
+  email: 'email'
 }
