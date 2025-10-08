@@ -1,5 +1,5 @@
 <template>
-  <q-header :class="['bg-primary', { 'appbar-transparent': isTransparent }]">
+  <q-header :class="['bg-primary', { 'is-transparent': isTransparent }]">
     <q-toolbar class="q-py-sm justify-center">
       <q-btn
         flat
@@ -18,7 +18,7 @@
         />
       </router-link>
     </q-toolbar>
-    <q-bar dense class="bg-accent">
+  <q-bar dense :class="['bg-accent', { 'is-transparent': isTransparent }]">
       <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral']" style="font-size: 12px;">
         <div v-for="dayHour in dayHourCombos" :key="`${dayHour.day}-${locale.value}`">
           <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ dayHour.day }}</span>
@@ -173,12 +173,21 @@ const scrollToSection = (sectionId) => {
   text-transform: capitalize;
 }
 
+// Solid backgrounds by default
 .q-header.bg-primary {
-  background-color: #16342A !important; /* solid primary by default */
+  background-color: #16342A !important;
+  transition: background-color 0.3s;
+}
+.q-bar.bg-accent {
+  background-color: #95572F !important;
   transition: background-color 0.3s;
 }
 
-.q-header.appbar-transparent {
-  background-color: rgba(22, 52, 42, 0.7) !important; /* slightly transparent when scrolled */
+// Shared transparency class for both
+.q-header.is-transparent {
+  background-color: rgba(22, 52, 42, 0.7) !important;
+}
+.q-bar.is-transparent {
+  background-color: rgba(149, 87, 47, 0.7) !important;
 }
 </style>
