@@ -3,33 +3,29 @@
   "version": "0.0.1",
   "description": "Classic cocktail lounge",
   "productName": "Harlow's Bar",
-  "author": "cody.manshack@gmail.com",
+  "author": "Cody Manshack <cody.manshack@gmail.com>",
   "private": true,
+  "type": "module",
   "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "postinstall": "quasar prepare"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.17.0",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "quasar": "^2.6.0",
-    "vue": "^3.0.0",
-    "vue-i18n": "^9.0.0",
-    "vue-router": "^4.0.0"
+    "quasar": "^2.18.5",
+    "vue": "^3.5.20",
+    "vue-i18n": "^11.0.0",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@intlify/vite-plugin-vue-i18n": "^7.0.0",
-    "@intlify/vue-i18n-loader": "^4.2.0",
-    "@quasar/app-vite": "^1.0.0",
-    "autoprefixer": "^10.4.2",
-    "eslint": "^8.10.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-n": "^16.1.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^9.0.0",
-    "postcss": "^8.4.14"
+    "@intlify/unplugin-vue-i18n": "^4.0.0",
+    "@quasar/app-vite": "^2.4.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",
