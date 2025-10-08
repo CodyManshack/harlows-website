@@ -1,8 +1,12 @@
 export default {
-  wedThurs: 'W. & Th.',
-  friyay: 'F.',
+  mon: 'M.',
+  tue: 'T.',
+  wed: 'W.',
+  thu: 'Th.',
+  fri: 'F.',
   sat: 'S.',
   sun: 'Su.',
+  wedThurs: 'W. & Th.',
   menu: 'View the menu',
   menuCondensed: 'Menu',
   navigate: 'Navigate',
@@ -17,7 +21,7 @@ export default {
   followUs: 'Follow us on Instagram',
   viewInsta: 'View our Instagram',
   address: 'address',
-  phone: 'WhatsApp',
+  whatsapp: 'WhatsApp',
   email: 'email',
   hours: 'Hours'
 }

@@ -1,8 +1,12 @@
 export default {
-  wedThurs: 'X & J',
-  friyay: 'V',
+  mon: 'L',
+  tue: 'M',
+  wed: 'X',
+  thu: 'J',
+  fri: 'V',
   sat: 'S',
   sun: 'D',
+  wedThurs: 'X & J',
   menu: 'Ver la carta',
   menuCondensed: 'La carta',
   navigate: 'Navegar',
@@ -17,7 +21,7 @@ export default {
   followUs: 'Síguenos en Instagram',
   viewInsta: 'Ver nuestro Instagram',
   address: 'dirección',
-  phone: 'WhatsApp',
+  whatsapp: 'WhatsApp',
   email: 'correo electrónico',
   hours: 'Horarios'
 }

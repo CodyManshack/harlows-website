@@ -9,7 +9,7 @@ export const businessHours = [
   },
   {
     days: ['fri'],
-    labelKey: 'friyay',
+    labelKey: 'fri',
     hours: '19 – 01:30'
   },
   {
