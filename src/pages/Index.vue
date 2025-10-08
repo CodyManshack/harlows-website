@@ -292,7 +292,7 @@ const contactButtons = [
 
 // Optimize computed property
 const menuPath = computed(
-  () => `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf`
+  () => `${locale.value.toUpperCase()}_Harlow's Menu_08.10.pdf`
 );
 
 // Computed classes for better performance
@@ -357,8 +357,8 @@ useMeta(() => ({
 onMounted(() => {
   // Preload both menu PDFs for instant viewing
   const menuPaths = [
-    "EN_Harlow's Menu_16.04.pdf",
-    "ES_Harlow's Menu_16.04.pdf",
+    "EN_Harlow's Menu_08.10.pdf",
+    "ES_Harlow's Menu_08.10.pdf",
   ];
 
   menuPaths.forEach((path) => {

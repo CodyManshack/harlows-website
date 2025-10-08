@@ -186,7 +186,7 @@ onUnmounted(() => {
   }
 });
 const menuPath = computed(() => {
-  return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf`;
+  return `${locale.value.toUpperCase()}_Harlow's Menu_08.10.pdf`;
 });
 import { businessHoursByDay, jsDayToKey } from "./businessHours.js";
 
