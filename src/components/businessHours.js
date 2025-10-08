@@ -4,7 +4,7 @@ export const businessHoursByDay = {
   mon: '',
   tue: '',
   wed: '19:00 – 01:00',
-  thu: '19:00 – 01:00',
+  thu: '19:00 – 00:00',
   fri: '19:00 – 01:30',
   sat: '18:00 – 01:30',
   sun: '19:00 – 00:00'
