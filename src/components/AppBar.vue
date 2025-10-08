@@ -5,27 +5,56 @@
         flat
         dense
         icon="menu"
-        style="position: absolute; left: 14px; top: 14px;"
+        style="position: absolute; left: 14px; top: 14px"
         @click="drawer = !drawer"
         aria-label="Menu"
       />
       <router-link :to="{ name: 'home' }" aria-label="Home">
         <q-img
           src="~/assets/logo-0.1x.png"
-          :width="$q.screen.gt.sm ? '260px' : '140px'"
+          :width="
+            $q.screen.xs
+              ? '160px'
+              : $q.screen.sm
+              ? '180px'
+              : $q.screen.md
+              ? '200px'
+              : $q.screen.lg
+              ? '220px'
+              : '260px'
+          "
           alt="Harlow's Bar Logo"
+          :style="{
+            marginTop: $q.screen.gt.sm ? '6px' : '0',
+            marginBottom: $q.screen.gt.sm ? '6px' : '0',
+          }"
         />
       </router-link>
     </q-toolbar>
-  <q-bar :class="['bg-accent hours-bar', { 'is-transparent': isTransparent }]">
-      <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral hours-content']">
+    <q-bar
+      :class="['bg-accent hours-bar', { 'is-transparent': isTransparent }]"
+    >
+      <div
+        :class="[
+          $q.screen.gt.sm ? 'text-body1' : 'text-caption',
+          'row no-wrap full-width justify-evenly spectral hours-content',
+        ]"
+      >
         <div
           v-for="group in dayHourCombos"
           :key="group.label + group.hours"
           :class="['hours-item', { 'is-today': group.isToday }]"
         >
-          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md', group.isToday ? 'hours-today' : '' ]">{{ group.label }}</span>
-          <span :class="group.isToday ? 'hours-today' : ''">{{ group.hours }}</span>
+          <span
+            :class="[
+              $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md',
+              group.isToday ? 'hours-today' : '',
+            ]"
+            >{{ group.label }}</span
+          >
+          <span :class="group.isToday ? 'hours-today' : ''">{{
+            group.hours
+          }}</span>
         </div>
       </div>
     </q-bar>
@@ -38,7 +67,9 @@
     behavior="mobile"
   >
     <q-list padding class="spectral">
-  <q-item-label header class="text-body1">{{ t('menu.condensed') }}</q-item-label>
+      <q-item-label header class="text-body1">{{
+        t("menu.condensed")
+      }}</q-item-label>
       <q-item
         v-for="(lang, i) in localeOptions"
         :key="i"
@@ -49,7 +80,9 @@
         class="q-pl-lg"
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ lang.label }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{
+            lang.label
+          }}</q-item-label>
         </q-item-section>
       </q-item>
 
@@ -62,7 +95,9 @@
         v-close-popup
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ t('gallery.title') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{
+            t("gallery.title")
+          }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item
@@ -72,7 +107,9 @@
         v-close-popup
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ t('navigation.contact') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{
+            t("navigation.contact")
+          }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item
@@ -82,124 +119,137 @@
         target="_blank"
       >
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{ t('navigation.navigate') }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">{{
+            t("navigation.navigate")
+          }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
 
-    <div class="full-width text-center" style="position: fixed; bottom: 12px;">
-      <div class="text-caption text-grey-6">© {{ new Date().getFullYear() }} Harlow's Bar</div>
+    <div class="full-width text-center" style="position: fixed; bottom: 12px">
+      <div class="text-caption text-grey-6">
+        © {{ new Date().getFullYear() }} Harlow's Bar
+      </div>
     </div>
   </q-drawer>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { useQuasar } from 'quasar'
+import { computed, ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { useQuasar } from "quasar";
 
-const router = useRouter()
-const $q = useQuasar()
-const { t, locale } = useI18n({ useScope: 'global' })
+const router = useRouter();
+const $q = useQuasar();
+const { t, locale } = useI18n({ useScope: "global" });
 const localeOptions = [
-  { value: 'en', label: 'English' },
-  { value: 'es', label: 'Español' }
-]
-const drawer = ref(false)
-const isTransparent = ref(false)
-const scrollTarget = ref(null)
+  { value: "en", label: "English" },
+  { value: "es", label: "Español" },
+];
+const drawer = ref(false);
+const isTransparent = ref(false);
+const scrollTarget = ref(null);
 
 // Listen for scroll to toggle transparency, using the real scroll container
 const onScroll = () => {
-  const el = scrollTarget.value
-  let scrollTop = 0
-  if (el && typeof el.scrollTop === 'number') {
-    scrollTop = el.scrollTop
+  const el = scrollTarget.value;
+  let scrollTop = 0;
+  if (el && typeof el.scrollTop === "number") {
+    scrollTop = el.scrollTop;
   } else {
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
   }
-  isTransparent.value = scrollTop > 20
-}
+  isTransparent.value = scrollTop > 20;
+};
 
 onMounted(() => {
-  const el = document.querySelector('.scroll') || document.querySelector('.main-content') || window
-  scrollTarget.value = el
-  const target = el === window ? window : el
-  target.addEventListener('scroll', onScroll, { passive: true })
-  onScroll()
-})
+  const el =
+    document.querySelector(".scroll") ||
+    document.querySelector(".main-content") ||
+    window;
+  scrollTarget.value = el;
+  const target = el === window ? window : el;
+  target.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+});
 
 onUnmounted(() => {
-  const el = scrollTarget.value
-  const target = el === window ? window : el
+  const el = scrollTarget.value;
+  const target = el === window ? window : el;
   if (target && target.removeEventListener) {
-    target.removeEventListener('scroll', onScroll)
+    target.removeEventListener("scroll", onScroll);
   }
-})
-const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
-import { businessHoursByDay, jsDayToKey } from './businessHours.js'
+});
+const menuPath = computed(() => {
+  return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf`;
+});
+import { businessHoursByDay, jsDayToKey } from "./businessHours.js";
 
-const todayIdx = new Date().getDay()
-const todayKey = jsDayToKey[todayIdx]
+const todayIdx = new Date().getDay();
+const todayKey = jsDayToKey[todayIdx];
 // List of days in display order (edit as needed)
-const displayDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+const displayDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 function groupDaysByHours() {
-  const groups = []
-  let currentGroup = null
+  const groups = [];
+  let currentGroup = null;
   for (const day of displayDays) {
-    const hours = businessHoursByDay[day]
+    const hours = businessHoursByDay[day];
     if (!currentGroup || currentGroup.hours !== hours) {
-      if (currentGroup) groups.push(currentGroup)
-      currentGroup = { days: [day], hours }
+      if (currentGroup) groups.push(currentGroup);
+      currentGroup = { days: [day], hours };
     } else {
-      currentGroup.days.push(day)
+      currentGroup.days.push(day);
     }
   }
-  if (currentGroup) groups.push(currentGroup)
-  return groups
+  if (currentGroup) groups.push(currentGroup);
+  return groups;
 }
 
 function formatHourString(hours) {
   // Replace times like '19:00' with '19', '01:00' with '01', etc.
-  return hours.replace(/(\d{1,2}):00/g, '$1')
+  return hours.replace(/(\d{1,2}):00/g, "$1");
 }
 
 const dayHourCombos = computed(() => {
   return groupDaysByHours()
-    .filter(group => group.hours && group.hours.trim() !== '')
-    .map(group => {
-      const isToday = group.days.includes(todayKey)
+    .filter((group) => group.hours && group.hours.trim() !== "")
+    .map((group) => {
+      const isToday = group.days.includes(todayKey);
       // Localize each day, join with ampersand
-      const localizedDays = group.days.map(dk => t('days.' + dk)).join(' & ')
+      const localizedDays = group.days.map((dk) => t("days." + dk)).join(" & ");
       return {
         label: localizedDays,
         hours: formatHourString(group.hours),
-        isToday
-      }
-    })
-})
+        isToday,
+      };
+    });
+});
 
 const selectLocale = (lang) => {
-  locale.value = lang
-}
+  locale.value = lang;
+};
 
 const goToMenu = (lang) => {
-  selectLocale(lang)
-  const routeData = router.resolve({ path: menuPath.value })
-  window.open(routeData.href, '_blank')
-}
+  selectLocale(lang);
+  const routeData = router.resolve({ path: menuPath.value });
+  window.open(routeData.href, "_blank");
+};
 
 const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId)
+  const element = document.getElementById(sectionId);
   if (element) {
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    })
+      behavior: "smooth",
+      block: "start",
+    });
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -209,25 +259,23 @@ const scrollToSection = (sectionId) => {
 
 // Solid backgrounds by default
 .q-header.bg-primary {
-  background-color: #16342A !important;
   transition: background-color 0.3s;
 }
 .q-bar.bg-accent {
-  background-color: #95572F !important;
   transition: background-color 0.3s;
 }
 
 // Shared transparency class for both
 .q-header.is-transparent {
-  background-color: rgba(22, 52, 42, 0.7) !important;
+  background-color: rgba($primary, 0.7) !important;
 }
 .q-bar.is-transparent {
-  background-color: rgba(149, 87, 47, 0.7) !important;
+  background-color: rgba($accent, 0.7) !important;
 }
 .hours-today {
   color: #fff !important;
   font-weight: bold;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 /* Increased header and hours bar sizes for breathing room */
@@ -247,14 +295,14 @@ const scrollToSection = (sectionId) => {
   align-items: center;
 }
 .hours-item.is-today::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background-color: #fff;
   margin-right: 2px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.25);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 
 /* Tighter baseline and consistent line height to avoid vertical shift */
