@@ -55,8 +55,8 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: 'gallery' }"
-        active-class="bg-secondary text-white"
+        @click="scrollToSection('gallery')"
+        v-close-popup
       >
         <q-item-section>
           <q-item-label class="text-h6 text-weight-regular">{{ t('gallery') }}</q-item-label>
@@ -65,8 +65,8 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: 'contact' }"
-        active-class="bg-secondary text-white"
+        @click="scrollToSection('contact')"
+        v-close-popup
       >
         <q-item-section>
           <q-item-label class="text-h6 text-weight-regular">{{ t('contact') }}</q-item-label>
@@ -119,6 +119,17 @@ const dayHourCombos = computed(() => {
 
 const selectLocale = (lang) => {
   locale.value = lang
+}
+
+const scrollToSection = (sectionId) => {
+  drawer.value = false
+  // Small delay to allow drawer to close
+  setTimeout(() => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 300)
 }
 
 const goToMenu = (lang) => {
