@@ -1,11 +1,11 @@
 <template>
   <q-header :class="['bg-primary', { 'is-transparent': isTransparent }]">
-    <q-toolbar class="q-py-sm justify-center">
+    <q-toolbar class="app-toolbar justify-center">
       <q-btn
         flat
         dense
         icon="menu"
-        style="position: absolute; left: 12px; top: 8px;"
+        style="position: absolute; left: 14px; top: 14px;"
         @click="drawer = !drawer"
         aria-label="Menu"
       />
@@ -13,16 +13,19 @@
         <q-img
           src="~/assets/logo-0.1x.png"
           :width="$q.screen.gt.sm ? '260px' : '140px'"
-          style="color: #7a3c18;"
           alt="Harlow's Bar Logo"
         />
       </router-link>
     </q-toolbar>
-  <q-bar dense :class="['bg-accent', { 'is-transparent': isTransparent }]">
-      <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral']" style="font-size: 12px;">
-        <div v-for="dayHour in dayHourCombos" :key="`${dayHour.day}-${locale.value}`">
-          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md' ]">{{ dayHour.day }}</span>
-          {{ dayHour.hours }}
+  <q-bar :class="['bg-accent hours-bar', { 'is-transparent': isTransparent }]">
+      <div :class="[ $q.screen.gt.sm ? 'text-body1' : 'text-caption', 'row no-wrap full-width justify-evenly spectral hours-content']">
+        <div
+          v-for="group in dayHourCombos"
+          :key="group.label + group.hours"
+          :class="['hours-item', { 'is-today': group.isToday }]"
+        >
+          <span :class="[ $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md', group.isToday ? 'hours-today' : '' ]">{{ group.label }}</span>
+          <span :class="group.isToday ? 'hours-today' : ''">{{ group.hours }}</span>
         </div>
       </div>
     </q-bar>
@@ -135,16 +138,21 @@ onUnmounted(() => {
   }
 })
 const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
+import { businessHours, jsDayToKey } from './businessHours'
+
+const todayIdx = new Date().getDay()
+const todayKey = jsDayToKey[todayIdx]
 const dayHourCombos = computed(() => {
-  // Explicitly access locale.value to ensure reactivity
-  // eslint-disable-next-line no-unused-vars
-  const currentLocale = locale.value
-  return [
-    { day: t('wedThurs'), hours: '19 – 01' },
-    { day: t('friyay'), hours: '19 – 01:30' },
-    { day: t('sat'), hours: '18 – 01:30' },
-    { day: t('sun'), hours: '19 – 00' }
-  ]
+  return businessHours.map(group => {
+    // Is today in this group?
+    const isToday = group.days.includes(todayKey)
+    return {
+      label: t(group.labelKey),
+      hours: group.hours,
+      isToday,
+      days: group.days.map(dk => t(dk)).join(', ')
+    }
+  })
 })
 
 const selectLocale = (lang) => {
@@ -189,5 +197,42 @@ const scrollToSection = (sectionId) => {
 }
 .q-bar.is-transparent {
   background-color: rgba(149, 87, 47, 0.7) !important;
+}
+.hours-today {
+  color: #fff !important;
+  font-weight: bold;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+
+/* Increased header and hours bar sizes for breathing room */
+.app-toolbar {
+  min-height: 64px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.hours-bar {
+  min-height: 30px;
+}
+.hours-content {
+  font-size: 13px !important;
+}
+.hours-item {
+  display: flex;
+  align-items: center;
+}
+.hours-item.is-today::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 2px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.25);
+}
+
+/* Tighter baseline and consistent line height to avoid vertical shift */
+.hours-content {
+  line-height: 1.3;
 }
 </style>
