@@ -309,12 +309,11 @@ const headlineClasses = computed(() => [
 // Gallery computed properties
 const galleryImages = computed(() => {
   return imageConfigs.map((config, index) => {
-    const srcPath = `src/assets/${config.basePath}/${config.sizes.small}.png`;
+    // Use public/ folder and absolute paths for production reliability
+    const base = `/${config.basePath}`;
+    const srcPath = `${base}/${config.sizes.small}.png`;
     const srcsetParts = Object.entries(config.sizes).map(
-      ([size, filename]) =>
-        `src/assets/${config.basePath}/${filename}.png ${getScreenDensity(
-          size
-        )}`
+      ([size, filename]) => `${base}/${filename}.png ${getScreenDensity(size)}`
     );
 
     return {
