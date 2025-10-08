@@ -1,5 +1,5 @@
 <template>
-  <q-header class="bg-primary">
+  <q-header :class="['bg-primary', { 'appbar-transparent': isTransparent }]">
     <q-toolbar class="q-py-sm justify-center">
       <q-btn
         flat
@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
@@ -104,6 +104,36 @@ const localeOptions = [
   { value: 'es', label: 'Español' }
 ]
 const drawer = ref(false)
+const isTransparent = ref(false)
+const scrollTarget = ref(null)
+
+// Listen for scroll to toggle transparency, using the real scroll container
+const onScroll = () => {
+  const el = scrollTarget.value
+  let scrollTop = 0
+  if (el && typeof el.scrollTop === 'number') {
+    scrollTop = el.scrollTop
+  } else {
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+  }
+  isTransparent.value = scrollTop > 20
+}
+
+onMounted(() => {
+  const el = document.querySelector('.scroll') || document.querySelector('.main-content') || window
+  scrollTarget.value = el
+  const target = el === window ? window : el
+  target.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
+})
+
+onUnmounted(() => {
+  const el = scrollTarget.value
+  const target = el === window ? window : el
+  if (target && target.removeEventListener) {
+    target.removeEventListener('scroll', onScroll)
+  }
+})
 const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
 const dayHourCombos = computed(() => {
   // Explicitly access locale.value to ensure reactivity
@@ -141,5 +171,14 @@ const scrollToSection = (sectionId) => {
 <style lang="scss">
 .q-item__label::first-letter {
   text-transform: capitalize;
+}
+
+.q-header.bg-primary {
+  background-color: #16342A !important; /* solid primary by default */
+  transition: background-color 0.3s;
+}
+
+.q-header.appbar-transparent {
+  background-color: rgba(22, 52, 42, 0.7) !important; /* slightly transparent when scrolled */
 }
 </style>
