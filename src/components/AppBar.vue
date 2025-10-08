@@ -138,19 +138,43 @@ onUnmounted(() => {
   }
 })
 const menuPath = computed(() => { return `${locale.value.toUpperCase()}_Harlow's Menu_16.04.pdf` })
-import { businessHours, jsDayToKey } from './businessHours'
+import { businessHoursByDay, jsDayToKey } from './businessHours.js'
 
 const todayIdx = new Date().getDay()
 const todayKey = jsDayToKey[todayIdx]
+// List of days in display order (edit as needed)
+const displayDays = ['wed', 'thu', 'fri', 'sat', 'sun']
+
+function groupDaysByHours() {
+  const groups = []
+  let currentGroup = null
+  for (const day of displayDays) {
+    const hours = businessHoursByDay[day]
+    if (!currentGroup || currentGroup.hours !== hours) {
+      if (currentGroup) groups.push(currentGroup)
+      currentGroup = { days: [day], hours }
+    } else {
+      currentGroup.days.push(day)
+    }
+  }
+  if (currentGroup) groups.push(currentGroup)
+  return groups
+}
+
+function formatHourString(hours) {
+  // Replace times like '19:00' with '19', '01:00' with '01', etc.
+  return hours.replace(/(\d{1,2}):00/g, '$1')
+}
+
 const dayHourCombos = computed(() => {
-  return businessHours.map(group => {
-    // Is today in this group?
+  return groupDaysByHours().map(group => {
     const isToday = group.days.includes(todayKey)
+    // Localize each day, join with ampersand
+    const localizedDays = group.days.map(dk => t(dk)).join(' & ')
     return {
-      label: t(group.labelKey),
-      hours: group.hours,
-      isToday,
-      days: group.days.map(dk => t(dk)).join(', ')
+      label: localizedDays,
+      hours: formatHourString(group.hours),
+      isToday
     }
   })
 })
