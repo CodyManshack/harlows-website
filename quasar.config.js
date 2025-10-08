@@ -1,27 +1,11 @@
-/* eslint-env node */
-
-/*
- * This file runs in a Node context (it's NOT transpiled by Babel), so use only
- * the ES6 features that are supported by your Node version. https://node.green/
- */
-
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-const { configure } = require('quasar/wrappers')
-const path = require('path')
+import { defineConfig } from '#q-app/wrappers'
+import { fileURLToPath } from 'node:url'
 
-module.exports = configure(function (/* ctx */) {
+export default defineConfig((ctx) => {
   return {
-    eslint: {
-      // fix: true,
-      // include = [],
-      // exclude = [],
-      // rawOptions = {},
-      warnings: true,
-      errors: true
-    },
-
     // https://v2.quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
 
@@ -54,8 +38,8 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       target: {
-        browser: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
-        node: 'node16'
+        browser: [ 'es2022', 'firefox115', 'chrome115', 'safari14' ],
+        node: 'node20'
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -74,34 +58,11 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      extendViteConf (viteConf) {
-        // Performance optimizations
-        viteConf.build = viteConf.build || {}
-        viteConf.build.rollupOptions = viteConf.build.rollupOptions || {}
-        viteConf.build.rollupOptions.output = viteConf.build.rollupOptions.output || {}
-        
-        // Enable chunk splitting for better caching
-        viteConf.build.rollupOptions.output.manualChunks = {
-          vendor: ['vue', 'vue-router', 'vue-i18n'],
-          quasar: ['quasar']
-        }
-        
-        // Optimize chunk size
-        viteConf.build.chunkSizeWarningLimit = 1000
-        
-        // Enable minification and compression
-        viteConf.build.minify = 'terser'
-        viteConf.build.terserOptions = {
-          compress: {
-            drop_console: true,
-            drop_debugger: true
-          }
-        }
-      },
+      // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
 
       vitePlugins: [
-        ['@intlify/vite-plugin-vue-i18n', {
+        ['@intlify/unplugin-vue-i18n/vite', {
           // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
           // compositionOnly: false,
 
@@ -109,8 +70,10 @@ module.exports = configure(function (/* ctx */) {
           // you need to set `runtimeOnly: false`
           // runtimeOnly: false,
 
+          ssr: ctx.modeName === 'ssr',
+
           // you need to set i18n resource including paths !
-          include: path.resolve(__dirname, './src/i18n/**')
+          include: [ fileURLToPath(new URL('./src/i18n', import.meta.url)) ]
         }]
       ]
     },
@@ -213,9 +176,15 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
     electron: {
-      // extendElectronMainConf (esbuildConf)
-      // extendElectronPreloadConf (esbuildConf)
+      // extendElectronMainConf (esbuildConf) {},
+      // extendElectronPreloadConf (esbuildConf) {},
 
+      // extendPackageJson (json) {},
+
+      // Electron preload scripts (if any) from /src-electron, WITHOUT file extension
+      preloadScripts: [ 'electron-preload' ],
+
+      // specify the debugging port to use for the Electron app when running in development mode
       inspectPort: 5858,
 
       bundler: 'packager', // 'packager' or 'builder'
@@ -236,16 +205,12 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'Harlows'
+        appId: "Harlow's"
       }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
     bex: {
-      contentScripts: [
-        'my-content-script'
-      ]
-
       // extendBexScriptsConf (esbuildConf) {}
       // extendBexManifestJson (json) {}
     }
