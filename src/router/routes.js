@@ -8,16 +8,6 @@ const routes = [
         name: 'home',
         component: () => import('pages/Index.vue')
       },
-      {
-        path: 'contact',
-        name: 'contact',
-        component: () => import('pages/Contact.vue')
-      },
-      {
-        path: 'gallery',
-        name: 'gallery',
-        component: () => import('pages/Gallery.vue')
-      }
     ]
   },
 
