@@ -18,5 +18,6 @@ export default {
   viewInsta: 'View our Instagram',
   address: 'address',
   phone: 'WhatsApp',
-  email: 'email'
+  email: 'email',
+  hours: 'Hours'
 }

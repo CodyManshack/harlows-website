@@ -77,7 +77,7 @@
             <div
               v-for="image in galleryImages"
               :key="image.id"
-              class="col-xs-12 col-sm-10 col-md-4 col-lg-3"
+              class="col-xs-12 col-sm-6 col-md-4 col-lg-3"
             >
               <q-intersection
                 once
@@ -312,9 +312,7 @@ const getScreenDensity = (size) => {
     '0.5x': '0.5x'
   }
   return densityMap[size] || '1x'
-}
-
-// Optimize meta setup
+}// Optimize meta setup
 useMeta(() => ({
   title: t('pageTitle') || 'Harlow\'s Bar – Classic Cocktail Lounge',
   meta: {
@@ -357,7 +355,7 @@ const goToMenu = (lang) => {
   flex-direction: column;
 }
 
-// Hero section styles
+// Hero section styles - keeping original design with your branding
 .hero {
   display: flex;
   flex: 1;
@@ -380,7 +378,7 @@ const goToMenu = (lang) => {
   }
 }
 
-// Gallery section styles
+// Gallery section styles - restored with better spacing
 .gallery-section {
   background-color: rgba(0, 0, 0, 0.02);
 }
@@ -407,9 +405,9 @@ const goToMenu = (lang) => {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-// Contact section styles
+// Contact section styles - keeping original layout
 .contact-section {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(22, 52, 42, 0.03); // Using your primary color
 }
 
 // Add performance optimizations
