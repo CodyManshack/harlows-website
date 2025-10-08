@@ -255,15 +255,15 @@ const contactButtons = [
   },
   {
     icon: 'logo-whatsapp',
-    title: 'phone',
-    subtitle: '+34 657 123 456',
+    title: 'whatsapp',
+    subtitle: '(+34) 692 940 844',
     href: 'https://wa.me/34657123456'
   },
   {
     icon: 'mail',
     title: 'email',
-    subtitle: 'hello@harlows.bar',
-    href: 'mailto:hello@harlows.bar'
+    subtitle: 'info@harlows.bar',
+    href: 'mailto:info@harlows.bar'
   }
 ]
 
