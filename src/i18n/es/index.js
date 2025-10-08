@@ -6,7 +6,6 @@ export default {
   fri: 'V',
   sat: 'S',
   sun: 'D',
-  wedThurs: 'X & J',
   menu: 'Ver la carta',
   menuCondensed: 'La carta',
   navigate: 'Navegar',
