@@ -82,10 +82,10 @@ export default defineConfig((ctx) => {
     devServer: {
       // https: true
       open: true, // opens browser window automatically
-      public: '0.0.0.0:9000',
-      hmr: {
-        clientPort: 8080
-      }
+      // public: '0.0.0.0:9000',
+      // hmr: {
+      //   clientPort: 8080
+      // }
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
