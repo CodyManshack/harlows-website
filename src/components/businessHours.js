@@ -1,6 +1,8 @@
 // Set business hours by day using i18n keys
 // Example: { wed: '19:00 – 01:00', thu: '19:00 – 01:00', fri: '19:00 – 01:30', ... }
 export const businessHoursByDay = {
+  mon: '',
+  tue: '',
   wed: '19:00 – 01:00',
   thu: '19:00 – 01:00',
   fri: '19:00 – 01:30',

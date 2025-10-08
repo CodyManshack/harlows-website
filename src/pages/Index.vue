@@ -21,7 +21,7 @@
             >
               <template v-slot:label>
                 <span class="text-h5 spectral text-weight-regular capitalize-first-letter">
-                  {{ t('viewMenu') }}
+                  {{ t('menu.view') }}
                 </span>
               </template>
 
@@ -44,12 +44,12 @@
             </q-btn-dropdown>
           </div>
           <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 spectral">
-            <h1 :class="headlineClasses">
-              {{ t('headline') }}
-            </h1>
-            <h2 class="gt-xs text-h6 text-weight-regular q-mt-md">
-              {{ t('subtitle') }}
-            </h2>
+              <h1 :class="headlineClasses">
+                {{ t('hero.headline') }}
+              </h1>
+              <h2 class="gt-xs text-h6 text-weight-regular q-mt-md">
+                {{ t('hero.subtitle') }}
+              </h2>
           </div>
         </div>
       </transition>
@@ -66,7 +66,7 @@
             mode="out-in"
           >
             <h1 class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic">
-              {{ t('gallery') }}
+              {{ t('gallery.title') }}
             </h1>
           </transition>
         </div>
@@ -118,7 +118,7 @@
         <div class="row justify-center items-center text-center">
           <transition appear enter-active-class="animated fadeIn slower" leave-active-class="animated fadeOut">
             <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
-              <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-italic' ]">{{ t('followUs') }}</div>
+              <div :class="[$q.screen.gt.sm ? 'text-h2' : 'text-h3', 'text-italic' ]">{{ t('instagram.follow') }}</div>
               <q-btn
                 square
                 color="accent"
@@ -130,7 +130,7 @@
                 href="https://www.instagram.com/harlows.bar/"
                 target="_blank"
               >
-                <span class="text-h5 text-weight-regular capitalize-first-letter">{{ t('viewInsta') }}</span>
+                <span class="text-h5 text-weight-regular capitalize-first-letter">{{ t('instagram.view') }}</span>
               </q-btn>
             </div>
           </transition>
@@ -154,7 +154,7 @@
                     <div class="col-12">
                       <q-icon :name="`ion-${button.icon}`" size="lg" color="accent" class="q-py-lg"/>
                     </div>
-                    <h5 class="text-weight-thin q-my-sm col-12">{{ t(button.title) }}</h5>
+                    <h5 class="text-weight-thin q-my-sm col-12">{{ t('contact.' + button.title) }}</h5>
                     <p class="text-caption text-grey-4 col-7 col-md-10">{{ button.subtitle }}</p>
                   </div>
                 </q-btn>
@@ -306,11 +306,11 @@ const getScreenDensity = (size) => {
   return densityMap[size] || '1x'
 }// Optimize meta setup
 useMeta(() => ({
-  title: t('pageTitle') || 'Harlow\'s Bar – Classic Cocktail Lounge',
+  title: t('page.title') || 'Harlow\'s Bar – Classic Cocktail Lounge',
   meta: {
     description: {
       name: 'description',
-      content: t('pageDescription') || 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.'
+  content: t('page.description') || 'Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.'
     }
   }
 }))
