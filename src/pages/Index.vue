@@ -71,42 +71,40 @@
           </transition>
         </div>
       </div>
-      <div class="row justify-center">
-        <div class="col-xs-12 col-sm-10 col-lg-8 col-xl-6">
-          <div :class="gutterClasses">
-            <div
-              v-for="image in galleryImages"
-              :key="image.id"
-              class="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+      <div class="masonry-grid-wrapper">
+        <div class="masonry-grid">
+          <div
+            v-for="image in galleryImages"
+            :key="image.id"
+            class="masonry-item"
+          >
+            <q-intersection
+              once
+              transition="fade"
+              :threshold="0.1"
             >
-              <q-intersection
-                once
-                transition="fade"
-                :threshold="0.1"
-              >
-                <q-card flat class="bg-transparent gallery-card">
-                  <q-img
-                    :src="image.src"
-                    :srcset="image.srcset"
-                    :alt="image.alt"
-                    loading="lazy"
-                    spinner-color="accent"
-                    :ratio="4/3"
-                    fit="cover"
-                    class="gallery-image"
-                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    no-spinner-delay
+              <q-card flat class="bg-transparent gallery-card">
+                <q-img
+                  :src="image.src"
+                  :srcset="image.srcset"
+                  :alt="image.alt"
+                  loading="lazy"
+                  spinner-color="accent"
+                  :ratio="4/3"
+                  fit="cover"
+                  class="gallery-image"
+                  sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  no-spinner-delay
+                >
+                  <div
+                    v-if="image.title"
+                    class="spectral text-h5 absolute-bottom text-right image-title"
                   >
-                    <div
-                      v-if="image.title"
-                      class="spectral text-h5 absolute-bottom text-right image-title"
-                    >
-                      {{ image.title }}
-                    </div>
-                  </q-img>
-                </q-card>
-              </q-intersection>
-            </div>
+                    {{ image.title }}
+                  </div>
+                </q-img>
+              </q-card>
+            </q-intersection>
           </div>
         </div>
       </div>
@@ -371,8 +369,39 @@ const goToMenu = (lang) => {
 }
 
 // Gallery section styles - restored with better spacing
+
 .gallery-section {
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+.masonry-grid-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (min-width: 600px) {
+    column-count: 2;
+  }
+  @media (min-width: 900px) {
+    column-count: 3;
+  }
+  @media (min-width: 1200px) {
+    column-count: 4;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .gallery-card {
