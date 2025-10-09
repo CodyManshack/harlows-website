@@ -3,12 +3,22 @@
     <h2 class="menu-section-title">{{ title }}</h2>
     <div v-if="subtitle" class="menu-section-subtitle">{{ subtitle }}</div>
     <div v-if="items">
-      <MenuItem v-for="item in items" :key="item.name" :item="item" />
+      <MenuItem
+        v-for="item in items"
+        :key="item.name"
+        :item="item"
+        :liquor="title === 'liquors'"
+      />
     </div>
     <template v-if="subsections">
       <div v-for="(sub, subkey) in subsections" :key="subkey">
         <h3 class="menu-subsection-title">{{ subkey }}</h3>
-        <MenuItem v-for="item in sub.items" :key="item.name" :item="item" />
+        <MenuItem
+          v-for="item in sub.items"
+          :key="item.name"
+          :item="item"
+          :liquor="title === 'liquors' || subkey === 'gin'"
+        />
       </div>
     </template>
   </section>
@@ -56,9 +66,9 @@ defineProps({
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-family: "Poiret One", cursive;
-  color: #34495e;
+  color: #000;
   text-transform: capitalize;
-  font-weight: 400;
+  font-weight: 500;
   border-left: 4px solid #3498db;
   padding-left: 1rem;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item">
+  <div :class="['menu-item', liquor ? 'menu-item-liquor' : '']">
     <div class="menu-item-header">
       <span class="menu-item-name">{{ item.name }}</span>
       <span class="menu-item-price">{{ item.price }}</span>
@@ -19,6 +19,7 @@
 <script setup>
 defineProps({
   item: Object,
+  liquor: Boolean,
 });
 </script>
 
@@ -82,5 +83,22 @@ defineProps({
   display: inline-block;
   margin-top: 0.3rem;
   cursor: pointer;
+}
+
+/* Smaller style for liquor items */
+.menu-item-liquor {
+  padding: 0.25rem 0;
+}
+.menu-item-liquor .menu-item-name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.menu-item-liquor .menu-item-price {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.menu-item-liquor .menu-item-description {
+  font-size: 0.9rem;
+  margin-top: 0.1rem;
 }
 </style>
