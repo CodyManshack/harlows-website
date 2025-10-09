@@ -1,5 +1,5 @@
 <template>
-  <q-header :class="['bg-primary', { 'is-transparent': isTransparent }]">
+  <q-header class="bg-primary">
     <q-toolbar class="app-toolbar justify-center">
       <q-btn
         flat
@@ -31,9 +31,7 @@
         />
       </router-link>
     </q-toolbar>
-    <q-bar
-      :class="['bg-accent hours-bar', { 'is-transparent': isTransparent }]"
-    >
+    <q-bar :class="['bg-accent hours-bar']">
       <div
         :class="[
           $q.screen.gt.sm ? 'text-body1' : 'text-caption',
