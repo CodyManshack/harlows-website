@@ -91,6 +91,37 @@ export default {
           price: 7,
           description: "honey and citrus",
         },
+        {
+          name: "Dapper Dan",
+          price: 7,
+          description: "tropical with herbal and spiced notes",
+        },
+        {
+          name: "Garden Club",
+          price: 8,
+          description: "a raspberry dessert made fluffy by egg white",
+          egg: true,
+        },
+        {
+          name: "Shirley Temple",
+          price: 6,
+          description: "bubbly sweet pomegranate",
+        },
+        {
+          name: "Jeanne Collins",
+          price: 7,
+          description: "bubbly with bittersweet lemon",
+        },
+        {
+          name: "Lisa-Lou Belle",
+          price: 7,
+          description: "sweet lemon and lime with spices",
+        },
+        {
+          name: "Lemon Fizz",
+          price: 8,
+          description: "sweet and bubbly lemon with fluffy egg white",
+        },
       ],
     },
     liquors: {
