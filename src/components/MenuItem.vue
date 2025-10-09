@@ -8,6 +8,11 @@
       {{ item.description }}
     </div>
     <div v-if="item.seasonal" class="menu-item-seasonal">Seasonal</div>
+    <div v-if="item.egg" class="menu-item-allergy">
+      <q-icon name="ion-egg" color="orange" size="1rem">
+        <q-tooltip class="bg-black text-white"> Contains egg white </q-tooltip>
+      </q-icon>
+    </div>
   </div>
 </template>
 
@@ -49,8 +54,8 @@ export default {
 .menu-item-name {
   font-family: "Poiret One", cursive;
   font-size: 1.4rem;
-  color: #2c3e50;
-  font-weight: 400;
+  color: #000;
+  font-weight: 600;
   text-transform: capitalize;
   flex: 1;
 }
@@ -58,14 +63,14 @@ export default {
 .menu-item-price {
   font-family: "Poiret One", cursive;
   font-size: 1.3rem;
-  color: #e74c3c;
-  font-weight: 400;
+  color: #000;
+  font-weight: 600;
   margin-left: 1rem;
 }
 
 .menu-item-description {
-  font-size: 1rem;
-  color: #5a6c7d;
+  font-size: 1.15rem;
+  color: #000;
   font-family: "Poiret One", cursive;
   line-height: 1.4;
   margin-top: 0.3rem;
@@ -82,5 +87,11 @@ export default {
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   display: inline-block;
+}
+
+.menu-item-allergy {
+  display: inline-block;
+  margin-top: 0.3rem;
+  cursor: pointer;
 }
 </style>
