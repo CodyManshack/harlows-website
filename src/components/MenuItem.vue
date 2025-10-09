@@ -6,6 +6,9 @@
         <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
           item.sizeLabel
         }}</span>
+        <span v-if="item.type" class="menu-item-size-label-inline">{{
+          item.type
+        }}</span>
       </span>
       <div class="menu-item-sizes">
         <div
@@ -35,6 +38,9 @@
         <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
           item.sizeLabel
         }}</span>
+        <span v-if="item.type" class="menu-item-size-label-inline">{{
+          item.type
+        }}</span>
       </span>
       <span class="menu-item-price">{{ item.price }}</span>
     </div>
@@ -63,7 +69,7 @@ const props = defineProps({
 .menu-item-size-label-inline {
   font-size: 0.95rem;
   font-weight: 400;
-  color: #888;
+  color: #666;
   margin-left: 0.5em;
   font-family: "Poiret One", cursive;
   vertical-align: middle;
