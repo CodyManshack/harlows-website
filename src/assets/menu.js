@@ -82,6 +82,32 @@ export default {
           description:
             "especially easy-to-drink: sweet orange juice with a bit of depth",
         },
+        {
+          name: "Clover Club",
+          price: 10,
+          description: "for raspberry lovers, fluffy, sweet, and tart",
+          egg: true,
+        },
+        {
+          name: "Bee's Knees",
+          price: 9,
+          description: "a sweet punch of honey, lemon, and orange",
+        },
+        {
+          name: "The Alamo",
+          price: 12,
+          description: "smoky with lime, grapefruit, and tequila",
+        },
+        {
+          name: "Jack Rose",
+          price: 12,
+          description: "sweet applejack and pomegranate",
+        },
+        {
+          name: "French 75",
+          price: 9,
+          description: "cava fortified with gin and sweet lemon flavors",
+        },
       ],
     },
     "alcohol-free cocktails": {
