@@ -187,7 +187,7 @@ export default {
         ],
       },
     },
-    "Water / Soft Drinks": {
+    "Water / soft drinks": {
       items: [
         {
           name: "Sparkling water",
@@ -285,6 +285,49 @@ export default {
             description:
               "A pale yellow sparkling wine with ripe fruit aromas and a fine, creamy palate. The embodiment of elegance, it pairs well with Iberian ham.",
             sizes: { bottle: 42 },
+          },
+        ],
+      },
+      champagne: {
+        items: [
+          {
+            name: "Moët & Chandon",
+            type: "Brut Impérial",
+            location: "Champagne, France",
+            description:
+              "Enchanting and lively, characterized by a sparkling bouquet of green apple, citrus fruit, and delicate white flowers. Its palate reveals fine bubbles, refreshing notes of lemon, and subtle hints of nuttiness, offering a captivating blend of flavors.",
+            sizes: { bottle: 80 },
+          },
+        ],
+      },
+      vermut: {
+        items: [
+          {
+            name: "4xavos",
+            type: "Red Vermouth",
+            location: "Valencia, Spain",
+            description:
+              "Traditional fortified wine made from red Grenache grapes and 21 herbs",
+            sizes: { glass: 5, bottle: 20 },
+          },
+        ],
+      },
+      rosé: {
+        items: [
+          {
+            name: "Mirabeau X",
+            location: "Côtes de Provence, France",
+            description:
+              "Delicate dry notes of frangipane, vineyard peach and citrus. An airy and mouthwatering rosé and a great example of this stunning Provence appellation",
+            sizes: { glass: 7, bottle: 26 },
+          },
+          {
+            name: "The Pale",
+            year: 2021,
+            location: "Côtes de Provence, France",
+            description:
+              "A delicious blend of Grenache, Cinsault, and Syrah that grow on the Mediterranean coast where the salty, sun-drenched soils give the wine a crisp yet fruity character",
+            sizes: { glass: 9, bottle: 33 },
           },
         ],
       },
