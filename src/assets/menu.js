@@ -167,6 +167,86 @@ export default {
           },
         ],
       },
+      brandy: {
+        items: [
+          {
+            name: "Carlos I",
+            price: 7,
+          },
+          {
+            name: "Courvoisier VSOP Cognac",
+            price: 10,
+          },
+          {
+            name: "Pere Magloire Calvados VSOP",
+            price: 10,
+          },
+        ],
+      },
+      bourbon: {
+        items: [
+          {
+            name: "Buffalo Trace",
+            price: 7,
+          },
+          {
+            name: "Wild Turkey Longbranch",
+            price: 9.5,
+          },
+        ],
+      },
+      whiskey: {
+        items: [
+          {
+            name: "Bulleit Rye",
+            price: 8.5,
+          },
+          {
+            name: "Hibiki Harmony Master's Select",
+            price: 25,
+          },
+        ],
+      },
+      scotch: {
+        items: [
+          {
+            name: "Monkey Shoulder",
+            price: 7,
+          },
+          {
+            name: "Johnnie Walker Island Green",
+            price: 10,
+          },
+          {
+            name: "Macallan 12",
+            price: 16,
+          },
+        ],
+      },
+      tequila: {
+        items: [
+          {
+            name: "Cruzplata Reposado",
+            price: 6.5,
+          },
+          {
+            name: "Volcan Blanco",
+            price: 9.5,
+          },
+          {
+            name: "Don Julio Añejo",
+            price: 14.5,
+          },
+        ],
+      },
+      mezcal: {
+        items: [
+          {
+            name: "Nucano Tobala Joven",
+            price: 12,
+          },
+        ],
+      },
     },
     beers: {
       draft: {
