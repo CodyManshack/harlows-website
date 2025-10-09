@@ -121,5 +121,52 @@ export default {
         ],
       },
     },
+    beers: {
+      draft: {
+        items: [
+          {
+            name: "Turia",
+            description:
+              "a toasted Oktoberfest Märzen beer brewed in Valencia since 1947",
+            sizes: { small: 2, large: 3.5 },
+          },
+          {
+            name: "Complot IPA",
+            description:
+              "a Mediterranean version of the classic IPA. Intense notes of hops with delicate hints of copper and orange",
+            sizes: { small: 2.5, large: 4 },
+          },
+        ],
+      },
+      local: {
+        subtitle:
+          "Emi craft beers are local, from our very own neighborhood (el botànic)!",
+        items: [
+          {
+            name: "La Canya Brown Ale",
+            price: 5,
+          },
+          {
+            name: "Tira-Li Golden Ale",
+            price: 5,
+          },
+        ],
+      },
+      bottles: {
+        items: [
+          {
+            name: "Estrella",
+            description: "a Mediterranean lager brewed in Barcelona since 1876",
+            price: 3.5,
+          },
+          {
+            name: "Free Damm (non-alcoholic)",
+            description:
+              "an alcohol-free lager with a light head and an intense aroma",
+            price: 3.5,
+          },
+        ],
+      },
+    },
   },
 };
