@@ -44,7 +44,8 @@
                 {
                     "name": "Pisco Sour",
                     "price": 11,
-                    "description": "perfectly tart and foamy, made with El Gobernador Pisco"
+                    "description": "perfectly tart and foamy, made with El Gobernador Pisco",
+                    "egg": true
                 },
                 {
                     "name": "Black Mojito",
