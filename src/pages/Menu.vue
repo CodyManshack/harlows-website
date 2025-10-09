@@ -7,8 +7,18 @@
         active-color="primary"
         indicator-color="primary"
       >
-        <q-tab name="drinks" label="Drinks" class="menu-tab" />
-        <q-tab name="food" label="Food" class="menu-tab" />
+        <q-tab
+          name="drinks"
+          label="Drinks"
+          class="menu-tab"
+          content-class="menu-tab-label"
+        />
+        <q-tab
+          name="food"
+          label="Food"
+          class="menu-tab"
+          content-class="menu-tab-label"
+        />
       </q-tabs>
 
       <q-tab-panels v-model="activeTab" class="menu-panels">
@@ -51,8 +61,15 @@ const activeTab = ref("drinks"); // Default to drinks since it's a bar
 .menu-tab {
   font-family: "Poiret One", cursive;
   font-size: 2rem;
-  font-weight: 400;
-  color: #2c3e50;
+  font-weight: 700;
+  color: #111;
+}
+
+.menu-tab-label {
+  font-family: "Poiret One", cursive;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111 !important;
 }
 
 .menu-panels {
@@ -68,5 +85,14 @@ const activeTab = ref("drinks"); // Default to drinks since it's a bar
   color: #2c3e50;
   font-weight: 400;
   text-shadow: 0 2px 4px rgba(44, 62, 80, 0.1);
+}
+</style>
+
+<style>
+.q-tab__label {
+  color: #111 !important;
+  font-weight: 700 !important;
+  font-family: "Poiret One", cursive !important;
+  font-size: 1.2rem !important;
 }
 </style>
