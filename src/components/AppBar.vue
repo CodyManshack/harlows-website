@@ -127,6 +127,25 @@
           <q-item-label class="text-h6 text-weight-regular">Menu</q-item-label>
         </q-item-section>
       </q-item>
+
+      <q-separator spaced />
+
+      <q-item-label header class="text-body1">Menu</q-item-label>
+      <q-item
+        v-for="link in menuSectionLinks"
+        :key="link.anchor"
+        clickable
+        v-ripple
+        @click="goToMenuAnchor(link.anchor)"
+        v-close-popup
+        class="q-pl-lg"
+      >
+        <q-item-section>
+          <q-item-label class="text-h6 text-weight-regular">{{
+            link.label
+          }}</q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
 
     <div class="full-width text-center" style="position: fixed; bottom: 12px">
@@ -142,6 +161,7 @@ import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
+import menu from "src/assets/menu.js";
 
 const router = useRouter();
 const $q = useQuasar();
@@ -246,6 +266,40 @@ const goToMenu = (lang) => {
 
 const goToMenuPage = () => {
   router.push({ name: "menu" });
+};
+
+const slugify = (str) =>
+  (str || "")
+    .toString()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "")
+    .trim();
+
+const menuSectionLinks = computed(() => {
+  const sections = [];
+  const pushSections = (obj) => {
+    Object.keys(obj).forEach((key) => {
+      sections.push({ label: key, anchor: `menu-section-${slugify(key)}` });
+    });
+  };
+  if (menu.food) pushSections(menu.food);
+  if (menu.drinks) pushSections(menu.drinks);
+  return sections;
+});
+
+const goToMenuAnchor = async (anchorId) => {
+  if (router.currentRoute.value.name !== "menu") {
+    await router.push({ name: "menu" });
+  }
+  // Give the page a tick to render
+  requestAnimationFrame(() => {
+    const el = document.getElementById(anchorId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
 };
 
 const scrollToSection = (sectionId) => {

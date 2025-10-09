@@ -1,5 +1,5 @@
 <template>
-  <section class="menu-section">
+  <section class="menu-section" :id="sectionAnchorId">
     <h2 class="menu-section-title">{{ title }}</h2>
     <div v-if="subtitle" class="menu-section-subtitle">{{ subtitle }}</div>
     <div v-if="items">
@@ -11,7 +11,11 @@
       />
     </div>
     <template v-if="subsections">
-      <div v-for="(sub, subkey) in subsections" :key="subkey">
+      <div
+        v-for="(sub, subkey) in subsections"
+        :key="subkey"
+        :id="`menu-subsection-${slugify(title)}-${slugify(subkey)}`"
+      >
         <div
           class="menu-subsection-title-row"
           :class="{ 'has-sizes': getHeaderSizes(sub.items).length }"
@@ -47,6 +51,7 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import MenuItem from "./MenuItem.vue";
 const props = defineProps({
   title: String,
@@ -54,6 +59,17 @@ const props = defineProps({
   items: Array,
   subsections: Object,
 });
+
+const slugify = (str) =>
+  (str || "")
+    .toString()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "")
+    .trim();
+
+const sectionAnchorId = computed(() => `menu-section-${slugify(props.title)}`);
 
 // Returns ordered unique list of sizing keys across items for header display
 function getHeaderSizes(items) {
@@ -92,6 +108,8 @@ function getHeaderSizes(items) {
 }
 .menu-section {
   margin-bottom: 3rem;
+  /* Keep title visible when navigating to anchor (account for header+bar) */
+  scroll-margin-top: 112px;
 }
 
 .menu-section-title {
@@ -141,6 +159,11 @@ function getHeaderSizes(items) {
   padding-left: 1rem;
   margin: 0;
   flex: 1;
+}
+
+/* Keep subsection titles visible when navigating to their anchors */
+[id^="menu-subsection-"] {
+  scroll-margin-top: 112px;
 }
 
 /* Align subsection size labels with item price columns */
