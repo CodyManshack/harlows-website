@@ -17,7 +17,7 @@
         :title="key"
         :subtitle="sectionData.subtitle"
         :items="sectionData.items"
-        :subsections="sectionData.gin ? sectionData : null"
+        :subsections="getSubsections(sectionData)"
       />
     </template>
   </div>
@@ -33,6 +33,27 @@ const props = defineProps({
     required: true,
   },
 });
+
+// Helper: returns subsections if present (object with keys, not just items/subtitle)
+function getSubsections(sectionData) {
+  if (!sectionData || typeof sectionData !== "object") return null;
+  // Exclude known keys that are not subsections
+  const exclude = ["items", "subtitle"];
+  const keys = Object.keys(sectionData).filter((k) => !exclude.includes(k));
+  if (keys.length === 0) return null;
+  // Build object of subsections
+  const subsections = {};
+  for (const k of keys) {
+    if (
+      sectionData[k] &&
+      typeof sectionData[k] === "object" &&
+      sectionData[k].items
+    ) {
+      subsections[k] = sectionData[k];
+    }
+  }
+  return Object.keys(subsections).length ? subsections : null;
+}
 </script>
 
 <style scoped>
