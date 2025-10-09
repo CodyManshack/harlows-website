@@ -139,6 +139,34 @@ export default {
           },
         ],
       },
+      rum: {
+        items: [
+          {
+            name: "Bacardi",
+            price: 5,
+          },
+          {
+            name: "Malibu",
+            price: 5,
+          },
+          {
+            name: "Kraken",
+            price: 6.5,
+          },
+          {
+            name: "Don Papa Baroko",
+            price: 8.5,
+          },
+          {
+            name: "Plantation XO 20",
+            price: 11,
+          },
+          {
+            name: "Flor de Caña 19",
+            price: 13,
+          },
+        ],
+      },
     },
     beers: {
       draft: {
