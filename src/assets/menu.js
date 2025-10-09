@@ -168,5 +168,21 @@ export default {
         ],
       },
     },
+    "Water / Soft Drinks": {
+      items: [
+        {
+          name: "Sparkling water",
+          price: 2,
+        },
+        {
+          name: "Mineral water",
+          sizes: { small: 1.5, large: 3 },
+        },
+        {
+          name: "Coca-Cola / Coke Zero",
+          price: 2,
+        },
+      ],
+    },
   },
 };
