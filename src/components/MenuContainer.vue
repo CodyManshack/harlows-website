@@ -24,21 +24,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
 import MenuSection from "./MenuSection.vue";
+import menu from "src/assets/menu.js";
 
 const props = defineProps({
   section: {
     type: String,
     required: true,
   },
-});
-
-const menu = ref({ food: {}, drinks: {} });
-
-onMounted(async () => {
-  const res = await fetch("/menu.json");
-  menu.value = await res.json();
 });
 </script>
 

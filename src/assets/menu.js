@@ -1,4 +1,4 @@
-{
+export default {
     "food": {
         "tapas": {
             "subtitle": "",
