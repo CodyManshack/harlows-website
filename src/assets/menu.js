@@ -176,7 +176,13 @@ export default {
         },
         {
           name: "Mineral water",
-          sizes: { small: 1.5, large: 3 },
+          price: 1.5,
+          sizeLabel: "330mL",
+        },
+        {
+          name: "Mineral water",
+          price: 3,
+          sizeLabel: "1L",
         },
         {
           name: "Coca-Cola / Coke Zero",

@@ -1,7 +1,12 @@
 <template>
   <div :class="['menu-item', liquor ? 'menu-item-liquor' : '']">
     <div class="menu-item-header" v-if="item.sizes">
-      <span class="menu-item-name">{{ item.name }}</span>
+      <span class="menu-item-name">
+        {{ item.name }}
+        <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
+          item.sizeLabel
+        }}</span>
+      </span>
       <div class="menu-item-sizes">
         <div
           class="menu-item-sizes-row menu-item-sizes-header"
@@ -25,7 +30,12 @@
       </div>
     </div>
     <div class="menu-item-header" v-else>
-      <span class="menu-item-name">{{ item.name }}</span>
+      <span class="menu-item-name">
+        {{ item.name }}
+        <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
+          item.sizeLabel
+        }}</span>
+      </span>
       <span class="menu-item-price">{{ item.price }}</span>
     </div>
     <div v-if="item.description" class="menu-item-description">
@@ -49,6 +59,15 @@ const props = defineProps({
 </script>
 
 <style scoped>
+/* Inline size label for item name */
+.menu-item-size-label-inline {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #888;
+  margin-left: 0.5em;
+  font-family: "Poiret One", cursive;
+  vertical-align: middle;
+}
 /* Sizing labels in subsection header */
 .menu-subsection-sizes {
   margin-left: 1.5rem;
