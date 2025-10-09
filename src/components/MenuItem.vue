@@ -3,7 +3,10 @@
     <div class="menu-item-header" v-if="item.sizes">
       <span class="menu-item-name">{{ item.name }}</span>
       <div class="menu-item-sizes">
-        <div class="menu-item-sizes-row menu-item-sizes-header">
+        <div
+          class="menu-item-sizes-row menu-item-sizes-header"
+          v-if="!hideSizes"
+        >
           <span
             v-for="(price, size) in item.sizes"
             :key="size"
@@ -38,13 +41,29 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   item: Object,
   liquor: Boolean,
+  hideSizes: Boolean,
 });
 </script>
 
 <style scoped>
+/* Sizing labels in subsection header */
+.menu-subsection-sizes {
+  margin-left: 1.5rem;
+  display: inline-flex;
+  gap: 1.5rem;
+  vertical-align: middle;
+}
+.menu-subsection-size-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #555;
+  font-family: "Poiret One", cursive;
+  min-width: 48px;
+  text-align: center;
+}
 /* Sizing columns for beers/wines */
 .menu-item-sizes {
   display: flex;
@@ -54,7 +73,7 @@ defineProps({
 }
 .menu-item-sizes-row {
   display: flex;
-  gap: 1.5rem;
+  gap: 0;
 }
 .menu-item-sizes-header {
   font-size: 1.1rem;
@@ -64,8 +83,9 @@ defineProps({
   margin-bottom: 0.1rem;
 }
 .menu-item-size-label {
-  min-width: 48px;
+  min-width: 64px;
   text-align: center;
+  display: inline-block;
 }
 .menu-item-sizes-prices {
   font-size: 1.15rem;
@@ -74,8 +94,9 @@ defineProps({
   font-family: "Poiret One", cursive;
 }
 .menu-item-size-price {
-  min-width: 48px;
+  min-width: 64px;
   text-align: center;
+  display: inline-block;
 }
 .menu-item {
   padding: 1rem 0;
