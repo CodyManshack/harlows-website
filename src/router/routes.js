@@ -8,6 +8,11 @@ const routes = [
         name: 'home',
         component: () => import('pages/Index.vue')
       },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: () => import('pages/Menu.vue')
+      },
     ]
   },
 

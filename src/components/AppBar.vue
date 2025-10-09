@@ -124,6 +124,11 @@
           }}</q-item-label>
         </q-item-section>
       </q-item>
+      <q-item clickable v-ripple @click="goToMenuPage" v-close-popup>
+        <q-item-section>
+          <q-item-label class="text-h6 text-weight-regular">Menu</q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
 
     <div class="full-width text-center" style="position: fixed; bottom: 12px">
@@ -239,6 +244,10 @@ const goToMenu = (lang) => {
   selectLocale(lang);
   const routeData = router.resolve({ path: menuPath.value });
   window.open(routeData.href, "_blank");
+};
+
+const goToMenuPage = () => {
+  router.push({ name: "menu" });
 };
 
 const scrollToSection = (sectionId) => {
