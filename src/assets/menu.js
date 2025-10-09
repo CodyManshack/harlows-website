@@ -74,13 +74,23 @@ export default {
                     {
                         "name": "Hendrick's",
                         "price": 9,
-                        "description": "a floral gin infused with cucumber and rose"
                     },
                     {
                         "name": "Tanqueray",
                         "price": 5,
-                        "description": "a classic London dry gin"
                     }
+                ]
+            },
+            "vodka": {
+                "items": [
+                  {
+                      "name": "Heredero",
+                      "price": 5.50,
+                  },
+                  {
+                      "name": "Grey Goose",
+                      "price": 9,
+                  }
                 ]
             }
         }

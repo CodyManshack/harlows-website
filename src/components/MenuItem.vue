@@ -2,7 +2,7 @@
   <div class="menu-item">
     <div class="menu-item-header">
       <span class="menu-item-name">{{ item.name }}</span>
-      <span class="menu-item-price">{{ item.price | currency }}</span>
+      <span class="menu-item-price">{{ item.price }}</span>
     </div>
     <div v-if="item.description" class="menu-item-description">
       {{ item.description }}
@@ -20,17 +20,6 @@
 defineProps({
   item: Object,
 });
-</script>
-
-<script>
-export default {
-  filters: {
-    currency(value) {
-      if (typeof value !== "number") return value;
-      return "$" + value;
-    },
-  },
-};
 </script>
 
 <style scoped>
