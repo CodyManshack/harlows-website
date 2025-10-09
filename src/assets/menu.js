@@ -194,7 +194,8 @@ export default {
       red: {
         items: [
           {
-            name: "828 Crianza",
+            name: "828",
+            type: "Crianza",
             sizes: { glass: 6, bottle: 22 },
           },
         ],
@@ -202,7 +203,8 @@ export default {
       cava: {
         items: [
           {
-            name: "Freixenet Negro Brut",
+            name: "Freixenet",
+            type: "Negro Brut",
             sizes: { glass: 8, bottle: 26 },
           },
         ],
