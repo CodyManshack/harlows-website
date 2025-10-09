@@ -14,14 +14,14 @@
       <div v-for="(sub, subkey) in subsections" :key="subkey">
         <div
           class="menu-subsection-title-row"
-          :class="{ 'has-sizes': getCommonSizes(sub.items) }"
+          :class="{ 'has-sizes': getHeaderSizes(sub.items).length }"
         >
           <h3 class="menu-subsection-title">{{ subkey }}</h3>
-          <template v-if="getCommonSizes(sub.items)">
+          <template v-if="getHeaderSizes(sub.items).length">
             <div class="menu-subsection-sizes">
               <div class="menu-item-sizes-row menu-item-sizes-header">
                 <span
-                  v-for="size in getCommonSizes(sub.items)"
+                  v-for="size in getHeaderSizes(sub.items)"
                   :key="size"
                   class="menu-item-size-label"
                   >{{ size }}</span
@@ -38,7 +38,8 @@
           :key="item.name"
           :item="item"
           :liquor="title === 'liquors' || subkey === 'gin'"
-          :hideSizes="!!getCommonSizes(sub.items)"
+          :hideSizes="getHeaderSizes(sub.items).length > 0"
+          :headerSizes="getHeaderSizes(sub.items)"
         />
       </div>
     </template>
@@ -54,16 +55,27 @@ const props = defineProps({
   subsections: Object,
 });
 
-// Returns array of sizing keys if all items have the same sizing keys, else null
-function getCommonSizes(items) {
-  if (!items || !items.length) return null;
-  const allSizes = items.map((i) => (i.sizes ? Object.keys(i.sizes) : null));
-  if (allSizes.some((s) => !s)) return null;
-  const first = allSizes[0];
-  if (allSizes.every((s) => JSON.stringify(s) === JSON.stringify(first))) {
-    return first;
+// Returns ordered unique list of sizing keys across items for header display
+function getHeaderSizes(items) {
+  if (!items || !items.length) return [];
+  const order = ["glass", "bottle", "small", "large"];
+  const set = new Set();
+  for (const it of items) {
+    if (it && it.sizes) {
+      Object.keys(it.sizes).forEach((k) => set.add(k));
+    }
   }
-  return null;
+  const sizes = Array.from(set);
+  // Sort by preferred order, then alphabetically for unknowns
+  sizes.sort((a, b) => {
+    const ia = order.indexOf(a);
+    const ib = order.indexOf(b);
+    if (ia !== -1 || ib !== -1) {
+      return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+    }
+    return a.localeCompare(b);
+  });
+  return sizes;
 }
 </script>
 

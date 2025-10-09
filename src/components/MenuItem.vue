@@ -1,19 +1,19 @@
 <template>
   <div :class="['menu-item', liquor ? 'menu-item-liquor' : '']">
-    <div class="menu-item-header" v-if="item.sizes">
+    <div
+      class="menu-item-header"
+      v-if="item.sizes || (headerSizes && headerSizes.length)"
+    >
       <span class="menu-item-name">
         {{ item.name }}
         <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
           item.sizeLabel
         }}</span>
-        <span v-if="item.type" class="menu-item-size-label-inline">{{
-          item.type
-        }}</span>
       </span>
       <div class="menu-item-sizes">
         <div
           class="menu-item-sizes-row menu-item-sizes-header"
-          v-if="!hideSizes"
+          v-if="!hideSizes && item.sizes"
         >
           <span
             v-for="(price, size) in item.sizes"
@@ -22,12 +22,29 @@
             >{{ size }}</span
           >
         </div>
+        <div
+          class="menu-item-sizes-row menu-item-sizes-header"
+          v-else-if="!hideSizes && headerSizes && headerSizes.length"
+        >
+          <span
+            v-for="size in headerSizes"
+            :key="'hdr-' + size"
+            class="menu-item-size-label"
+            >{{ size }}</span
+          >
+        </div>
         <div class="menu-item-sizes-row menu-item-sizes-prices">
           <span
-            v-for="(price, size) in item.sizes"
+            v-for="size in headerSizes && headerSizes.length
+              ? headerSizes
+              : Object.keys(item.sizes || {})"
             :key="size + '-price'"
             class="menu-item-size-price"
-            >{{ price }}</span
+            >{{
+              item.sizes && item.sizes[size] !== undefined
+                ? item.sizes[size]
+                : "—"
+            }}</span
           >
         </div>
       </div>
@@ -38,11 +55,11 @@
         <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
           item.sizeLabel
         }}</span>
-        <span v-if="item.type" class="menu-item-size-label-inline">{{
-          item.type
-        }}</span>
       </span>
       <span class="menu-item-price">{{ item.price }}</span>
+    </div>
+    <div v-if="item.type || item.year || item.location" class="menu-item-meta">
+      {{ [item.type, item.year, item.location].filter(Boolean).join(" · ") }}
     </div>
     <div v-if="item.description" class="menu-item-description">
       {{ item.description }}
@@ -61,6 +78,7 @@ const props = defineProps({
   item: Object,
   liquor: Boolean,
   hideSizes: Boolean,
+  headerSizes: Array,
 });
 </script>
 
@@ -68,8 +86,8 @@ const props = defineProps({
 /* Inline size label for item name */
 .menu-item-size-label-inline {
   font-size: 0.95rem;
-  font-weight: 400;
-  color: #666;
+  font-weight: 500;
+  color: #555;
   margin-left: 0.5em;
   font-family: "Poiret One", cursive;
   vertical-align: middle;
@@ -103,7 +121,7 @@ const props = defineProps({
 .menu-item-sizes-header {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #555;
+  color: #444;
   font-family: "Poiret One", cursive;
   margin-bottom: 0.1rem;
 }
@@ -164,6 +182,15 @@ const props = defineProps({
   line-height: 1.4;
   margin-top: 0.3rem;
   font-style: italic;
+}
+
+/* Wine metadata line under name */
+.menu-item-meta {
+  font-size: 0.95rem;
+  color: #555;
+  font-family: "Poiret One", cursive;
+  margin-top: -0.25rem; /* tuck closer to name for compact mobile layout */
+  margin-bottom: 0.15rem;
 }
 
 .menu-item-seasonal {
