@@ -55,6 +55,18 @@
         <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
           item.sizeLabel
         }}</span>
+        <span v-if="item.egg" class="menu-item-egg">
+          <q-icon
+            name="ion-egg"
+            color="orange"
+            size="0.85rem"
+            style="opacity: 0.75"
+          >
+            <q-tooltip class="bg-black text-white"
+              >Allergen: Contains Egg White</q-tooltip
+            >
+          </q-icon>
+        </span>
       </span>
       <span class="menu-item-price">{{ item.price }}</span>
     </div>
@@ -65,11 +77,6 @@
       {{ item.description }}
     </div>
     <div v-if="item.seasonal" class="menu-item-seasonal">Seasonal</div>
-    <div v-if="item.egg" class="menu-item-allergy">
-      <q-icon name="ion-egg" color="orange" size="1rem">
-        <q-tooltip class="bg-black text-white"> Contains egg white </q-tooltip>
-      </q-icon>
-    </div>
   </div>
 </template>
 
@@ -205,10 +212,18 @@ const props = defineProps({
   display: inline-block;
 }
 
-.menu-item-allergy {
-  display: inline-block;
-  margin-top: 0.3rem;
-  cursor: pointer;
+/* Inline egg icon after name, less visually demanding */
+.menu-item-egg {
+  margin-left: 0.35em;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.65;
+  position: relative;
+  top: 0.05em;
+}
+.menu-item-name {
+  display: inline-flex;
+  align-items: baseline;
 }
 
 /* Smaller style for liquor items */
