@@ -33,9 +33,9 @@ defineProps({
   font-size: 2.5rem;
   margin-bottom: 1rem;
   font-family: "Poiret One", cursive;
-  color: #2c3e50;
+  color: #000;
   text-transform: capitalize;
-  font-weight: 400;
+  font-weight: 700;
   text-align: center;
   border-bottom: 2px solid #e8e8e8;
   padding-bottom: 0.5rem;
