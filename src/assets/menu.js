@@ -184,5 +184,23 @@ export default {
         },
       ],
     },
+    wine: {
+      red: {
+        items: [
+          {
+            name: "828 Crianza",
+            sizes: { glass: 6, bottle: 22 },
+          },
+        ],
+      },
+      cava: {
+        items: [
+          {
+            name: "Freixenet Negro Brut",
+            sizes: { glass: 8, bottle: 26 },
+          },
+        ],
+      },
+    },
   },
 };
