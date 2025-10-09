@@ -188,6 +188,30 @@ export default {
           name: "Coca-Cola / Coke Zero",
           price: 2,
         },
+        {
+          name: "Ginger Ale",
+          price: 3,
+        },
+        {
+          name: "Casera Gaseosa",
+          price: 2.5,
+        },
+      ],
+    },
+    coffee: {
+      items: [
+        {
+          name: "Espresso",
+          price: 3,
+        },
+        {
+          name: "Americano",
+          price: 3,
+        },
+        {
+          name: "Cappuccino",
+          price: 3.5,
+        },
       ],
     },
     wine: {
@@ -198,6 +222,33 @@ export default {
             type: "Crianza",
             sizes: { glass: 6, bottle: 22 },
           },
+          {
+            name: "Aconcagua Alta",
+            type: "Cabernet Sauvignon",
+            year: 2019,
+            location: "Valle del Aconcagua, Chile",
+            description:
+              "dry and powerful, its balanced acidity and fruity flavor include notes of black fruits and hints of spice and tobacco",
+            sizes: { bottle: 50 },
+          },
+        ],
+      },
+      white: {
+        items: [
+          {
+            name: "Murviedro",
+            type: "Sauvignon Blanc",
+            sizes: { glass: 6, bottle: 22 },
+          },
+          {
+            name: "Mar de Frades",
+            type: "Albariño",
+            year: 2021,
+            location: "Galicia, Spain",
+            description:
+              "aromas of tropical fruits with floral and balsamic notes. The ocean breeze of the Salnés Valley imparts a slightly saline character",
+            sizes: { bottle: 30 },
+          },
         ],
       },
       cava: {
@@ -206,6 +257,15 @@ export default {
             name: "Freixenet",
             type: "Negro Brut",
             sizes: { glass: 8, bottle: 26 },
+          },
+          {
+            name: "Gramona Imperial",
+            type: "Gran reserva brut",
+            year: 2017,
+            location: "Sant Sadurní d´Anoia, Spain",
+            description:
+              "A pale yellow sparkling wine with ripe fruit aromas and a fine, creamy palate. The embodiment of elegance, it pairs well with Iberian ham.",
+            sizes: { bottle: 42 },
           },
         ],
       },
