@@ -51,6 +51,13 @@ defineProps({
   padding-bottom: 0.5rem;
 }
 
+.menu-section:first-of-type .menu-section-title {
+  margin-top: 0;
+}
+.menu-section:not(:first-of-type) .menu-section-title {
+  margin-top: 2rem;
+}
+
 .menu-section-subtitle {
   font-size: 1.1rem;
   color: #5a6c7d;
