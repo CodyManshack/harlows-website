@@ -10,6 +10,12 @@ export default {
             "selection of 2 cured meats and 2 cheeses, served with olive oil and warm bread",
         },
         {
+          name: "cheese plate",
+          price: 8,
+          description:
+            "selection of 2 cheeses, served with olive oil and warm bread",
+        },
+        {
           name: "olives and feta",
           price: 5,
           description: "a mix of assorted olives and feta",
@@ -18,13 +24,25 @@ export default {
     },
     "gourmet dips": {
       subtitle:
-        "by Toupine et Cabesselle \nserved with handmade fennel crackers",
+        "by Toupine et Cabesselle. \nServed with handmade fennel crackers",
       items: [
         {
           name: "Artichoke Caviar with Green Olives",
           price: 7,
           description:
             "this dip pairs the powerful taste of artichokes with the gentle sweetness of green olives. Served warm",
+        },
+        {
+          name: "Mushroom Cream with Summer Truffle",
+          price: 7,
+          description:
+            "the refined flavors of porcini mushrooms and summer truffles combine into a sultry, creamy dip. Served warm",
+        },
+        {
+          name: "Poichichade with Fresh Cilantro",
+          price: 7,
+          description:
+            "a French dip of pureed chickpeas – similar to hummus – with fresh cilantro. Served chilled",
         },
       ],
     },
@@ -76,6 +94,7 @@ export default {
       ],
     },
     liquors: {
+      subtitle: "priced per glass",
       gin: {
         items: [
           {
