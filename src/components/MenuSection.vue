@@ -30,6 +30,9 @@
             </div>
           </template>
         </div>
+        <div v-if="sub.subtitle" class="menu-subsection-subtitle">
+          {{ sub.subtitle }}
+        </div>
         <MenuItem
           v-for="item in sub.items"
           :key="item.name"
@@ -65,6 +68,16 @@ function getCommonSizes(items) {
 </script>
 
 <style scoped>
+/* Subsection subtitle */
+.menu-subsection-subtitle {
+  font-size: 1.05rem;
+  color: #5a6c7d;
+  margin-bottom: 1.2rem;
+  font-family: "Poiret One", cursive;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.4;
+}
 .menu-section {
   margin-bottom: 3rem;
 }
