@@ -1,5 +1,16 @@
 <template>
   <div :class="['menu-item', liquor ? 'menu-item-liquor' : '']">
+    <!-- Optional item image (mobile-first, above name) -->
+    <div v-if="item.img" class="menu-item-image-wrapper">
+      <q-img
+        :src="item.img"
+        :alt="item.name"
+        loading="lazy"
+        ratio="1"
+        fit="cover"
+        class="menu-item-image menu-notch"
+      />
+    </div>
     <div
       class="menu-item-header"
       v-if="item.sizes || (headerSizes && headerSizes.length)"
@@ -213,6 +224,46 @@ const props = defineProps({
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   display: inline-block;
+}
+
+/* Item image (optimized for mobile) */
+.menu-item-image-wrapper {
+  margin: 0 0 0.6rem 0;
+}
+.menu-item-image {
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #f8f8f8;
+}
+
+/* Cut-off (chamfered) corners using clip-path */
+.menu-notch {
+  --notch: 20px;
+  clip-path: polygon(
+    var(--notch) 0%,
+    calc(100% - var(--notch)) 0%,
+    100% var(--notch),
+    100% calc(100% - var(--notch)),
+    calc(100% - var(--notch)) 100%,
+    var(--notch) 100%,
+    0% calc(100% - var(--notch)),
+    0% var(--notch)
+  );
+}
+
+@supports not (clip-path: polygon(0 0)) {
+  /* Fallback: rounded corners if clip-path not supported */
+  .menu-notch {
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  /* On larger screens, keep image modest */
+  .menu-item-image {
+    max-width: 360px;
+  }
 }
 
 /* Inline egg icon after name, less visually demanding */
