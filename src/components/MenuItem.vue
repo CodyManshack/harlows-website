@@ -90,6 +90,7 @@ const props = defineProps({
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 /* Inline size label for item name */
 .menu-item-size-label-inline {
   font-size: 0.95rem;
@@ -183,12 +184,14 @@ const props = defineProps({
 }
 
 .menu-item-description {
-  font-size: 1.15rem;
-  color: #000;
-  font-family: "Poiret One", cursive;
+  font-size: 1rem;
+  color: #111;
+  font-family: "Inter", "Roboto", Arial, sans-serif;
   line-height: 1.4;
   margin-top: 0.3rem;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 400;
+  /* letter-spacing: 0.01em; */
 }
 
 /* Wine metadata line under name */
@@ -239,7 +242,10 @@ const props = defineProps({
   font-weight: 600;
 }
 .menu-item-liquor .menu-item-description {
-  font-size: 0.9rem;
-  margin-top: 0.1rem;
+  font-size: 1rem;
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+  line-height: 1.5;
+  font-style: normal;
+  font-weight: 400;
 }
 </style>
