@@ -278,13 +278,9 @@ const slugify = (str) =>
 
 const menuSectionLinks = computed(() => {
   const sections = [];
-  const pushSections = (obj) => {
-    Object.keys(obj).forEach((key) => {
-      sections.push({ label: key, anchor: `menu-section-${slugify(key)}` });
-    });
-  };
-  if (menu.food) pushSections(menu.food);
-  if (menu.drinks) pushSections(menu.drinks);
+  Object.keys(menu).forEach((key) => {
+    sections.push({ label: key, anchor: `menu-section-${slugify(key)}` });
+  });
   return sections;
 });
 
