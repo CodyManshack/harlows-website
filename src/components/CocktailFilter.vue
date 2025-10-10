@@ -158,7 +158,7 @@ const handleScroll = () => {
     // Find the parent section element
     const sectionEl = filterBar.value?.closest(".menu-section");
     if (!sectionEl) {
-      console.log("No section element found");
+      console.debug("No section element found");
       return;
     }
     const sectionRect = sectionEl.getBoundingClientRect();
@@ -180,7 +180,7 @@ const handleScroll = () => {
 
     // Force reactivity update
     if (isSticky.value !== shouldBeSticky) {
-      console.log(
+      console.debug(
         "Changing sticky state from",
         isSticky.value,
         "to",
@@ -190,14 +190,14 @@ const handleScroll = () => {
     }
 
     // Debug logging
-    console.log("Scroll debug:", {
-      titleBottom: titleRect.bottom,
-      sectionBottom: sectionRect.bottom,
-      shouldBeSticky,
-      wasSticky,
-      isCurrentlySticky: isSticky.value,
-      scrollY: window.scrollY,
-    });
+    // console.debug("Scroll debug:", {
+    //   titleBottom: titleRect.bottom,
+    //   sectionBottom: sectionRect.bottom,
+    //   shouldBeSticky,
+    //   wasSticky,
+    //   isCurrentlySticky: isSticky.value,
+    //   scrollY: window.scrollY,
+    // });
 
     // Emit sticky state change
     if (wasSticky !== shouldBeSticky) {
@@ -209,25 +209,20 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  console.log("CocktailFilter mounted!");
-  console.log("Filter element:", filterBar.value);
-
   // Test scroll listener attachment
   const testScroll = () => {
-    console.log("SCROLL EVENT FIRED - timestamp:", Date.now());
+    // console.debug("SCROLL EVENT FIRED - timestamp:", Date.now());
     handleScroll();
   };
 
   // Add scroll listener to both window and document
   window.addEventListener("scroll", testScroll, { passive: true });
   document.addEventListener("scroll", testScroll, { passive: true });
-  console.log("Scroll listeners attached to window and document");
 
   // Always show filter initially
   isVisible.value = true;
 
   // Test the scroll handler immediately
-  console.log("Testing scroll handler...");
   handleScroll();
 
   // Store the test function so we can remove it later
@@ -237,7 +232,6 @@ onMounted(() => {
   if (filterBar.value) {
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log("INTERSECTION OBSERVER FIRED");
         handleScroll();
       },
       {
@@ -251,7 +245,6 @@ onMounted(() => {
       const titleEl = sectionEl?.querySelector(".menu-section-title");
       if (titleEl) {
         observer.observe(titleEl);
-        console.log("Intersection observer attached to title");
         window.intersectionObserver = observer;
       }
     }, 100);
@@ -287,7 +280,7 @@ onBeforeUnmount(() => {
 
 .cocktail-filter.sticky {
   position: fixed !important;
-  top: 94px !important; /* Account for AppBar height (64px toolbar + 30px hours bar) */
+  top: 96px !important; /* Account for AppBar height (64px toolbar + 30px hours bar) */
   left: 0 !important;
   right: 0 !important;
   margin: 0 !important;
