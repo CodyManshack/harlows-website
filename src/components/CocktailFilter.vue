@@ -338,8 +338,9 @@ onBeforeUnmount(() => {
   background: rgba(247, 245, 237, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #e8e8e8;
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
+  padding: 1rem 0;
+  margin: 0;
+  margin-top: -1rem;
   transition: all 0.3s ease;
   z-index: 100;
   font-family: "Poiret One", cursive;
@@ -358,40 +359,45 @@ onBeforeUnmount(() => {
 }
 
 .filter-content {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 900px; /* keep same as page content */
+  margin: 0 auto; /* center within full-width container */
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  padding: 0 12px; /* slight side padding */
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .filter-label {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #2c3e50;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .filter-tags {
-  display: flex;
-  gap: 0.5rem;
+  display: flex; /* dynamic best-fit per content */
   flex-wrap: wrap;
+  gap: 0.4rem;
   align-items: center;
+  justify-content: center; /* center rows instead of bunching left */
+  width: 100%;
 }
 
 .filter-tag {
-  padding: 0.3rem 0.8rem;
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+  padding: 0.25rem 0.6rem;
   border: 1px solid #d4d4d4;
-  border-radius: 20px;
+  border-radius: 4px;
   background: white;
-  font-family: "Poiret One", cursive;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #2c3e50;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  flex: 0 0 auto; /* size to content */
+  text-align: center;
 }
 
 .filter-tag:hover {
@@ -400,18 +406,18 @@ onBeforeUnmount(() => {
 }
 
 .filter-tag.active {
-  background: #3498db;
+  background: #4c2a26;
   color: white;
-  border-color: #3498db;
+  border-color: #4c2a26;
 }
 
 .clear-filters {
-  padding: 0.3rem 0.8rem;
+  padding: 0.25rem 0.6rem;
   border: 1px solid #e74c3c;
-  border-radius: 20px;
+  border-radius: 16px;
   background: white;
   font-family: "Poiret One", cursive;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #e74c3c;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -444,7 +450,7 @@ onBeforeUnmount(() => {
 @media (max-width: 768px) {
   .filter-content {
     gap: 0.5rem;
-    padding: 0 0.5rem;
+    padding: 0 8px;
   }
 
   .filter-tags {
