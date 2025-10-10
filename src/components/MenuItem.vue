@@ -170,7 +170,7 @@ const props = defineProps({
   font-family: "neue-kabel", sans-serif;
   font-size: 1.4rem;
   color: #000;
-  font-weight: 300;
+  font-weight: 500;
   text-transform: capitalize;
   flex: 1;
 }
@@ -186,7 +186,7 @@ const props = defineProps({
 .menu-item-description {
   font-size: 1rem;
   color: #111;
-  font-family: "Inter", "Roboto", Arial, sans-serif;
+  font-family: "neue-kabel", Arial, sans-serif;
   line-height: 1.4;
   margin-top: 0.3rem;
   font-style: normal;
