@@ -37,6 +37,7 @@ const filterBar = ref(null);
 const isSticky = ref(false);
 const isVisible = ref(false);
 const selectedTags = ref([]);
+const parentSection = ref(null);
 
 const availableTags = [
   { id: "seasonal", label: "Seasonal" },
@@ -152,116 +153,179 @@ watch(
   { deep: true }
 );
 
-// Handle scroll events for sticky behavior
-const handleScroll = () => {
-  try {
-    // Find the parent section element
-    const sectionEl = filterBar.value?.closest(".menu-section");
-    if (!sectionEl) {
-      console.debug("No section element found");
-      return;
-    }
-    const sectionRect = sectionEl.getBoundingClientRect();
-    const sectionTitle = sectionEl.querySelector(".menu-section-title");
-
-    if (!sectionTitle) return;
-
-    const titleRect = sectionTitle.getBoundingClientRect();
-
-    // Simple logic: sticky when title is above viewport and section is still visible
-    const titleAboveViewport = titleRect.bottom <= 0;
-    const sectionStillVisible = sectionRect.bottom > 50;
-
-    const shouldBeSticky = titleAboveViewport && sectionStillVisible;
-    const wasSticky = isSticky.value;
-
-    // Always show filter (for now, to debug)
-    isVisible.value = true;
-
-    // Force reactivity update
-    if (isSticky.value !== shouldBeSticky) {
-      console.debug(
-        "Changing sticky state from",
-        isSticky.value,
-        "to",
-        shouldBeSticky
-      );
-      isSticky.value = shouldBeSticky;
-    }
-
-    // Debug logging
-    // console.debug("Scroll debug:", {
-    //   titleBottom: titleRect.bottom,
-    //   sectionBottom: sectionRect.bottom,
-    //   shouldBeSticky,
-    //   wasSticky,
-    //   isCurrentlySticky: isSticky.value,
-    //   scrollY: window.scrollY,
-    // });
-
-    // Emit sticky state change
-    if (wasSticky !== shouldBeSticky) {
-      emit("sticky-change", shouldBeSticky);
-    }
-  } catch (error) {
-    console.error("Error in handleScroll:", error);
-  }
-};
+// Intersection Observer approach for better reliability
 
 onMounted(() => {
-  // Test scroll listener attachment
-  const testScroll = () => {
-    // console.debug("SCROLL EVENT FIRED - timestamp:", Date.now());
-    handleScroll();
-  };
+  console.log(
+    "🚀 CocktailFilter onMounted - Setting up Intersection Observers"
+  );
 
-  // Add scroll listener to both window and document
-  window.addEventListener("scroll", testScroll, { passive: true });
-  document.addEventListener("scroll", testScroll, { passive: true });
+  // Store parent section reference
+  parentSection.value = filterBar.value?.closest(".menu-section");
+  console.log(
+    "Found parent section:",
+    parentSection.value?.querySelector(".menu-section-title")?.textContent
+  );
 
-  // Always show filter initially
-  isVisible.value = true;
+  if (!parentSection.value) {
+    console.error("Could not find parent section");
+    return;
+  }
 
-  // Test the scroll handler immediately
-  handleScroll();
+  // Find the section title and last cocktail item
+  const sectionTitle = parentSection.value.querySelector(".menu-section-title");
+  const cocktailItems = parentSection.value.querySelectorAll(".menu-item");
+  const lastCocktailItem = cocktailItems[cocktailItems.length - 1];
 
-  // Store the test function so we can remove it later
-  window.testScrollFunction = testScroll;
+  console.log("Section title found:", !!sectionTitle);
+  console.log("Last cocktail item found:", !!lastCocktailItem);
 
-  // Alternative: Use intersection observer
-  if (filterBar.value) {
-    const observer = new IntersectionObserver(
+  if (sectionTitle && lastCocktailItem) {
+    // Observer for the section title (to determine sticky behavior)
+    const titleObserver = new IntersectionObserver(
       (entries) => {
-        handleScroll();
+        const entry = entries[0];
+        console.log(
+          "📍 Title observer:",
+          entry.isIntersecting,
+          "boundingClientRect.top:",
+          entry.boundingClientRect.top
+        );
+
+        // Title has scrolled past the AppBar boundary = should be sticky, but only if filter is visible
+        // Since we have rootMargin of -94px, when isIntersecting=false, the title is behind the AppBar
+        const titleScrolledPast = !entry.isIntersecting;
+        const shouldBeSticky = titleScrolledPast && isVisible.value;
+
+        // Always update sticky state based on both title position AND visibility
+
+        console.log("🔍 Title sticky logic:", {
+          isIntersecting: entry.isIntersecting,
+          boundingClientRectTop: entry.boundingClientRect.top,
+          titleScrolledPast,
+          filterVisible: isVisible.value,
+          shouldBeSticky,
+          currentStickyState: isSticky.value,
+          needsChange: isSticky.value !== shouldBeSticky,
+          explanation: entry.isIntersecting
+            ? "Title visible in adjusted viewport"
+            : "Title behind AppBar - should be sticky",
+        });
+
+        if (isSticky.value !== shouldBeSticky) {
+          console.log(
+            "🔄 Sticky state changing:",
+            isSticky.value,
+            "->",
+            shouldBeSticky
+          );
+          isSticky.value = shouldBeSticky;
+          emit("sticky-change", shouldBeSticky);
+        }
       },
       {
-        threshold: [0, 0.1, 0.5, 1],
+        threshold: 0,
+        rootMargin: "-94px 0px 0px 0px", // Account for AppBar height
       }
     );
 
-    // Find and observe the section title
-    setTimeout(() => {
-      const sectionEl = filterBar.value?.closest(".menu-section");
-      const titleEl = sectionEl?.querySelector(".menu-section-title");
-      if (titleEl) {
-        observer.observe(titleEl);
-        window.intersectionObserver = observer;
+    // Observer for the last cocktail item (to determine when we've left the section)
+    const sectionEndObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        console.log(
+          "📍 Section end observer:",
+          entry.isIntersecting,
+          "boundingClientRect.top:",
+          entry.boundingClientRect.top
+        );
+
+        // If last item is visible or above viewport, we're still in/near the cocktails section
+        const inSection =
+          entry.isIntersecting || entry.boundingClientRect.top > 0;
+
+        console.log("🔍 Section visibility logic:", {
+          isIntersecting: entry.isIntersecting,
+          boundingClientRectTop: entry.boundingClientRect.top,
+          inSection,
+          currentVisibility: isVisible.value,
+          needsChange: isVisible.value !== inSection,
+        });
+
+        if (isVisible.value !== inSection) {
+          console.log(
+            "🔄 Visibility changing:",
+            isVisible.value,
+            "->",
+            inSection
+          );
+          isVisible.value = inSection;
+
+          // If filter becomes invisible, it should also stop being sticky
+          if (!inSection && isSticky.value) {
+            console.log(
+              "🔄 Sticky state changing (section left):",
+              isSticky.value,
+              "->",
+              false
+            );
+            isSticky.value = false;
+            emit("sticky-change", false);
+          }
+          // If filter becomes visible, check if title is already scrolled past
+          else if (inSection && !isSticky.value) {
+            // Check if title is currently behind the AppBar
+            const sectionTitle = parentSection.value.querySelector(
+              ".menu-section-title"
+            );
+            if (sectionTitle) {
+              const titleRect = sectionTitle.getBoundingClientRect();
+              const titleBehindAppBar = titleRect.top < 94; // AppBar height
+
+              if (titleBehindAppBar) {
+                console.log(
+                  "🔄 Sticky state changing (re-entering section with title scrolled past):",
+                  isSticky.value,
+                  "->",
+                  true
+                );
+                isSticky.value = true;
+                emit("sticky-change", true);
+              }
+            }
+          }
+        }
+      },
+      {
+        threshold: 0,
+        rootMargin: "200px 0px 200px 0px", // Show filter 200px before/after section
       }
-    }, 100);
+    );
+
+    // Start observing
+    titleObserver.observe(sectionTitle);
+    sectionEndObserver.observe(lastCocktailItem);
+
+    // Store observers for cleanup
+    filterBar.value._titleObserver = titleObserver;
+    filterBar.value._sectionEndObserver = sectionEndObserver;
+
+    console.log("✅ Intersection observers set up successfully");
   }
 
-  // Run initial scroll check
-  setTimeout(() => {
-    handleScroll();
-    emit("filter-change", filteredCocktails.value);
-  }, 500);
+  // Initial filter emission
+  emit("filter-change", filteredCocktails.value);
 });
 
 onBeforeUnmount(() => {
-  if (window.testScrollFunction) {
-    window.removeEventListener("scroll", window.testScrollFunction);
-    document.removeEventListener("scroll", window.testScrollFunction);
-    delete window.testScrollFunction;
+  console.log("🧹 Cleaning up intersection observers");
+
+  if (filterBar.value?._titleObserver) {
+    filterBar.value._titleObserver.disconnect();
+  }
+
+  if (filterBar.value?._sectionEndObserver) {
+    filterBar.value._sectionEndObserver.disconnect();
   }
 });
 </script>
