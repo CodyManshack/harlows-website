@@ -193,8 +193,9 @@ onMounted(() => {
         );
 
         // Title has scrolled past the AppBar boundary = should be sticky, but only if filter is visible
-        // Since we have rootMargin of -94px, when isIntersecting=false, the title is behind the AppBar
-        const titleScrolledPast = !entry.isIntersecting;
+        // We need to distinguish between title being above vs below the adjusted viewport
+        const titleScrolledPast =
+          !entry.isIntersecting && entry.boundingClientRect.top < 94; // Actually behind AppBar
         const shouldBeSticky = titleScrolledPast && isVisible.value;
 
         // Always update sticky state based on both title position AND visibility
@@ -209,7 +210,9 @@ onMounted(() => {
           needsChange: isSticky.value !== shouldBeSticky,
           explanation: entry.isIntersecting
             ? "Title visible in adjusted viewport"
-            : "Title behind AppBar - should be sticky",
+            : entry.boundingClientRect.top < 94
+            ? "Title behind AppBar - should be sticky"
+            : "Title below viewport - should NOT be sticky",
         });
 
         if (isSticky.value !== shouldBeSticky) {
