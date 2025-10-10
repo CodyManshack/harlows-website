@@ -343,7 +343,7 @@ onBeforeUnmount(() => {
   margin-top: -1rem;
   transition: all 0.3s ease;
   z-index: 100;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
 }
 
 .cocktail-filter.sticky {
@@ -416,7 +416,7 @@ onBeforeUnmount(() => {
   border: 1px solid #e74c3c;
   border-radius: 16px;
   background: white;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   font-size: 0.75rem;
   color: #e74c3c;
   cursor: pointer;
@@ -434,7 +434,7 @@ onBeforeUnmount(() => {
   border: 1px solid #9b59b6;
   border-radius: 20px;
   background: white;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   font-size: 0.8rem;
   color: #9b59b6;
   cursor: pointer;

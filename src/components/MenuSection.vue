@@ -146,7 +146,7 @@ function getHeaderSizes(items) {
   font-size: 1.05rem;
   color: #5a6c7d;
   margin-bottom: 1.2rem;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   text-align: center;
   font-style: italic;
   line-height: 1.4;
@@ -160,10 +160,10 @@ function getHeaderSizes(items) {
 .menu-section-title {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   color: #000;
   text-transform: capitalize;
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
   border-bottom: none;
   padding-bottom: 0;
@@ -180,7 +180,7 @@ function getHeaderSizes(items) {
   font-size: 1.1rem;
   color: #5a6c7d;
   margin-bottom: 1.25rem;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   text-align: center;
   font-style: italic;
   line-height: 1.4;
@@ -213,7 +213,7 @@ function getHeaderSizes(items) {
 }
 .menu-subsection-title {
   font-size: 1.6rem;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   color: #000;
   text-transform: capitalize;
   font-weight: 500;
@@ -243,7 +243,7 @@ function getHeaderSizes(items) {
   font-size: 1.1rem;
   font-weight: 600;
   color: #555;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
 }
 .menu-item-size-label {
   min-width: 64px;

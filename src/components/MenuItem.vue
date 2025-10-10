@@ -97,7 +97,7 @@ const props = defineProps({
   font-weight: 500;
   color: #555;
   margin-left: 0.5em;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   vertical-align: middle;
 }
 /* Sizing labels in subsection header */
@@ -111,7 +111,7 @@ const props = defineProps({
   font-size: 1.1rem;
   font-weight: 600;
   color: #555;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   min-width: 48px;
   text-align: center;
 }
@@ -130,7 +130,7 @@ const props = defineProps({
   font-size: 1.1rem;
   font-weight: 600;
   color: #444;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   margin-bottom: 0.1rem;
 }
 .menu-item-size-label {
@@ -142,7 +142,7 @@ const props = defineProps({
   font-size: 1.15rem;
   font-weight: 700;
   color: #000;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
 }
 .menu-item-size-price {
   min-width: 64px;
@@ -167,19 +167,19 @@ const props = defineProps({
 }
 
 .menu-item-name {
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   font-size: 1.4rem;
   color: #000;
-  font-weight: 600;
+  font-weight: 300;
   text-transform: capitalize;
   flex: 1;
 }
 
 .menu-item-price {
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   font-size: 1.2rem;
   color: #000;
-  font-weight: 600;
+  font-weight: 300;
   margin-left: 1rem;
 }
 
@@ -198,7 +198,7 @@ const props = defineProps({
 .menu-item-meta {
   font-size: 0.95rem;
   color: #555;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   margin-top: -0.25rem; /* tuck closer to name for compact mobile layout */
   margin-bottom: 0.15rem;
 }
@@ -206,7 +206,7 @@ const props = defineProps({
 .menu-item-seasonal {
   font-size: 0.9rem;
   color: #f39c12;
-  font-family: "Poiret One", cursive;
+  font-family: "neue-kabel", sans-serif;
   font-style: italic;
   margin-top: 0.3rem;
   background: rgba(243, 156, 18, 0.1);
