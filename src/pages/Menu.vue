@@ -19,9 +19,8 @@ import MenuContainer from "src/components/MenuContainer.vue";
   max-width: 1000px;
   background-color: #f7f5ed;
   background-blend-mode: lighten;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto;
   padding: 0 2rem 2rem 2rem;
-  border-radius: 12px;
   box-sizing: border-box;
 }
 </style>
