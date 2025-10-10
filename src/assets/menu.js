@@ -58,7 +58,7 @@ export default {
         description:
           "strong almond liqueur with a touch of sweetness, tartness, and fluffiness",
         egg: true,
-        img: "/cocktails/amarettosour/0.1x.png",
+        img: "/cocktails/amarettosour/0.25x.png",
       },
       {
         name: "Americano",
@@ -70,11 +70,13 @@ export default {
         price: 10,
         description:
           "floral violet liqueur with tart lemon and maraschino cherry",
+        img: "/cocktails/aviation/0.25x.png",
       },
       {
         name: "Bacardi Cocktail",
         price: 9,
         description: "exceptionally smooth and sweet, pomegranate and lime",
+        img: "/cocktails/bacardicocktail/0.25x.png",
       },
       {
         name: "Bee's Knees",
@@ -85,12 +87,14 @@ export default {
         name: "Black Mojito",
         price: 13,
         description: "spiced black rum with refreshing sweet mint",
+        img: "/cocktails/blackmojito/0.25x.png",
       },
       {
         name: "Boulevardier",
         price: 10,
         description:
           "a classic negroni with whiskey in place of gin – resulting in a bitter spiced rye whiskey flavor",
+        img: "/cocktails/boulevardier/0.25x.png",
       },
       {
         name: "Brandy Alexander",
@@ -136,6 +140,7 @@ export default {
         price: 8,
         description:
           "a classic daquiri with a cherry twist and bright grapefruit",
+        img: "/cocktails/hemingwayspecial/0.25x.png",
       },
       {
         name: "Hot Buttered Rum",
@@ -174,6 +179,7 @@ export default {
         name: "Martini Classic",
         description:
           "the classic dry martini – choose vodka or gin – clean, dirty, or filthy",
+        img: "/cocktails/dirtymartini/0.25x.png",
       },
       {
         name: "Mayan Chocolate",
@@ -208,6 +214,7 @@ export default {
         price: 9,
         description:
           "especially easy-to-drink: sweet orange juice with a bit of depth",
+        img: "/cocktails/orangeblossom/0.25x.png",
       },
       {
         name: "Pisco Sour",
@@ -227,6 +234,7 @@ export default {
         price: 10,
         description:
           "once one of the most popular cocktails in America: scotch and drambuie complete this simple yet strong, scotch-heavy cocktail",
+        img: "/cocktails/rustynail/0.25x.png",
       },
       {
         name: "Sazerac",
@@ -261,6 +269,7 @@ export default {
         price: 11,
         description: "the classic blend of fluffy, sweet, lemon, and bourbon",
         egg: true,
+        img: "/cocktails/whiskeysour/0.33x.png",
       },
       {
         name: "White Lady",
