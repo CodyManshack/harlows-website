@@ -46,11 +46,12 @@
           <span
             :class="[
               $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md',
-              group.isToday ? 'hours-today' : '',
+              group.isToday ? 'hours-today' : 'hours-other',
             ]"
-            >{{ group.label }}</span
           >
-          <span :class="group.isToday ? 'hours-today' : ''">{{
+            {{ group.label }}
+          </span>
+          <span :class="group.isToday ? 'hours-today' : 'hours-other'">{{
             group.hours
           }}</span>
         </div>
@@ -239,12 +240,46 @@ function formatHourString(hours) {
   return hours.replace(/(\d{1,2}):00/g, "$1");
 }
 
+function getActiveDayKey() {
+  const now = new Date();
+  const todayIdx = now.getDay();
+  const todayKey = jsDayToKey[todayIdx];
+  const yesterdayIdx = (todayIdx + 6) % 7;
+  const yesterdayKey = jsDayToKey[yesterdayIdx];
+  // Check if yesterday was open late and still open now
+  const yesterdayHours = businessHoursByDay[yesterdayKey];
+  const match =
+    yesterdayHours &&
+    yesterdayHours.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/);
+  if (match) {
+    let [_, openH, openM, closeH, closeM] = match;
+    openH = parseInt(openH, 10);
+    openM = parseInt(openM, 10);
+    closeH = parseInt(closeH, 10);
+    closeM = parseInt(closeM, 10);
+    const openTime = new Date(now);
+    openTime.setDate(openTime.getDate() - 1);
+    openTime.setHours(openH, openM, 0, 0);
+    let closeTime = new Date(now);
+    closeTime.setDate(closeTime.getDate());
+    closeTime.setHours(closeH, closeM, 0, 0);
+    if (closeH < openH || (closeH === openH && closeM < openM)) {
+      // If now is after midnight but before close, highlight yesterday
+      if (now >= openTime && now <= closeTime) {
+        return yesterdayKey;
+      }
+    }
+  }
+  return todayKey;
+}
+
+const activeDayKey = computed(() => getActiveDayKey());
+
 const dayHourCombos = computed(() => {
   return groupDaysByHours()
     .filter((group) => group.hours && group.hours.trim() !== "")
     .map((group) => {
-      const isToday = group.days.includes(todayKey);
-      // Localize each day, join with ampersand
+      const isToday = group.days.includes(activeDayKey.value);
       const localizedDays = group.days.map((dk) => t("days." + dk)).join(" & ");
       return {
         label: localizedDays,
@@ -314,6 +349,16 @@ const scrollToSection = (sectionId) => {
 </script>
 
 <style lang="scss">
+.hours-other {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+.hours-today {
+  color: #fff !important;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
 .q-item__label::first-letter {
   text-transform: capitalize;
 }
@@ -333,12 +378,6 @@ const scrollToSection = (sectionId) => {
 .q-bar.is-transparent {
   background-color: rgba($accent, 0.7) !important;
 }
-.hours-today {
-  color: #fff !important;
-  font-weight: bold;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-}
-
 /* Increased header and hours bar sizes for breathing room */
 .app-toolbar {
   min-height: 64px;
@@ -347,9 +386,6 @@ const scrollToSection = (sectionId) => {
 }
 .hours-bar {
   min-height: 30px;
-}
-.hours-content {
-  font-size: 13px !important;
 }
 .hours-item {
   display: flex;
