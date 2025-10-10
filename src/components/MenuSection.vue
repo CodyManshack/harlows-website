@@ -95,12 +95,65 @@ const handleStickyChange = (sticky) => {
   filterIsSticky.value = sticky;
 };
 
-// Display items - use filtered items for cocktails, original items for others
+// Custom display order for cocktails section
+const defaultCocktailOrder = [
+  "Pisco Sour",
+  "The Alamo",
+  "Old Fashioned",
+  "Hot Buttered Rum",
+  "Mayan Chocolate",
+  "Amaretto Sour",
+  "Aviation",
+  "Boulevardier",
+  "Americano",
+  "Bacardi Cocktail",
+  "Bee's Knees",
+  "Black Mojito",
+  "Brandy Alexander",
+  "Cadillac Margarita",
+  "Clover Club",
+  "Espresso Martini",
+  "French 75",
+  "Gin Fizz",
+  "Grasshopper",
+  "Hemingway Special",
+  "Jack Rose",
+  "The Left Hand",
+  "Manhattan",
+  "Man O' War",
+  "Margarita '42",
+  "Martini Classic",
+  "Moscow Mule",
+  "Negroni",
+  "New York Sour",
+  "Orange Blossom",
+  "Ramos Gin Fizz",
+  "Rusty Nail",
+  "Sazerac",
+  "Sidecar",
+  "Tom Collins",
+  "Valencian Suntan",
+  "Vesper Martini",
+  "Whiskey Sour",
+  "White Lady",
+];
+
+const sortCocktails = (items) => {
+  return [...items].sort((a, b) => {
+    const ai = defaultCocktailOrder.indexOf(a.name);
+    const bi = defaultCocktailOrder.indexOf(b.name);
+    if (ai === -1 && bi === -1) return a.name.localeCompare(b.name);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+};
+
 const displayItems = computed(() => {
   if (props.title === "cocktails") {
-    return filteredItems.value.length > 0
-      ? filteredItems.value
-      : props.items || [];
+    const items =
+      filteredItems.value.length > 0 ? filteredItems.value : props.items || [];
+    return sortCocktails(items);
   }
   return props.items || [];
 });
