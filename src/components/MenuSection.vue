@@ -1,6 +1,7 @@
 <template>
   <section class="menu-section" :id="sectionAnchorId" ref="sectionRef">
     <h2 class="menu-section-title">{{ title }}</h2>
+    <DiamondDivider class="section-divider" />
     <div v-if="subtitle" class="menu-section-subtitle">{{ subtitle }}</div>
 
     <!-- Cocktail Filter -->
@@ -70,6 +71,7 @@
 import { computed, ref } from "vue";
 import MenuItem from "./MenuItem.vue";
 import CocktailFilter from "./CocktailFilter.vue";
+import DiamondDivider from "./DiamondDivider.vue";
 
 const props = defineProps({
   title: String,
@@ -157,14 +159,14 @@ function getHeaderSizes(items) {
 
 .menu-section-title {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-family: "Poiret One", cursive;
   color: #000;
   text-transform: capitalize;
   font-weight: 700;
   text-align: center;
-  border-bottom: 2px solid #e8e8e8;
-  padding-bottom: 0.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .menu-section:first-of-type .menu-section-title {
@@ -177,11 +179,28 @@ function getHeaderSizes(items) {
 .menu-section-subtitle {
   font-size: 1.1rem;
   color: #5a6c7d;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   font-family: "Poiret One", cursive;
   text-align: center;
   font-style: italic;
   line-height: 1.4;
+}
+
+.section-divider {
+  max-width: 600px;
+  margin: 0.25rem auto 1rem auto;
+}
+
+.section-divider :deep(.left-line),
+.section-divider :deep(.right-line) {
+  border-top: 1px solid #4c2a26 !important; /* accent */
+}
+
+.section-divider :deep(.small-diamond-left),
+.section-divider :deep(.small-diamond-right),
+.section-divider :deep(.large-diamond) {
+  border: 1px solid #4c2a26 !important; /* accent */
+  z-index: 10;
 }
 
 .menu-subsection-title-row {

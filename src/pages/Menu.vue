@@ -20,7 +20,7 @@ import MenuContainer from "src/components/MenuContainer.vue";
   background-color: #f7f5ed;
   background-blend-mode: lighten;
   margin: 0 auto;
-  padding: 0 2rem 2rem 2rem;
+  padding: 2rem;
   box-sizing: border-box;
 }
 </style>
