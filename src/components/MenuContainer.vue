@@ -15,13 +15,6 @@
 import MenuSection from "./MenuSection.vue";
 import menu from "src/assets/menu.js";
 
-const props = defineProps({
-  section: {
-    type: String,
-    required: true,
-  },
-});
-
 // Helper: returns subsections if present (object with keys, not just items/subtitle)
 function getSubsections(sectionData) {
   if (!sectionData || typeof sectionData !== "object") return null;

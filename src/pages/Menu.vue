@@ -1,8 +1,7 @@
 <template>
   <q-page>
     <div class="menu-list">
-      <MenuContainer section="food" />
-      <MenuContainer section="drinks" />
+      <MenuContainer />
     </div>
   </q-page>
 </template>
