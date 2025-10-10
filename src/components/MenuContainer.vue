@@ -1,25 +1,13 @@
 <template>
   <div class="menu-container">
-    <template v-if="section === 'food'">
-      <MenuSection
-        v-for="(sectionData, key) in menu.food"
-        :key="key"
-        :title="key"
-        :subtitle="sectionData.subtitle"
-        :items="sectionData.items"
-      />
-    </template>
-
-    <template v-if="section === 'drinks'">
-      <MenuSection
-        v-for="(sectionData, key) in menu.drinks"
-        :key="'drinks-' + key"
-        :title="key"
-        :subtitle="sectionData.subtitle"
-        :items="sectionData.items"
-        :subsections="getSubsections(sectionData)"
-      />
-    </template>
+    <MenuSection
+      v-for="(sectionData, key) in menu"
+      :key="'section-' + key"
+      :title="key"
+      :subtitle="sectionData.subtitle"
+      :items="sectionData.items"
+      :subsections="getSubsections(sectionData)"
+    />
   </div>
 </template>
 
