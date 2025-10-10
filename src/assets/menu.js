@@ -51,6 +51,34 @@ export default {
     cocktails: {
       items: [
         {
+          name: "The Alamo",
+          price: 12,
+          description: "smoky with lime, grapefruit, and tequila",
+        },
+        {
+          name: "Amaretto Sour",
+          price: 10,
+          description:
+            "strong almond liqueur with a touch of sweetness, tartness, and fluffiness",
+          egg: true,
+        },
+        {
+          name: "Americano",
+          price: 8,
+          description: "bubbly and bitter with Campari",
+        },
+        {
+          name: "Aviation",
+          price: 10,
+          description:
+            "floral violet liqueur with tart lemon and maraschino cherry",
+        },
+        {
+          name: "Bacardi Cocktail",
+          price: 9,
+          description: "exceptionally smooth and sweet, pomegranate and lime",
+        },
+        {
           name: "Bee's Knees",
           price: 9,
           description: "a sweet punch of honey, lemon, and orange",
@@ -61,15 +89,55 @@ export default {
           description: "spiced black rum with refreshing sweet mint",
         },
         {
+          name: "Boulevardier",
+          price: 10,
+          description:
+            "a classic negroni with whiskey in place of gin – resulting in a bitter spiced rye whiskey flavor",
+        },
+        {
+          name: "Brandy Alexander",
+          price: 9,
+          description: "dessert of brandy, creamy nutmeg and chocolate",
+        },
+        {
+          name: "Cadillac Margarita",
+          price: 15,
+          description:
+            "an elevated margarita made with top-shelf Volcan tequila blanco, Grand Marnier premium orange liqueur, and a salted rim",
+        },
+        {
           name: "Clover Club",
           price: 10,
           description: "for raspberry lovers, fluffy, sweet, and tart",
           egg: true,
         },
         {
+          name: "Espresso Martini",
+          price: 12,
+          description: "deep flavors of specialty espresso with a sweet finish",
+          egg: true,
+        },
+        {
           name: "French 75",
           price: 9,
           description: "cava fortified with gin and sweet lemon flavors",
+        },
+        {
+          name: "Gin Fizz",
+          price: 11,
+          description: "sweet and bubbly lemon with fluffy egg white",
+        },
+        {
+          name: "Grasshopper",
+          price: 10,
+          description:
+            "after winning a 1918 New York cocktail contest, this mint chocolate dessert cocktail has continued to delight for over 106 years",
+        },
+        {
+          name: "Hemingway Special",
+          price: 8,
+          description:
+            "a classic daquiri with a cherry twist and bright grapefruit",
         },
         {
           name: "Hot Buttered Rum",
@@ -84,11 +152,59 @@ export default {
           description: "sweet applejack and pomegranate",
         },
         {
+          name: "The Left Hand",
+          price: 10,
+          description: "bourbon with notes of bitter dark chocolate",
+        },
+        {
+          name: "Manhattan",
+          price: 11,
+          description: "sweet bourbon with bitter notes",
+        },
+        {
+          name: "Man O' War",
+          price: 8,
+          description: "bourbon with subtly spiced orange",
+        },
+        {
+          name: "Margarita '42",
+          price: 11,
+          description:
+            "a classic margarita: the perfect combination of tequila reposado and citric sweetness with a salted rim",
+        },
+        {
+          name: "Martini Classic",
+          description:
+            "the classic dry martini – choose vodka or gin – clean, dirty, or filthy",
+        },
+        {
           name: "Mayan Chocolate",
           price: 10,
           description:
             "a spicy chocolate experience reminiscent of a spicy mole sauce. Notes of cinnamon, chocolate, cherry, and chili pepper",
           seasonal: true,
+        },
+        {
+          name: "Moscow Mule",
+          price: 10,
+          description: "the kick of ginger beer paired with tart lime",
+        },
+        {
+          name: "Negroni",
+          price: 9,
+          description: "herbal with slightly sweet undertones",
+        },
+        {
+          name: "New York Sour",
+          price: 12,
+          description:
+            "an update of the Whiskey Sour that incorporates red wine",
+          egg: true,
+        },
+        {
+          name: "Old Fashioned",
+          price: 12,
+          description: "sweet bourbon with bitter notes",
         },
         {
           name: "Orange Blossom",
@@ -104,9 +220,56 @@ export default {
           egg: true,
         },
         {
-          name: "The Alamo",
+          name: "Ramos Gin Fizz",
+          price: 13,
+          description:
+            "a large, creamy, and citrusy cocktail from 1888 featuring the aroma of orange blossom",
+          egg: true,
+        },
+        {
+          name: "Rusty Nail",
+          price: 10,
+          description:
+            "once one of the most popular cocktails in America: scotch and drambuie complete this simple yet strong, scotch-heavy cocktail",
+        },
+        {
+          name: "Sazerac",
           price: 12,
-          description: "smoky with lime, grapefruit, and tequila",
+          description:
+            "the Official Cocktail of New Orleans marries the spice of rye whiskey with cognac and aromatic absinthe",
+        },
+        {
+          name: "Sidecar",
+          price: 12,
+          description:
+            "tart, dry orange with a sugared rim, made with Courvoisier VSOP premium cognac",
+        },
+        {
+          name: "Tom Collins",
+          price: 9,
+          description: "bubbly with bittersweet lemon on ice",
+        },
+        {
+          name: "Valencian Suntan",
+          price: 10,
+          description: "spiced orange with lemon",
+        },
+        {
+          name: "Vesper Martini",
+          price: 12,
+          description:
+            "an extra strong martini made famous by James Bond in 1953: gin, dry vermouth, and vodka",
+        },
+        {
+          name: "Whiskey Sour",
+          price: 11,
+          description: "the classic blend of fluffy, sweet, lemon, and bourbon",
+          egg: true,
+        },
+        {
+          name: "White Lady",
+          price: 9,
+          description: "sweet lemonade with a small touch of orange",
         },
       ],
     },
@@ -147,6 +310,7 @@ export default {
           name: "Lemon Fizz",
           price: 8,
           description: "sweet and bubbly lemon with fluffy egg white",
+          egg: true,
         },
       ],
     },
