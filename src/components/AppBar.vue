@@ -30,6 +30,23 @@
           }"
         />
       </router-link>
+
+      <!-- Language Toggle in top right -->
+      <q-btn
+        flat
+        dense
+        :label="locale.toUpperCase()"
+        @click="toggleLanguage"
+        class="text-white"
+        style="
+          position: absolute;
+          right: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 0.8rem;
+          min-height: 32px;
+        "
+      />
     </q-toolbar>
     <q-bar :class="['bg-accent hours-bar']">
       <div
@@ -66,63 +83,17 @@
     behavior="mobile"
   >
     <q-list padding class="spectral">
-      <q-item-label header class="text-body1">{{
-        t("menu.condensed")
-      }}</q-item-label>
-      <q-item
-        v-for="(lang, i) in localeOptions"
-        :key="i"
-        @click="goToMenu(lang.value)"
-        v-close-popup
-        clickable
-        v-ripple
-        class="q-pl-lg"
-      >
+      <!-- Navigation -->
+      <q-item-label header class="text-body1">Navigation</q-item-label>
+
+      <!-- Home Page Link -->
+      <q-item clickable v-ripple @click="goToHome" v-close-popup>
         <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{
-            lang.label
-          }}</q-item-label>
+          <q-item-label class="text-h6 text-weight-regular">Home</q-item-label>
         </q-item-section>
       </q-item>
 
-      <q-separator spaced />
-
-      <q-item
-        clickable
-        v-ripple
-        @click="scrollToSection('gallery')"
-        v-close-popup
-      >
-        <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{
-            t("gallery.title")
-          }}</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item
-        clickable
-        v-ripple
-        @click="scrollToSection('contact')"
-        v-close-popup
-      >
-        <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{
-            t("navigation.contact")
-          }}</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item
-        clickable
-        v-ripple
-        href="https://maps.app.goo.gl/y8zXASHuxx2pLbyf9"
-        target="_blank"
-      >
-        <q-item-section>
-          <q-item-label class="text-h6 text-weight-regular">{{
-            t("navigation.navigate")
-          }}</q-item-label>
-        </q-item-section>
-      </q-item>
+      <!-- Menu Page Link -->
       <q-item clickable v-ripple @click="goToMenuPage" v-close-popup>
         <q-item-section>
           <q-item-label class="text-h6 text-weight-regular">Menu</q-item-label>
@@ -131,7 +102,8 @@
 
       <q-separator spaced />
 
-      <q-item-label header class="text-body1">Menu</q-item-label>
+      <!-- Menu Sections -->
+      <q-item-label header class="text-body1">Menu Sections</q-item-label>
       <q-item
         v-for="link in menuSectionLinks"
         :key="link.anchor"
@@ -167,10 +139,6 @@ import menu from "src/assets/menu.js";
 const router = useRouter();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
-const localeOptions = [
-  { value: "en", label: "English" },
-  { value: "es", label: "Español" },
-];
 const drawer = ref(false);
 const isTransparent = ref(false);
 const scrollTarget = ref(null);
@@ -214,8 +182,6 @@ const menuPath = computed(() => {
 });
 import { businessHoursByDay, jsDayToKey } from "./businessHours.js";
 
-const todayIdx = new Date().getDay();
-const todayKey = jsDayToKey[todayIdx];
 // List of days in display order (edit as needed)
 const displayDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
@@ -289,14 +255,12 @@ const dayHourCombos = computed(() => {
     });
 });
 
-const selectLocale = (lang) => {
-  locale.value = lang;
+const toggleLanguage = () => {
+  locale.value = locale.value === "en" ? "es" : "en";
 };
 
-const goToMenu = (lang) => {
-  selectLocale(lang);
-  const routeData = router.resolve({ path: menuPath.value });
-  window.open(routeData.href, "_blank");
+const goToHome = () => {
+  router.push({ name: "home" });
 };
 
 const goToMenuPage = () => {
@@ -335,16 +299,6 @@ const goToMenuAnchor = async (anchorId) => {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
-};
-
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
 };
 </script>
 
