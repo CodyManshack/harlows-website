@@ -58,6 +58,7 @@ export default {
         description:
           "strong almond liqueur with a touch of sweetness, tartness, and fluffiness",
         egg: true,
+        img: "/cocktails/amarettosour/0.1x.png",
       },
       {
         name: "Americano",
