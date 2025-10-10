@@ -1,10 +1,26 @@
 <template>
-  <section class="menu-section" :id="sectionAnchorId">
+  <section class="menu-section" :id="sectionAnchorId" ref="sectionRef">
     <h2 class="menu-section-title">{{ title }}</h2>
     <div v-if="subtitle" class="menu-section-subtitle">{{ subtitle }}</div>
+
+    <!-- Cocktail Filter -->
+    <div
+      v-if="title === 'cocktails' && items && items.length > 0"
+      class="filter-container"
+    >
+      <!-- Sticky placeholder to prevent content jump -->
+      <div v-if="filterIsSticky" class="filter-placeholder"></div>
+      <CocktailFilter
+        ref="cocktailFilterRef"
+        :cocktails="items"
+        @filter-change="handleFilterChange"
+        @sticky-change="handleStickyChange"
+      />
+    </div>
+
     <div v-if="items">
       <MenuItem
-        v-for="item in items"
+        v-for="item in displayItems"
         :key="item.name"
         :item="item"
         :liquor="title === 'liquors'"
@@ -51,13 +67,40 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import MenuItem from "./MenuItem.vue";
+import CocktailFilter from "./CocktailFilter.vue";
+
 const props = defineProps({
   title: String,
   subtitle: String,
   items: Array,
   subsections: Object,
+});
+
+const sectionRef = ref(null);
+const cocktailFilterRef = ref(null);
+const filteredItems = ref([]);
+const filterIsSticky = ref(false);
+
+// Handle filtered cocktails from CocktailFilter component
+const handleFilterChange = (filtered) => {
+  filteredItems.value = filtered;
+};
+
+// Handle sticky state changes from CocktailFilter component
+const handleStickyChange = (sticky) => {
+  filterIsSticky.value = sticky;
+};
+
+// Display items - use filtered items for cocktails, original items for others
+const displayItems = computed(() => {
+  if (props.title === "cocktails") {
+    return filteredItems.value.length > 0
+      ? filteredItems.value
+      : props.items || [];
+  }
+  return props.items || [];
 });
 
 const slugify = (str) =>
@@ -187,5 +230,15 @@ function getHeaderSizes(items) {
   min-width: 64px;
   text-align: center;
   display: inline-block;
+}
+
+/* Filter container and placeholder for sticky behavior */
+.filter-container {
+  position: relative;
+}
+
+.filter-placeholder {
+  height: 80px; /* Approximate height of the filter when sticky */
+  width: 100%;
 }
 </style>
