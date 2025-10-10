@@ -1,6 +1,5 @@
 <template>
   <div :class="['menu-item', liquor ? 'menu-item-liquor' : '']">
-    <!-- Optional item image (mobile-first, above name) -->
     <div v-if="item.img" class="menu-item-image-wrapper">
       <q-img
         :src="item.img"
@@ -11,83 +10,88 @@
         class="menu-item-image menu-notch"
       />
     </div>
-    <div
-      class="menu-item-header"
-      v-if="item.sizes || (headerSizes && headerSizes.length)"
-    >
-      <span class="menu-item-name">
-        {{ item.name }}
-        <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
-          item.sizeLabel
-        }}</span>
-      </span>
-      <div class="menu-item-sizes">
-        <div
-          class="menu-item-sizes-row menu-item-sizes-header"
-          v-if="!hideSizes && item.sizes"
-        >
-          <span
-            v-for="(price, size) in item.sizes"
-            :key="size"
-            class="menu-item-size-label"
-            >{{ size }}</span
+    <div class="menu-item-content">
+      <div
+        class="menu-item-header"
+        v-if="item.sizes || (headerSizes && headerSizes.length)"
+      >
+        <span class="menu-item-name">
+          {{ item.name }}
+          <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
+            item.sizeLabel
+          }}</span>
+        </span>
+        <div class="menu-item-sizes">
+          <div
+            class="menu-item-sizes-row menu-item-sizes-header"
+            v-if="!hideSizes && item.sizes"
           >
-        </div>
-        <div
-          class="menu-item-sizes-row menu-item-sizes-header"
-          v-else-if="!hideSizes && headerSizes && headerSizes.length"
-        >
-          <span
-            v-for="size in headerSizes"
-            :key="'hdr-' + size"
-            class="menu-item-size-label"
-            >{{ size }}</span
+            <span
+              v-for="(price, size) in item.sizes"
+              :key="size"
+              class="menu-item-size-label"
+              >{{ size }}</span
+            >
+          </div>
+          <div
+            class="menu-item-sizes-row menu-item-sizes-header"
+            v-else-if="!hideSizes && headerSizes && headerSizes.length"
           >
-        </div>
-        <div class="menu-item-sizes-row menu-item-sizes-prices">
-          <span
-            v-for="size in headerSizes && headerSizes.length
-              ? headerSizes
-              : Object.keys(item.sizes || {})"
-            :key="size + '-price'"
-            class="menu-item-size-price"
-            >{{
-              item.sizes && item.sizes[size] !== undefined
-                ? item.sizes[size]
-                : "—"
-            }}</span
-          >
+            <span
+              v-for="size in headerSizes"
+              :key="'hdr-' + size"
+              class="menu-item-size-label"
+              >{{ size }}</span
+            >
+          </div>
+          <div class="menu-item-sizes-row menu-item-sizes-prices">
+            <span
+              v-for="size in headerSizes && headerSizes.length
+                ? headerSizes
+                : Object.keys(item.sizes || {})"
+              :key="size + '-price'"
+              class="menu-item-size-price"
+              >{{
+                item.sizes && item.sizes[size] !== undefined
+                  ? item.sizes[size]
+                  : "—"
+              }}</span
+            >
+          </div>
         </div>
       </div>
-    </div>
-    <div class="menu-item-header" v-else>
-      <span class="menu-item-name">
-        {{ item.name }}
-        <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
-          item.sizeLabel
-        }}</span>
-        <span v-if="item.egg" class="menu-item-egg">
-          <q-icon
-            name="ion-egg"
-            color="orange"
-            size="0.85rem"
-            style="opacity: 0.75"
-          >
-            <q-tooltip class="bg-black text-white"
-              >Allergen: Contains Egg White</q-tooltip
+      <div class="menu-item-header" v-else>
+        <span class="menu-item-name">
+          {{ item.name }}
+          <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
+            item.sizeLabel
+          }}</span>
+          <span v-if="item.egg" class="menu-item-egg">
+            <q-icon
+              name="ion-egg"
+              color="orange"
+              size="0.85rem"
+              style="opacity: 0.75"
             >
-          </q-icon>
+              <q-tooltip class="bg-black text-white"
+                >Allergen: Contains Egg White</q-tooltip
+              >
+            </q-icon>
+          </span>
         </span>
-      </span>
-      <span class="menu-item-price">{{ item.price }}</span>
+        <span class="menu-item-price">{{ item.price }}</span>
+      </div>
+      <div
+        v-if="item.type || item.year || item.location"
+        class="menu-item-meta"
+      >
+        {{ [item.type, item.year, item.location].filter(Boolean).join(" · ") }}
+      </div>
+      <div v-if="item.description" class="menu-item-description">
+        {{ item.description }}
+      </div>
+      <div v-if="item.seasonal" class="menu-item-seasonal">Seasonal</div>
     </div>
-    <div v-if="item.type || item.year || item.location" class="menu-item-meta">
-      {{ [item.type, item.year, item.location].filter(Boolean).join(" · ") }}
-    </div>
-    <div v-if="item.description" class="menu-item-description">
-      {{ item.description }}
-    </div>
-    <div v-if="item.seasonal" class="menu-item-seasonal">Seasonal</div>
   </div>
 </template>
 
@@ -223,6 +227,7 @@ const props = defineProps({
 }
 .menu-item-image {
   width: 100%;
+  max-width: 360px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   background: #f8f8f8;
@@ -251,9 +256,41 @@ const props = defineProps({
 }
 
 @media (min-width: 768px) {
-  /* On larger screens, keep image modest */
+  .menu-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 1.5rem 0;
+  }
+  .menu-item-image-wrapper {
+    margin: 0;
+    flex: 0 0 360px;
+    max-width: 360px;
+    width: 100%;
+    display: block;
+  }
   .menu-item-image {
     max-width: 360px;
+    width: 100%;
+    display: block;
+  }
+  .menu-item-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .menu-item-header,
+  .menu-item-meta,
+  .menu-item-description,
+  .menu-item-seasonal {
+    text-align: left;
+  }
+  .menu-item-seasonal {
+    align-self: flex-start;
+    width: auto;
+    max-width: fit-content;
   }
 }
 

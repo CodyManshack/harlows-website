@@ -13,7 +13,7 @@ import MenuContainer from "src/components/MenuContainer.vue";
 <style scoped>
 .menu-list {
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   background-color: #f7f5ed;
   background-blend-mode: lighten;
   margin: 0 auto;
