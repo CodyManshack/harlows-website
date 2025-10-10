@@ -292,6 +292,8 @@ const goToMenuAnchor = async (anchorId) => {
   if (router.currentRoute.value.name !== "menu") {
     await router.push({ name: "menu" });
   }
+  // Close the drawer after navigation
+  drawer.value = false;
   // Give the page a tick to render
   requestAnimationFrame(() => {
     const el = document.getElementById(anchorId);
