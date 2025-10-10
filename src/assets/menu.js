@@ -51,11 +51,37 @@ export default {
     cocktails: {
       items: [
         {
+          name: "Bee's Knees",
+          price: 9,
+          description: "a sweet punch of honey, lemon, and orange",
+        },
+        {
+          name: "Black Mojito",
+          price: 13,
+          description: "spiced black rum with refreshing sweet mint",
+        },
+        {
+          name: "Clover Club",
+          price: 10,
+          description: "for raspberry lovers, fluffy, sweet, and tart",
+          egg: true,
+        },
+        {
+          name: "French 75",
+          price: 9,
+          description: "cava fortified with gin and sweet lemon flavors",
+        },
+        {
           name: "Hot Buttered Rum",
           price: 5,
           description:
             "a small and sweet treat, the perfect nightcap. Hot black spiced rum with sweet butter, whipped cream, cinnamon, and nutmeg",
           seasonal: true,
+        },
+        {
+          name: "Jack Rose",
+          price: 12,
+          description: "sweet applejack and pomegranate",
         },
         {
           name: "Mayan Chocolate",
@@ -65,6 +91,12 @@ export default {
           seasonal: true,
         },
         {
+          name: "Orange Blossom",
+          price: 9,
+          description:
+            "especially easy-to-drink: sweet orange juice with a bit of depth",
+        },
+        {
           name: "Pisco Sour",
           price: 11,
           description:
@@ -72,41 +104,9 @@ export default {
           egg: true,
         },
         {
-          name: "Black Mojito",
-          price: 13,
-          description: "spiced black rum with refreshing sweet mint",
-        },
-        {
-          name: "Orange Blossom",
-          price: 9,
-          description:
-            "especially easy-to-drink: sweet orange juice with a bit of depth",
-        },
-        {
-          name: "Clover Club",
-          price: 10,
-          description: "for raspberry lovers, fluffy, sweet, and tart",
-          egg: true,
-        },
-        {
-          name: "Bee's Knees",
-          price: 9,
-          description: "a sweet punch of honey, lemon, and orange",
-        },
-        {
           name: "The Alamo",
           price: 12,
           description: "smoky with lime, grapefruit, and tequila",
-        },
-        {
-          name: "Jack Rose",
-          price: 12,
-          description: "sweet applejack and pomegranate",
-        },
-        {
-          name: "French 75",
-          price: 9,
-          description: "cava fortified with gin and sweet lemon flavors",
         },
       ],
     },
