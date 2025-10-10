@@ -176,7 +176,7 @@ const props = defineProps({
 
 .menu-item-price {
   font-family: "Poiret One", cursive;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #000;
   font-weight: 600;
   margin-left: 1rem;
