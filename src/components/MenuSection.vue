@@ -28,7 +28,7 @@
           name: tr(item.name),
           description: tr(item.description),
         }"
-        :liquor="title === 'liquors'"
+        :liquor="sectionKey === 'liquors'"
         :sectionKey="sectionKey"
       />
     </div>
@@ -36,13 +36,15 @@
       <div
         v-for="(sub, subkey) in subsections"
         :key="subkey"
-        :id="`menu-subsection-${slugify(title)}-${slugify(subkey)}`"
+        :id="`menu-subsection-${slugify(sectionKey)}-${slugify(subkey)}`"
       >
         <div
           class="menu-subsection-title-row"
           :class="{ 'has-sizes': getHeaderSizes(sub.items).length }"
         >
-          <h3 class="menu-subsection-title">{{ tr(sub.title ?? subkey) }}</h3>
+          <h3 class="menu-subsection-title">
+            {{ tr(sub.label ?? sub.title ?? subkey) }}
+          </h3>
           <template v-if="getHeaderSizes(sub.items).length">
             <div class="menu-subsection-sizes">
               <div class="menu-item-sizes-row menu-item-sizes-header">
@@ -69,7 +71,7 @@
             name: tr(item.name),
             description: tr(item.description),
           }"
-          :liquor="title === 'liquors' || subkey === 'gin'"
+          :liquor="sectionKey === 'liquors' || subkey === 'gin'"
           :hideSizes="getHeaderSizes(sub.items).length > 0"
           :headerSizes="getHeaderSizes(sub.items)"
           :sectionKey="sectionKey"

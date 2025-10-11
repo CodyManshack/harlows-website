@@ -95,7 +95,7 @@ export function buildMenuJsonLd({ locale = "es", currency = "EUR" } = {}) {
 
     const subSections = subsections.map(({ key: subKey, data: sub }) => ({
       "@type": "MenuSection",
-      name: tr(sub.title ?? subKey),
+      name: tr(sub.label ?? sub.title ?? subKey),
       hasMenuItem: (sub.items || []).map((it) => ({
         "@type": "MenuItem",
         name: tr(it.name),
