@@ -110,49 +110,6 @@
             {{ cat.label }}: {{ item.profile?.[cat.key] ?? 0 }} / 5
           </q-tooltip>
         </span>
-        <span class="profile-legend-icon" aria-label="Legend">
-          <q-icon name="help_outline" size="16px" class="text-grey-7">
-            <q-tooltip class="bg-black text-white">
-              <div class="legend-container">
-                <div class="legend-row">
-                  <span
-                    class="legend-swatch"
-                    style="background: #6a1b9a"
-                  ></span>
-                  {{ t("filter.tags.boozy") }}
-                </div>
-                <div class="legend-row">
-                  <span
-                    class="legend-swatch"
-                    style="background: #d32f2f"
-                  ></span>
-                  {{ t("filter.tags.bitter") }}
-                </div>
-                <div class="legend-row">
-                  <span
-                    class="legend-swatch"
-                    style="background: #f39c12"
-                  ></span>
-                  {{ t("filter.tags.sweet") }}
-                </div>
-                <div class="legend-row">
-                  <span
-                    class="legend-swatch"
-                    style="background: #43a047"
-                  ></span>
-                  {{ t("filter.tags.citrus") }}
-                </div>
-                <div class="legend-row">
-                  <span
-                    class="legend-swatch"
-                    style="background: #1976d2"
-                  ></span>
-                  {{ t("filter.tags.tart") }}
-                </div>
-              </div>
-            </q-tooltip>
-          </q-icon>
-        </span>
       </div>
     </div>
   </div>
@@ -364,30 +321,6 @@ function barHeight(val) {
 }
 .cat-color-tart {
   color: #1976d2;
-}
-
-/* Legend tooltip (reuse styles similar to filter legend) */
-.profile-legend-icon {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 8px;
-  cursor: help;
-}
-.legend-container {
-  display: grid;
-  gap: 4px;
-}
-.legend-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-}
-.legend-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  display: inline-block;
 }
 
 /* Item image (optimized for mobile) */
