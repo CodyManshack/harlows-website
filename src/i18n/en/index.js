@@ -11,6 +11,11 @@ export default {
   menu: {
     view: "View the menu",
     condensed: "Menu",
+    meta: {
+      title: "Menu – Harlow's Bar",
+      description:
+        "Explore our cocktail, beer, and wine menu with seasonal specials.",
+    },
   },
   navigation: {
     navigate: "Navigate",

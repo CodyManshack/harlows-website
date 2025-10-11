@@ -11,6 +11,11 @@ export default {
   menu: {
     view: "Ver la carta",
     condensed: "La carta",
+    meta: {
+      title: "Carta – Harlow's Bar",
+      description:
+        "Descubre nuestra carta de cócteles, cervezas y vinos con especiales de temporada.",
+    },
   },
   navigation: {
     navigate: "Navegar",
