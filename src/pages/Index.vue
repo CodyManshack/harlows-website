@@ -9,7 +9,7 @@
         mode="out-in"
       >
         <div :class="heroContentClasses">
-          <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 col-xl-4 spectral">
+          <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 col-xl-4">
             <div class="hero-content-wrapper text-center">
               <div class="hero-separation-card">
                 <div class="hero-text-overlay">
@@ -33,7 +33,7 @@
                 >
                   <template v-slot:label>
                     <span
-                      class="text-h5 spectral text-weight-regular capitalize-first-letter"
+                      class="text-h5 text-weight-regular capitalize-first-letter"
                     >
                       {{ t("menu.view") }}
                     </span>
@@ -49,9 +49,7 @@
                       v-ripple
                     >
                       <q-item-section>
-                        <q-item-label
-                          class="text-h6 text-weight-regular spectral"
-                        >
+                        <q-item-label class="text-h6 text-weight-regular">
                           {{ lang.label }}
                         </q-item-label>
                       </q-item-section>
@@ -76,7 +74,7 @@
             mode="out-in"
           >
             <h1
-              class="capitalize-first-letter text-h3 text-weight-regular spectral text-italic"
+              class="capitalize-first-letter text-h3 text-weight-regular text-italic"
             >
               {{ t("gallery.title") }}
             </h1>
@@ -106,7 +104,7 @@
                 >
                   <div
                     v-if="image.title"
-                    class="spectral text-h5 absolute-bottom text-right image-title"
+                    class="text-h5 absolute-bottom text-right image-title"
                   >
                     {{ image.title }}
                   </div>
@@ -127,7 +125,7 @@
             enter-active-class="animated fadeIn slower"
             leave-active-class="animated fadeOut"
           >
-            <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
+            <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4">
               <div
                 :class="[
                   $q.screen.gt.sm ? 'text-h2' : 'text-h3',
@@ -157,7 +155,7 @@
       </div>
       <div class="q-pb-xl">
         <div class="row justify-center items-center text-center q-pb-lg">
-          <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4 spectral">
+          <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4">
             <div class="row justify-center items-center q-gutter-lg q-my-md">
               <transition-group
                 appear
@@ -512,17 +510,5 @@ const goToMenu = (lang) => {
 // Add performance optimizations
 .animated {
   animation-fill-mode: both;
-}
-
-// Optimize for better text rendering
-.spectral {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-// Smooth scrolling for anchor links
-html {
-  scroll-behavior: smooth;
 }
 </style>

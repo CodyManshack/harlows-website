@@ -52,7 +52,7 @@
       <div
         :class="[
           $q.screen.gt.sm ? 'text-body1' : 'text-caption',
-          'row no-wrap full-width justify-evenly spectral hours-content',
+          'row no-wrap full-width justify-evenly hours-content',
         ]"
       >
         <div
@@ -82,7 +82,7 @@
     dark
     behavior="mobile"
   >
-    <q-list padding class="spectral">
+    <q-list padding>
       <!-- Navigation -->
       <q-item-label header class="text-body1">Navigation</q-item-label>
 
