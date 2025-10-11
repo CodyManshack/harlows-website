@@ -20,6 +20,9 @@
           <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
             item.sizeLabel
           }}</span>
+          <span v-if="item.seasonal" class="menu-item-seasonal">{{
+            t("filter.tags.seasonal")
+          }}</span>
         </span>
         <div class="menu-item-sizes">
           <div
@@ -78,6 +81,9 @@
               >
             </q-icon>
           </span>
+          <span v-if="item.seasonal" class="menu-item-seasonal">{{
+            t("filter.tags.seasonal")
+          }}</span>
         </span>
         <span class="menu-item-price">{{ item.price }}</span>
       </div>
@@ -90,7 +96,7 @@
       <div v-if="item.description" class="menu-item-description">
         {{ item.description }}
       </div>
-      <div v-if="item.seasonal" class="menu-item-seasonal">Seasonal</div>
+
       <div
         v-if="item.profile"
         class="menu-item-profile compact-bars"
@@ -273,10 +279,12 @@ function barHeight(val) {
 }
 
 .menu-item-seasonal {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #f39c12;
-  font-style: italic;
-  margin-top: 0.3rem;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 0;
+  margin-left: 0.5rem;
   background: rgba(243, 156, 18, 0.1);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
