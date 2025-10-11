@@ -251,7 +251,7 @@ function getHeaderSizes(items) {
   font-size: 1.05rem;
   color: #5a6c7d;
   margin-bottom: 1.2rem;
-  text-align: center;
+  margin-left: 1.2rem;
   font-style: italic;
   line-height: 1.4;
 }
