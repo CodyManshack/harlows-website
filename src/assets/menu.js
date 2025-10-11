@@ -4,7 +4,7 @@ export default {
     subtitle: "",
     items: [
       {
-        name: { en: "meat & cheese plate", es: "tabla de embutidos y quesos" },
+        name: "meat & cheese plate",
         price: 14,
         description: {
           en: "selection of 2 cured meats and 2 cheeses, served with olive oil and warm bread",
@@ -12,7 +12,7 @@ export default {
         },
       },
       {
-        name: { en: "cheese plate", es: "tabla de quesos" },
+        name: "cheese plate",
         price: 8,
         description: {
           en: "selection of 2 cheeses, served with olive oil and warm bread",
@@ -20,33 +20,54 @@ export default {
         },
       },
       {
-        name: "olives and feta",
+        name: { en: "olives and feta", es: "aceitunas con feta" },
         price: 5,
-        description: "a mix of assorted olives and feta",
+        description: {
+          en: "a mix of assorted olives and feta",
+          es: "una mezcla de aceitunas y queso feta",
+        },
       },
     ],
   },
   "gourmet dips": {
-    subtitle:
-      "by Toupine et Cabesselle. \nServed with handmade fennel crackers",
+    label: { en: "gourmet dips", es: "dips gourmet" },
+    subtitle: {
+      en: "by Toupine et Cabesselle. served with handmade fennel crackers",
+      es: "por Toupine et Cabesselle. servido con crackers de hinojo hechos a mano",
+    },
     items: [
       {
-        name: "Artichoke Caviar with Green Olives",
+        name: {
+          en: "Artichoke Caviar with Green Olives",
+          es: "Artichoke Caviar con Green Olives",
+        },
         price: 7,
-        description:
-          "this dip pairs the powerful taste of artichokes with the gentle sweetness of green olives. Served warm",
+        description: {
+          en: "this dip pairs the powerful taste of artichokes with the gentle sweetness of green olives. Served warm",
+          es: "este dip combina el potente sabor de las alcachofas con el suave dulzor de las aceitunas verdes. Se sirve caliente",
+        },
       },
       {
-        name: "Mushroom Cream with Summer Truffle",
+        name: {
+          en: "Mushroom Cream with Summer Truffle",
+          es: "Mushroom Cream con Summer Truffle",
+        },
         price: 7,
-        description:
-          "the refined flavors of porcini mushrooms and summer truffles combine into a sultry, creamy dip. Served warm",
+        description: {
+          en: "the refined flavors of porcini mushrooms and summer truffles combine into a sultry, creamy dip. Served warm",
+          es: "los sabores refinados de las setas porcini y las trufas de verano se combinan en un dip suave y cremoso. Se sirve caliente",
+        },
       },
       {
-        name: "Poichichade with Fresh Cilantro",
+        name: {
+          en: "Poichichade with Fresh Cilantro",
+          es: "Poichichade con Cilantro Fresco",
+        },
         price: 7,
-        description:
-          "a French dip of pureed chickpeas – similar to hummus – with fresh cilantro. Served chilled",
+        description: {
+          en: "a French dip of pureed chickpeas – similar to hummus – with fresh cilantro. Served chilled",
+          es: "un dip francés de puré de garbanzos – similar al hummus – con cilantro fresco. Se sirve frío",
+        },
       },
     ],
   },
