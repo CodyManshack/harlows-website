@@ -527,7 +527,7 @@ export default {
       ],
     },
   },
-  "Water / soft drinks": {
+  "Water & sodas": {
     items: [
       {
         name: "Sparkling water",
