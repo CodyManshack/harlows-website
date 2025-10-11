@@ -40,4 +40,20 @@ export default {
     label: "Hours",
     open: "Open from {open} to {close}",
   },
+  filter: {
+    label: "Filter by:",
+    clear: "Clear All",
+    tags: {
+      seasonal: "Seasonal",
+      egg: "Egg White",
+      sweet: "Sweet",
+      strong: "Strong",
+      citrus: "Citrus",
+      fruity: "Fruity",
+      bitter: "Bitter",
+      spicy: "Spicy",
+      under10: "Under $10",
+      premium: "$12+",
+    },
+  },
 };

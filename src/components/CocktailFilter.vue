@@ -1,7 +1,7 @@
 <template>
   <div :class="['cocktail-filter', { sticky: isSticky }]" ref="filterBar">
     <div class="filter-content">
-      <span class="filter-label">Filter by:</span>
+      <span class="filter-label">{{ t("filter.label") }}</span>
       <div class="filter-tags">
         <button
           v-for="tag in availableTags"
@@ -17,7 +17,7 @@
         class="clear-filters"
         @click="clearAllFilters"
       >
-        Clear All
+        {{ t("filter.clear") }}
       </button>
       <!-- Debug button -->
     </div>
@@ -41,21 +41,22 @@ const nextTitleVisible = ref(false);
 const selectedTags = ref([]);
 const parentSection = ref(null);
 
-const availableTags = [
-  { id: "seasonal", label: "Seasonal" },
-  { id: "egg", label: "Egg White" },
-  { id: "sweet", label: "Sweet" },
-  { id: "strong", label: "Strong" },
-  { id: "citrus", label: "Citrus" },
-  { id: "fruity", label: "Fruity" },
-  { id: "bitter", label: "Bitter" },
-  { id: "spicy", label: "Spicy" },
-  { id: "under10", label: "Under $10" },
-  { id: "premium", label: "$12+" },
-];
+const { t, locale } = useI18n();
+
+const availableTags = computed(() => [
+  { id: "seasonal", label: t("filter.tags.seasonal") },
+  { id: "egg", label: t("filter.tags.egg") },
+  { id: "sweet", label: t("filter.tags.sweet") },
+  { id: "strong", label: t("filter.tags.strong") },
+  { id: "citrus", label: t("filter.tags.citrus") },
+  { id: "fruity", label: t("filter.tags.fruity") },
+  { id: "bitter", label: t("filter.tags.bitter") },
+  { id: "spicy", label: t("filter.tags.spicy") },
+  { id: "under10", label: t("filter.tags.under10") },
+  { id: "premium", label: t("filter.tags.premium") },
+]);
 
 // i18n-aware value resolver for strings or {en, es} objects
-const { locale } = useI18n();
 function trVal(value) {
   if (value && typeof value === "object") {
     const loc = (locale.value || "en").toString();
@@ -81,59 +82,63 @@ const filteredCocktails = computed(() => {
   // Apply all selected tag filters (AND logic - cocktail must match ALL selected tags)
   filtered = filtered.filter((cocktail) => {
     return selectedTags.value.every((tag) => {
+      const loc = (locale.value || "en").toString();
+      const kw = {
+        sweet: {
+          en: ["sweet", "honey", "dessert"],
+          es: ["dulce", "miel", "postre"],
+        },
+        strong: {
+          en: ["strong", "powerful", "whiskey", "bourbon", "rum"],
+          es: ["fuerte", "potente", "whisky", "bourbon", "ron"],
+        },
+        citrus: {
+          en: ["lemon", "lime", "orange", "citrus", "grapefruit"],
+          es: ["limón", "lima", "naranja", "cítric", "pomelo"],
+        },
+        fruity: {
+          en: ["fruit", "berry", "cherry", "apple", "pomegranate", "raspberry"],
+          es: ["fruta", "baya", "cereza", "manzana", "granada", "frambuesa"],
+        },
+        bitter: {
+          en: ["bitter", "campari"],
+          es: ["amargo", "campari"],
+        },
+        spicy: {
+          en: ["spicy", "spice", "chili", "pepper", "cinnamon"],
+          es: ["picante", "especia", "chile", "pimienta", "canela"],
+        },
+      };
+      const words = (key) =>
+        (kw[key]?.[loc] || kw[key]?.en || []).map((w) => w.toLowerCase());
       switch (tag) {
         case "seasonal":
           return cocktail.seasonal;
         case "egg":
           return cocktail.egg;
         case "sweet":
-          return (
-            descOf(cocktail).includes("sweet") ||
-            descOf(cocktail).includes("honey") ||
-            descOf(cocktail).includes("dessert") ||
-            nameOf(cocktail).toLowerCase().includes("sweet")
+          return words("sweet").some(
+            (w) =>
+              descOf(cocktail).includes(w) ||
+              nameOf(cocktail).toLowerCase().includes(w)
           );
         case "strong":
           return (
-            descOf(cocktail).includes("strong") ||
-            descOf(cocktail).includes("powerful") ||
-            descOf(cocktail).includes("whiskey") ||
-            descOf(cocktail).includes("bourbon") ||
-            descOf(cocktail).includes("rum") ||
+            words("strong").some((w) => descOf(cocktail).includes(w)) ||
             cocktail.price >= 11
           );
         case "citrus":
-          return (
-            descOf(cocktail).includes("lemon") ||
-            descOf(cocktail).includes("lime") ||
-            descOf(cocktail).includes("orange") ||
-            descOf(cocktail).includes("citrus") ||
-            descOf(cocktail).includes("grapefruit")
-          );
+          return words("citrus").some((w) => descOf(cocktail).includes(w));
         case "fruity":
-          return (
-            descOf(cocktail).includes("fruit") ||
-            descOf(cocktail).includes("berry") ||
-            descOf(cocktail).includes("cherry") ||
-            descOf(cocktail).includes("apple") ||
-            descOf(cocktail).includes("pomegranate") ||
-            descOf(cocktail).includes("raspberry")
-          );
+          return words("fruity").some((w) => descOf(cocktail).includes(w));
         case "bitter":
           return (
-            descOf(cocktail).includes("bitter") ||
-            descOf(cocktail).includes("campari") ||
+            words("bitter").some((w) => descOf(cocktail).includes(w)) ||
             nameOf(cocktail).toLowerCase().includes("negroni") ||
             nameOf(cocktail).toLowerCase().includes("americano")
           );
         case "spicy":
-          return (
-            descOf(cocktail).includes("spicy") ||
-            descOf(cocktail).includes("spice") ||
-            descOf(cocktail).includes("chili") ||
-            descOf(cocktail).includes("pepper") ||
-            descOf(cocktail).includes("cinnamon")
-          );
+          return words("spicy").some((w) => descOf(cocktail).includes(w));
         case "under10":
           return cocktail.price < 10;
         case "premium":

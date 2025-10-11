@@ -40,4 +40,20 @@ export default {
     label: "Horarios",
     open: "Abierto de {open} a {close}",
   },
+  filter: {
+    label: "Filtrar por:",
+    clear: "Limpiar",
+    tags: {
+      seasonal: "De temporada",
+      egg: "Clara de huevo",
+      sweet: "Dulce",
+      strong: "Fuerte",
+      citrus: "Cítrico",
+      fruity: "Afrutado",
+      bitter: "Amargo",
+      spicy: "Picante",
+      under10: "Menos de 10€",
+      premium: "+12€",
+    },
+  },
 };
