@@ -17,6 +17,12 @@ export function buildRestaurantJsonLd({ locale = "es", origin } = {}) {
     name: "Harlow's Bar",
     url: absoluteUrl(`/${locale}`, origin),
     image: absoluteUrl("/icons/favicon-128x128.png", origin),
+    priceRange: "€€",
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 39.4739458,
+      longitude: -0.3842719,
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: "Carrer de Lepant 4",
