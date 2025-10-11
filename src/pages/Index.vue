@@ -10,35 +10,33 @@
       >
         <div :class="heroContentClasses">
           <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-            <div class="hero-content-wrapper text-center">
-              <div class="hero-separation-card">
-                <div class="hero-text-overlay">
-                  <h1 :class="headlineClasses">
-                    {{ t("hero.headline") }}
-                  </h1>
-                  <h2
-                    class="text-h6 text-weight-regular q-mt-md q-mb-xl hero-subtitle"
-                  >
-                    {{ t("hero.subtitle") }}
-                  </h2>
-                </div>
-                <q-btn
-                  color="accent"
-                  padding="lg xl"
-                  :size="$q.screen.xs ? 'lg' : 'xl'"
-                  content-class="bg-accent"
-                  no-caps
-                  aria-label="View Menu"
-                  class="hero-menu-btn"
-                  @click="goToMenu()"
+            <div class="hero-separation-card text-center">
+              <div class="hero-text-overlay">
+                <h1 :class="headlineClasses">
+                  {{ t("hero.headline") }}
+                </h1>
+                <h2
+                  class="text-h6 text-weight-regular q-mt-md q-mb-xl hero-subtitle"
                 >
-                  <span
-                    class="text-h5 text-weight-regular capitalize-first-letter"
-                  >
-                    {{ t("menu.view") }}
-                  </span>
-                </q-btn>
+                  {{ t("hero.subtitle") }}
+                </h2>
               </div>
+              <q-btn
+                color="accent"
+                padding="lg xl"
+                :size="$q.screen.xs ? 'lg' : 'xl'"
+                content-class="bg-accent"
+                no-caps
+                aria-label="View Menu"
+                class="hero-menu-btn"
+                @click="goToMenu()"
+              >
+                <span
+                  class="text-h5 text-weight-regular capitalize-first-letter"
+                >
+                  {{ t("menu.view") }}
+                </span>
+              </q-btn>
             </div>
           </div>
         </div>
@@ -196,10 +194,6 @@ const goToMenu = () => {
   }
 }
 
-.hero-content-wrapper {
-  padding: 1rem;
-}
-
 .hero-separation-card {
   background: rgba(0, 0, 0, 0.85);
   border-radius: 16px;
@@ -218,6 +212,7 @@ const goToMenu = () => {
 
   h1 {
     color: white !important;
+    margin-top: 0;
     margin-bottom: 1rem;
     font-weight: 300;
     letter-spacing: 1px;
