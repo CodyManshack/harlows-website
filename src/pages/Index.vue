@@ -47,7 +47,7 @@
     <section id="contact" class="contact-section">
       <div class="q-pb-xl">
         <div class="row justify-center items-center text-center q-pb-lg">
-          <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4">
+          <div class="col-xs-12 col-md-8 col-lg-6">
             <div class="row justify-center items-center q-gutter-lg q-my-md">
               <transition-group
                 appear
@@ -55,7 +55,7 @@
                 leave-active-class="animated zoomOut"
               >
                 <q-btn
-                  class="col-md-3 col-8 bg-primary"
+                  class="col-xs-8 col-sm-6 col-md-3 col-lg-4 bg-primary"
                   style="height: 200px"
                   v-for="button in contactButtons"
                   :key="button.title"
@@ -89,7 +89,7 @@
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.7956147359905!2d-0.38684602266516505!3d39.47394581247808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604fe3f94d65cf%3A0x4471acc1b9c7ad98!2sHarlow&#39;s%20Bar!5e0!3m2!1sen!2ses!4v1697395155698!5m2!1sen!2ses"
           width="100%"
           height="510"
-          style="border: 0"
+          style="border: 0; display: block"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
