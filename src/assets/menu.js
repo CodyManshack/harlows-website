@@ -75,7 +75,7 @@ export default {
     label: { en: "cocktails", es: "cócteles" },
     items: [
       {
-        name: { en: "The Alamo", es: "El Álamo" },
+        name: "The Alamo",
         price: 12,
         description: {
           en: "smoky with lime, grapefruit, and tequila",
@@ -85,226 +85,324 @@ export default {
       {
         name: "Amaretto Sour",
         price: 10,
-        description:
-          "strong almond liqueur with a touch of sweetness, tartness, and fluffiness",
+        description: {
+          en: "strong almond liqueur with a touch of sweetness, tartness, and fluffiness",
+          es: "licor de almendra fuerte con un toque de dulzor, acidez y suavidad",
+        },
         egg: true,
         img: "/cocktails/amarettosour/0.25x.png",
       },
       {
         name: "Americano",
         price: 8,
-        description: "bubbly and bitter with Campari",
+        description: {
+          en: "bubbly and bitter with Campari",
+          es: "burbujeante y amargo con Campari",
+        },
       },
       {
         name: "Aviation",
         price: 10,
-        description:
-          "floral violet liqueur with tart lemon and maraschino cherry",
+        description: {
+          en: "floral violet liqueur with tart lemon and maraschino cherry",
+          es: "licor de violeta floral con limón ácido y cereza maraschino",
+        },
         img: "/cocktails/aviation/0.25x.png",
       },
       {
         name: "Bacardi Cocktail",
         price: 9,
-        description: "exceptionally smooth and sweet, pomegranate and lime",
+        description: {
+          en: "exceptionally smooth and sweet, pomegranate and lime",
+          es: "granada y lima excepcionalmente suaves y dulces",
+        },
         img: "/cocktails/bacardicocktail/0.25x.png",
       },
       {
         name: "Bee's Knees",
         price: 9,
-        description: "a sweet punch of honey, lemon, and orange",
+        description: {
+          en: "a sweet punch of honey, lemon, and orange",
+          es: "un dulce golpe de miel, limón y naranja",
+        },
       },
       {
         name: "Black Mojito",
         price: 13,
-        description: "spiced black rum with refreshing sweet mint",
+        description: {
+          en: "spiced black rum with refreshing sweet mint",
+          es: "ron negro especiado con menta dulce fría",
+        },
         img: "/cocktails/blackmojito/0.25x.png",
       },
       {
         name: "Boulevardier",
         price: 10,
-        description:
-          "a classic negroni with whiskey in place of gin – resulting in a bitter spiced rye whiskey flavor",
+        description: {
+          en: "a classic negroni with whiskey in place of gin – resulting in a bitter spiced rye whiskey flavor",
+          es: "negroni clásico con whisky en lugar de ginebra – sabor amargo y especiado de rye",
+        },
         img: "/cocktails/boulevardier/0.25x.png",
       },
       {
         name: "Brandy Alexander",
         price: 9,
-        description: "dessert of brandy, creamy nutmeg and chocolate",
+        description: {
+          en: "dessert of brandy, creamy nutmeg and chocolate",
+          es: "postre cremoso de moscada y chocolate",
+        },
       },
       {
         name: "Cadillac Margarita",
         price: 15,
-        description:
-          "an elevated margarita made with top-shelf Volcan tequila blanco, Grand Marnier premium orange liqueur, and a salted rim",
+        description: {
+          en: "an elevated margarita made with top-shelf Volcan tequila blanco, Grand Marnier premium orange liqueur, and a salted rim",
+          es: "la margarita elevada: con tequila blanco Volcan de primera calidad, licor de naranja Grand Marnier, y un borde de sal",
+        },
       },
       {
         name: "Clover Club",
         price: 10,
-        description: "for raspberry lovers, fluffy, sweet, and tart",
+        description: {
+          en: "for raspberry lovers, fluffy, sweet, and tart",
+          es: "espumoso, dulce y ácido, para amantes de la frambuesa",
+        },
         egg: true,
       },
       {
         name: "Espresso Martini",
         price: 12,
-        description: "deep flavors of specialty espresso with a sweet finish",
+        description: {
+          en: "deep flavors of specialty espresso with a sweet finish",
+          es: "sabores profundos de espresso especial con un final dulce",
+        },
         egg: true,
       },
       {
         name: "French 75",
         price: 9,
-        description: "cava fortified with gin and sweet lemon flavors",
+        description: {
+          en: "cava fortified with gin and sweet lemon flavors",
+          es: "cava fortificado con ginebra y sabores dulces de limón",
+        },
       },
       {
         name: "Gin Fizz",
         price: 11,
-        description: "sweet and bubbly lemon with fluffy egg white",
+        description: {
+          en: "sweet and bubbly lemon with fluffy egg white",
+          es: "limón dulce y claras de huevo espumosas",
+        },
       },
       {
         name: "Grasshopper",
         price: 10,
-        description:
-          "after winning a 1918 New York cocktail contest, this mint chocolate dessert cocktail has continued to delight for over 106 years",
+        description: {
+          en: "after winning a 1918 New York cocktail contest, this mint chocolate dessert cocktail has continued to delight for over 106 years",
+          es: "tras ganar un concurso de cócteles en Nueva York en 1918, este cóctel de postre con chocolate y menta ha seguido deleitando durante más de 106 años",
+        },
       },
       {
         name: "Hemingway Special",
         price: 8,
-        description:
-          "a classic daquiri with a cherry twist and bright grapefruit",
+        description: {
+          en: "a classic daquiri with a cherry twist and bright grapefruit",
+          es: "un daiquirí clásico con un toque de cereza y pomelo brillante",
+        },
         img: "/cocktails/hemingwayspecial/0.25x.png",
       },
       {
         name: "Hot Buttered Rum",
         price: 5,
-        description:
-          "a small and sweet treat, the perfect nightcap. Hot black spiced rum with sweet butter, whipped cream, cinnamon, and nutmeg",
+        description: {
+          en: "a small and sweet treat, the perfect nightcap. Hot black spiced rum with sweet butter, whipped cream, cinnamon, and nutmeg",
+          es: "un pequeño y dulce capricho, la perfecta copa nocturna. Ron negro caliente especiado con mantequilla dulce, nata montada, canela y nuez moscada",
+        },
         seasonal: true,
       },
       {
         name: "Jack Rose",
         price: 12,
-        description: "sweet applejack and pomegranate",
+        description: {
+          en: "sweet applejack and pomegranate",
+          es: "applejack dulce y granada",
+        },
       },
       {
         name: "The Left Hand",
         price: 10,
-        description: "bourbon with notes of bitter dark chocolate",
+        description: {
+          en: "bourbon with notes of bitter dark chocolate",
+          es: "bourbon con notas de chocolate negro amargo",
+        },
       },
       {
         name: "Manhattan",
         price: 11,
-        description: "sweet bourbon with bitter notes",
+        description: {
+          en: "sweet bourbon with bitter notes",
+          es: "rye whiskey con matices dulces y amargos",
+        },
       },
       {
         name: "Man O' War",
         price: 8,
-        description: "bourbon with subtly spiced orange",
+        description: {
+          en: "bourbon with subtly spiced orange",
+          es: "bourbon con naranja especiada",
+        },
       },
       {
         name: "Margarita '42",
         price: 11,
-        description:
-          "a classic margarita: the perfect combination of tequila reposado and citric sweetness with a salted rim",
+        description: {
+          en: "a classic margarita: the perfect combination of tequila reposado and citric sweetness with a salted rim",
+          es: "una margarita clásica: la combinación perfecta de tequila reposado y dulzor cítrico con un borde de sal",
+        },
       },
       {
         name: "Martini Classic",
-        description:
-          "the classic dry martini – choose vodka or gin – clean, dirty, or filthy",
+        description: {
+          en: "the classic dry martini – choose vodka or gin – clean, dirty, or filthy",
+          es: "el martini seco clásico – elija su ginebra o vodka – limpio, sucio o muy sucio",
+        },
         img: "/cocktails/dirtymartini/0.25x.png",
       },
       {
         name: "Mayan Chocolate",
         price: 10,
-        description:
-          "a spicy chocolate experience reminiscent of a spicy mole sauce. Notes of cinnamon, chocolate, cherry, and chili pepper",
+        description: {
+          en: "a spicy chocolate experience reminiscent of a spicy mole sauce. Notes of cinnamon, chocolate, cherry, and chili pepper",
+          es: "un Harlow’s Original: una experiencia de chocolate picante que recuerda a una salsa mole picante. Notas de canela, chocolate, cereza y chile",
+        },
         seasonal: true,
       },
       {
         name: "Moscow Mule",
         price: 10,
-        description: "the kick of ginger beer paired with tart lime",
+        description: {
+          en: "the kick of ginger beer paired with tart lime",
+          es: "el sabor de ginger beer combinada con lima ácida",
+        },
       },
       {
         name: "Negroni",
         price: 9,
-        description: "herbal with slightly sweet undertones",
+        description: {
+          en: "herbal with slightly sweet undertones",
+          es: "herbal con matices un poco dulces",
+        },
       },
       {
         name: "New York Sour",
         price: 12,
-        description: "an update of the Whiskey Sour that incorporates red wine",
+        description: {
+          en: "an update of the Whiskey Sour that incorporates red wine",
+          es: "una revisión del Whiskey Sour que incorpora vino tinto",
+        },
         egg: true,
       },
       {
         name: "Old Fashioned",
         price: 12,
-        description: "sweet bourbon with bitter notes",
+        description: {
+          en: "sweet bourbon with bitter notes",
+          es: "bourbon dulce con notas amargas",
+        },
       },
       {
         name: "Orange Blossom",
         price: 9,
-        description:
-          "especially easy-to-drink: sweet orange juice with a bit of depth",
+        description: {
+          en: "especially easy-to-drink: sweet orange juice with a bit of depth",
+          es: "especialmente suave: zumo de naranja dulce con un poco de profundidad",
+        },
         img: "/cocktails/orangeblossom/0.25x.png",
       },
       {
         name: "Pisco Sour",
         price: 11,
-        description: "perfectly tart and foamy, made with El Gobernador Pisco",
+        description: {
+          en: "perfectly tart and foamy, made with El Gobernador Pisco",
+          es: "perfectamente ácido y espumoso, con Pisco El Gobernador",
+        },
         egg: true,
       },
       {
         name: "Ramos Gin Fizz",
         price: 13,
-        description:
-          "a large, creamy, and citrusy cocktail from 1888 featuring the aroma of orange blossom",
+        description: {
+          en: "a large, creamy, and citrusy cocktail from 1888 featuring the aroma of orange blossom",
+          es: "un cóctel grande, cremoso y cítrico de 1888 con aroma de azahar",
+        },
         egg: true,
       },
       {
         name: "Rusty Nail",
         price: 10,
-        description:
-          "once one of the most popular cocktails in America: scotch and drambuie complete this simple yet strong, scotch-heavy cocktail",
+        description: {
+          en: "once one of the most popular cocktails in America: scotch and drambuie complete this simple yet strong, scotch-heavy cocktail",
+          es: "en su día uno de los cócteles más populares de América: scotch y Drambuie completan este cóctel sencillo pero notablemente fuerte, cargado de scotch",
+        },
         img: "/cocktails/rustynail/0.25x.png",
       },
       {
         name: "Sazerac",
         price: 12,
-        description:
-          "the Official Cocktail of New Orleans marries the spice of rye whiskey with cognac and aromatic absinthe",
+        description: {
+          en: "the Official Cocktail of New Orleans marries the spice of rye whiskey with cognac and aromatic absinthe",
+          es: "el Cóctel Oficial de Nueva Orleans marida las especias del rye whiskey con coñac y la absenta aromática",
+        },
       },
       {
         name: "Sidecar",
         price: 12,
-        description:
-          "tart, dry orange with a sugared rim, made with Courvoisier VSOP premium cognac",
+        description: {
+          en: "tart, dry orange with a sugared rim, made with Courvoisier VSOP premium cognac",
+          es: "naranja ácida y seca con un borde azucarado, hecho con coñac premium Courvoisier VSOP",
+        },
       },
       {
         name: "Tom Collins",
         price: 9,
-        description: "bubbly with bittersweet lemon on ice",
+        description: {
+          en: "bubbly with bittersweet lemon on ice",
+          es: "burbujeante con limón amargo y dulce con hielo",
+        },
       },
       {
         name: "Valencian Suntan",
         price: 10,
-        description: "spiced orange with lemon",
+        description: {
+          en: "spiced orange with lemon",
+          es: "naranja especiada con limón",
+        },
       },
       {
         name: "Vesper Martini",
         price: 12,
-        description:
-          "an extra strong martini made famous by James Bond in 1953: gin, dry vermouth, and vodka",
+        description: {
+          en: "an extra strong martini made famous by James Bond in 1953: gin, dry vermouth, and vodka",
+          es: "martini extra fuerte que James Bond hizo famoso en 1953: gin, vermut seco y vodka",
+        },
       },
       {
         name: "Whiskey Sour",
         price: 11,
-        description: "the classic blend of fluffy, sweet, lemon, and bourbon",
+        description: {
+          en: "the classic blend of fluffy, sweet, lemon, and bourbon",
+          es: "la combinación clásica espumosa de bourbon y cítricos",
+        },
         egg: true,
         img: "/cocktails/whiskeysour/0.33x.png",
       },
       {
         name: "White Lady",
         price: 9,
-        description: "sweet lemonade with a small touch of orange",
+        description: {
+          en: "sweet lemonade with a small touch of orange",
+          es: "limón dulce con un poco de naranja",
+        },
       },
     ],
   },
