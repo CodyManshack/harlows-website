@@ -1,5 +1,5 @@
 <template>
-  <q-header class="bg-primary">
+  <q-header :class="['bg-primary', { 'is-hidden': isHidden }]">
     <q-toolbar class="app-toolbar justify-center">
       <q-btn
         flat
@@ -135,15 +135,19 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
 import menu from "src/assets/menu.js";
+import { useHeaderState } from "src/composables/useHeaderState.js";
 
 const router = useRouter();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
+const { setHeaderHidden } = useHeaderState();
 const drawer = ref(false);
 const isTransparent = ref(false);
 const scrollTarget = ref(null);
+const isHidden = ref(false);
+let lastScrollY = 0;
 
-// Listen for scroll to toggle transparency, using the real scroll container
+// Listen for scroll to toggle transparency and hide/show header
 const onScroll = () => {
   const el = scrollTarget.value;
   let scrollTop = 0;
@@ -156,7 +160,28 @@ const onScroll = () => {
       document.body.scrollTop ||
       0;
   }
+
+  // Update transparency
   isTransparent.value = scrollTop > 20;
+
+  // Hide/show header based on scroll direction
+  const scrollDelta = scrollTop - lastScrollY;
+
+  if (scrollTop < 100) {
+    // Always show header near top of page
+    isHidden.value = false;
+  } else if (scrollDelta > 10) {
+    // Scrolling down - hide header
+    isHidden.value = true;
+  } else if (scrollDelta < -10) {
+    // Scrolling up - show header
+    isHidden.value = false;
+  }
+
+  // Update global state
+  setHeaderHidden(isHidden.value);
+
+  lastScrollY = scrollTop;
 };
 
 onMounted(() => {
@@ -332,10 +357,16 @@ const goToMenuAnchor = async (anchorId) => {
 
 // Solid backgrounds by default
 .q-header.bg-primary {
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
+  transform: translateY(0);
 }
 .q-bar.bg-accent {
   transition: background-color 0.3s;
+}
+
+// Hide header on scroll
+.q-header.is-hidden {
+  transform: translateY(-100%);
 }
 
 // Shared transparency class for both

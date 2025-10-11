@@ -1,5 +1,11 @@
 <template>
-  <div :class="['cocktail-filter', { sticky: isSticky }]" ref="filterBar">
+  <div
+    :class="[
+      'cocktail-filter',
+      { sticky: isSticky, 'header-hidden': isHeaderHidden },
+    ]"
+    ref="filterBar"
+  >
     <div class="filter-content">
       <span class="filter-label">{{ t("filter.label") }}</span>
       <q-icon
@@ -63,6 +69,7 @@
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import FlavorProfileDots from "./FlavorProfileDots.vue";
+import { useHeaderState } from "src/composables/useHeaderState.js";
 
 const props = defineProps({
   cocktails: Array,
@@ -78,6 +85,7 @@ const selectedTags = ref([]);
 const parentSection = ref(null);
 
 const { t, locale } = useI18n();
+const { isHeaderHidden } = useHeaderState();
 
 const availableTags = computed(() => [
   { id: "seasonal", label: t("filter.tags.seasonal") },
@@ -464,6 +472,10 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   background: rgba(247, 245, 237, 0.98) !important;
   z-index: 1000 !important;
+}
+
+.cocktail-filter.sticky.header-hidden {
+  top: 0 !important; /* When header is hidden, move filter to top */
 }
 
 .filter-content {
