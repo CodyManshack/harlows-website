@@ -26,6 +26,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps({
   cocktails: Array,
@@ -53,12 +54,29 @@ const availableTags = [
   { id: "premium", label: "$12+" },
 ];
 
+// i18n-aware value resolver for strings or {en, es} objects
+const { locale } = useI18n();
+function trVal(value) {
+  if (value && typeof value === "object") {
+    const loc = (locale.value || "en").toString();
+    return value[loc] ?? value.en ?? Object.values(value)[0] ?? "";
+  }
+  return value ?? "";
+}
+function nameOf(item) {
+  return String(trVal(item?.name) || "");
+}
+function descOf(item) {
+  return String(trVal(item?.description) || "").toLowerCase();
+}
+
 const filteredCocktails = computed(() => {
+  const source = Array.isArray(props.cocktails) ? props.cocktails : [];
   if (selectedTags.value.length === 0) {
-    return [...props.cocktails].sort((a, b) => a.name.localeCompare(b.name));
+    return [...source].sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
   }
 
-  let filtered = [...props.cocktails];
+  let filtered = [...source];
 
   // Apply all selected tag filters (AND logic - cocktail must match ALL selected tags)
   filtered = filtered.filter((cocktail) => {
@@ -70,51 +88,51 @@ const filteredCocktails = computed(() => {
           return cocktail.egg;
         case "sweet":
           return (
-            cocktail.description?.toLowerCase().includes("sweet") ||
-            cocktail.description?.toLowerCase().includes("honey") ||
-            cocktail.description?.toLowerCase().includes("dessert") ||
-            cocktail.name.toLowerCase().includes("sweet")
+            descOf(cocktail).includes("sweet") ||
+            descOf(cocktail).includes("honey") ||
+            descOf(cocktail).includes("dessert") ||
+            nameOf(cocktail).toLowerCase().includes("sweet")
           );
         case "strong":
           return (
-            cocktail.description?.toLowerCase().includes("strong") ||
-            cocktail.description?.toLowerCase().includes("powerful") ||
-            cocktail.description?.toLowerCase().includes("whiskey") ||
-            cocktail.description?.toLowerCase().includes("bourbon") ||
-            cocktail.description?.toLowerCase().includes("rum") ||
+            descOf(cocktail).includes("strong") ||
+            descOf(cocktail).includes("powerful") ||
+            descOf(cocktail).includes("whiskey") ||
+            descOf(cocktail).includes("bourbon") ||
+            descOf(cocktail).includes("rum") ||
             cocktail.price >= 11
           );
         case "citrus":
           return (
-            cocktail.description?.toLowerCase().includes("lemon") ||
-            cocktail.description?.toLowerCase().includes("lime") ||
-            cocktail.description?.toLowerCase().includes("orange") ||
-            cocktail.description?.toLowerCase().includes("citrus") ||
-            cocktail.description?.toLowerCase().includes("grapefruit")
+            descOf(cocktail).includes("lemon") ||
+            descOf(cocktail).includes("lime") ||
+            descOf(cocktail).includes("orange") ||
+            descOf(cocktail).includes("citrus") ||
+            descOf(cocktail).includes("grapefruit")
           );
         case "fruity":
           return (
-            cocktail.description?.toLowerCase().includes("fruit") ||
-            cocktail.description?.toLowerCase().includes("berry") ||
-            cocktail.description?.toLowerCase().includes("cherry") ||
-            cocktail.description?.toLowerCase().includes("apple") ||
-            cocktail.description?.toLowerCase().includes("pomegranate") ||
-            cocktail.description?.toLowerCase().includes("raspberry")
+            descOf(cocktail).includes("fruit") ||
+            descOf(cocktail).includes("berry") ||
+            descOf(cocktail).includes("cherry") ||
+            descOf(cocktail).includes("apple") ||
+            descOf(cocktail).includes("pomegranate") ||
+            descOf(cocktail).includes("raspberry")
           );
         case "bitter":
           return (
-            cocktail.description?.toLowerCase().includes("bitter") ||
-            cocktail.description?.toLowerCase().includes("campari") ||
-            cocktail.name.toLowerCase().includes("negroni") ||
-            cocktail.name.toLowerCase().includes("americano")
+            descOf(cocktail).includes("bitter") ||
+            descOf(cocktail).includes("campari") ||
+            nameOf(cocktail).toLowerCase().includes("negroni") ||
+            nameOf(cocktail).toLowerCase().includes("americano")
           );
         case "spicy":
           return (
-            cocktail.description?.toLowerCase().includes("spicy") ||
-            cocktail.description?.toLowerCase().includes("spice") ||
-            cocktail.description?.toLowerCase().includes("chili") ||
-            cocktail.description?.toLowerCase().includes("pepper") ||
-            cocktail.description?.toLowerCase().includes("cinnamon")
+            descOf(cocktail).includes("spicy") ||
+            descOf(cocktail).includes("spice") ||
+            descOf(cocktail).includes("chili") ||
+            descOf(cocktail).includes("pepper") ||
+            descOf(cocktail).includes("cinnamon")
           );
         case "under10":
           return cocktail.price < 10;
@@ -126,8 +144,8 @@ const filteredCocktails = computed(() => {
     });
   });
 
-  // Always sort alphabetically
-  return filtered.sort((a, b) => a.name.localeCompare(b.name));
+  // Always sort alphabetically by localized/display name
+  return filtered.sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
 });
 
 // Functions for tag management

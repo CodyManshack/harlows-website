@@ -161,7 +161,8 @@ useMeta(() => ({
 }));
 
 const goToMenu = () => {
-  router.push({ path: "/menu" });
+  const loc = router.currentRoute.value.params.locale || locale.value || "es";
+  router.push({ name: "menu", params: { locale: loc } });
 };
 </script>
 

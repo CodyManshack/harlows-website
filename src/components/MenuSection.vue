@@ -6,7 +6,7 @@
 
     <!-- Cocktail Filter -->
     <div
-      v-if="title === 'cocktails' && items && items.length > 0"
+      v-if="sectionKey === 'cocktails' && items && items.length > 0"
       class="filter-container"
     >
       <!-- Sticky placeholder to prevent content jump -->
@@ -22,9 +22,14 @@
     <div v-if="items">
       <MenuItem
         v-for="item in displayItems"
-        :key="item.name"
-        :item="item"
+        :key="tr(item.name)"
+        :item="{
+          ...item,
+          name: tr(item.name),
+          description: tr(item.description),
+        }"
         :liquor="title === 'liquors'"
+        :sectionKey="sectionKey"
       />
     </div>
     <template v-if="subsections">
@@ -37,7 +42,7 @@
           class="menu-subsection-title-row"
           :class="{ 'has-sizes': getHeaderSizes(sub.items).length }"
         >
-          <h3 class="menu-subsection-title">{{ subkey }}</h3>
+          <h3 class="menu-subsection-title">{{ tr(sub.title ?? subkey) }}</h3>
           <template v-if="getHeaderSizes(sub.items).length">
             <div class="menu-subsection-sizes">
               <div class="menu-item-sizes-row menu-item-sizes-header">
@@ -45,22 +50,30 @@
                   v-for="size in getHeaderSizes(sub.items)"
                   :key="size"
                   class="menu-item-size-label"
-                  >{{ size }}</span
+                  >{{
+                    trSize(size, { sectionKey, subsectionKey: subkey })
+                  }}</span
                 >
               </div>
             </div>
           </template>
         </div>
         <div v-if="sub.subtitle" class="menu-subsection-subtitle">
-          {{ sub.subtitle }}
+          {{ tr(sub.subtitle) }}
         </div>
         <MenuItem
           v-for="item in sub.items"
-          :key="item.name"
-          :item="item"
+          :key="tr(item.name)"
+          :item="{
+            ...item,
+            name: tr(item.name),
+            description: tr(item.description),
+          }"
           :liquor="title === 'liquors' || subkey === 'gin'"
           :hideSizes="getHeaderSizes(sub.items).length > 0"
           :headerSizes="getHeaderSizes(sub.items)"
+          :sectionKey="sectionKey"
+          :subsectionKey="subkey"
         />
       </div>
     </template>
@@ -74,11 +87,45 @@ import CocktailFilter from "./CocktailFilter.vue";
 import DiamondDivider from "./DiamondDivider.vue";
 
 const props = defineProps({
-  title: String,
-  subtitle: String,
+  title: [String, Object],
+  subtitle: [String, Object],
   items: Array,
   subsections: Object,
+  sectionKey: String,
 });
+
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+function tr(value) {
+  if (value && typeof value === "object") {
+    const loc = (locale.value || "en").toString();
+    return value[loc] ?? value.en ?? Object.values(value)[0] ?? "";
+  }
+  return value ?? "";
+}
+
+// Translate standard size keys for display (keeps keys untouched in data)
+function trSize(key, ctx = {}) {
+  const loc = (locale.value || "en").toString();
+  const map = {
+    en: { glass: "glass", bottle: "bottle", small: "small", large: "large" },
+    es: { glass: "copa", bottle: "botella", small: "pequeña", large: "grande" },
+  };
+  // Spanish draft beers: small -> caña, large -> doble
+  if (
+    loc === "es" &&
+    ctx &&
+    ctx.sectionKey === "beers" &&
+    (ctx.subsectionKey === "draft" ||
+      String(ctx.subsectionKey || "")
+        .toLowerCase()
+        .includes("draft"))
+  ) {
+    if (key === "small") return "caña";
+    if (key === "large") return "doble";
+  }
+  return (map[loc] && map[loc][key]) || key;
+}
 
 const sectionRef = ref(null);
 const cocktailFilterRef = ref(null);
@@ -150,7 +197,7 @@ const sortCocktails = (items) => {
 };
 
 const displayItems = computed(() => {
-  if (props.title === "cocktails") {
+  if (props.sectionKey === "cocktails") {
     const items =
       filteredItems.value.length > 0 ? filteredItems.value : props.items || [];
     return sortCocktails(items);
@@ -167,7 +214,10 @@ const slugify = (str) =>
     .replace(/(^-|-$)+/g, "")
     .trim();
 
-const sectionAnchorId = computed(() => `menu-section-${slugify(props.title)}`);
+// Use stable, language-agnostic key for anchors so drawer links work in all languages
+const sectionAnchorId = computed(
+  () => `menu-section-${slugify(props.sectionKey)}`
+);
 
 // Returns ordered unique list of sizing keys across items for header display
 function getHeaderSizes(items) {

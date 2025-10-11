@@ -253,15 +253,26 @@ const dayHourCombos = computed(() => {
 });
 
 const toggleLanguage = () => {
-  locale.value = locale.value === "en" ? "es" : "en";
+  const next = locale.value === "en" ? "es" : "en";
+  locale.value = next;
+  const name = router.currentRoute.value.name;
+  const params = { ...router.currentRoute.value.params, locale: next };
+  const query = router.currentRoute.value.query;
+  if (name) {
+    router.push({ name, params, query });
+  } else {
+    router.push({ path: `/${next}` });
+  }
 };
 
 const goToHome = () => {
-  router.push({ name: "home" });
+  const loc = router.currentRoute.value.params.locale || locale.value || "es";
+  router.push({ name: "home", params: { locale: loc } });
 };
 
 const goToMenuPage = () => {
-  router.push({ name: "menu" });
+  const loc = router.currentRoute.value.params.locale || locale.value || "es";
+  router.push({ name: "menu", params: { locale: loc } });
 };
 
 const slugify = (str) =>
@@ -275,15 +286,22 @@ const slugify = (str) =>
 
 const menuSectionLinks = computed(() => {
   const sections = [];
-  Object.keys(menu).forEach((key) => {
-    sections.push({ label: key, anchor: `menu-section-${slugify(key)}` });
+  Object.entries(menu).forEach(([key, section]) => {
+    // Use label if present, else key. Support {en, es} object via t-like fallback
+    let label = section?.label ?? key;
+    if (label && typeof label === "object") {
+      const loc = (locale.value || "en").toString();
+      label = label[loc] ?? label.en ?? Object.values(label)[0] ?? key;
+    }
+    sections.push({ label, anchor: `menu-section-${slugify(key)}` });
   });
   return sections;
 });
 
 const goToMenuAnchor = async (anchorId) => {
+  const loc = router.currentRoute.value.params.locale || locale.value || "es";
   if (router.currentRoute.value.name !== "menu") {
-    await router.push({ name: "menu" });
+    await router.push({ name: "menu", params: { locale: loc } });
   }
   // Close the drawer after navigation
   drawer.value = false;

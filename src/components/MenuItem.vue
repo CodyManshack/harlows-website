@@ -30,7 +30,7 @@
               v-for="(price, size) in item.sizes"
               :key="size"
               class="menu-item-size-label"
-              >{{ size }}</span
+              >{{ trSize(size, { sectionKey, subsectionKey }) }}</span
             >
           </div>
           <div
@@ -41,7 +41,7 @@
               v-for="size in headerSizes"
               :key="'hdr-' + size"
               class="menu-item-size-label"
-              >{{ size }}</span
+              >{{ trSize(size, { sectionKey, subsectionKey }) }}</span
             >
           </div>
           <div class="menu-item-sizes-row menu-item-sizes-prices">
@@ -96,12 +96,38 @@
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
 const props = defineProps({
   item: Object,
   liquor: Boolean,
   hideSizes: Boolean,
   headerSizes: Array,
+  sectionKey: String,
+  subsectionKey: String,
 });
+
+const { locale } = useI18n();
+function trSize(key, ctx = {}) {
+  const loc = (locale.value || "en").toString();
+  const map = {
+    en: { glass: "glass", bottle: "bottle", small: "small", large: "large" },
+    es: { glass: "copa", bottle: "botella", small: "pequeña", large: "grande" },
+  };
+  // Spanish draft beers: small -> caña, large -> doble
+  if (
+    loc === "es" &&
+    ctx &&
+    ctx.sectionKey === "beers" &&
+    (ctx.subsectionKey === "draft" ||
+      String(ctx.subsectionKey || "")
+        .toLowerCase()
+        .includes("draft"))
+  ) {
+    if (key === "small") return "caña";
+    if (key === "large") return "doble";
+  }
+  return (map[loc] && map[loc][key]) || key;
+}
 </script>
 
 <style scoped>

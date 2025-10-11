@@ -1,18 +1,23 @@
 export default {
   tapas: {
+    label: { en: "tapas", es: "tapas" },
     subtitle: "",
     items: [
       {
-        name: "meat & cheese plate",
+        name: { en: "meat & cheese plate", es: "tabla de embutidos y quesos" },
         price: 14,
-        description:
-          "selection of 2 cured meats and 2 cheeses, served with olive oil and warm bread",
+        description: {
+          en: "selection of 2 cured meats and 2 cheeses, served with olive oil and warm bread",
+          es: "selección de 2 embutidos y 2 quesos, servido con aceite de oliva y pan caliente",
+        },
       },
       {
-        name: "cheese plate",
+        name: { en: "cheese plate", es: "tabla de quesos" },
         price: 8,
-        description:
-          "selection of 2 cheeses, served with olive oil and warm bread",
+        description: {
+          en: "selection of 2 cheeses, served with olive oil and warm bread",
+          es: "selección de 2 quesos, servido con aceite de oliva y pan caliente",
+        },
       },
       {
         name: "olives and feta",
@@ -46,11 +51,15 @@ export default {
     ],
   },
   cocktails: {
+    label: { en: "cocktails", es: "cócteles" },
     items: [
       {
-        name: "The Alamo",
+        name: { en: "The Alamo", es: "El Álamo" },
         price: 12,
-        description: "smoky with lime, grapefruit, and tequila",
+        description: {
+          en: "smoky with lime, grapefruit, and tequila",
+          es: "ahumado con lima, pomelo y tequila",
+        },
       },
       {
         name: "Amaretto Sour",
@@ -279,6 +288,7 @@ export default {
     ],
   },
   "alcohol-free cocktails": {
+    label: { en: "alcohol-free cocktails", es: "cócteles sin alcohol" },
     items: [
       {
         name: "Bumble Bee",
@@ -475,7 +485,9 @@ export default {
     },
   },
   beers: {
+    label: { en: "beers", es: "cervezas" },
     draft: {
+      label: { en: "draft", es: "de barril" },
       items: [
         {
           name: "Turia",
@@ -510,6 +522,7 @@ export default {
       ],
     },
     bottles: {
+      label: { en: "bottles", es: "botellas" },
       items: [
         {
           name: "Estrella",
