@@ -81,6 +81,7 @@ export default {
           en: "smoky with lime, grapefruit, and tequila",
           es: "ahumado con lima, pomelo y tequila",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Amaretto Sour",
@@ -91,6 +92,7 @@ export default {
         },
         egg: true,
         img: "/cocktails/amarettosour/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Americano",
@@ -99,6 +101,7 @@ export default {
           en: "bubbly and bitter with Campari",
           es: "burbujeante y amargo con Campari",
         },
+        profile: { boozy: 1, bitter: 5, sweet: 1, citrus: 0, tart: 0 },
       },
       {
         name: "Aviation",
@@ -108,6 +111,7 @@ export default {
           es: "licor de violeta floral con limón ácido y cereza maraschino",
         },
         img: "/cocktails/aviation/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Bacardi Cocktail",
@@ -117,6 +121,7 @@ export default {
           es: "granada y lima excepcionalmente suaves y dulces",
         },
         img: "/cocktails/bacardicocktail/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Bee's Knees",
@@ -125,6 +130,7 @@ export default {
           en: "a sweet punch of honey, lemon, and orange",
           es: "un dulce golpe de miel, limón y naranja",
         },
+        profile: { boozy: 1, bitter: 0, sweet: 4, citrus: 3, tart: 3 },
       },
       {
         name: "Black Mojito",
@@ -134,6 +140,7 @@ export default {
           es: "ron negro especiado con menta dulce fría",
         },
         img: "/cocktails/blackmojito/0.25x.png",
+        profile: { boozy: 2, bitter: 0, sweet: 4, citrus: 2, tart: 3 },
       },
       {
         name: "Boulevardier",
@@ -143,6 +150,7 @@ export default {
           es: "negroni clásico con whisky en lugar de ginebra – sabor amargo y especiado de rye",
         },
         img: "/cocktails/boulevardier/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Brandy Alexander",
@@ -151,6 +159,7 @@ export default {
           en: "dessert of brandy, creamy nutmeg and chocolate",
           es: "postre cremoso de moscada y chocolate",
         },
+        profile: { boozy: 2, bitter: 0, sweet: 5, citrus: 0, tart: 0 },
       },
       {
         name: "Cadillac Margarita",
@@ -159,6 +168,7 @@ export default {
           en: "an elevated margarita made with top-shelf Volcan tequila blanco, Grand Marnier premium orange liqueur, and a salted rim",
           es: "la margarita elevada: con tequila blanco Volcan de primera calidad, licor de naranja Grand Marnier, y un borde de sal",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Clover Club",
@@ -168,6 +178,7 @@ export default {
           es: "espumoso, dulce y ácido, para amantes de la frambuesa",
         },
         egg: true,
+        profile: { boozy: 1, bitter: 0, sweet: 4, citrus: 1, tart: 5 },
       },
       {
         name: "Espresso Martini",
@@ -177,6 +188,7 @@ export default {
           es: "sabores profundos de espresso especial con un final dulce",
         },
         egg: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "French 75",
@@ -185,6 +197,7 @@ export default {
           en: "cava fortified with gin and sweet lemon flavors",
           es: "cava fortificado con ginebra y sabores dulces de limón",
         },
+        profile: { boozy: 1, bitter: 0, sweet: 4, citrus: 2, tart: 3 },
       },
       {
         name: "Gin Fizz",
@@ -193,6 +206,7 @@ export default {
           en: "sweet and bubbly lemon with fluffy egg white",
           es: "limón dulce y claras de huevo espumosas",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Grasshopper",
@@ -201,6 +215,7 @@ export default {
           en: "after winning a 1918 New York cocktail contest, this mint chocolate dessert cocktail has continued to delight for over 106 years",
           es: "tras ganar un concurso de cócteles en Nueva York en 1918, este cóctel de postre con chocolate y menta ha seguido deleitando durante más de 106 años",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Hemingway Special",
@@ -210,6 +225,7 @@ export default {
           es: "un daiquirí clásico con un toque de cereza y pomelo brillante",
         },
         img: "/cocktails/hemingwayspecial/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Hot Buttered Rum",
@@ -219,6 +235,7 @@ export default {
           es: "un pequeño y dulce capricho, la perfecta copa nocturna. Ron negro caliente especiado con mantequilla dulce, nata montada, canela y nuez moscada",
         },
         seasonal: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Jack Rose",
@@ -227,6 +244,7 @@ export default {
           en: "sweet applejack and pomegranate",
           es: "applejack dulce y granada",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "The Left Hand",
@@ -235,6 +253,7 @@ export default {
           en: "bourbon with notes of bitter dark chocolate",
           es: "bourbon con notas de chocolate negro amargo",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Manhattan",
@@ -243,6 +262,7 @@ export default {
           en: "sweet bourbon with bitter notes",
           es: "rye whiskey con matices dulces y amargos",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Man O' War",
@@ -251,6 +271,7 @@ export default {
           en: "bourbon with subtly spiced orange",
           es: "bourbon con naranja especiada",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Margarita '42",
@@ -259,6 +280,7 @@ export default {
           en: "a classic margarita: the perfect combination of tequila reposado and citric sweetness with a salted rim",
           es: "una margarita clásica: la combinación perfecta de tequila reposado y dulzor cítrico con un borde de sal",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Martini Classic",
@@ -267,6 +289,7 @@ export default {
           es: "el martini seco clásico – elija su ginebra o vodka – limpio, sucio o muy sucio",
         },
         img: "/cocktails/dirtymartini/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Mayan Chocolate",
@@ -276,6 +299,7 @@ export default {
           es: "un Harlow’s Original: una experiencia de chocolate picante que recuerda a una salsa mole picante. Notas de canela, chocolate, cereza y chile",
         },
         seasonal: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Moscow Mule",
@@ -284,6 +308,7 @@ export default {
           en: "the kick of ginger beer paired with tart lime",
           es: "el sabor de ginger beer combinada con lima ácida",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Negroni",
@@ -292,6 +317,7 @@ export default {
           en: "herbal with slightly sweet undertones",
           es: "herbal con matices un poco dulces",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "New York Sour",
@@ -301,6 +327,7 @@ export default {
           es: "una revisión del Whiskey Sour que incorpora vino tinto",
         },
         egg: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Old Fashioned",
@@ -309,6 +336,7 @@ export default {
           en: "sweet bourbon with bitter notes",
           es: "bourbon dulce con notas amargas",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Orange Blossom",
@@ -318,6 +346,7 @@ export default {
           es: "especialmente suave: zumo de naranja dulce con un poco de profundidad",
         },
         img: "/cocktails/orangeblossom/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Pisco Sour",
@@ -327,6 +356,7 @@ export default {
           es: "perfectamente ácido y espumoso, con Pisco El Gobernador",
         },
         egg: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Ramos Gin Fizz",
@@ -336,6 +366,7 @@ export default {
           es: "un cóctel grande, cremoso y cítrico de 1888 con aroma de azahar",
         },
         egg: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Rusty Nail",
@@ -345,6 +376,7 @@ export default {
           es: "en su día uno de los cócteles más populares de América: scotch y Drambuie completan este cóctel sencillo pero notablemente fuerte, cargado de scotch",
         },
         img: "/cocktails/rustynail/0.25x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Sazerac",
@@ -353,6 +385,7 @@ export default {
           en: "the Official Cocktail of New Orleans marries the spice of rye whiskey with cognac and aromatic absinthe",
           es: "el Cóctel Oficial de Nueva Orleans marida las especias del rye whiskey con coñac y la absenta aromática",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Sidecar",
@@ -361,6 +394,7 @@ export default {
           en: "tart, dry orange with a sugared rim, made with Courvoisier VSOP premium cognac",
           es: "naranja ácida y seca con un borde azucarado, hecho con coñac premium Courvoisier VSOP",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Tom Collins",
@@ -369,6 +403,7 @@ export default {
           en: "bubbly with bittersweet lemon on ice",
           es: "burbujeante con limón amargo y dulce con hielo",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Valencian Suntan",
@@ -377,6 +412,7 @@ export default {
           en: "spiced orange with lemon",
           es: "naranja especiada con limón",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Vesper Martini",
@@ -385,6 +421,7 @@ export default {
           en: "an extra strong martini made famous by James Bond in 1953: gin, dry vermouth, and vodka",
           es: "martini extra fuerte que James Bond hizo famoso en 1953: gin, vermut seco y vodka",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Whiskey Sour",
@@ -395,6 +432,7 @@ export default {
         },
         egg: true,
         img: "/cocktails/whiskeysour/0.33x.png",
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "White Lady",
@@ -403,6 +441,7 @@ export default {
           en: "sweet lemonade with a small touch of orange",
           es: "limón dulce con un poco de naranja",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
     ],
   },
@@ -416,6 +455,7 @@ export default {
           en: "honey and citrus",
           es: "miel y cítricos",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 4, citrus: 3, tart: 3 },
       },
       {
         name: "Dapper Dan",
@@ -424,6 +464,7 @@ export default {
           en: "tropical with herbal and spiced notes",
           es: "tropical con notas herbáceas y especiadas",
         },
+        profile: { boozy: 0, bitter: 2, sweet: 5, citrus: 0, tart: 2 },
       },
       {
         name: "Garden Club",
@@ -433,6 +474,7 @@ export default {
           es: "un postre esponjoso de frambuesa con clara de huevo",
         },
         egg: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Shirley Temple",
@@ -441,6 +483,7 @@ export default {
           en: "bubbly sweet pomegranate",
           es: "burbujeante granada dulce",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Jeanne Collins",
@@ -449,6 +492,7 @@ export default {
           en: "bubbly with bittersweet lemon",
           es: "burbujeante con limón agridulce",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Lisa-Lou Belle",
@@ -457,6 +501,7 @@ export default {
           en: "sweet lemon and lime with spices",
           es: "limón y lima dulces con especias",
         },
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Lemon Fizz",
@@ -466,6 +511,7 @@ export default {
           es: "limón dulce y claras de huevo esponjosas",
         },
         egg: true,
+        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
     ],
   },
