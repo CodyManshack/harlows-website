@@ -100,11 +100,13 @@
 
 <script setup>
 import { computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { buildRestaurantJsonLd, absoluteUrl } from "src/utils/seo.js";
 import { useI18n } from "vue-i18n";
 import { useMeta, useQuasar } from "quasar";
 
 const router = useRouter();
+const route = useRoute();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
 
@@ -148,6 +150,8 @@ const headlineClasses = computed(() => [
 ]);
 
 // Optimize meta setup
+// absoluteUrl imported from utils
+
 useMeta(() => ({
   title: t("page.title") || "Harlow's Bar – Classic Cocktail Lounge",
   meta: {
@@ -158,6 +162,25 @@ useMeta(() => ({
         "Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.",
     },
   },
+  link: [
+    { rel: "alternate", hreflang: "es", href: absoluteUrl("/es") },
+    { rel: "alternate", hreflang: "en", href: absoluteUrl("/en") },
+    { rel: "alternate", hreflang: "x-default", href: absoluteUrl("/es") },
+    {
+      rel: "canonical",
+      href: absoluteUrl(`/${route.params.locale || locale.value || "es"}`),
+    },
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify(
+        buildRestaurantJsonLd({
+          locale: (route.params.locale || locale.value || "es").toString(),
+        })
+      ),
+    },
+  ],
 }));
 
 const goToMenu = () => {
