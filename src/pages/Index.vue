@@ -22,7 +22,7 @@
                     {{ t("hero.subtitle") }}
                   </h2>
                 </div>
-                <q-btn-dropdown
+                <q-btn
                   color="accent"
                   padding="lg xl"
                   :size="$q.screen.xs ? 'lg' : 'xl'"
@@ -30,90 +30,19 @@
                   no-caps
                   aria-label="View Menu"
                   class="hero-menu-btn"
+                  @click="goToMenu()"
                 >
-                  <template v-slot:label>
-                    <span
-                      class="text-h5 text-weight-regular capitalize-first-letter"
-                    >
-                      {{ t("menu.view") }}
-                    </span>
-                  </template>
-
-                  <q-list separator>
-                    <q-item
-                      v-for="lang in localeOptions"
-                      :key="lang.value"
-                      @click="goToMenu(lang.value)"
-                      v-close-popup
-                      clickable
-                      v-ripple
-                    >
-                      <q-item-section>
-                        <q-item-label class="text-h6 text-weight-regular">
-                          {{ lang.label }}
-                        </q-item-label>
-                      </q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-btn-dropdown>
+                  <span
+                    class="text-h5 text-weight-regular capitalize-first-letter"
+                  >
+                    {{ t("menu.view") }}
+                  </span>
+                </q-btn>
               </div>
             </div>
           </div>
         </div>
       </transition>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery-section q-py-xl">
-      <div class="row justify-center text-center">
-        <div class="col-xs-12">
-          <transition
-            appear
-            enter-active-class="animated fadeIn slower"
-            leave-active-class="animated fadeOut"
-            mode="out-in"
-          >
-            <h1
-              class="capitalize-first-letter text-h3 text-weight-regular text-italic"
-            >
-              {{ t("gallery.title") }}
-            </h1>
-          </transition>
-        </div>
-      </div>
-      <div class="masonry-grid-wrapper">
-        <div class="masonry-grid">
-          <div
-            v-for="image in galleryImages"
-            :key="image.id"
-            class="masonry-item"
-          >
-            <q-intersection once transition="fade" :threshold="0.1">
-              <q-card flat class="bg-transparent gallery-card">
-                <q-img
-                  :src="image.src"
-                  :srcset="image.srcset"
-                  :alt="image.alt"
-                  loading="lazy"
-                  spinner-color="accent"
-                  :ratio="4 / 3"
-                  fit="cover"
-                  class="gallery-image"
-                  sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  no-spinner-delay
-                >
-                  <div
-                    v-if="image.title"
-                    class="text-h5 absolute-bottom text-right image-title"
-                  >
-                    {{ image.title }}
-                  </div>
-                </q-img>
-              </q-card>
-            </q-intersection>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Contact Section -->
@@ -207,7 +136,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useMeta, useQuasar } from "quasar";
@@ -220,50 +149,6 @@ const { t, locale } = useI18n({ useScope: "global" });
 const localeOptions = [
   { value: "en", label: "English" },
   { value: "es", label: "Español" },
-];
-
-// Gallery image configurations
-const imageConfigs = [
-  {
-    basePath: "cocktails/dirtymartini",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Dirty Martini",
-  },
-  {
-    basePath: "cocktails/whiskeysour",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Whiskey Sour",
-  },
-  {
-    basePath: "cocktails/aviation",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Aviation",
-  },
-  {
-    basePath: "cocktails/orangeblossom",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Orange Blossom",
-  },
-  {
-    basePath: "cocktails/rustynail",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Rusty Nail",
-  },
-  {
-    basePath: "cocktails/amarettosour",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Amaretto Sour",
-  },
-  {
-    basePath: "cocktails/blackmojito",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Black Mojito",
-  },
-  {
-    basePath: "cocktails/hemingwayspecial",
-    sizes: { small: "0.1x", medium: "0.33x", large: "0.5x" },
-    title: "Hemingway Special",
-  },
 ];
 
 // Contact buttons data
@@ -288,11 +173,6 @@ const contactButtons = [
   },
 ];
 
-// Optimize computed property
-const menuPath = computed(
-  () => `${locale.value.toUpperCase()}_Harlow's Menu_08.10.pdf`
-);
-
 // Computed classes for better performance
 const heroContentClasses = computed(() => [
   $q.screen.xs ? "justify-between" : "justify-center",
@@ -302,31 +182,6 @@ const heroContentClasses = computed(() => [
 const headlineClasses = computed(() => [
   $q.screen.gt.xs ? "text-h2" : "text-h3",
   "text-weight-regular text-italic",
-]);
-
-// Gallery computed properties
-const galleryImages = computed(() => {
-  return imageConfigs.map((config, index) => {
-    // Use public/ folder and absolute paths for production reliability
-    const base = `/${config.basePath}`;
-    const srcPath = `${base}/${config.sizes.small}.png`;
-    const srcsetParts = Object.entries(config.sizes).map(
-      ([size, filename]) => `${base}/${filename}.png ${getScreenDensity(size)}`
-    );
-
-    return {
-      id: `image-${index}`,
-      src: srcPath,
-      srcset: srcsetParts.join(", "),
-      alt: config.title || `${config.basePath.split("/").pop()} image`,
-      title: config.title,
-    };
-  });
-});
-
-const gutterClasses = computed(() => [
-  "row",
-  $q.screen.xs ? "q-gutter-xs" : "q-gutter-md",
 ]);
 
 // Helper function for screen density
@@ -350,27 +205,8 @@ useMeta(() => ({
   },
 }));
 
-// Preload menu PDFs on component mount for instant access
-onMounted(() => {
-  // Preload both menu PDFs for instant viewing
-  const menuPaths = [
-    "EN_Harlow's Menu_08.10.pdf",
-    "ES_Harlow's Menu_08.10.pdf",
-  ];
-
-  menuPaths.forEach((path) => {
-    const link = document.createElement("link");
-    link.rel = "prefetch";
-    link.href = path;
-    link.as = "document";
-    document.head.appendChild(link);
-  });
-});
-
-const goToMenu = (lang) => {
-  locale.value = lang;
-  const routeData = router.resolve({ path: menuPath.value });
-  window.open(routeData.href, "_blank");
+const goToMenu = () => {
+  router.push({ path: "/menu" });
 };
 </script>
 
@@ -444,71 +280,10 @@ const goToMenu = (lang) => {
 
 .hero-menu-btn {
   margin-top: 1rem;
-} // Gallery section styles - restored with better spacing
-
-.gallery-section {
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-.masonry-grid-wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 0 1rem;
-}
-
-.masonry-grid {
-  column-count: 1;
-  column-gap: 1.5rem;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (min-width: 600px) {
-    column-count: 2;
-  }
-  @media (min-width: 900px) {
-    column-count: 3;
-  }
-  @media (min-width: 1200px) {
-    column-count: 4;
-  }
-}
-
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 1.5rem;
-  width: 100%;
-}
-
-.gallery-card {
-  border-radius: 24px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.gallery-image {
-  border-radius: 24px;
-}
-
-.image-title {
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  padding: 16px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 // Contact section styles - keeping original layout
 .contact-section {
   background-color: rgba(22, 52, 42, 0.03); // Using your primary color
-}
-
-// Add performance optimizations
-.animated {
-  animation-fill-mode: both;
 }
 </style>
