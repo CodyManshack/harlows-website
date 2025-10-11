@@ -99,29 +99,10 @@
 
       <div
         v-if="item.profile"
-        class="menu-item-profile horizontal-bars"
+        class="menu-item-profile"
         aria-label="Flavor profile"
       >
-        <div
-          v-for="cat in profileCats"
-          :key="cat.key"
-          class="hbar-container"
-          :class="'cat-color-' + cat.key"
-        >
-          <div
-            class="hbar-fill"
-            :style="{ width: barWidth(item.profile?.[cat.key]) }"
-          ></div>
-          <span
-            class="hbar-label"
-            :class="(item.profile?.[cat.key] ?? 0) >= 3 ? 'on-fill' : 'on-bg'"
-          >
-            {{ cat.label }}
-          </span>
-          <q-tooltip class="bg-black text-white">
-            {{ cat.label }}: {{ item.profile?.[cat.key] ?? 0 }} / 5
-          </q-tooltip>
-        </div>
+        <FlavorProfileDots :profile="item.profile" />
       </div>
     </div>
   </div>
@@ -130,6 +111,8 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
+import FlavorProfileDots from "./FlavorProfileDots.vue";
+
 const props = defineProps({
   item: Object,
   liquor: Boolean,
@@ -160,21 +143,6 @@ function trSize(key, ctx = {}) {
     if (key === "large") return "doble";
   }
   return (map[loc] && map[loc][key]) || key;
-}
-
-// Profile categories and helpers for compact micro-bar visualization
-const profileCats = computed(() => [
-  { key: "boozy", label: t("filter.tags.boozy") },
-  { key: "bitter", label: t("filter.tags.bitter") },
-  { key: "sweet", label: t("filter.tags.sweet") },
-  { key: "citrus", label: t("filter.tags.citrus") },
-  { key: "tart", label: t("filter.tags.tart") },
-]);
-
-function barWidth(val) {
-  const v = Math.max(0, Math.min(5, Number(val ?? 0)));
-  const pct = Math.round((v / 5) * 100);
-  return pct + "%";
 }
 </script>
 
@@ -297,67 +265,9 @@ function barWidth(val) {
   display: inline-block;
 }
 
-/* Flavor profile: single row of horizontal bars with labels inside */
-.menu-item-profile.horizontal-bars {
-  margin-top: 0.5rem;
-  display: flex;
-  width: 100%;
-  gap: 6px;
-  align-items: center;
-  flex-wrap: nowrap; /* keep single row */
-  overflow: hidden; /* prevent overflow beyond container */
-}
-.hbar-container {
-  flex: 1 1 0;
-  min-width: 0; /* allow shrink to fit */
-  height: 16px;
-  background: #f0f0f0;
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-}
-.hbar-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background: currentColor;
-}
-.hbar-label {
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.72rem;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  pointer-events: none;
-}
-.hbar-label.on-bg {
-  color: #333;
-}
-.hbar-label.on-fill {
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
-}
-/* Assign unique colors per category using class on container */
-.cat-color-boozy {
-  color: #6a1b9a;
-}
-.cat-color-bitter {
-  color: #d32f2f;
-}
-.cat-color-sweet {
-  color: #f39c12;
-}
-.cat-color-citrus {
-  color: #43a047;
-}
-.cat-color-tart {
-  color: #1976d2;
+/* Flavor profile spacing */
+.menu-item-profile {
+  margin-top: 1rem;
 }
 
 /* Item image (optimized for mobile) */

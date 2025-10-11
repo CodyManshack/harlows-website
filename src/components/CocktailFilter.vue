@@ -52,12 +52,17 @@
       </button>
       <!-- Debug button -->
     </div>
+    <!-- Flavor Profile Legend -->
+    <div class="flavor-profile-legend">
+      <FlavorProfileDots :profile="sampleProfile" :show-labels="true" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
+import FlavorProfileDots from "./FlavorProfileDots.vue";
 
 const props = defineProps({
   cocktails: Array,
@@ -88,6 +93,14 @@ const availableTags = computed(() => [
   { id: "under10", label: t("filter.tags.under10") },
   { id: "premium", label: t("filter.tags.premium") },
 ]);
+
+const sampleProfile = {
+  boozy: 3,
+  bitter: 2,
+  sweet: 4,
+  citrus: 2,
+  tart: 1,
+};
 
 // i18n-aware value resolver for strings or {en, es} objects
 function trVal(value) {
@@ -573,5 +586,14 @@ onBeforeUnmount(() => {
   height: 10px;
   border-radius: 2px;
   display: inline-block;
+}
+
+/* Flavor Profile Legend */
+.flavor-profile-legend {
+  background: rgba(248, 249, 250, 0.9);
+  border-top: 1px solid #e9ecef;
+  padding: 8px 12px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 </style>
