@@ -47,41 +47,6 @@
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
-      <div class="q-py-xl">
-        <div class="row justify-center items-center text-center">
-          <transition
-            appear
-            enter-active-class="animated fadeIn slower"
-            leave-active-class="animated fadeOut"
-          >
-            <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4">
-              <div
-                :class="[
-                  $q.screen.gt.sm ? 'text-h2' : 'text-h3',
-                  'text-italic',
-                ]"
-              >
-                {{ t("instagram.follow") }}
-              </div>
-              <q-btn
-                color="accent"
-                padding="sm lg"
-                :size="$q.screen.xs ? 'lg' : 'xl'"
-                no-caps
-                class="q-mt-lg"
-                icon-right="ion-logo-instagram"
-                href="https://www.instagram.com/harlows.bar/"
-                target="_blank"
-              >
-                <span
-                  class="text-h5 text-weight-regular capitalize-first-letter"
-                  >{{ t("instagram.view") }}</span
-                >
-              </q-btn>
-            </div>
-          </transition>
-        </div>
-      </div>
       <div class="q-pb-xl">
         <div class="row justify-center items-center text-center q-pb-lg">
           <div class="col-xs-12 col-md-8 col-lg-6 col-xl-4">
@@ -145,14 +110,14 @@ const router = useRouter();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
 
-// Move static data outside of reactive context
-const localeOptions = [
-  { value: "en", label: "English" },
-  { value: "es", label: "Español" },
-];
-
 // Contact buttons data
 const contactButtons = [
+  {
+    icon: "logo-instagram",
+    title: "instagram",
+    subtitle: "@harlows.bar",
+    href: "https://www.instagram.com/harlows.bar",
+  },
   {
     icon: "pin",
     title: "address",
@@ -184,15 +149,7 @@ const headlineClasses = computed(() => [
   "text-weight-regular text-italic",
 ]);
 
-// Helper function for screen density
-const getScreenDensity = (size) => {
-  const densityMap = {
-    "0.1x": "0.1x",
-    "0.33x": "0.33x",
-    "0.5x": "0.5x",
-  };
-  return densityMap[size] || "1x";
-}; // Optimize meta setup
+// Optimize meta setup
 useMeta(() => ({
   title: t("page.title") || "Harlow's Bar – Classic Cocktail Lounge",
   meta: {
