@@ -206,7 +206,7 @@ function trSize(key, ctx = {}) {
 .menu-item-name {
   font-size: 1.4rem;
   color: #000;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: capitalize;
   flex: 1;
 }
@@ -219,7 +219,7 @@ function trSize(key, ctx = {}) {
 }
 
 .menu-item-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #111;
   line-height: 1.4;
   margin-top: 0.3rem;
