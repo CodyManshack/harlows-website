@@ -206,7 +206,7 @@ export default {
           en: "sweet and bubbly lemon with fluffy egg white",
           es: "limón dulce y claras de huevo espumosas",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 0, sweet: 2, citrus: 2, tart: 2 },
       },
       {
         name: "Grasshopper",
@@ -215,7 +215,7 @@ export default {
           en: "after winning a 1918 New York cocktail contest, this mint chocolate dessert cocktail has continued to delight for over 106 years",
           es: "tras ganar un concurso de cócteles en Nueva York en 1918, este cóctel de postre con chocolate y menta ha seguido deleitando durante más de 106 años",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 1, bitter: 0, sweet: 5, citrus: 0, tart: 0 },
       },
       {
         name: "Hemingway Special",
@@ -225,7 +225,7 @@ export default {
           es: "un daiquirí clásico con un toque de cereza y pomelo brillante",
         },
         img: "/cocktails/hemingwayspecial/0.25x.png",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 0, sweet: 4, citrus: 5, tart: 5 },
       },
       {
         name: "Hot Buttered Rum",
@@ -253,7 +253,7 @@ export default {
           en: "bourbon with notes of bitter dark chocolate",
           es: "bourbon con notas de chocolate negro amargo",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 4, bitter: 5, sweet: 1, citrus: 0, tart: 1 },
       },
       {
         name: "Manhattan",
@@ -262,7 +262,7 @@ export default {
           en: "sweet bourbon with bitter notes",
           es: "rye whiskey con matices dulces y amargos",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 4, sweet: 1, citrus: 0, tart: 1 },
       },
       {
         name: "Man O' War",
@@ -317,7 +317,7 @@ export default {
           en: "herbal with slightly sweet undertones",
           es: "herbal con matices un poco dulces",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 3, sweet: 1, citrus: 0, tart: 1 },
       },
       {
         name: "New York Sour",
@@ -336,7 +336,7 @@ export default {
           en: "sweet bourbon with bitter notes",
           es: "bourbon dulce con notas amargas",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 2, sweet: 3, citrus: 3, tart: 2 },
       },
       {
         name: "Orange Blossom",
@@ -394,7 +394,7 @@ export default {
           en: "tart, dry orange with a sugared rim, made with Courvoisier VSOP premium cognac",
           es: "naranja ácida y seca con un borde azucarado, hecho con coñac premium Courvoisier VSOP",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 1, sweet: 3, citrus: 2, tart: 3 },
       },
       {
         name: "Tom Collins",
@@ -403,7 +403,7 @@ export default {
           en: "bubbly with bittersweet lemon on ice",
           es: "burbujeante con limón amargo y dulce con hielo",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 0, sweet: 3, citrus: 4, tart: 3 },
       },
       {
         name: "Valencian Suntan",
@@ -412,7 +412,7 @@ export default {
           en: "spiced orange with lemon",
           es: "naranja especiada con limón",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 2, sweet: 3, citrus: 5, tart: 5 },
       },
       {
         name: "Vesper Martini",
@@ -421,7 +421,7 @@ export default {
           en: "an extra strong martini made famous by James Bond in 1953: gin, dry vermouth, and vodka",
           es: "martini extra fuerte que James Bond hizo famoso en 1953: gin, vermut seco y vodka",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 0, sweet: 0, citrus: 1, tart: 0 },
       },
       {
         name: "Whiskey Sour",
@@ -441,7 +441,7 @@ export default {
           en: "sweet lemonade with a small touch of orange",
           es: "limón dulce con un poco de naranja",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 0, sweet: 4, citrus: 5, tart: 4 },
       },
     ],
   },
@@ -474,7 +474,7 @@ export default {
           es: "un postre esponjoso de frambuesa con clara de huevo",
         },
         egg: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 0, bitter: 0, sweet: 4, citrus: 1, tart: 5 },
       },
       {
         name: "Shirley Temple",
@@ -483,7 +483,7 @@ export default {
           en: "bubbly sweet pomegranate",
           es: "burbujeante granada dulce",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 0, bitter: 0, sweet: 5, citrus: 2, tart: 0 },
       },
       {
         name: "Jeanne Collins",
@@ -492,7 +492,7 @@ export default {
           en: "bubbly with bittersweet lemon",
           es: "burbujeante con limón agridulce",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 0, bitter: 0, sweet: 3, citrus: 4, tart: 3 },
       },
       {
         name: "Lisa-Lou Belle",
@@ -501,7 +501,7 @@ export default {
           en: "sweet lemon and lime with spices",
           es: "limón y lima dulces con especias",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 0, bitter: 2, sweet: 4, citrus: 4, tart: 3 },
       },
       {
         name: "Lemon Fizz",
@@ -511,7 +511,7 @@ export default {
           es: "limón dulce y claras de huevo esponjosas",
         },
         egg: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 0, bitter: 0, sweet: 2, citrus: 2, tart: 2 },
       },
     ],
   },
