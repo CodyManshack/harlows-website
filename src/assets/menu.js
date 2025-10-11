@@ -412,38 +412,59 @@ export default {
       {
         name: "Bumble Bee",
         price: 7,
-        description: "honey and citrus",
+        description: {
+          en: "honey and citrus",
+          es: "miel y cítricos",
+        },
       },
       {
         name: "Dapper Dan",
         price: 7,
-        description: "tropical with herbal and spiced notes",
+        description: {
+          en: "tropical with herbal and spiced notes",
+          es: "tropical con notas herbáceas y especiadas",
+        },
       },
       {
         name: "Garden Club",
         price: 8,
-        description: "a raspberry dessert made fluffy by egg white",
+        description: {
+          en: "a raspberry dessert made fluffy by egg white",
+          es: "un postre esponjoso de frambuesa con clara de huevo",
+        },
         egg: true,
       },
       {
         name: "Shirley Temple",
         price: 6,
-        description: "bubbly sweet pomegranate",
+        description: {
+          en: "bubbly sweet pomegranate",
+          es: "burbujeante granada dulce",
+        },
       },
       {
         name: "Jeanne Collins",
         price: 7,
-        description: "bubbly with bittersweet lemon",
+        description: {
+          en: "bubbly with bittersweet lemon",
+          es: "burbujeante con limón agridulce",
+        },
       },
       {
         name: "Lisa-Lou Belle",
         price: 7,
-        description: "sweet lemon and lime with spices",
+        description: {
+          en: "sweet lemon and lime with spices",
+          es: "limón y lima dulces con especias",
+        },
       },
       {
         name: "Lemon Fizz",
         price: 8,
-        description: "sweet and bubbly lemon with fluffy egg white",
+        description: {
+          en: "sweet and bubbly lemon with fluffy egg white",
+          es: "limón dulce y claras de huevo esponjosas",
+        },
         egg: true,
       },
     ],
