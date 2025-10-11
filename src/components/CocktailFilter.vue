@@ -36,6 +36,7 @@ const emit = defineEmits(["filter-change", "sticky-change"]);
 const filterBar = ref(null);
 const isSticky = ref(false);
 const isVisible = ref(false);
+const nextTitleVisible = ref(false);
 const selectedTags = ref([]);
 const parentSection = ref(null);
 
@@ -176,6 +177,11 @@ onMounted(() => {
   const sectionTitle = parentSection.value.querySelector(".menu-section-title");
   const cocktailItems = parentSection.value.querySelectorAll(".menu-item");
   const lastCocktailItem = cocktailItems[cocktailItems.length - 1];
+  // Attempt to find the next section's title for early hide behavior
+  const nextSectionTitle =
+    parentSection.value.nextElementSibling?.querySelector?.(
+      ".menu-section-title"
+    );
 
   console.log("Section title found:", !!sectionTitle);
   console.log("Last cocktail item found:", !!lastCocktailItem);
@@ -243,9 +249,10 @@ onMounted(() => {
           entry.boundingClientRect.top
         );
 
-        // If last item is visible or above viewport, we're still in/near the cocktails section
+        // If last item is visible or above viewport AND the next title is not visible, we're in the cocktails section
         const inSection =
-          entry.isIntersecting || entry.boundingClientRect.top > 0;
+          (entry.isIntersecting || entry.boundingClientRect.top > 0) &&
+          !nextTitleVisible.value;
 
         console.log("🔍 Section visibility logic:", {
           isIntersecting: entry.isIntersecting,
@@ -301,13 +308,45 @@ onMounted(() => {
       },
       {
         threshold: 0,
-        rootMargin: "200px 0px 200px 0px", // Show filter 200px before/after section
+        // Tighten margins so we leave the section earlier (no generous buffer)
+        rootMargin: "0px 0px 0px 0px",
       }
     );
+
+    // Optional: Observer for the NEXT section title — when it reaches the top zone, hide filter early
+    let nextTitleObserver = null;
+    if (nextSectionTitle) {
+      nextTitleObserver = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          // Consider the next title visible in the top zone (account for AppBar) when intersecting with negative top margin
+          nextTitleVisible.value = entry.isIntersecting;
+
+          if (nextTitleVisible.value) {
+            // Ensure filter is not visible nor sticky when next section title arrives
+            if (isVisible.value || isSticky.value) {
+              isVisible.value = false;
+              if (isSticky.value) {
+                isSticky.value = false;
+                emit("sticky-change", false);
+              }
+            }
+          }
+        },
+        {
+          threshold: 0,
+          rootMargin: "-96px 0px 0px 0px", // Hide once next title reaches under AppBar
+        }
+      );
+    }
 
     // Start observing
     titleObserver.observe(sectionTitle);
     sectionEndObserver.observe(lastCocktailItem);
+    if (nextSectionTitle && nextTitleObserver) {
+      nextTitleObserver.observe(nextSectionTitle);
+      filterBar.value._nextTitleObserver = nextTitleObserver;
+    }
 
     // Store observers for cleanup
     filterBar.value._titleObserver = titleObserver;
@@ -329,6 +368,9 @@ onBeforeUnmount(() => {
 
   if (filterBar.value?._sectionEndObserver) {
     filterBar.value._sectionEndObserver.disconnect();
+  }
+  if (filterBar.value?._nextTitleObserver) {
+    filterBar.value._nextTitleObserver.disconnect();
   }
 });
 </script>
