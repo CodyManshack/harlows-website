@@ -695,6 +695,7 @@ export default {
     },
   },
   "Water & sodas": {
+    label: { en: "water & sodas", es: "agua y refrescos" },
     items: [
       {
         name: "Sparkling water",
@@ -729,6 +730,7 @@ export default {
     ],
   },
   coffee: {
+    label: { en: "coffee", es: "café" },
     items: [
       {
         name: "Espresso",
@@ -745,7 +747,9 @@ export default {
     ],
   },
   wine: {
+    label: { en: "wine", es: "vino" },
     red: {
+      label: { en: "red", es: "tinto" },
       items: [
         {
           name: "828",
@@ -757,13 +761,16 @@ export default {
           type: "Cabernet Sauvignon",
           year: 2019,
           location: "Valle del Aconcagua, Chile",
-          description:
-            "dry and powerful, its balanced acidity and fruity flavor include notes of black fruits and hints of spice and tobacco",
+          description: {
+            en: "dry and powerful, its balanced acidity and fruity flavor include notes of black fruits and hints of spice and tobacco",
+            es: "seco y potente, su acidez equilibrada y su sabor afrutado incluyen notas de frutas negras y toques de especias y tabaco",
+          },
           sizes: { bottle: 50 },
         },
       ],
     },
     white: {
+      label: { en: "white", es: "blanco" },
       items: [
         {
           name: "Murviedro",
@@ -775,8 +782,10 @@ export default {
           type: "Albariño",
           year: 2021,
           location: "Galicia, Spain",
-          description:
-            "aromas of tropical fruits with floral and balsamic notes. The ocean breeze of the Salnés Valley imparts a slightly saline character",
+          description: {
+            en: "aromas of tropical fruits with floral and balsamic notes. The ocean breeze of the Salnés Valley imparts a slightly saline character",
+            es: "aromas de frutas tropicales con notas florales y balsámicas. La brisa oceánica del Valle de Salnés imparte un carácter ligeramente salino",
+          },
           sizes: { bottle: 30 },
         },
       ],
@@ -793,20 +802,25 @@ export default {
           type: "Gran reserva brut",
           year: 2017,
           location: "Sant Sadurní d´Anoia, Spain",
-          description:
-            "A pale yellow sparkling wine with ripe fruit aromas and a fine, creamy palate. The embodiment of elegance, it pairs well with Iberian ham.",
+          description: {
+            en: "a pale yellow sparkling wine with ripe fruit aromas and a fine, creamy palate. The embodiment of elegance, it pairs well with Iberian ham",
+            es: "un vino espumoso de color amarillo pálido con aromas de frutas maduras y un paladar fino y cremoso. La encarnación de la elegancia, marida bien con jamón ibérico",
+          },
           sizes: { bottle: 42 },
         },
       ],
     },
     champagne: {
+      label: { en: "champagne", es: "champán" },
       items: [
         {
           name: "Moët & Chandon",
           type: "Brut Impérial",
           location: "Champagne, France",
-          description:
-            "Enchanting and lively, characterized by a sparkling bouquet of green apple, citrus fruit, and delicate white flowers. Its palate reveals fine bubbles, refreshing notes of lemon, and subtle hints of nuttiness, offering a captivating blend of flavors.",
+          description: {
+            en: "enchanting and lively, characterized by a sparkling bouquet of green apple, citrus fruit, and delicate white flowers. Its palate reveals fine bubbles, refreshing notes of lemon, and subtle hints of nuttiness, offering a captivating blend of flavors",
+            es: "encantador y vivaz, caracterizado por un brillante ramo de manzana verde, cítricos y delicadas flores blancas. Su paladar revela burbujas finas, notas refrescantes de limón y sutiles toques de frutos secos, ofreciendo una cautivadora mezcla de sabores",
+          },
           sizes: { bottle: 80 },
         },
       ],
@@ -817,8 +831,10 @@ export default {
           name: "4xavos",
           type: "Red Vermouth",
           location: "Valencia, Spain",
-          description:
-            "Traditional fortified wine made from red Grenache grapes and 21 herbs",
+          description: {
+            en: "traditional fortified wine made from red Grenache grapes and 21 herbs",
+            es: "vino generoso de garnacha tinta y 21 hierbas",
+          },
           sizes: { glass: 5, bottle: 20 },
         },
       ],
@@ -828,16 +844,20 @@ export default {
         {
           name: "Mirabeau X",
           location: "Côtes de Provence, France",
-          description:
-            "Delicate dry notes of frangipane, vineyard peach and citrus. An airy and mouthwatering rosé and a great example of this stunning Provence appellation",
+          description: {
+            en: "delicate dry notes of frangipane, vineyard peach and citrus. An airy and mouthwatering rosé and a great example of this stunning Provence appellation",
+            es: "delicadas notas secas de frangipane, melocotón de viña y cítricos. Un rosado aireado y apetitoso y un gran ejemplo de esta impresionante denominación de Provenza",
+          },
           sizes: { glass: 7, bottle: 26 },
         },
         {
           name: "The Pale",
           year: 2021,
           location: "Côtes de Provence, France",
-          description:
-            "A delicious blend of Grenache, Cinsault, and Syrah that grow on the Mediterranean coast where the salty, sun-drenched soils give the wine a crisp yet fruity character",
+          description: {
+            en: "a delicious blend of Grenache, Cinsault, and Syrah that grow on the Mediterranean coast where the salty, sun-drenched soils give the wine a crisp yet fruity character",
+            es: "una mezcla deliciosa de garnacha, cinsault y syrah que crecen en la costa mediterránea, donde la tierra salada y bañada por el sol le dan al vino un carácter seco pero afrutado",
+          },
           sizes: { glass: 9, bottle: 33 },
         },
       ],
