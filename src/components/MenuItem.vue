@@ -99,23 +99,29 @@
 
       <div
         v-if="item.profile"
-        class="menu-item-profile compact-bars"
+        class="menu-item-profile horizontal-bars"
         aria-label="Flavor profile"
       >
-        <span
+        <div
           v-for="cat in profileCats"
           :key="cat.key"
-          class="bar-container"
+          class="hbar-container"
           :class="'cat-color-' + cat.key"
         >
-          <i
-            class="bar-vertical"
-            :style="{ height: barHeight(item.profile?.[cat.key]) }"
-          ></i>
+          <div
+            class="hbar-fill"
+            :style="{ width: barWidth(item.profile?.[cat.key]) }"
+          ></div>
+          <span
+            class="hbar-label"
+            :class="(item.profile?.[cat.key] ?? 0) >= 3 ? 'on-fill' : 'on-bg'"
+          >
+            {{ cat.label }}
+          </span>
           <q-tooltip class="bg-black text-white">
             {{ cat.label }}: {{ item.profile?.[cat.key] ?? 0 }} / 5
           </q-tooltip>
-        </span>
+        </div>
       </div>
     </div>
   </div>
@@ -165,7 +171,7 @@ const profileCats = computed(() => [
   { key: "tart", label: t("filter.tags.tart") },
 ]);
 
-function barHeight(val) {
+function barWidth(val) {
   const v = Math.max(0, Math.min(5, Number(val ?? 0)));
   const pct = Math.round((v / 5) * 100);
   return pct + "%";
@@ -291,28 +297,51 @@ function barHeight(val) {
   display: inline-block;
 }
 
-/* Minimal flavor profile micro-bars: single-row tiny vertical bars */
-.menu-item-profile.compact-bars {
+/* Flavor profile: single row of horizontal bars with labels inside */
+.menu-item-profile.horizontal-bars {
   margin-top: 0.5rem;
-  display: inline-flex;
-  gap: 8px;
-  align-items: flex-end;
-  min-height: 16px;
+  display: flex;
+  width: 100%;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: nowrap; /* keep single row */
+  overflow: hidden; /* prevent overflow beyond container */
 }
-.bar-container {
-  width: 8px;
+.hbar-container {
+  flex: 1 1 0;
+  min-width: 0; /* allow shrink to fit */
   height: 16px;
-  background: #e6e6e6;
-  border-radius: 2px;
+  background: #f0f0f0;
+  border-radius: 3px;
   position: relative;
-  display: inline-flex;
-  align-items: flex-end;
   overflow: hidden;
 }
-.bar-vertical {
-  width: 100%;
+.hbar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
   background: currentColor;
-  border-radius: 2px 2px 0 0;
+}
+.hbar-label {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+.hbar-label.on-bg {
+  color: #333;
+}
+.hbar-label.on-fill {
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 /* Assign unique colors per category using class on container */
 .cat-color-boozy {
