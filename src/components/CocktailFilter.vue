@@ -590,10 +590,12 @@ onBeforeUnmount(() => {
 
 /* Flavor Profile Legend */
 .flavor-profile-legend {
-  background: rgba(248, 249, 250, 0.9);
+  background: rgba(247, 245, 237, 0.95);
   border-top: 1px solid #e9ecef;
-  padding: 8px 12px;
+  padding: 12px 12px 0 12px;
+  margin-top: 12px;
   max-width: 900px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
