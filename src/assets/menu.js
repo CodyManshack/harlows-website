@@ -470,8 +470,10 @@ export default {
     ],
   },
   liquors: {
-    subtitle: "priced per glass",
+    label: { en: "liquors", es: "licóres" },
+    subtitle: { en: "priced per glass", es: "precio por vaso" },
     gin: {
+      label: { en: "gin", es: "ginebra" },
       items: [
         {
           name: "Tanqueray",
@@ -516,6 +518,7 @@ export default {
       ],
     },
     rum: {
+      label: { en: "rum", es: "ron" },
       items: [
         {
           name: "Bacardi",
@@ -632,22 +635,28 @@ export default {
         {
           name: "Turia",
           type: "Märzen",
-          description:
-            "a toasted Oktoberfest Märzen beer brewed in Valencia since 1947",
+          description: {
+            en: "a toasted Oktoberfest Märzen beer brewed in Valencia since 1947",
+            es: "una cerveza tostada de Oktoberfest/Märzen elaborada en Valencia desde 1947",
+          },
           sizes: { small: 2, large: 3.5 },
         },
         {
           name: "Complot",
           type: "IPA",
-          description:
-            "a Mediterranean version of the classic IPA. Intense notes of hops with delicate hints of copper and orange",
+          description: {
+            en: "a Mediterranean version of the classic IPA. Intense notes of hops with delicate hints of copper and orange",
+            es: "una versión mediterránea de la clásica IPA. Notas intensas de lúpulo con delicados toques de cobre y naranja",
+          },
           sizes: { small: 2.5, large: 4 },
         },
       ],
     },
     "local • Emi": {
-      subtitle:
-        "Emi craft beers are local, from our very own neighborhood (el botànic)!",
+      subtitle: {
+        en: "Emi craft beers are local, from our very own neighborhood (el botànic)!",
+        es: "¡Las cervezas artesanales Emi son locales, de nuestro propio barrio (el botànic)!",
+      },
       items: [
         {
           name: "La Canya",
@@ -667,14 +676,19 @@ export default {
         {
           name: "Estrella",
           type: "Lager",
-          description: "a Mediterranean lager brewed in Barcelona since 1876",
+          description: {
+            en: "a Mediterranean lager brewed in Barcelona since 1876",
+            es: "una cerveza lager mediterránea elaborada en Barcelona desde 1876",
+          },
           price: 3.5,
         },
         {
           name: "Free Damm (non-alcoholic)",
           type: "Lager",
-          description:
-            "an alcohol-free lager with a light head and an intense aroma",
+          description: {
+            en: "an alcohol-free lager with a light head and an intense aroma",
+            es: "un lager sin alcohol con una textura ligera y un aroma intenso",
+          },
           price: 3.5,
         },
       ],
@@ -703,6 +717,10 @@ export default {
       {
         name: "Ginger Ale",
         price: 3,
+      },
+      {
+        name: "Ginger Beer",
+        price: 2,
       },
       {
         name: "Casera Gaseosa",
