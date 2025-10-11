@@ -11,14 +11,12 @@ export default {
   menu: {
     view: "Ver la carta",
     condensed: "La carta",
-    boozy: "Alcohol marcado",
     meta: {
       title: "Carta – Harlow's Bar",
       description:
         "Descubre nuestra carta de cócteles, cervezas y vinos con especiales de temporada.",
     },
   },
-  tart: "Ácido",
   navigation: {
     navigate: "Navegar",
     contact: "Contactar",
@@ -51,6 +49,7 @@ export default {
     label: "Filtrar por:",
     clear: "Limpiar",
     tags: {
+      boozy: "Alcohol",
       seasonal: "De temporada",
       egg: "Clara de huevo",
       sweet: "Dulce",
@@ -61,6 +60,7 @@ export default {
       spicy: "Picante",
       under10: "Menos de 10€",
       premium: "+12€",
+      tart: "Ácido",
     },
   },
 };

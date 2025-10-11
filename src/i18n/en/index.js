@@ -11,14 +11,12 @@ export default {
   menu: {
     view: "View the menu",
     condensed: "Menu",
-    boozy: "Boozy",
     meta: {
       title: "Menu – Harlow's Bar",
       description:
         "Explore our cocktail, beer, and wine menu with seasonal specials.",
     },
   },
-  tart: "Tart",
   navigation: {
     navigate: "Navigate",
     contact: "Contact",
@@ -51,6 +49,7 @@ export default {
     label: "Filter by:",
     clear: "Clear All",
     tags: {
+      boozy: "Boozy",
       seasonal: "Seasonal",
       egg: "Egg White",
       sweet: "Sweet",
@@ -61,6 +60,7 @@ export default {
       spicy: "Spicy",
       under10: "Under $10",
       premium: "$12+",
+      tart: "Tart",
     },
   },
 };
