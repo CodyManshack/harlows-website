@@ -52,7 +52,7 @@
       <div
         :class="[
           $q.screen.gt.sm ? 'text-body1' : 'text-caption',
-          'row no-wrap full-width justify-evenly hours-content',
+          'row no-wrap full-width justify-evenly hours-content items-center',
         ]"
       >
         <div
