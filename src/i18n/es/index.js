@@ -49,7 +49,7 @@ export default {
     label: "Filtrar por:",
     clear: "Limpiar",
     tags: {
-      boozy: "Alcohol",
+      boozy: "Fuerte",
       seasonal: "De temporada",
       egg: "Clara de huevo",
       sweet: "Dulce",
