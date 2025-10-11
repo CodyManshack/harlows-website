@@ -11,12 +11,14 @@ export default {
   menu: {
     view: "View the menu",
     condensed: "Menu",
+    boozy: "Boozy",
     meta: {
       title: "Menu – Harlow's Bar",
       description:
         "Explore our cocktail, beer, and wine menu with seasonal specials.",
     },
   },
+  tart: "Tart",
   navigation: {
     navigate: "Navigate",
     contact: "Contact",

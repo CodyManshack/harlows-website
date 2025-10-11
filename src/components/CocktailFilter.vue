@@ -2,6 +2,37 @@
   <div :class="['cocktail-filter', { sticky: isSticky }]" ref="filterBar">
     <div class="filter-content">
       <span class="filter-label">{{ t("filter.label") }}</span>
+      <q-icon
+        name="help_outline"
+        size="18px"
+        class="legend-icon q-ml-sm text-grey-7"
+        aria-label="Legend"
+      >
+        <q-tooltip class="bg-black text-white">
+          <div class="legend-container">
+            <div class="legend-row">
+              <span class="legend-swatch" style="background: #6a1b9a"></span>
+              {{ t("filter.tags.boozy") }}
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch" style="background: #d32f2f"></span>
+              {{ t("filter.tags.bitter") }}
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch" style="background: #f39c12"></span>
+              {{ t("filter.tags.sweet") }}
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch" style="background: #43a047"></span>
+              {{ t("filter.tags.citrus") }}
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch" style="background: #1976d2"></span>
+              {{ t("filter.tags.tart") }}
+            </div>
+          </div>
+        </q-tooltip>
+      </q-icon>
       <div class="filter-tags">
         <button
           v-for="tag in availableTags"
@@ -46,12 +77,14 @@ const { t, locale } = useI18n();
 const availableTags = computed(() => [
   { id: "seasonal", label: t("filter.tags.seasonal") },
   { id: "egg", label: t("filter.tags.egg") },
+  { id: "boozy", label: t("filter.tags.boozy") },
   { id: "sweet", label: t("filter.tags.sweet") },
   { id: "strong", label: t("filter.tags.strong") },
   { id: "citrus", label: t("filter.tags.citrus") },
   { id: "fruity", label: t("filter.tags.fruity") },
   { id: "bitter", label: t("filter.tags.bitter") },
   { id: "spicy", label: t("filter.tags.spicy") },
+  { id: "tart", label: t("filter.tags.tart") },
   { id: "under10", label: t("filter.tags.under10") },
   { id: "premium", label: t("filter.tags.premium") },
 ]);
@@ -78,6 +111,9 @@ const filteredCocktails = computed(() => {
   }
 
   let filtered = [...source];
+
+  // Threshold for flavor profile matching (0-5 scale). A value ≥ threshold counts as matching
+  const threshold = 3;
 
   // Apply all selected tag filters (AND logic - cocktail must match ALL selected tags)
   filtered = filtered.filter((cocktail) => {
@@ -116,29 +152,24 @@ const filteredCocktails = computed(() => {
           return cocktail.seasonal;
         case "egg":
           return cocktail.egg;
+        case "boozy":
+          return (cocktail.profile?.boozy ?? 0) >= threshold;
         case "sweet":
-          return words("sweet").some(
-            (w) =>
-              descOf(cocktail).includes(w) ||
-              nameOf(cocktail).toLowerCase().includes(w)
-          );
+          return (cocktail.profile?.sweet ?? 0) >= threshold;
         case "strong":
-          return (
-            words("strong").some((w) => descOf(cocktail).includes(w)) ||
-            cocktail.price >= 11
-          );
+          return (cocktail.profile?.boozy ?? 0) >= threshold; // map 'strong' to 'boozy'
         case "citrus":
-          return words("citrus").some((w) => descOf(cocktail).includes(w));
+          return (cocktail.profile?.citrus ?? 0) >= threshold;
         case "fruity":
+          // no dedicated profile key; fall back to keyword match
           return words("fruity").some((w) => descOf(cocktail).includes(w));
         case "bitter":
-          return (
-            words("bitter").some((w) => descOf(cocktail).includes(w)) ||
-            nameOf(cocktail).toLowerCase().includes("negroni") ||
-            nameOf(cocktail).toLowerCase().includes("americano")
-          );
+          return (cocktail.profile?.bitter ?? 0) >= threshold;
         case "spicy":
+          // not part of profile; keep keyword matching
           return words("spicy").some((w) => descOf(cocktail).includes(w));
+        case "tart":
+          return (cocktail.profile?.tart ?? 0) >= threshold;
         case "under10":
           return cocktail.price < 10;
         case "premium":
@@ -524,5 +555,23 @@ onBeforeUnmount(() => {
     font-size: 0.75rem;
     padding: 0.25rem 0.6rem;
   }
+}
+
+/* Legend tooltip styles */
+.legend-container {
+  display: grid;
+  gap: 4px;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
 }
 </style>

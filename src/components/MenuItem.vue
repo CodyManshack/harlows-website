@@ -91,12 +91,76 @@
         {{ item.description }}
       </div>
       <div v-if="item.seasonal" class="menu-item-seasonal">Seasonal</div>
+      <div
+        v-if="item.profile"
+        class="menu-item-profile compact-bars"
+        aria-label="Flavor profile"
+      >
+        <span
+          v-for="cat in profileCats"
+          :key="cat.key"
+          class="bar-container"
+          :class="'cat-color-' + cat.key"
+        >
+          <i
+            class="bar-vertical"
+            :style="{ height: barHeight(item.profile?.[cat.key]) }"
+          ></i>
+          <q-tooltip class="bg-black text-white">
+            {{ cat.label }}: {{ item.profile?.[cat.key] ?? 0 }} / 5
+          </q-tooltip>
+        </span>
+        <span class="profile-legend-icon" aria-label="Legend">
+          <q-icon name="help_outline" size="16px" class="text-grey-7">
+            <q-tooltip class="bg-black text-white">
+              <div class="legend-container">
+                <div class="legend-row">
+                  <span
+                    class="legend-swatch"
+                    style="background: #6a1b9a"
+                  ></span>
+                  {{ t("filter.tags.boozy") }}
+                </div>
+                <div class="legend-row">
+                  <span
+                    class="legend-swatch"
+                    style="background: #d32f2f"
+                  ></span>
+                  {{ t("filter.tags.bitter") }}
+                </div>
+                <div class="legend-row">
+                  <span
+                    class="legend-swatch"
+                    style="background: #f39c12"
+                  ></span>
+                  {{ t("filter.tags.sweet") }}
+                </div>
+                <div class="legend-row">
+                  <span
+                    class="legend-swatch"
+                    style="background: #43a047"
+                  ></span>
+                  {{ t("filter.tags.citrus") }}
+                </div>
+                <div class="legend-row">
+                  <span
+                    class="legend-swatch"
+                    style="background: #1976d2"
+                  ></span>
+                  {{ t("filter.tags.tart") }}
+                </div>
+              </div>
+            </q-tooltip>
+          </q-icon>
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useI18n } from "vue-i18n";
+import { computed } from "vue";
 const props = defineProps({
   item: Object,
   liquor: Boolean,
@@ -106,7 +170,7 @@ const props = defineProps({
   subsectionKey: String,
 });
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 function trSize(key, ctx = {}) {
   const loc = (locale.value || "en").toString();
   const map = {
@@ -127,6 +191,21 @@ function trSize(key, ctx = {}) {
     if (key === "large") return "doble";
   }
   return (map[loc] && map[loc][key]) || key;
+}
+
+// Profile categories and helpers for compact micro-bar visualization
+const profileCats = computed(() => [
+  { key: "boozy", label: t("filter.tags.boozy") },
+  { key: "bitter", label: t("filter.tags.bitter") },
+  { key: "sweet", label: t("filter.tags.sweet") },
+  { key: "citrus", label: t("filter.tags.citrus") },
+  { key: "tart", label: t("filter.tags.tart") },
+]);
+
+function barHeight(val) {
+  const v = Math.max(0, Math.min(5, Number(val ?? 0)));
+  const pct = Math.round((v / 5) * 100);
+  return pct + "%";
 }
 </script>
 
@@ -244,6 +323,70 @@ function trSize(key, ctx = {}) {
   background: rgba(243, 156, 18, 0.1);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
+  display: inline-block;
+}
+
+/* Minimal flavor profile micro-bars: single-row tiny vertical bars */
+.menu-item-profile.compact-bars {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  gap: 8px;
+  align-items: flex-end;
+  min-height: 16px;
+}
+.bar-container {
+  width: 8px;
+  height: 16px;
+  background: #e6e6e6;
+  border-radius: 2px;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.bar-vertical {
+  width: 100%;
+  background: currentColor;
+  border-radius: 2px 2px 0 0;
+}
+/* Assign unique colors per category using class on container */
+.cat-color-boozy {
+  color: #6a1b9a;
+}
+.cat-color-bitter {
+  color: #d32f2f;
+}
+.cat-color-sweet {
+  color: #f39c12;
+}
+.cat-color-citrus {
+  color: #43a047;
+}
+.cat-color-tart {
+  color: #1976d2;
+}
+
+/* Legend tooltip (reuse styles similar to filter legend) */
+.profile-legend-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  cursor: help;
+}
+.legend-container {
+  display: grid;
+  gap: 4px;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
   display: inline-block;
 }
 
