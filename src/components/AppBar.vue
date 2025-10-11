@@ -78,7 +78,7 @@
   <q-drawer
     v-model="drawer"
     class="bg-primary"
-    :width="$q.screen.gt.sm ? 240 : 180"
+    :width="$q.screen.gt.sm ? 280 : 240"
     dark
     behavior="mobile"
   >
@@ -177,12 +177,9 @@ onUnmounted(() => {
     target.removeEventListener("scroll", onScroll);
   }
 });
-const menuPath = computed(() => {
-  return `${locale.value.toUpperCase()}_Harlow's Menu_08.10.pdf`;
-});
 import { businessHoursByDay, jsDayToKey } from "./businessHours.js";
 
-// List of days in display order (edit as needed)
+// List of days in display order
 const displayDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 function groupDaysByHours() {
