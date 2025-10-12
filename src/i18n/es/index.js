@@ -65,6 +65,7 @@ export default {
       under10: "Menos de 10€",
       premium: "+12€",
       tart: "Ácido",
+      idontlikealcohol: "Tienes algo en lo que no se note el alcohol?",
     },
   },
 };

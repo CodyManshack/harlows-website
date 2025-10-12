@@ -127,7 +127,7 @@ export default {
           es: "granada y lima excepcionalmente suaves y dulces",
         },
         img: "/cocktails/bacardicocktail",
-        tags: ["fruity"],
+        tags: ["fruity", "idontlikealcohol"],
         profile: { boozy: 1, bitter: 0, sweet: 5, citrus: 2, tart: 1 },
       },
       {
@@ -366,7 +366,7 @@ export default {
         },
         img: "/cocktails/orangeblossom",
         profile: { boozy: 0, bitter: 2, sweet: 3, citrus: 1, tart: 1 },
-        tags: ["fruity"],
+        tags: ["fruity", "idontlikealcohol"],
       },
       {
         name: "Pisco Sour",

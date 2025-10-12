@@ -143,6 +143,7 @@ const availableTags = computed(() => [
   { id: "egg", label: t("filter.tags.egg") },
   { id: "under10", label: t("filter.tags.under10") },
   { id: "premium", label: t("filter.tags.premium") },
+  { id: "idontlikealcohol", label: t("filter.tags.idontlikealcohol") },
 ]);
 
 const sampleProfile = {
@@ -214,6 +215,9 @@ const filteredCocktails = computed(() => {
         case "not2sweet": {
           const sweet = cocktail.profile?.sweet;
           return sweet === 2 || sweet === 3;
+        }
+        case "idontlikealcohol": {
+          return cocktail.tags?.includes("idontlikealcohol") ?? false;
         }
         case "bitter":
           return (cocktail.profile?.bitter ?? 0) >= threshold;

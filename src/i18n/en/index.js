@@ -65,6 +65,7 @@ export default {
       under10: "Under $10",
       premium: "$12+",
       tart: "Tart",
+      idontlikealcohol: "Do you have anything where I can't taste the alcohol?",
     },
   },
 };
