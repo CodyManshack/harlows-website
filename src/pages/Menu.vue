@@ -20,8 +20,6 @@ import {
 const { t, locale } = useI18n({ useScope: "global" });
 const route = useRoute();
 
-// absoluteUrl provided by utils; fallback handled there
-
 useMeta(() => ({
   title: t("menu.meta.title") || "Menu – Harlow's Bar",
   meta: {
