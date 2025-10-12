@@ -567,8 +567,10 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .cocktail-filter {
-  background: rgba(247, 245, 237, 0.95);
+  --cf-bg: rgba(247, 245, 237, 0.95);
+  background: var(--cf-bg);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid #e8e8e8;
   padding: 1rem 0;
   margin: 0;
@@ -584,7 +586,9 @@ onBeforeUnmount(() => {
     margin: 0 !important;
     border-radius: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    background: rgba(247, 245, 237, 0.98) !important;
+    background: var(--cf-bg) !important; // keep same background as non-sticky
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 1000 !important;
   }
 
@@ -662,7 +666,7 @@ onBeforeUnmount(() => {
   }
 
   &__legend {
-    background: rgba(247, 245, 237, 0.95);
+    background: transparent; // avoid double alpha over parent bg
     border-top: 1px solid #e9ecef;
     padding: 12px 12px 0 12px;
     margin-top: 12px;
