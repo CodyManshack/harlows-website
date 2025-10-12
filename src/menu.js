@@ -127,6 +127,7 @@ export default {
           es: "granada y lima excepcionalmente suaves y dulces",
         },
         img: "/cocktails/bacardicocktail",
+        tags: ["fruity"],
         profile: { boozy: 1, bitter: 0, sweet: 5, citrus: 2, tart: 1 },
       },
       {
@@ -137,6 +138,7 @@ export default {
           es: "un dulce golpe de miel, limón y naranja",
         },
         profile: { boozy: 1, bitter: 0, sweet: 4, citrus: 3, tart: 3 },
+        tags: ["fruity"],
       },
       {
         name: "Black Mojito",
@@ -186,6 +188,7 @@ export default {
           es: "espumoso, dulce y ácido, para amantes de la frambuesa",
         },
         egg: true,
+        tags: ["fruity"],
         profile: { boozy: 1, bitter: 0, sweet: 4, citrus: 1, tart: 5 },
       },
       {
@@ -255,6 +258,7 @@ export default {
           en: "sweet applejack and pomegranate",
           es: "applejack dulce y granada",
         },
+        tags: ["fruity"],
         profile: { boozy: 3, bitter: 0, sweet: 4, citrus: 3, tart: 3 },
         img: "/cocktails/jackrose",
       },
@@ -362,6 +366,7 @@ export default {
         },
         img: "/cocktails/orangeblossom",
         profile: { boozy: 0, bitter: 2, sweet: 3, citrus: 1, tart: 1 },
+        tags: ["fruity"],
       },
       {
         name: "Pisco Sour",
@@ -430,6 +435,7 @@ export default {
         },
         profile: { boozy: 3, bitter: 2, sweet: 3, citrus: 5, tart: 5 },
         img: "/cocktails/valenciansuntan",
+        tags: ["fruity"],
       },
       {
         name: "Vesper Martini",

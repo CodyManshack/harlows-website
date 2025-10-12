@@ -140,7 +140,6 @@ const availableTags = computed(() => [
   { id: "seasonal", label: t("filter.tags.seasonal") },
   { id: "egg", label: t("filter.tags.egg") },
   { id: "fruity", label: t("filter.tags.fruity") },
-  { id: "spicy", label: t("filter.tags.spicy") },
   { id: "under10", label: t("filter.tags.under10") },
   { id: "premium", label: t("filter.tags.premium") },
 ]);
@@ -195,19 +194,6 @@ const filteredCocktails = computed(() => {
   // Apply all selected tag filters (AND logic - cocktail must match ALL selected tags)
   filtered = filtered.filter((cocktail) => {
     return selectedTags.value.every((tag) => {
-      const loc = (locale.value || "en").toString();
-      const kw = {
-        fruity: {
-          en: ["fruit", "berry", "cherry", "apple", "pomegranate", "raspberry"],
-          es: ["fruta", "baya", "cereza", "manzana", "granada", "frambuesa"],
-        },
-        spicy: {
-          en: ["spicy", "spice", "chili", "pepper", "cinnamon"],
-          es: ["picante", "especia", "chile", "pimienta", "canela"],
-        },
-      };
-      const words = (key) =>
-        (kw[key]?.[loc] || kw[key]?.en || []).map((w) => w.toLowerCase());
       switch (tag) {
         case "seasonal":
           return cocktail.seasonal;
@@ -221,14 +207,11 @@ const filteredCocktails = computed(() => {
           return (cocktail.profile?.boozy ?? 0) >= threshold; // map 'strong' to 'boozy'
         case "citrus":
           return (cocktail.profile?.citrus ?? 0) >= threshold;
-        case "fruity":
-          // no dedicated profile key; fall back to keyword match
-          return words("fruity").some((w) => descOf(cocktail).includes(w));
+        case "fruity": {
+          return cocktail.tags?.includes("fruity") ?? false;
+        }
         case "bitter":
           return (cocktail.profile?.bitter ?? 0) >= threshold;
-        case "spicy":
-          // not part of profile; keep keyword matching
-          return words("spicy").some((w) => descOf(cocktail).includes(w));
         case "tart":
           return (cocktail.profile?.tart ?? 0) >= threshold;
         case "under10":
