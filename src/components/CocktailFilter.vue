@@ -600,7 +600,7 @@ onBeforeUnmount(() => {
   &__legend {
     background: transparent; // avoid double alpha over parent bg
     border-top: 1px solid #e9ecef;
-    padding: 12px 12px 0 12px;
+    padding-top: 12px;
     margin-top: 12px;
     max-width: 900px;
     margin-left: auto;
