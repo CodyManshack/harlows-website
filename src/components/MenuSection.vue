@@ -27,7 +27,7 @@
       class="menu-items"
     >
       <MenuItem
-        v-for="item in displayItems"
+        v-for="(item, idx) in displayItems"
         :key="tr(item.name)"
         :item="{
           ...item,
@@ -36,6 +36,7 @@
         }"
         :liquor="sectionKey === 'liquors'"
         :sectionKey="sectionKey"
+        :priority="firstSection && idx === firstImageIdx"
       />
     </transition-group>
     <!-- Bottom sentinel for cocktails section to stop sticky filter before next section title -->
@@ -106,6 +107,7 @@ const props = defineProps({
   items: Array,
   subsections: Object,
   sectionKey: String,
+  firstSection: { type: Boolean, default: false },
 });
 
 import { useI18n } from "vue-i18n";
@@ -247,6 +249,15 @@ const displayItems = computed(() => {
   return props.items || [];
 });
 
+// Determine index of first item with an image for LCP priority
+const firstImageIdx = computed(() => {
+  const arr = Array.isArray(displayItems.value) ? displayItems.value : [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] && arr[i].img) return i;
+  }
+  return -1;
+});
+
 const slugify = (str) =>
   (str || "")
     .toString()
@@ -299,6 +310,9 @@ function getHeaderSizes(items) {
   margin-bottom: 3rem;
   /* Keep title visible when navigating to anchor (account for header+bar) */
   scroll-margin-top: 112px;
+  /* Defer rendering of off-screen sections to improve FCP/LCP */
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
 }
 
 .menu-section-title {

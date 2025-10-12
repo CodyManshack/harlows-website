@@ -1,13 +1,14 @@
 <template>
   <div class="menu-container">
     <MenuSection
-      v-for="(sectionData, key) in menu"
+      v-for="(sectionData, key, idx) in menu"
       :key="'section-' + key"
       :title="tr(sectionData.label ?? sectionData.title ?? key)"
       :subtitle="tr(sectionData.subtitle)"
       :items="sectionData.items"
       :subsections="getSubsections(sectionData)"
       :sectionKey="key"
+      :firstSection="idx === 0"
     />
   </div>
 </template>

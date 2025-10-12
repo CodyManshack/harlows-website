@@ -7,7 +7,11 @@
           :srcset="imgSrcset"
           sizes="(min-width: 768px) 360px, 100vw"
           :alt="displayName"
-          loading="lazy"
+          :loading="priority ? 'eager' : 'lazy'"
+          :fetchpriority="priority ? 'high' : 'auto'"
+          decoding="async"
+          :width="intrinsicSize"
+          :height="intrinsicSize"
           class="menu-item__image menu-notch"
         />
       </template>
@@ -15,9 +19,9 @@
         <q-img
           :src="item.img"
           :alt="displayName"
-          loading="lazy"
-          ratio="1"
-          fit="cover"
+          :loading="priority ? 'eager' : 'lazy'"
+          :fetchpriority="priority ? 'high' : 'auto'"
+          decoding="async"
           class="menu-item__image menu-notch"
         />
       </template>
@@ -146,6 +150,7 @@ const props = defineProps({
   headerSizes: Array,
   sectionKey: String,
   subsectionKey: String,
+  priority: { type: Boolean, default: false },
 });
 
 const { locale, t } = useI18n();
@@ -241,6 +246,9 @@ function trSize(key, ctx = {}) {
 
 <style scoped lang="scss">
 .menu-item {
+  /* Defer off-screen rendering for faster FCP/LCP while reserving space */
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
   padding: 1rem 0;
   border-bottom: 1px dotted #d4d4d4;
   margin-bottom: 0.5rem;
