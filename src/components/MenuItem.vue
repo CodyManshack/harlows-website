@@ -107,6 +107,16 @@
               >
             </q-icon>
           </span>
+          <span
+            v-if="item.spicy"
+            class="menu-item__allergen menu-item__allergen--spicy"
+          >
+            <q-icon name="mdi-chili-mild" size="1.1rem" style="opacity: 0.95">
+              <q-tooltip class="bg-black text-white"
+                >Allergen: Contains Spicy Ingredients</q-tooltip
+              >
+            </q-icon>
+          </span>
           <span v-if="item.seasonal" class="menu-item__seasonal">
             {{ t("filter.tags.seasonal") }}
           </span>
@@ -341,6 +351,9 @@ function trSize(key, ctx = {}) {
     &--egg i,
     &--dairy i {
       color: $accent;
+    }
+    &--spicy i {
+      color: #d32f2f;
     }
   }
 
