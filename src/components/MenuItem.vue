@@ -195,15 +195,14 @@ async function buildSrcsetFromFolder(folderPath) {
   const existing = checks.filter(Boolean);
   if (existing.length) {
     imgSrcset.value = existing.map((c) => `${c.url} ${c.width}w`).join(", ");
-    // Choose a reasonable default src (middle size if available)
-    const preferred =
-      existing.find((c) => c.width === 800) ||
-      existing[Math.floor(existing.length / 2)];
-    imgBaseSrc.value = preferred.url;
+    // Prefer a mobile-friendly default src (400) or the smallest available
+    const sorted = [...existing].sort((a, b) => a.width - b.width);
+    const preferred = existing.find((c) => c.width === 400) || sorted[0];
+    imgBaseSrc.value = preferred?.url || sorted[0].url;
   } else {
-    // fallback: point to folder basename 800
+    // Fallback: use 400 as the default guess for mobile-first
     imgSrcset.value = "";
-    imgBaseSrc.value = `${normalized}/${base}-800.jpg`;
+    imgBaseSrc.value = `${normalized}/${base}-400.jpg`;
   }
 }
 
