@@ -17,7 +17,10 @@
           <i
             v-for="n in 5"
             :key="n"
-            :class="['dot', { filled: n <= (cat.value || 0) }]"
+            :class="[
+              'dot',
+              { filled: isActive(cat.key) ? n <= 5 : n <= (cat.value || 0) },
+            ]"
           ></i>
         </div>
       </div>
@@ -113,6 +116,8 @@ const profileCategories = computed(() => [
 }
 .dot-column.active .dot-label {
   text-decoration: underline;
+  font-weight: 600;
+  color: #222;
 }
 .dot-label {
   font-size: 0.65rem;
@@ -137,6 +142,13 @@ const profileCategories = computed(() => [
 }
 .dot.filled {
   background: currentColor;
+}
+
+.dot-column.active .dots {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.03);
 }
 
 /* Color classes */

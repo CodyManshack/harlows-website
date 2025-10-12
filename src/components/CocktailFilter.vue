@@ -230,6 +230,8 @@ function onFlavorPick(key) {
   emit("sort-change", [...activeSortKeys.value]);
 }
 
+// To clear sorting, click active flavor(s) again to toggle them off
+
 // Watch for filter changes and emit to parent
 watch(
   selectedTags,
