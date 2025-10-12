@@ -10,8 +10,6 @@
           :loading="priority ? 'eager' : 'lazy'"
           :fetchpriority="priority ? 'high' : 'auto'"
           decoding="async"
-          :width="intrinsicSize"
-          :height="intrinsicSize"
           class="menu-item__image menu-notch"
         />
       </template>
