@@ -56,6 +56,7 @@ export default {
       seasonal: "Seasonal",
       egg: "Egg White",
       sweet: "Sweet",
+      not2sweet: "Not Too Sweet",
       strong: "Strong",
       citrus: "Citrus",
       fruity: "Fruity",

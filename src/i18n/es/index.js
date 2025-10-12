@@ -56,6 +56,7 @@ export default {
       seasonal: "De temporada",
       egg: "Clara de huevo",
       sweet: "Dulce",
+      not2sweet: "No demasiado dulce",
       strong: "Fuerte",
       citrus: "Cítrico",
       fruity: "Afrutado",

@@ -138,8 +138,9 @@ function debounce(fn, delay) {
 
 const availableTags = computed(() => [
   { id: "seasonal", label: t("filter.tags.seasonal") },
-  { id: "egg", label: t("filter.tags.egg") },
   { id: "fruity", label: t("filter.tags.fruity") },
+  { id: "not2sweet", label: t("filter.tags.not2sweet") },
+  { id: "egg", label: t("filter.tags.egg") },
   { id: "under10", label: t("filter.tags.under10") },
   { id: "premium", label: t("filter.tags.premium") },
 ]);
@@ -209,6 +210,10 @@ const filteredCocktails = computed(() => {
           return (cocktail.profile?.citrus ?? 0) >= threshold;
         case "fruity": {
           return cocktail.tags?.includes("fruity") ?? false;
+        }
+        case "not2sweet": {
+          const sweet = cocktail.profile?.sweet;
+          return sweet === 2 || sweet === 3;
         }
         case "bitter":
           return (cocktail.profile?.bitter ?? 0) >= threshold;
