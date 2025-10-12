@@ -285,7 +285,7 @@ function getHeaderSizes(items) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 /* Subsection subtitle */
 .menu-subsection-subtitle {
   font-size: 1.05rem;
@@ -335,13 +335,13 @@ function getHeaderSizes(items) {
 
 .section-divider :deep(.left-line),
 .section-divider :deep(.right-line) {
-  border-top: 1px solid #4c2a26 !important; /* accent */
+  border-top: 1px solid $h-bitter !important; /* accent */
 }
 
 .section-divider :deep(.small-diamond-left),
 .section-divider :deep(.small-diamond-right),
 .section-divider :deep(.large-diamond) {
-  border: 1px solid #4c2a26 !important; /* accent */
+  border: 1px solid $h-bitter !important; /* accent */
   z-index: 10;
 }
 
