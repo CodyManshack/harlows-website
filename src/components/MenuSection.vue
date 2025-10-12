@@ -358,7 +358,7 @@ function getHeaderSizes(items) {
   color: #000;
   text-transform: capitalize;
   font-weight: 500;
-  border-left: 4px solid var(--q-primary);
+  border-left: 4px solid var(--q-accent);
   padding-left: 1rem;
   margin: 0;
   flex: 1;
