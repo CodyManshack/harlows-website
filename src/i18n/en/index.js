@@ -48,6 +48,9 @@ export default {
   filter: {
     label: "Filter by:",
     clear: "Clear All",
+    legend: {
+      caption: "Legend – tap a category to sort",
+    },
     tags: {
       boozy: "Boozy",
       seasonal: "Seasonal",

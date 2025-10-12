@@ -1,5 +1,5 @@
 <template>
-  <div class="flavor-profile-dots">
+  <div class="flavor-profile-dots" :class="{ legend: legend }">
     <div class="profile-row">
       <div
         v-for="cat in profileCategories"
@@ -38,6 +38,12 @@ const props = defineProps({
     default: () => ({}),
   },
   showLabels: {
+    type: Boolean,
+    default: false,
+  },
+  // When true, render with a subtle, muted style to indicate this is a legend,
+  // not the actual values for a specific drink.
+  legend: {
     type: Boolean,
     default: false,
   },
@@ -166,5 +172,27 @@ const profileCategories = computed(() => [
 }
 .cat-color-tart {
   color: $h-tart;
+}
+
+/* Legend mode tweaks: same layout/size, but visually distinct and slightly muted */
+.flavor-profile-dots.legend {
+  .dot {
+    background: transparent; /* show outline instead of gray fill for empties */
+    border: 1px solid currentColor;
+    opacity: 0.55; /* subtle */
+  }
+  .dot.filled {
+    background: currentColor; /* filled remains colored */
+    opacity: 0.85;
+  }
+  .dot-column.active .dots {
+    /* lighten the active outline so it doesn't overpower in legend */
+    border-width: 1px;
+    background: rgba(0, 0, 0, 0.02);
+  }
+  .dot-label {
+    color: #666;
+    font-weight: 500;
+  }
 }
 </style>

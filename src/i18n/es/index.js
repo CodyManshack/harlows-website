@@ -48,6 +48,9 @@ export default {
   filter: {
     label: "Filtrar por:",
     clear: "Limpiar",
+    legend: {
+      caption: "Leyenda – toca una categoría para ordenar",
+    },
     tags: {
       boozy: "Fuerte",
       seasonal: "De temporada",

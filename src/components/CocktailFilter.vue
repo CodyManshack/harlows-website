@@ -29,12 +29,17 @@
     </div>
     <!-- Flavor Profile Legend -->
     <div class="flavor-profile-legend">
+      <div class="legend-caption">
+        {{ t("filter.legend.caption") }}
+      </div>
       <FlavorProfileDots
         :profile="sampleProfile"
         :show-labels="true"
+        :legend="true"
         :active-keys="activeSortKeys"
         @pick="onFlavorPick"
       />
+      <div class="legend-separator" aria-hidden="true"></div>
     </div>
   </div>
 </template>
@@ -714,5 +719,12 @@ onBeforeUnmount(() => {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.legend-caption {
+  font-size: 0.8rem;
+  color: #5e5e5e;
+  margin-bottom: 6px;
+  text-align: center;
 }
 </style>
