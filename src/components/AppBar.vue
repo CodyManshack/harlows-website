@@ -1,5 +1,5 @@
 <template>
-  <q-header :class="['bg-h-primary', { 'is-hidden': isHidden }]">
+  <q-header :class="['bg-primary', { 'is-hidden': isHidden }]">
     <q-toolbar class="app-toolbar justify-center">
       <q-btn
         flat
@@ -48,7 +48,7 @@
         "
       />
     </q-toolbar>
-    <q-bar :class="['bg-h-accent hours-bar']">
+    <q-bar :class="['hours-bar']">
       <div
         :class="[
           $q.screen.gt.sm ? 'text-body1' : 'text-caption',
@@ -77,7 +77,7 @@
   </q-header>
   <q-drawer
     v-model="drawer"
-    class="bg-h-primary"
+    class="bg-primary"
     :width="$q.screen.gt.sm ? 280 : 240"
     dark
     behavior="mobile"
