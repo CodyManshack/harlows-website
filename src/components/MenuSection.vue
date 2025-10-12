@@ -20,7 +20,12 @@
       />
     </div>
 
-    <div v-if="items">
+    <transition-group
+      v-if="items"
+      tag="div"
+      name="menu-reorder"
+      class="menu-items"
+    >
       <MenuItem
         v-for="item in displayItems"
         :key="tr(item.name)"
@@ -32,7 +37,7 @@
         :liquor="sectionKey === 'liquors'"
         :sectionKey="sectionKey"
       />
-    </div>
+    </transition-group>
     <!-- Bottom sentinel for cocktails section to stop sticky filter before next section title -->
     <div
       v-if="sectionKey === 'cocktails' && items && items.length > 0"
@@ -394,5 +399,28 @@ function getHeaderSizes(items) {
 .filter-placeholder {
   height: 80px; /* Approximate height of the filter when sticky */
   width: 100%;
+}
+
+/* Smooth reordering animation for menu items */
+.menu-reorder-enter-active,
+.menu-reorder-leave-active {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.menu-reorder-enter-from,
+.menu-reorder-leave-to {
+  opacity: 0.01;
+  transform: translateY(6px);
+}
+.menu-reorder-move {
+  transition: transform 220ms ease;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-reorder-enter-active,
+  .menu-reorder-leave-active,
+  .menu-reorder-move {
+    transition: none !important;
+  }
 }
 </style>
