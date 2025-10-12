@@ -10,4 +10,4 @@ Classic cocktail lounge website for Harlow's Bar, based in Valencia, Spain.
 
 ## Image Optimization
 - Resize source image to 1:1 ratio
-- Resize to our img src set using the `img_optimize` script in src/utils
+- Resize to our img src set using the `img_optimize` script
