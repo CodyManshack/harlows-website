@@ -69,13 +69,15 @@
           <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
             item.sizeLabel
           }}</span>
+          <span v-if="item.dairy" class="menu-item-dairy">
+            <q-icon name="mdi-cow" size="0.85rem" style="opacity: 0.75">
+              <q-tooltip class="bg-black text-white"
+                >Allergen: Contains Dairy</q-tooltip
+              >
+            </q-icon>
+          </span>
           <span v-if="item.egg" class="menu-item-egg">
-            <q-icon
-              name="ion-egg"
-              color="orange"
-              size="0.85rem"
-              style="opacity: 0.75"
-            >
+            <q-icon name="ion-egg" size="0.85rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Egg White</q-tooltip
               >
@@ -146,17 +148,8 @@ function trSize(key, ctx = {}) {
 }
 </script>
 
-<style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
-/* Inline size label for item name */
-.menu-item-size-label-inline {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #555;
-  margin-left: 0.5em;
-  vertical-align: middle;
-}
-/* Sizing labels in subsection header */
+<style scoped lang="scss">
+// Subsection (used outside of .menu-item block but within component)
 .menu-subsection-sizes {
   margin-left: 1.5rem;
   display: inline-flex;
@@ -170,119 +163,208 @@ function trSize(key, ctx = {}) {
   min-width: 48px;
   text-align: center;
 }
-/* Sizing columns for beers/wines */
+
+// Sizing columns for beers/wines
 .menu-item-sizes {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-left: 1rem;
-}
-.menu-item-sizes-row {
-  display: flex;
-  gap: 0;
-}
-.menu-item-sizes-header {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 0.1rem;
+
+  &-row {
+    display: flex;
+    gap: 0;
+  }
+  &-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.1rem;
+  }
+  &-prices {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #000;
+  }
 }
 .menu-item-size-label {
   min-width: 64px;
   text-align: center;
   display: inline-block;
 }
-.menu-item-sizes-prices {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #000;
-}
 .menu-item-size-price {
   min-width: 64px;
   text-align: center;
   display: inline-block;
 }
+
+// Inline size label next to item name
+.menu-item-size-label-inline {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #555;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
 .menu-item {
   padding: 1rem 0;
   border-bottom: 1px dotted #d4d4d4;
   margin-bottom: 0.5rem;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  &-name {
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 600;
+    text-transform: capitalize;
+    flex: 1;
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  &-price {
+    font-size: 1.2rem;
+    color: #000;
+    font-weight: 300;
+    margin-left: 1rem;
+  }
+
+  &-description {
+    font-size: 1.1rem;
+    color: #111;
+    line-height: 1.4;
+    margin-top: 0.3rem;
+    font-style: normal;
+    font-weight: 400;
+    // letter-spacing: 0.01em;
+  }
+
+  // Wine metadata line under name
+  &-meta {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: -0.25rem; // tuck closer to name for compact mobile layout
+    margin-bottom: 0.15rem;
+  }
+
+  &-seasonal {
+    font-size: 0.8rem;
+    color: $accent;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 0;
+    margin-left: 0.5rem;
+    background: rgba(243, 156, 18, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  // Flavor profile spacing
+  &-profile {
+    margin-top: 1rem;
+  }
+
+  // Item image (optimized for mobile)
+  &-image-wrapper {
+    margin: 0 0 0.6rem 0;
+  }
+  &-image {
+    width: 100%;
+    max-width: 360px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background: #f8f8f8;
+  }
+
+  // Allergens
+  &-egg,
+  &-dairy {
+    margin-left: 0.35em;
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.65;
+    position: relative;
+
+    i {
+      color: $accent;
+    }
+  }
+
+  // Smaller style for liquor items
+  &-liquor {
+    padding: 0.25rem 0;
+
+    .menu-item-name {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .menu-item-price {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .menu-item-description {
+      font-size: 1rem;
+      line-height: 1.5;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }
+
+  // Desktop / larger screens
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 1.5rem 0;
+
+    &-image-wrapper {
+      margin: 0;
+      flex: 0 0 360px;
+      max-width: 360px;
+      width: 100%;
+      display: block;
+    }
+    &-image {
+      max-width: 360px;
+      width: 100%;
+      display: block;
+    }
+    &-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &-header,
+    &-meta,
+    &-description,
+    &-seasonal {
+      text-align: left;
+    }
+
+    &-seasonal {
+      align-self: flex-start;
+      width: auto;
+      max-width: fit-content;
+    }
+  }
 }
 
-.menu-item:last-child {
-  border-bottom: none;
-}
-
-.menu-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.5rem;
-}
-
-.menu-item-name {
-  font-size: 1.4rem;
-  color: #000;
-  font-weight: 600;
-  text-transform: capitalize;
-  flex: 1;
-}
-
-.menu-item-price {
-  font-size: 1.2rem;
-  color: #000;
-  font-weight: 300;
-  margin-left: 1rem;
-}
-
-.menu-item-description {
-  font-size: 1.1rem;
-  color: #111;
-  line-height: 1.4;
-  margin-top: 0.3rem;
-  font-style: normal;
-  font-weight: 400;
-  /* letter-spacing: 0.01em; */
-}
-
-/* Wine metadata line under name */
-.menu-item-meta {
-  font-size: 0.95rem;
-  color: #555;
-  margin-top: -0.25rem; /* tuck closer to name for compact mobile layout */
-  margin-bottom: 0.15rem;
-}
-
-.menu-item-seasonal {
-  font-size: 0.8rem;
-  color: #f39c12;
-  font-style: normal;
-  font-weight: 400;
-  margin-top: 0;
-  margin-left: 0.5rem;
-  background: rgba(243, 156, 18, 0.1);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-/* Flavor profile spacing */
-.menu-item-profile {
-  margin-top: 1rem;
-}
-
-/* Item image (optimized for mobile) */
-.menu-item-image-wrapper {
-  margin: 0 0 0.6rem 0;
-}
-.menu-item-image {
-  width: 100%;
-  max-width: 360px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  background: #f8f8f8;
-}
-
-/* Cut-off (chamfered) corners using clip-path */
+// Cut-off (chamfered) corners using clip-path
 .menu-notch {
   --notch: 20px;
   clip-path: polygon(
@@ -295,84 +377,10 @@ function trSize(key, ctx = {}) {
     0% calc(100% - var(--notch)),
     0% var(--notch)
   );
-}
 
-@supports not (clip-path: polygon(0 0)) {
-  /* Fallback: rounded corners if clip-path not supported */
-  .menu-notch {
+  @supports not (clip-path: polygon(0 0)) {
+    // Fallback: rounded corners if clip-path not supported
     border-radius: 12px;
   }
-}
-
-@media (min-width: 768px) {
-  .menu-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 1.5rem 0;
-  }
-  .menu-item-image-wrapper {
-    margin: 0;
-    flex: 0 0 360px;
-    max-width: 360px;
-    width: 100%;
-    display: block;
-  }
-  .menu-item-image {
-    max-width: 360px;
-    width: 100%;
-    display: block;
-  }
-  .menu-item-content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .menu-item-header,
-  .menu-item-meta,
-  .menu-item-description,
-  .menu-item-seasonal {
-    text-align: left;
-  }
-  .menu-item-seasonal {
-    align-self: flex-start;
-    width: auto;
-    max-width: fit-content;
-  }
-}
-
-/* Inline egg icon after name, less visually demanding */
-.menu-item-egg {
-  margin-left: 0.35em;
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.65;
-  position: relative;
-  top: 0.05em;
-}
-.menu-item-name {
-  display: inline-flex;
-  align-items: baseline;
-}
-
-/* Smaller style for liquor items */
-.menu-item-liquor {
-  padding: 0.25rem 0;
-}
-.menu-item-liquor .menu-item-name {
-  font-size: 1rem;
-  font-weight: 600;
-}
-.menu-item-liquor .menu-item-price {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-.menu-item-liquor .menu-item-description {
-  font-size: 1rem;
-  line-height: 1.5;
-  font-style: normal;
-  font-weight: 400;
 }
 </style>
