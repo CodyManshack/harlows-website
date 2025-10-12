@@ -256,9 +256,8 @@ function trSize(key, ctx = {}) {
   /* Defer off-screen rendering for faster FCP/LCP while reserving space */
   content-visibility: auto;
   contain-intrinsic-size: 600px;
-  padding: 1rem 0;
-  border-bottom: 1px dotted #d4d4d4;
-  margin-bottom: 0.5rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid $h-border;
 
   &:last-child {
     border-bottom: none;
