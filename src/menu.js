@@ -87,7 +87,7 @@ export default {
           en: "smoky with lime, grapefruit, and tequila",
           es: "ahumado con lima, pomelo y tequila",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 1, sweet: 0, citrus: 5, tart: 4 },
       },
       {
         name: "Amaretto Sour",
@@ -98,7 +98,7 @@ export default {
         },
         egg: true,
         img: "/cocktails/amarettosour",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 1, sweet: 4, citrus: 2, tart: 2 },
       },
       {
         name: "Americano",
@@ -117,7 +117,7 @@ export default {
           es: "licor de violeta floral con limón ácido y cereza maraschino",
         },
         img: "/cocktails/aviation",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 0, sweet: 2, citrus: 3, tart: 4 },
       },
       {
         name: "Bacardi Cocktail",
@@ -127,7 +127,7 @@ export default {
           es: "granada y lima excepcionalmente suaves y dulces",
         },
         img: "/cocktails/bacardicocktail",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 1, bitter: 0, sweet: 5, citrus: 2, tart: 1 },
       },
       {
         name: "Bee's Knees",
@@ -176,7 +176,7 @@ export default {
           en: "an elevated margarita made with top-shelf Volcan tequila blanco, Grand Marnier premium orange liqueur, and a salted rim",
           es: "la margarita elevada: con tequila blanco Volcan de primera calidad, licor de naranja Grand Marnier, y un borde de sal",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 0, sweet: 4, citrus: 3, tart: 3 },
       },
       {
         name: "Clover Club",
@@ -196,7 +196,7 @@ export default {
           es: "sabores profundos de espresso especial con un final dulce",
         },
         egg: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 3, sweet: 4, citrus: 0, tart: 0 },
       },
       {
         name: "French 75",
@@ -244,7 +244,7 @@ export default {
           es: "un pequeño y dulce capricho, la perfecta copa nocturna. Ron negro caliente especiado con mantequilla dulce, nata montada, canela y nuez moscada",
         },
         seasonal: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 1, bitter: 2, sweet: 5, citrus: 0, tart: 0 },
         dairy: true,
         img: "/cocktails/hotbutteredrum",
       },
@@ -255,7 +255,7 @@ export default {
           en: "sweet applejack and pomegranate",
           es: "applejack dulce y granada",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 0, sweet: 4, citrus: 3, tart: 3 },
         img: "/cocktails/jackrose",
       },
       {
@@ -292,7 +292,7 @@ export default {
           en: "a classic margarita: the perfect combination of tequila reposado and citric sweetness with a salted rim",
           es: "una margarita clásica: la combinación perfecta de tequila reposado y dulzor cítrico con un borde de sal",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 1, sweet: 4, citrus: 5, tart: 4 },
         img: "/cocktails/margarita42",
       },
       {
@@ -340,7 +340,7 @@ export default {
           es: "una revisión del Whiskey Sour que incorpora vino tinto",
         },
         egg: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 4, sweet: 2, citrus: 3, tart: 1 },
         img: "/cocktails/newyorksour",
       },
       {
@@ -370,7 +370,7 @@ export default {
           es: "perfectamente ácido y espumoso, con Pisco El Gobernador",
         },
         egg: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 1, sweet: 3, citrus: 5, tart: 5 },
       },
       {
         name: "Ramos Gin Fizz",
@@ -390,7 +390,7 @@ export default {
           es: "en su día uno de los cócteles más populares de América: scotch y Drambuie completan este cóctel sencillo pero notablemente fuerte, cargado de scotch",
         },
         img: "/cocktails/rustynail",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 1, sweet: 3, citrus: 0, tart: 0 },
       },
       {
         name: "Sazerac",
@@ -427,7 +427,7 @@ export default {
           en: "spiced orange with lemon",
           es: "naranja especiada con limón",
         },
-        profile: { boozy: 2, bitter: 2, sweet: 3, citrus: 5, tart: 5 },
+        profile: { boozy: 3, bitter: 2, sweet: 3, citrus: 5, tart: 5 },
         img: "/cocktails/valenciansuntan",
       },
       {
@@ -448,7 +448,7 @@ export default {
         },
         egg: true,
         img: "/cocktails/whiskeysour",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 4, bitter: 1, sweet: 3, citrus: 2, tart: 1 },
       },
       {
         name: "White Lady",
