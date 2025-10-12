@@ -2,17 +2,23 @@
   <div
     :class="[
       'cocktail-filter',
-      { sticky: isSticky, 'header-hidden': isHeaderHidden },
+      {
+        'cocktail-filter--sticky': isSticky,
+        'cocktail-filter--headerHidden': isHeaderHidden,
+      },
     ]"
     ref="filterBar"
   >
-    <div class="filter-content">
-      <span class="filter-label">{{ t("filter.label") }}</span>
-      <div class="filter-tags">
+    <div class="cocktail-filter__content">
+      <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
+      <div class="cocktail-filter__tags">
         <button
           v-for="tag in availableTags"
           :key="tag.id"
-          :class="['filter-tag', { active: selectedTags.includes(tag.id) }]"
+          :class="[
+            'cocktail-filter__tag',
+            { 'is-active': selectedTags.includes(tag.id) },
+          ]"
           @click="toggleTag(tag.id)"
         >
           {{ tag.label }}
@@ -20,16 +26,16 @@
       </div>
       <button
         v-if="selectedTags.length > 0"
-        class="clear-filters"
+        class="cocktail-filter__clear"
         @click="clearAllFilters"
       >
         {{ t("filter.clear") }}
       </button>
-      <!-- Debug button -->
     </div>
+
     <!-- Flavor Profile Legend -->
-    <div class="flavor-profile-legend">
-      <div class="legend-caption">
+    <div class="cocktail-filter__legend">
+      <div class="cocktail-filter__legendCaption">
         {{ t("filter.legend.caption") }}
       </div>
       <FlavorProfileDots
@@ -39,7 +45,6 @@
         :active-keys="activeSortKeys"
         @pick="onFlavorPick"
       />
-      <div class="legend-separator" aria-hidden="true"></div>
     </div>
   </div>
 </template>
@@ -560,7 +565,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .cocktail-filter {
   background: rgba(247, 245, 237, 0.95);
   backdrop-filter: blur(10px);
@@ -570,129 +575,126 @@ onBeforeUnmount(() => {
   margin-top: -1rem;
   transition: all 0.3s ease;
   z-index: 100;
-}
 
-.cocktail-filter.sticky {
-  position: fixed !important;
-  top: 96px !important; /* Account for AppBar height (64px toolbar + 30px hours bar) */
-  left: 0 !important;
-  right: 0 !important;
-  margin: 0 !important;
-  border-radius: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  background: rgba(247, 245, 237, 0.98) !important;
-  z-index: 1000 !important;
-}
+  &--sticky {
+    position: fixed !important;
+    top: 96px !important; // Account for AppBar height
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: rgba(247, 245, 237, 0.98) !important;
+    z-index: 1000 !important;
+  }
 
-.cocktail-filter.sticky.header-hidden {
-  top: 0 !important; /* When header is hidden, move filter to top */
-}
+  &--headerHidden {
+    top: 0 !important; // when header hidden, move filter to top
+  }
 
-.filter-content {
-  max-width: 900px; /* keep same as page content */
-  margin: 0 auto; /* center within full-width container */
-  display: flex;
-  gap: 0.5rem;
-  padding: 0 12px; /* slight side padding */
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.filter-label {
-  font-size: 0.8rem;
-  color: #2c3e50;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.filter-tags {
-  display: flex; /* dynamic best-fit per content */
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  align-items: center;
-  justify-content: center; /* center rows instead of bunching left */
-  width: 100%;
-}
-
-.filter-tag {
-  font-family: "Inter", "Roboto", Arial, sans-serif;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid #d4d4d4;
-  border-radius: 4px;
-  background: white;
-  font-size: 0.75rem;
-  color: #2c3e50;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  flex: 0 0 auto; /* size to content */
-  text-align: center;
-}
-
-.filter-tag:hover {
-  border-color: #3498db;
-  background: #f8f9fa;
-}
-
-.filter-tag.active {
-  background: #4c2a26;
-  color: white;
-  border-color: #4c2a26;
-}
-
-.clear-filters {
-  padding: 0.25rem 0.6rem;
-  border: 1px solid #e74c3c;
-  border-radius: 16px;
-  background: white;
-  font-size: 0.75rem;
-  color: #e74c3c;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.clear-filters:hover {
-  background: #e74c3c;
-  color: white;
-}
-
-.debug-button {
-  padding: 0.3rem 0.8rem;
-  border: 1px solid #9b59b6;
-  border-radius: 20px;
-  background: white;
-  font-size: 0.8rem;
-  color: #9b59b6;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.debug-button:hover {
-  background: #9b59b6;
-  color: white;
-}
-
-@media (max-width: 768px) {
-  .filter-content {
+  &__content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
     gap: 0.5rem;
-    padding: 0 8px;
+    padding: 0 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  .filter-tags {
-    gap: 0.3rem;
+  &__label {
+    font-size: 0.8rem;
+    color: #2c3e50;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
-  .filter-tag,
-  .clear-filters {
-    font-size: 0.75rem;
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &__tag {
+    font-family: "Inter", "Roboto", Arial, sans-serif;
     padding: 0.25rem 0.6rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    background: white;
+    font-size: 0.75rem;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    text-align: center;
+
+    &:hover {
+      border-color: #3498db;
+      background: #f8f9fa;
+    }
+    &.is-active {
+      background: #4c2a26;
+      color: #fff;
+      border-color: #4c2a26;
+    }
+  }
+
+  &__clear {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid #e74c3c;
+    border-radius: 16px;
+    background: white;
+    font-size: 0.75rem;
+    color: #e74c3c;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: #e74c3c;
+      color: #fff;
+    }
+  }
+
+  &__legend {
+    background: rgba(247, 245, 237, 0.95);
+    border-top: 1px solid #e9ecef;
+    padding: 12px 12px 0 12px;
+    margin-top: 12px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &__legendCaption {
+    font-size: 0.8rem;
+    color: #2c3e50; /* align with filter label */
+    font-weight: 600; /* align with filter label */
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    &__content {
+      gap: 0.5rem;
+      padding: 0 8px;
+    }
+    &__tags {
+      gap: 0.3rem;
+    }
+    &__tag,
+    &__clear {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+    }
   }
 }
 
-/* Legend tooltip styles */
+// Legend tooltip helpers (if still used anywhere else)
 .legend-container {
   display: grid;
   gap: 4px;
@@ -708,23 +710,5 @@ onBeforeUnmount(() => {
   height: 10px;
   border-radius: 2px;
   display: inline-block;
-}
-
-/* Flavor Profile Legend */
-.flavor-profile-legend {
-  background: rgba(247, 245, 237, 0.95);
-  border-top: 1px solid #e9ecef;
-  padding: 12px 12px 0 12px;
-  margin-top: 12px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.legend-caption {
-  font-size: 0.8rem;
-  color: #5e5e5e;
-  margin-bottom: 6px;
-  text-align: center;
 }
 </style>

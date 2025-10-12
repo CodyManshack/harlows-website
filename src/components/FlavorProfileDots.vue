@@ -1,25 +1,32 @@
 <template>
-  <div class="flavor-profile-dots" :class="{ legend: legend }">
-    <div class="profile-row">
+  <div
+    class="flavor-profile-dots"
+    :class="{ 'flavor-profile-dots--legend': legend }"
+  >
+    <div class="flavor-profile-dots__row">
       <div
         v-for="cat in profileCategories"
         :key="cat.key"
-        class="dot-column"
-        :class="{ active: isActive(cat.key) }"
+        class="flavor-profile-dots__col"
+        :class="{ 'flavor-profile-dots__col--active': isActive(cat.key) }"
         role="button"
         tabindex="0"
         :aria-pressed="isActive(cat.key)"
         @click="$emit('pick', cat.key)"
         @keydown.enter.stop.prevent="$emit('pick', cat.key)"
       >
-        <span v-if="showLabels" class="dot-label">{{ cat.label }}</span>
-        <div class="dots" :class="'cat-color-' + cat.key">
+        <span v-if="showLabels" class="flavor-profile-dots__label">{{
+          cat.label
+        }}</span>
+        <div class="flavor-profile-dots__dots" :class="'cat-color-' + cat.key">
           <i
             v-for="n in 5"
             :key="n"
             :class="[
-              'dot',
-              { filled: isActive(cat.key) ? n <= 5 : n <= (cat.value || 0) },
+              'flavor-profile-dots__dot',
+              {
+                'is-filled': isActive(cat.key) ? n <= 5 : n <= (cat.value || 0),
+              },
             ]"
           ></i>
         </div>
@@ -100,99 +107,100 @@ const profileCategories = computed(() => [
 <style lang="scss" scoped>
 .flavor-profile-dots {
   width: 100%;
-}
-.profile-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-}
-.dot-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-.dot-column:not(:has(.dot-label)) {
-  justify-content: center;
-}
-.dot-column {
-  cursor: pointer;
-  user-select: none;
-}
-.dot-column.active .dot-label {
-  text-decoration: underline;
-  font-weight: 600;
-  color: #222;
-}
-.dot-label {
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: #555;
-  text-align: center;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.dots {
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  justify-content: center;
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #e0e0e0;
-  display: inline-block;
-}
-.dot.filled {
-  background: currentColor;
-}
 
-.dot-column.active .dots {
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  padding: 2px 6px;
-  background: rgba(0, 0, 0, 0.03);
-}
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
 
-/* Color classes */
-.cat-color-boozy {
-  color: $h-boozy;
-}
-.cat-color-bitter {
-  color: $h-bitter;
-}
-.cat-color-sweet {
-  color: $h-sweet;
-}
-.cat-color-citrus {
-  color: $h-citrus;
-}
-.cat-color-tart {
-  color: $h-tart;
-}
+  &__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    cursor: pointer;
+    user-select: none;
 
-/* Legend mode tweaks: same layout/size, but visually distinct and slightly muted */
-.flavor-profile-dots.legend {
-  .dot {
-    background: transparent; /* show outline instead of gray fill for empties */
-    border: 1px solid currentColor;
-    opacity: 0.55; /* subtle */
+    &--active {
+      .flavor-profile-dots__label {
+        text-decoration: underline;
+        font-weight: 600;
+        color: #222;
+      }
+      .flavor-profile-dots__dots {
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        padding: 2px 6px;
+        background: rgba(0, 0, 0, 0.03);
+      }
+    }
   }
-  .dot.filled {
-    background: currentColor; /* filled remains colored */
-    opacity: 0.85;
-  }
-  .dot-column.active .dots {
-    /* lighten the active outline so it doesn't overpower in legend */
-    border-width: 1px;
-    background: rgba(0, 0, 0, 0.02);
-  }
-  .dot-label {
-    color: #666;
+
+  &__label {
+    font-size: 0.65rem;
     font-weight: 500;
+    color: #555;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  &__dots {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+  }
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: inline-block;
+
+    &.is-filled {
+      background: currentColor;
+    }
+  }
+
+  // Legend mode: visually subtle/outlined, same size/width
+  &--legend {
+    .flavor-profile-dots__dot {
+      background: transparent;
+      border: 1px solid currentColor;
+      opacity: 0.55;
+    }
+    .flavor-profile-dots__dot.is-filled {
+      background: currentColor;
+      opacity: 0.85;
+    }
+    .flavor-profile-dots__col--active .flavor-profile-dots__dots {
+      border-width: 1px;
+      background: rgba(0, 0, 0, 0.02);
+    }
+    .flavor-profile-dots__label {
+      color: #666;
+      font-weight: 500;
+    }
+  }
+
+  // Color classes
+  .cat-color-boozy {
+    color: $h-boozy;
+  }
+  .cat-color-bitter {
+    color: $h-bitter;
+  }
+  .cat-color-sweet {
+    color: $h-sweet;
+  }
+  .cat-color-citrus {
+    color: $h-citrus;
+  }
+  .cat-color-tart {
+    color: $h-tart;
   }
 }
 </style>
