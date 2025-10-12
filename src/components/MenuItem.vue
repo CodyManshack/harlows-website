@@ -1,107 +1,119 @@
 <template>
-  <div :class="['menu-item', liquor ? 'menu-item-liquor' : '']">
-    <div v-if="item.img" class="menu-item-image-wrapper">
+  <div :class="['menu-item', liquor ? 'menu-item--liquor' : '']">
+    <div v-if="item.img" class="menu-item__imageWrap">
       <q-img
         :src="item.img"
         :alt="item.name"
         loading="lazy"
         ratio="1"
         fit="cover"
-        class="menu-item-image menu-notch"
+        class="menu-item__image menu-notch"
       />
     </div>
-    <div class="menu-item-content">
+    <div class="menu-item__content">
       <div
-        class="menu-item-header"
+        class="menu-item__header"
         v-if="item.sizes || (headerSizes && headerSizes.length)"
       >
-        <span class="menu-item-name">
+        <span class="menu-item__name">
           {{ item.name }}
-          <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
-            item.sizeLabel
-          }}</span>
-          <span v-if="item.seasonal" class="menu-item-seasonal">{{
-            t("filter.tags.seasonal")
-          }}</span>
+          <span v-if="item.sizeLabel" class="menu-item__sizeLabelInline">
+            {{ item.sizeLabel }}
+          </span>
+          <span v-if="item.seasonal" class="menu-item__seasonal">
+            {{ t("filter.tags.seasonal") }}
+          </span>
         </span>
-        <div class="menu-item-sizes">
+        <div class="menu-item__sizes">
           <div
-            class="menu-item-sizes-row menu-item-sizes-header"
+            class="menu-item__sizesRow menu-item__sizesHeader"
             v-if="!hideSizes && item.sizes"
           >
             <span
               v-for="(price, size) in item.sizes"
               :key="size"
-              class="menu-item-size-label"
-              >{{ trSize(size, { sectionKey, subsectionKey }) }}</span
+              class="menu-item__sizeLabel"
             >
+              {{ trSize(size, { sectionKey, subsectionKey }) }}
+            </span>
           </div>
           <div
-            class="menu-item-sizes-row menu-item-sizes-header"
+            class="menu-item__sizesRow menu-item__sizesHeader"
             v-else-if="!hideSizes && headerSizes && headerSizes.length"
           >
             <span
               v-for="size in headerSizes"
               :key="'hdr-' + size"
-              class="menu-item-size-label"
-              >{{ trSize(size, { sectionKey, subsectionKey }) }}</span
+              class="menu-item__sizeLabel"
             >
+              {{ trSize(size, { sectionKey, subsectionKey }) }}
+            </span>
           </div>
-          <div class="menu-item-sizes-row menu-item-sizes-prices">
+          <div class="menu-item__sizesRow menu-item__sizesPrices">
             <span
               v-for="size in headerSizes && headerSizes.length
                 ? headerSizes
                 : Object.keys(item.sizes || {})"
               :key="size + '-price'"
-              class="menu-item-size-price"
-              >{{
+              class="menu-item__sizePrice"
+            >
+              {{
                 item.sizes && item.sizes[size] !== undefined
                   ? item.sizes[size]
                   : "—"
-              }}</span
-            >
+              }}
+            </span>
           </div>
         </div>
       </div>
-      <div class="menu-item-header" v-else>
-        <span class="menu-item-name">
+
+      <div class="menu-item__header" v-else>
+        <span class="menu-item__name">
           {{ item.name }}
-          <span v-if="item.sizeLabel" class="menu-item-size-label-inline">{{
-            item.sizeLabel
-          }}</span>
-          <span v-if="item.dairy" class="menu-item-dairy">
+          <span v-if="item.sizeLabel" class="menu-item__sizeLabelInline">
+            {{ item.sizeLabel }}
+          </span>
+          <span
+            v-if="item.dairy"
+            class="menu-item__allergen menu-item__allergen--dairy"
+          >
             <q-icon name="mdi-cow" size="0.85rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Dairy</q-tooltip
               >
             </q-icon>
           </span>
-          <span v-if="item.egg" class="menu-item-egg">
+          <span
+            v-if="item.egg"
+            class="menu-item__allergen menu-item__allergen--egg"
+          >
             <q-icon name="ion-egg" size="0.85rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Egg White</q-tooltip
               >
             </q-icon>
           </span>
-          <span v-if="item.seasonal" class="menu-item-seasonal">{{
-            t("filter.tags.seasonal")
-          }}</span>
+          <span v-if="item.seasonal" class="menu-item__seasonal">
+            {{ t("filter.tags.seasonal") }}
+          </span>
         </span>
-        <span class="menu-item-price">{{ item.price }}</span>
+        <span class="menu-item__price">{{ item.price }}</span>
       </div>
+
       <div
         v-if="item.type || item.year || item.location"
-        class="menu-item-meta"
+        class="menu-item__meta"
       >
         {{ [item.type, item.year, item.location].filter(Boolean).join(" · ") }}
       </div>
-      <div v-if="item.description" class="menu-item-description">
+
+      <div v-if="item.description" class="menu-item__desc">
         {{ item.description }}
       </div>
 
       <div
         v-if="item.profile"
-        class="menu-item-profile"
+        class="menu-item__profile"
         aria-label="Flavor profile"
       >
         <FlavorProfileDots :profile="item.profile" />
@@ -149,64 +161,6 @@ function trSize(key, ctx = {}) {
 </script>
 
 <style scoped lang="scss">
-// Subsection (used outside of .menu-item block but within component)
-.menu-subsection-sizes {
-  margin-left: 1.5rem;
-  display: inline-flex;
-  gap: 1.5rem;
-  vertical-align: middle;
-}
-.menu-subsection-size-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #555;
-  min-width: 48px;
-  text-align: center;
-}
-
-// Sizing columns for beers/wines
-.menu-item-sizes {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-left: 1rem;
-
-  &-row {
-    display: flex;
-    gap: 0;
-  }
-  &-header {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 0.1rem;
-  }
-  &-prices {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #000;
-  }
-}
-.menu-item-size-label {
-  min-width: 64px;
-  text-align: center;
-  display: inline-block;
-}
-.menu-item-size-price {
-  min-width: 64px;
-  text-align: center;
-  display: inline-block;
-}
-
-// Inline size label next to item name
-.menu-item-size-label-inline {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #555;
-  margin-left: 0.5em;
-  vertical-align: middle;
-}
-
 .menu-item {
   padding: 1rem 0;
   border-bottom: 1px dotted #d4d4d4;
@@ -216,14 +170,14 @@ function trSize(key, ctx = {}) {
     border-bottom: none;
   }
 
-  &-header {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 0.5rem;
   }
 
-  &-name {
+  &__name {
     font-size: 1.4rem;
     color: #000;
     font-weight: 600;
@@ -233,32 +187,29 @@ function trSize(key, ctx = {}) {
     align-items: baseline;
   }
 
-  &-price {
+  &__price {
     font-size: 1.2rem;
     color: #000;
     font-weight: 300;
     margin-left: 1rem;
   }
 
-  &-description {
-    font-size: 1.1rem;
-    color: #111;
-    line-height: 1.4;
-    margin-top: 0.3rem;
-    font-style: normal;
-    font-weight: 400;
-    // letter-spacing: 0.01em;
+  &__sizeLabelInline {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #555;
+    margin-left: 0.5em;
+    vertical-align: middle;
   }
 
-  // Wine metadata line under name
-  &-meta {
+  &__meta {
     font-size: 0.95rem;
     color: #555;
-    margin-top: -0.25rem; // tuck closer to name for compact mobile layout
+    margin-top: -0.25rem;
     margin-bottom: 0.15rem;
   }
 
-  &-seasonal {
+  &__seasonal {
     font-size: 0.8rem;
     color: $accent;
     font-style: normal;
@@ -271,16 +222,24 @@ function trSize(key, ctx = {}) {
     display: inline-block;
   }
 
-  // Flavor profile spacing
-  &-profile {
+  &__desc {
+    font-size: 1.1rem;
+    color: #111;
+    line-height: 1.4;
+    margin-top: 0.3rem;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  &__profile {
     margin-top: 1rem;
   }
 
-  // Item image (optimized for mobile)
-  &-image-wrapper {
+  &__imageWrap {
     margin: 0 0 0.6rem 0;
   }
-  &-image {
+
+  &__image {
     width: 100%;
     max-width: 360px;
     overflow: hidden;
@@ -288,60 +247,58 @@ function trSize(key, ctx = {}) {
     background: #f8f8f8;
   }
 
-  // Allergens
-  &-egg,
-  &-dairy {
+  &__allergen {
     margin-left: 0.35em;
     display: inline-flex;
     align-items: center;
     opacity: 0.65;
     position: relative;
+    top: 0.05em;
 
-    i {
+    &--egg i,
+    &--dairy i {
       color: $accent;
     }
   }
 
-  // Smaller style for liquor items
-  &-liquor {
+  &--liquor {
     padding: 0.25rem 0;
 
-    .menu-item-name {
+    .menu-item__name {
       font-size: 1rem;
       font-weight: 600;
     }
-    .menu-item-price {
+    .menu-item__price {
       font-size: 0.95rem;
       font-weight: 600;
     }
-    .menu-item-description {
+    .menu-item__desc {
       font-size: 1rem;
       line-height: 1.5;
-      font-style: normal;
       font-weight: 400;
     }
   }
 
-  // Desktop / larger screens
   @media (min-width: 768px) {
     display: flex;
     align-items: flex-start;
     gap: 2rem;
     padding: 1.5rem 0;
 
-    &-image-wrapper {
+    &__imageWrap {
       margin: 0;
       flex: 0 0 360px;
       max-width: 360px;
       width: 100%;
       display: block;
     }
-    &-image {
+    &__image {
       max-width: 360px;
       width: 100%;
       display: block;
     }
-    &-content {
+
+    &__content {
       flex: 1;
       min-width: 0;
       display: flex;
@@ -349,19 +306,54 @@ function trSize(key, ctx = {}) {
       justify-content: center;
     }
 
-    &-header,
-    &-meta,
-    &-description,
-    &-seasonal {
+    &__header,
+    &__meta,
+    &__desc,
+    &__seasonal {
       text-align: left;
     }
 
-    &-seasonal {
+    &__seasonal {
       align-self: flex-start;
       width: auto;
       max-width: fit-content;
     }
   }
+}
+
+// Sizes block (kept separate to avoid over-deep nesting)
+.menu-item__sizes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 1rem;
+
+  &Row {
+    display: flex;
+    gap: 0;
+  }
+  &Header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.1rem;
+  }
+  &Prices {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #000;
+  }
+}
+
+.menu-item__sizeLabel {
+  min-width: 64px;
+  text-align: center;
+  display: inline-block;
+}
+.menu-item__sizePrice {
+  min-width: 64px;
+  text-align: center;
+  display: inline-block;
 }
 
 // Cut-off (chamfered) corners using clip-path
@@ -379,7 +371,6 @@ function trSize(key, ctx = {}) {
   );
 
   @supports not (clip-path: polygon(0 0)) {
-    // Fallback: rounded corners if clip-path not supported
     border-radius: 12px;
   }
 }
