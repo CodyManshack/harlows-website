@@ -77,7 +77,7 @@
             v-if="item.dairy"
             class="menu-item__allergen menu-item__allergen--dairy"
           >
-            <q-icon name="mdi-cow" size="0.85rem" style="opacity: 0.75">
+            <q-icon name="mdi-cow" size="1rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Dairy</q-tooltip
               >
@@ -87,7 +87,7 @@
             v-if="item.egg"
             class="menu-item__allergen menu-item__allergen--egg"
           >
-            <q-icon name="ion-egg" size="0.85rem" style="opacity: 0.75">
+            <q-icon name="mdi-egg" size=".85rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Egg White</q-tooltip
               >
@@ -216,7 +216,7 @@ function trSize(key, ctx = {}) {
     font-weight: 400;
     margin-top: 0;
     margin-left: 0.5rem;
-    background: rgba(243, 156, 18, 0.1);
+    background: rgba($accent, 0.1);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
     display: inline-block;
@@ -253,7 +253,6 @@ function trSize(key, ctx = {}) {
     align-items: center;
     opacity: 0.65;
     position: relative;
-    top: 0.05em;
 
     &--egg i,
     &--dairy i {
