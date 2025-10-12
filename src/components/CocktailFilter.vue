@@ -148,25 +148,9 @@ const filteredCocktails = computed(() => {
     return selectedTags.value.every((tag) => {
       const loc = (locale.value || "en").toString();
       const kw = {
-        sweet: {
-          en: ["sweet", "honey", "dessert"],
-          es: ["dulce", "miel", "postre"],
-        },
-        strong: {
-          en: ["strong", "powerful", "whiskey", "bourbon", "rum"],
-          es: ["fuerte", "potente", "whisky", "bourbon", "ron"],
-        },
-        citrus: {
-          en: ["lemon", "lime", "orange", "citrus", "grapefruit"],
-          es: ["limón", "lima", "naranja", "cítric", "pomelo"],
-        },
         fruity: {
           en: ["fruit", "berry", "cherry", "apple", "pomegranate", "raspberry"],
           es: ["fruta", "baya", "cereza", "manzana", "granada", "frambuesa"],
-        },
-        bitter: {
-          en: ["bitter", "campari"],
-          es: ["amargo", "campari"],
         },
         spicy: {
           en: ["spicy", "spice", "chili", "pepper", "cinnamon"],
