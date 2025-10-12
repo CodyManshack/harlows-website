@@ -39,14 +39,14 @@ const profileCategories = computed(() => [
     value: props.profile.boozy || 0,
   },
   {
-    key: "bitter",
-    label: t("filter.tags.bitter"),
-    value: props.profile.bitter || 0,
-  },
-  {
     key: "sweet",
     label: t("filter.tags.sweet"),
     value: props.profile.sweet || 0,
+  },
+  {
+    key: "tart",
+    label: t("filter.tags.tart"),
+    value: props.profile.tart || 0,
   },
   {
     key: "citrus",
@@ -54,14 +54,14 @@ const profileCategories = computed(() => [
     value: props.profile.citrus || 0,
   },
   {
-    key: "tart",
-    label: t("filter.tags.tart"),
-    value: props.profile.tart || 0,
+    key: "bitter",
+    label: t("filter.tags.bitter"),
+    value: props.profile.bitter || 0,
   },
 ]);
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .flavor-profile-dots {
   width: 100%;
 }
@@ -107,18 +107,18 @@ const profileCategories = computed(() => [
 
 /* Color classes */
 .cat-color-boozy {
-  color: #6a1b9a;
+  color: $h-boozy;
 }
 .cat-color-bitter {
-  color: #d32f2f;
+  color: $h-bitter;
 }
 .cat-color-sweet {
-  color: #f39c12;
+  color: $h-sweet;
 }
 .cat-color-citrus {
-  color: #43a047;
+  color: $h-citrus;
 }
 .cat-color-tart {
-  color: #1976d2;
+  color: $h-tart;
 }
 </style>
