@@ -92,6 +92,7 @@
           style="border: 0; display: block"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
+          title="Google Maps"
         ></iframe>
       </div>
     </section>
