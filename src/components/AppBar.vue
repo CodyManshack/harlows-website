@@ -35,7 +35,7 @@
       <q-btn
         flat
         dense
-        :label="locale.value === 'en' ? 'ES' : 'EN'"
+        :label="nextLanguage.toUpperCase()"
         @click="toggleLanguage"
         class="text-white"
         style="
@@ -216,7 +216,7 @@ const dayHourCombos = computed(() => {
 });
 
 const toggleLanguage = () => {
-  const next = locale.value === "en" ? "es" : "en";
+  const next = nextLanguage.value;
   locale.value = next;
   const name = router.currentRoute.value.name;
   const params = { ...router.currentRoute.value.params, locale: next };
@@ -227,6 +227,8 @@ const toggleLanguage = () => {
     router.push({ path: `/${next}` });
   }
 };
+
+const nextLanguage = computed(() => (locale.value === "en" ? "es" : "en"));
 
 const goToHome = () => {
   const loc = router.currentRoute.value.params.locale || locale.value || "es";
