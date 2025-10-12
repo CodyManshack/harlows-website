@@ -1,13 +1,6 @@
 <template>
-  <div
-    :class="[
-      'cocktail-filter',
-      {
-        'cocktail-filter--sticky': isSticky,
-      },
-    ]"
-    ref="filterBar"
-  >
+  <!-- In-place bar keeps the ref and observers; hidden when sticky -->
+  <div class="cocktail-filter" ref="filterBar" v-show="!isSticky">
     <div class="cocktail-filter__content">
       <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
       <div class="cocktail-filter__tags">
@@ -46,6 +39,49 @@
       />
     </div>
   </div>
+
+  <!-- Teleport sticky bar to body to avoid transformed/contained ancestors -->
+  <teleport to="body">
+    <div v-if="isSticky" class="cocktail-filter cocktail-filter--sticky">
+      <div class="cocktail-filter__content">
+        <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
+        <div class="cocktail-filter__tags">
+          <button
+            v-for="tag in availableTags"
+            :key="tag.id"
+            :class="[
+              'cocktail-filter__tag',
+              { 'is-active': selectedTags.includes(tag.id) },
+            ]"
+            @click="toggleTag(tag.id)"
+          >
+            {{ tag.label }}
+          </button>
+        </div>
+        <button
+          v-if="selectedTags.length > 0"
+          class="cocktail-filter__clear"
+          @click="clearAllFilters"
+        >
+          {{ t("filter.clear") }}
+        </button>
+      </div>
+
+      <!-- Flavor Profile Legend -->
+      <div class="cocktail-filter__legend">
+        <div class="cocktail-filter__legendCaption">
+          {{ t("filter.legend.caption") }}
+        </div>
+        <FlavorProfileDots
+          :profile="sampleProfile"
+          :show-labels="true"
+          :legend="true"
+          :active-keys="activeSortKeys"
+          @pick="onFlavorPick"
+        />
+      </div>
+    </div>
+  </teleport>
 </template>
 
 <script setup>

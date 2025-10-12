@@ -1,5 +1,10 @@
 <template>
-  <section class="menu-section" :id="sectionAnchorId" ref="sectionRef">
+  <section
+    class="menu-section"
+    :class="{ 'menu-section--cocktails': sectionKey === 'cocktails' }"
+    :id="sectionAnchorId"
+    ref="sectionRef"
+  >
     <h2 class="menu-section-title">{{ title }}</h2>
     <DiamondDivider class="section-divider" />
     <div v-if="subtitle" class="menu-section-subtitle">{{ subtitle }}</div>
@@ -313,6 +318,13 @@ function getHeaderSizes(items) {
   /* Defer rendering of off-screen sections to improve FCP/LCP */
   content-visibility: auto;
   contain-intrinsic-size: 1000px;
+}
+
+/* IMPORTANT: Disable content-visibility on cocktails section so fixed children can render correctly */
+.menu-section--cocktails {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+  contain: initial;
 }
 
 .menu-section-title {
