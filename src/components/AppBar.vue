@@ -134,7 +134,7 @@ import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
-import menu from "src/assets/menu.js";
+import menu from "src/components/menu.js";
 import { useHeaderState } from "src/composables/useHeaderState.js";
 
 const router = useRouter();
