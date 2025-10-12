@@ -1,5 +1,5 @@
 <template>
-  <q-header :class="['bg-primary', { 'is-hidden': isHidden }]">
+  <div class="appbar bg-primary">
     <q-toolbar class="app-toolbar justify-center">
       <q-btn
         flat
@@ -48,7 +48,7 @@
         "
       />
     </q-toolbar>
-    <q-bar :class="['hours-bar']">
+  <q-bar :class="['hours-bar']">
       <div
         :class="[
           $q.screen.gt.sm ? 'text-body1' : 'text-caption',
@@ -74,7 +74,7 @@
         </div>
       </div>
     </q-bar>
-  </q-header>
+  </div>
   <q-drawer
     v-model="drawer"
     class="bg-primary"
@@ -130,78 +130,16 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
 import menu from "src/components/menu.js";
-import { useHeaderState } from "src/composables/useHeaderState.js";
 
 const router = useRouter();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
-const { setHeaderHidden } = useHeaderState();
 const drawer = ref(false);
-const isTransparent = ref(false);
-const scrollTarget = ref(null);
-const isHidden = ref(false);
-let lastScrollY = 0;
-
-// Listen for scroll to toggle transparency and hide/show header
-const onScroll = () => {
-  const el = scrollTarget.value;
-  let scrollTop = 0;
-  if (el && typeof el.scrollTop === "number") {
-    scrollTop = el.scrollTop;
-  } else {
-    scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
-  }
-
-  // Update transparency
-  isTransparent.value = scrollTop > 20;
-
-  // Hide/show header based on scroll direction
-  const scrollDelta = scrollTop - lastScrollY;
-
-  if (scrollTop < 100) {
-    // Always show header near top of page
-    isHidden.value = false;
-  } else if (scrollDelta > 10) {
-    // Scrolling down - hide header
-    isHidden.value = true;
-  } else if (scrollDelta < -10) {
-    // Scrolling up - show header
-    isHidden.value = false;
-  }
-
-  // Update global state
-  setHeaderHidden(isHidden.value);
-
-  lastScrollY = scrollTop;
-};
-
-onMounted(() => {
-  const el =
-    document.querySelector(".scroll") ||
-    document.querySelector(".main-content") ||
-    window;
-  scrollTarget.value = el;
-  const target = el === window ? window : el;
-  target.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-});
-
-onUnmounted(() => {
-  const el = scrollTarget.value;
-  const target = el === window ? window : el;
-  if (target && target.removeEventListener) {
-    target.removeEventListener("scroll", onScroll);
-  }
-});
 import { businessHoursByDay, jsDayToKey } from "./businessHours.js";
 
 // List of days in display order
@@ -322,22 +260,6 @@ const menuSectionLinks = computed(() => {
   });
   return sections;
 });
-
-const goToMenuAnchor = async (anchorId) => {
-  const loc = router.currentRoute.value.params.locale || locale.value || "es";
-  if (router.currentRoute.value.name !== "menu") {
-    await router.push({ name: "menu", params: { locale: loc } });
-  }
-  // Close the drawer after navigation
-  drawer.value = false;
-  // Give the page a tick to render
-  requestAnimationFrame(() => {
-    const el = document.getElementById(anchorId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-};
 </script>
 
 <style lang="scss">
@@ -355,26 +277,10 @@ const goToMenuAnchor = async (anchorId) => {
   text-transform: capitalize;
 }
 
-// Solid backgrounds by default
-.q-header.bg-primary {
-  transition: background-color 0.3s, transform 0.3s ease-in-out;
-  transform: translateY(0);
-}
-.q-bar.bg-accent {
+// Normal-flow app bar (scrolls with content)
+.appbar.bg-primary {
+  width: 100%;
   transition: background-color 0.3s;
-}
-
-// Hide header on scroll
-.q-header.is-hidden {
-  transform: translateY(-100%);
-}
-
-// Shared transparency class for both
-.q-header.is-transparent {
-  background-color: rgba($primary, 0.7) !important;
-}
-.q-bar.is-transparent {
-  background-color: rgba($accent, 0.7) !important;
 }
 /* Increased header and hours bar sizes for breathing room */
 .app-toolbar {
