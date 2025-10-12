@@ -5,6 +5,7 @@ html {
   scroll-behavior: smooth;
 }
 body, html {
+  font-display: swap;
   font-family: "neue-kabel", "Segoe UI", "Arial", "Helvetica Neue", Helvetica, sans-serif;
 }
 @media (max-width: $breakpoint-sm-max) {
