@@ -74,6 +74,10 @@ const nextTitleVisible = ref(false);
 const selectedTags = ref([]);
 const parentSection = ref(null);
 const activeSortKeys = ref([]); // e.g., ['boozy','bitter'] in order clicked
+// Cached DOM refs for fallback computations
+const sectionTitleEl = ref(null);
+const bottomBoundEl = ref(null);
+const nextSectionTitleEl = ref(null);
 
 const { t, locale } = useI18n();
 const $q = useQuasar();
@@ -272,6 +276,11 @@ onMounted(() => {
       ".menu-section-title"
     );
 
+  // Cache elements for fallback recompute
+  sectionTitleEl.value = sectionTitle || null;
+  bottomBoundEl.value = bottomSentinel || lastCocktailItem || null;
+  nextSectionTitleEl.value = nextSectionTitle || null;
+
   console.log("Section title found:", !!sectionTitle);
   console.log(
     "Bottom sentinel found:",
@@ -368,6 +377,51 @@ onMounted(() => {
 
   // Initial filter emission
   emit("filter-change", filteredCocktails.value);
+
+  // Fallback: scroll/resize recompute in case IntersectionObserver is flaky/minified
+  const recomputeStickyVisibility = () => {
+    try {
+      const titleEl = sectionTitleEl.value;
+      const boundEl = bottomBoundEl.value;
+      if (!titleEl || !boundEl) return;
+      const appBarHeight = 0;
+      const titleRect = titleEl.getBoundingClientRect();
+      const boundRect = boundEl.getBoundingClientRect();
+      const topPassed = titleRect.top <= appBarHeight;
+      const bottomBuffer = getBottomBufferPx();
+      const bottomNotPassed = boundRect.bottom > bottomBuffer;
+      const inSection = topPassed && bottomNotPassed;
+
+      // Update sticky state
+      const shouldBeSticky = topPassed && inSection;
+      if (isSticky.value !== shouldBeSticky) {
+        isSticky.value = shouldBeSticky;
+        emit("sticky-change", shouldBeSticky);
+      }
+      if (isVisible.value !== inSection) {
+        isVisible.value = inSection;
+      }
+    } catch (e) {
+      // no-op
+    }
+  };
+
+  // Debounced listeners
+  const onScroll = debounce(recomputeStickyVisibility, 50);
+  const onResize = debounce(() => {
+    // Recompute after layout changes
+    recomputeStickyVisibility();
+  }, 120);
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onResize);
+
+  // Stash for cleanup
+  filterBar.value._onScroll = onScroll;
+  filterBar.value._onResize = onResize;
+
+  // Run once after mount
+  nextTick(() => recomputeStickyVisibility());
 });
 
 onBeforeUnmount(() => {
@@ -396,6 +450,15 @@ onBeforeUnmount(() => {
     filterBar.value._debouncedNextTitleHandler.cancel?.();
     filterBar.value._debouncedNextTitleHandler = null;
   }
+  // Cleanup fallback listeners
+  if (filterBar.value?._onScroll) {
+    window.removeEventListener("scroll", filterBar.value._onScroll);
+    filterBar.value._onScroll = null;
+  }
+  if (filterBar.value?._onResize) {
+    window.removeEventListener("resize", filterBar.value._onResize);
+    filterBar.value._onResize = null;
+  }
 });
 </script>
 
@@ -416,7 +479,10 @@ onBeforeUnmount(() => {
     position: fixed !important;
     top: 0 !important; // No header offset
     left: 0 !important;
-    right: 0 !important;
+    right: 0 !important; /* allow full width without forcing 100vw */
+    width: auto !important;
+    max-width: 100vw !important; /* cap at viewport in case parent constraints apply */
+    box-sizing: border-box;
     margin: 0 !important;
     border-radius: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
