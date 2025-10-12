@@ -115,7 +115,7 @@ export default {
           en: "floral violet liqueur with tart lemon and maraschino cherry",
           es: "licor de violeta floral con limón ácido y cereza maraschino",
         },
-        img: "/cocktails/aviation/0.25x.png",
+        img: "/cocktails/aviation",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -125,7 +125,7 @@ export default {
           en: "exceptionally smooth and sweet, pomegranate and lime",
           es: "granada y lima excepcionalmente suaves y dulces",
         },
-        img: "/cocktails/bacardicocktail/0.25x.png",
+        img: "/cocktails/bacardicocktail",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -144,7 +144,7 @@ export default {
           en: "spiced black rum with refreshing sweet mint",
           es: "ron negro especiado con menta dulce fría",
         },
-        img: "/cocktails/blackmojito/0.25x.png",
+        img: "/cocktails/blackmojito",
         profile: { boozy: 2, bitter: 0, sweet: 4, citrus: 2, tart: 3 },
       },
       {
@@ -154,7 +154,7 @@ export default {
           en: "a classic negroni with whiskey in place of gin – resulting in a bitter spiced rye whiskey flavor",
           es: "negroni clásico con whisky en lugar de ginebra – sabor amargo y especiado de rye",
         },
-        img: "/cocktails/boulevardier/0.25x.png",
+        img: "/cocktails/boulevardier",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -166,6 +166,7 @@ export default {
         },
         profile: { boozy: 2, bitter: 0, sweet: 5, citrus: 0, tart: 0 },
         dairy: true,
+        img: "/cocktails/brandyalexander",
       },
       {
         name: "Cadillac Margarita",
@@ -231,7 +232,7 @@ export default {
           en: "a classic daquiri with a cherry twist and bright grapefruit",
           es: "un daiquirí clásico con un toque de cereza y pomelo brillante",
         },
-        img: "/cocktails/hemingwayspecial/0.25x.png",
+        img: "/cocktails/hemingwayspecial",
         profile: { boozy: 2, bitter: 0, sweet: 4, citrus: 5, tart: 5 },
       },
       {
@@ -244,6 +245,7 @@ export default {
         seasonal: true,
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
         dairy: true,
+        img: "/cocktails/hotbutteredrum",
       },
       {
         name: "Jack Rose",
@@ -253,6 +255,7 @@ export default {
           es: "applejack dulce y granada",
         },
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        img: "/cocktails/jackrose",
       },
       {
         name: "The Left Hand",
@@ -289,6 +292,7 @@ export default {
           es: "una margarita clásica: la combinación perfecta de tequila reposado y dulzor cítrico con un borde de sal",
         },
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        img: "/cocktails/margarita42",
       },
       {
         name: "Martini Classic",
@@ -296,7 +300,7 @@ export default {
           en: "the classic dry martini – choose vodka or gin – clean, dirty, or filthy",
           es: "el martini seco clásico – elija su ginebra o vodka – limpio, sucio o muy sucio",
         },
-        img: "/cocktails/dirtymartini/0.25x.png",
+        img: "/cocktails/martini",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -336,6 +340,7 @@ export default {
         },
         egg: true,
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        img: "/cocktails/newyorksour",
       },
       {
         name: "Old Fashioned",
@@ -353,7 +358,7 @@ export default {
           en: "especially easy-to-drink: sweet orange juice with a bit of depth",
           es: "especialmente suave: zumo de naranja dulce con un poco de profundidad",
         },
-        img: "/cocktails/orangeblossom/0.25x.png",
+        img: "/cocktails/orangeblossom",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -383,7 +388,7 @@ export default {
           en: "once one of the most popular cocktails in America: scotch and drambuie complete this simple yet strong, scotch-heavy cocktail",
           es: "en su día uno de los cócteles más populares de América: scotch y Drambuie completan este cóctel sencillo pero notablemente fuerte, cargado de scotch",
         },
-        img: "/cocktails/rustynail/0.25x.png",
+        img: "/cocktails/rustynail",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -403,6 +408,7 @@ export default {
           es: "naranja ácida y seca con un borde azucarado, hecho con coñac premium Courvoisier VSOP",
         },
         profile: { boozy: 3, bitter: 1, sweet: 3, citrus: 2, tart: 3 },
+        img: "/cocktails/sidecar",
       },
       {
         name: "Tom Collins",
@@ -421,6 +427,7 @@ export default {
           es: "naranja especiada con limón",
         },
         profile: { boozy: 2, bitter: 2, sweet: 3, citrus: 5, tart: 5 },
+        img: "/cocktails/valenciansuntan",
       },
       {
         name: "Vesper Martini",
@@ -439,7 +446,7 @@ export default {
           es: "la combinación clásica espumosa de bourbon y cítricos",
         },
         egg: true,
-        img: "/cocktails/whiskeysour/0.33x.png",
+        img: "/cocktails/whiskeysour",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {
@@ -450,6 +457,7 @@ export default {
           es: "limón dulce con un poco de naranja",
         },
         profile: { boozy: 2, bitter: 0, sweet: 4, citrus: 5, tart: 4 },
+        img: "/cocktails/whitelady",
       },
     ],
   },
