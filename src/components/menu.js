@@ -11,6 +11,7 @@ export default {
           es: "selección de 2 embutidos y 2 quesos, servido con aceite de oliva y pan caliente",
         },
         dairy: true,
+        img: "/tapas/meatncheese",
       },
       {
         name: "cheese plate",
