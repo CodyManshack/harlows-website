@@ -1,6 +1,6 @@
 // Centralized SEO utilities: JSON-LD builders for Restaurant and Menu
-import menuData from "src/components/menu.js";
-import { businessHoursByDay } from "src/components/businessHours.js";
+import menuData from "src/menu.js";
+import { businessHoursByDay } from "src/businessHours.js";
 
 export function absoluteUrl(path, originFallback = "https://harlows.bar") {
   const origin =

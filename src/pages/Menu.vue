@@ -15,7 +15,7 @@ import {
   buildRestaurantJsonLd,
   buildMenuJsonLd,
   absoluteUrl,
-} from "src/utils/seo.js";
+} from "src/seo.js";
 
 const { t, locale } = useI18n({ useScope: "global" });
 const route = useRoute();

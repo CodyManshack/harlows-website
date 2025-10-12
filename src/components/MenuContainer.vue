@@ -15,7 +15,7 @@
 
 <script setup>
 import MenuSection from "./MenuSection.vue";
-import menu from "src/components/menu.js";
+import menu from "src/menu.js";
 import { useI18n } from "vue-i18n";
 
 const { locale } = useI18n();

@@ -102,7 +102,7 @@
 <script setup>
 import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { buildRestaurantJsonLd, absoluteUrl } from "src/utils/seo.js";
+import { buildRestaurantJsonLd, absoluteUrl } from "src/seo.js";
 import { useI18n } from "vue-i18n";
 import { useMeta, useQuasar } from "quasar";
 

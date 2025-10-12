@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildRestaurantJsonLd, buildMenuJsonLd } from "src/utils/seo.js";
+import { buildRestaurantJsonLd, buildMenuJsonLd } from "src/seo.js";
 
 describe("SEO JSON-LD builders", () => {
   it("buildRestaurantJsonLd returns basic structure", () => {

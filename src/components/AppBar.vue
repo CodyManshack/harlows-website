@@ -48,7 +48,7 @@
         "
       />
     </q-toolbar>
-  <q-bar :class="['hours-bar']">
+    <q-bar :class="['hours-bar']">
       <div
         :class="[
           $q.screen.gt.sm ? 'text-body1' : 'text-caption',
@@ -134,13 +134,13 @@ import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
-import menu from "src/components/menu.js";
+import menu from "src/menu.js";
 
 const router = useRouter();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
 const drawer = ref(false);
-import { businessHoursByDay, jsDayToKey } from "./businessHours.js";
+import { businessHoursByDay, jsDayToKey } from "../businessHours.js";
 
 // List of days in display order
 const displayDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
