@@ -32,6 +32,12 @@
         :sectionKey="sectionKey"
       />
     </div>
+    <!-- Bottom sentinel for cocktails section to stop sticky filter before next section title -->
+    <div
+      v-if="sectionKey === 'cocktails' && items && items.length > 0"
+      class="cocktail-section-end-sentinel"
+      aria-hidden="true"
+    />
     <template v-if="subsections">
       <div
         v-for="(sub, subkey) in subsections"

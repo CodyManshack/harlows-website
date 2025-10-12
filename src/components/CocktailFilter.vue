@@ -75,6 +75,7 @@ import {
   watch,
 } from "vue";
 import { useI18n } from "vue-i18n";
+import { useQuasar } from "quasar";
 import FlavorProfileDots from "./FlavorProfileDots.vue";
 import { useHeaderState } from "src/composables/useHeaderState.js";
 
@@ -93,6 +94,26 @@ const parentSection = ref(null);
 
 const { t, locale } = useI18n();
 const { isHeaderHidden } = useHeaderState();
+const $q = useQuasar();
+
+// IntersectionObserver tuning
+const OBS_DEBOUNCE_MS = 60; // reduce flicker by debouncing observer callbacks
+const BOTTOM_BUFFER_PX = 180; // stop a bit early to avoid boundary thrash
+
+function debounce(fn, delay) {
+  let timer = null;
+  const debounced = (...args) => {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+  debounced.cancel = () => {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  };
+  return debounced;
+}
 
 const availableTags = computed(() => [
   { id: "seasonal", label: t("filter.tags.seasonal") },
@@ -116,6 +137,19 @@ const sampleProfile = {
   citrus: 2,
   tart: 1,
 };
+
+// Responsive bottom buffer to avoid covering the next section title.
+// Combines header height, filter height, and an extra margin that is larger on small screens.
+function getBottomBufferPx() {
+  const appBarH = isHeaderHidden.value ? 0 : 94;
+  const filterH = filterBar.value?.offsetHeight || 80;
+  // Extra margin by breakpoint
+  let extra = 16; // desktop default
+  if ($q?.screen?.xs === true || $q?.screen?.lt?.sm === true)
+    extra = 56; // phones
+  else if ($q?.screen?.lt?.md === true) extra = 32; // small tablets
+  return Math.round(appBarH + filterH + extra);
+}
 
 // i18n-aware value resolver for strings or {en, es} objects
 function trVal(value) {
@@ -240,6 +274,10 @@ onMounted(() => {
 
   // Find the section title and last cocktail item
   const sectionTitle = parentSection.value.querySelector(".menu-section-title");
+  // Prefer a dedicated bottom sentinel if present; fallback to last cocktail item
+  const bottomSentinel = parentSection.value.querySelector(
+    ".cocktail-section-end-sentinel"
+  );
   const cocktailItems = parentSection.value.querySelectorAll(".menu-item");
   const lastCocktailItem = cocktailItems[cocktailItems.length - 1];
   // Attempt to find the next section's title for early hide behavior
@@ -249,9 +287,14 @@ onMounted(() => {
     );
 
   console.log("Section title found:", !!sectionTitle);
-  console.log("Last cocktail item found:", !!lastCocktailItem);
+  console.log(
+    "Bottom sentinel found:",
+    !!bottomSentinel,
+    "last item:",
+    !!lastCocktailItem
+  );
 
-  if (sectionTitle && lastCocktailItem) {
+  if (sectionTitle && (bottomSentinel || lastCocktailItem)) {
     // Create dynamic observer options based on header visibility
     const createObserverOptions = () => ({
       threshold: 0,
@@ -261,195 +304,80 @@ onMounted(() => {
     });
 
     // Observer for the section title (to determine sticky behavior)
-    let titleObserver = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      console.log(
-        "📍 Title observer (original):",
-        entry.isIntersecting,
-        "boundingClientRect.top:",
-        entry.boundingClientRect.top
-      );
-
-      // Title has scrolled past the AppBar boundary = should be sticky, but only if filter is visible
-      // We need to distinguish between title being above vs below the adjusted viewport
+    const onTitle = (entry) => {
       const appBarHeight = isHeaderHidden.value ? 0 : 94;
       const titleScrolledPast =
         !entry.isIntersecting && entry.boundingClientRect.top < appBarHeight;
-      const shouldBeSticky = titleScrolledPast; // Sticky should depend only on title position, not visibility      // Always update sticky state based on both title position AND visibility
-
-      console.log("🔍 Title sticky logic (original):", {
-        isIntersecting: entry.isIntersecting,
-        boundingClientRectTop: entry.boundingClientRect.top,
-        appBarHeight,
-        titleScrolledPast,
-        shouldBeSticky,
-        currentStickyState: isSticky.value,
-        needsChange: isSticky.value !== shouldBeSticky,
-        explanation: entry.isIntersecting
-          ? "Title visible in adjusted viewport"
-          : entry.boundingClientRect.top < appBarHeight
-          ? "Title behind AppBar - should be sticky"
-          : "Title below viewport - should NOT be sticky",
-      });
+      const shouldBeSticky = titleScrolledPast;
       if (isSticky.value !== shouldBeSticky) {
-        console.log(
-          "🔄 Sticky state changing:",
-          isSticky.value,
-          "->",
-          shouldBeSticky
-        );
         isSticky.value = shouldBeSticky;
         emit("sticky-change", shouldBeSticky);
       }
-    }, createObserverOptions());
+    };
+    const debouncedOnTitle = debounce(onTitle, OBS_DEBOUNCE_MS);
+    let titleObserver = new IntersectionObserver(
+      (entries) => debouncedOnTitle(entries[0]),
+      createObserverOptions()
+    );
 
-    // Observer for the last cocktail item (to determine when we've left the section)
-    const sectionEndObserver = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        console.log(
-          "📍 Section end observer:",
-          entry.isIntersecting,
-          "boundingClientRect.top:",
-          entry.boundingClientRect.top
-        );
+    // Observer for the end of section (bottom sentinel or last item)
+    const onSectionEnd = (entry) => {
+      const appBarHeight = isHeaderHidden.value ? 0 : 94;
+      const sectionTitle = parentSection.value?.querySelector?.(
+        ".menu-section-title"
+      );
+      const sectionTitleRect = sectionTitle?.getBoundingClientRect();
+      const topPassed =
+        !!sectionTitleRect && sectionTitleRect.top <= appBarHeight;
+      const boundBottom = entry.boundingClientRect.bottom;
+      const bottomBuffer = getBottomBufferPx();
+      const bottomNotPassed = boundBottom > bottomBuffer;
+      const inSection = topPassed && bottomNotPassed;
 
-        // We're in the cocktails section if:
-        // 1. We haven't reached the next section yet
-        // 2. AND we're not above the current section (check via section title position)
-        const sectionTitle = parentSection.value?.querySelector?.(
-          ".menu-section-title"
-        );
-        const appBarHeight = isHeaderHidden.value ? 0 : 94;
-        const sectionTitleRect = sectionTitle?.getBoundingClientRect();
-        const aboveSection =
-          sectionTitle && sectionTitleRect.bottom < appBarHeight;
-        const inSection = !nextTitleVisible.value && !aboveSection;
-
-        console.log("🔍 Section visibility logic:", {
-          lastItemIntersecting: entry.isIntersecting,
-          lastItemTop: entry.boundingClientRect.top,
-          lastItemBottom: entry.boundingClientRect.bottom,
-          nextTitleVisible: nextTitleVisible.value,
-          sectionTitleBottom: sectionTitleRect?.bottom,
-          appBarHeight,
-          aboveSection,
-          inSection,
-          currentVisibility: isVisible.value,
-          needsChange: isVisible.value !== inSection,
-          headerHidden: isHeaderHidden.value,
-          windowHeight: window.innerHeight,
-          scrollY: window.scrollY,
-        });
-
-        if (isVisible.value !== inSection) {
-          console.log(
-            "🔄 Visibility changing:",
-            isVisible.value,
-            "->",
-            inSection
-          );
-          isVisible.value = inSection;
-
-          // If filter becomes invisible, it should also stop being sticky
-          if (!inSection && isSticky.value) {
-            console.log(
-              "🔄 Sticky state changing (section left):",
-              isSticky.value,
-              "->",
-              false
-            );
-            isSticky.value = false;
-            emit("sticky-change", false);
-          }
-          // If filter becomes visible, check if title is already scrolled past
-          else if (inSection && !isSticky.value) {
-            // Check if title is currently behind the AppBar
-            const sectionTitle = parentSection.value.querySelector(
-              ".menu-section-title"
-            );
-            if (sectionTitle) {
-              const titleRect = sectionTitle.getBoundingClientRect();
-              const appBarHeight = isHeaderHidden.value ? 0 : 94;
-              const titleBehindAppBar = titleRect.top < appBarHeight;
-
-              if (titleBehindAppBar) {
-                console.log(
-                  "🔄 Sticky state changing (re-entering section with title scrolled past):",
-                  isSticky.value,
-                  "->",
-                  true
-                );
-                isSticky.value = true;
-                emit("sticky-change", true);
-              }
-            }
-          }
+      if (isVisible.value !== inSection) {
+        isVisible.value = inSection;
+        if (!inSection && isSticky.value) {
+          isSticky.value = false;
+          emit("sticky-change", false);
+        } else if (inSection && !isSticky.value && topPassed) {
+          isSticky.value = true;
+          emit("sticky-change", true);
         }
-      },
-      {
-        threshold: 0,
-        // Tighten margins so we leave the section earlier (no generous buffer)
-        rootMargin: "0px 0px 0px 0px",
       }
+    };
+    const debouncedOnSectionEnd = debounce(onSectionEnd, OBS_DEBOUNCE_MS);
+    const sectionEndObserver = new IntersectionObserver(
+      (entries) => debouncedOnSectionEnd(entries[0]),
+      { threshold: 0, rootMargin: "0px 0px 0px 0px" }
     );
 
     // Optional: Observer for the NEXT section title — when it reaches the top zone, hide filter early
     let nextTitleObserver = null;
     if (nextSectionTitle) {
+      const onNextTitle = (entry) => {
+        nextTitleVisible.value = entry.isIntersecting;
+      };
+      const debouncedOnNextTitle = debounce(onNextTitle, OBS_DEBOUNCE_MS);
       nextTitleObserver = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          console.log("🔍 Next title observer:", {
-            isIntersecting: entry.isIntersecting,
-            boundingClientRectTop: entry.boundingClientRect.top,
-            boundingClientRectBottom: entry.boundingClientRect.bottom,
-            currentNextTitleVisible: nextTitleVisible.value,
-            headerHidden: isHeaderHidden.value,
-            rootMargin: isHeaderHidden.value
-              ? "0px 0px 0px 0px"
-              : "-96px 0px 0px 0px",
-          });
-
-          // Consider the next title visible in the top zone (account for AppBar) when intersecting with negative top margin
-          nextTitleVisible.value = entry.isIntersecting;
-
-          if (nextTitleVisible.value) {
-            console.log("🚫 Next section reached - hiding filter");
-            // Ensure filter is not visible nor sticky when next section title arrives
-            if (isVisible.value || isSticky.value) {
-              isVisible.value = false;
-              if (isSticky.value) {
-                isSticky.value = false;
-                emit("sticky-change", false);
-              }
-            }
-          } else {
-            console.log(
-              "✅ Next section no longer visible - may show filter again"
-            );
-          }
-        },
-        {
-          threshold: 0,
-          rootMargin: isHeaderHidden.value
-            ? "0px 0px 0px 0px"
-            : "-96px 0px 0px 0px",
-        }
+        (entries) => debouncedOnNextTitle(entries[0]),
+        { threshold: 0, rootMargin: "0px 0px 0px 0px" }
       );
+      filterBar.value._debouncedNextTitleHandler = debouncedOnNextTitle;
     }
 
     // Start observing
     titleObserver.observe(sectionTitle);
-    sectionEndObserver.observe(lastCocktailItem);
+    sectionEndObserver.observe(bottomSentinel || lastCocktailItem);
     if (nextSectionTitle && nextTitleObserver) {
       nextTitleObserver.observe(nextSectionTitle);
       filterBar.value._nextTitleObserver = nextTitleObserver;
     }
 
-    // Store observers for cleanup
+    // Store observers and debounced handlers for cleanup
     filterBar.value._titleObserver = titleObserver;
     filterBar.value._sectionEndObserver = sectionEndObserver;
+    filterBar.value._debouncedTitleHandler = debouncedOnTitle;
+    filterBar.value._debouncedSectionEndHandler = debouncedOnSectionEnd;
 
     console.log("✅ Intersection observers set up successfully");
   }
@@ -485,6 +413,19 @@ watch(isHeaderHidden, (newValue, oldValue) => {
     if (filterBar.value?._nextTitleObserver) {
       filterBar.value._nextTitleObserver.disconnect();
     }
+    // Cancel debounced handlers
+    if (filterBar.value?._debouncedTitleHandler) {
+      filterBar.value._debouncedTitleHandler.cancel?.();
+      filterBar.value._debouncedTitleHandler = null;
+    }
+    if (filterBar.value?._debouncedSectionEndHandler) {
+      filterBar.value._debouncedSectionEndHandler.cancel?.();
+      filterBar.value._debouncedSectionEndHandler = null;
+    }
+    if (filterBar.value?._debouncedNextTitleHandler) {
+      filterBar.value._debouncedNextTitleHandler.cancel?.();
+      filterBar.value._debouncedNextTitleHandler = null;
+    }
 
     // Wait for next tick to ensure DOM has updated, then recreate observers
     nextTick(() => {
@@ -492,6 +433,9 @@ watch(isHeaderHidden, (newValue, oldValue) => {
       if (!parentSection) return;
 
       const sectionTitle = parentSection.querySelector(".menu-section-title");
+      const bottomSentinel = parentSection.querySelector(
+        ".cocktail-section-end-sentinel"
+      );
       const cocktailItems = parentSection.querySelectorAll(".menu-item");
       const lastCocktailItem = cocktailItems[cocktailItems.length - 1];
       const nextSectionTitle =
@@ -499,7 +443,7 @@ watch(isHeaderHidden, (newValue, oldValue) => {
           ".menu-section-title"
         );
 
-      if (sectionTitle && lastCocktailItem) {
+      if (sectionTitle && (bottomSentinel || lastCocktailItem)) {
         // Recreate observers with updated options
         const createObserverOptions = () => ({
           threshold: 0,
@@ -508,98 +452,85 @@ watch(isHeaderHidden, (newValue, oldValue) => {
             : "-94px 0px 0px 0px",
         });
 
-        const titleObserver = new IntersectionObserver((entries) => {
-          const entry = entries[0];
+        const onTitleRe = (entry) => {
           const appBarHeight = isHeaderHidden.value ? 0 : 94;
           const titleScrolledPast =
             !entry.isIntersecting &&
             entry.boundingClientRect.top < appBarHeight;
-          const shouldBeSticky = titleScrolledPast; // Sticky should depend only on title position, not visibility
-
-          console.log("🔍 Title observer (recreated):", {
-            isIntersecting: entry.isIntersecting,
-            boundingClientRectTop: entry.boundingClientRect.top,
-            appBarHeight,
-            titleScrolledPast,
-            isVisible: isVisible.value,
-            shouldBeSticky,
-            currentSticky: isSticky.value,
-            needsChange: isSticky.value !== shouldBeSticky,
-          });
-
+          const shouldBeSticky = titleScrolledPast;
           if (isSticky.value !== shouldBeSticky) {
-            console.log(
-              "🔄 Sticky state changing (recreated observer):",
-              isSticky.value,
-              "->",
-              shouldBeSticky
-            );
             isSticky.value = shouldBeSticky;
             emit("sticky-change", shouldBeSticky);
           }
-        }, createObserverOptions());
+        };
+        const debouncedOnTitleRe = debounce(onTitleRe, OBS_DEBOUNCE_MS);
+        const titleObserver = new IntersectionObserver(
+          (entries) => debouncedOnTitleRe(entries[0]),
+          createObserverOptions()
+        );
 
-        const sectionEndObserver = new IntersectionObserver(
-          (entries) => {
-            const entry = entries[0];
-            const sectionTitle = parentSection.querySelector?.(
-              ".menu-section-title"
-            );
-            const appBarHeight = isHeaderHidden.value ? 0 : 94;
-            const aboveSection =
-              sectionTitle &&
-              sectionTitle.getBoundingClientRect().bottom < appBarHeight;
-            const inSection = !nextTitleVisible.value && !aboveSection;
+        const onSectionEndRe = (entry) => {
+          const sectionTitle = parentSection.querySelector?.(
+            ".menu-section-title"
+          );
+          const appBarHeight = isHeaderHidden.value ? 0 : 94;
+          const rect = sectionTitle?.getBoundingClientRect();
+          const topPassed = !!rect && rect.top <= appBarHeight;
+          const boundBottom = entry.boundingClientRect.bottom;
+          const bottomBuffer = getBottomBufferPx();
+          const bottomNotPassed = boundBottom > bottomBuffer;
+          const inSection = topPassed && bottomNotPassed;
 
-            if (isVisible.value !== inSection) {
-              isVisible.value = inSection;
-              if (!inSection && isSticky.value) {
-                isSticky.value = false;
-                emit("sticky-change", false);
-              }
+          if (isVisible.value !== inSection) {
+            isVisible.value = inSection;
+            if (!inSection && isSticky.value) {
+              isSticky.value = false;
+              emit("sticky-change", false);
+            } else if (inSection && !isSticky.value && topPassed) {
+              isSticky.value = true;
+              emit("sticky-change", true);
             }
-          },
+          }
+        };
+        const debouncedOnSectionEndRe = debounce(
+          onSectionEndRe,
+          OBS_DEBOUNCE_MS
+        );
+        const sectionEndObserver = new IntersectionObserver(
+          (entries) => debouncedOnSectionEndRe(entries[0]),
           { threshold: 0, rootMargin: "0px 0px 0px 0px" }
         );
 
         // Recreate next title observer if it exists
         let nextTitleObserver = null;
         if (nextSectionTitle) {
-          nextTitleObserver = new IntersectionObserver(
-            (entries) => {
-              const entry = entries[0];
-              nextTitleVisible.value = entry.isIntersecting;
-
-              if (nextTitleVisible.value) {
-                if (isVisible.value || isSticky.value) {
-                  isVisible.value = false;
-                  if (isSticky.value) {
-                    isSticky.value = false;
-                    emit("sticky-change", false);
-                  }
-                }
-              }
-            },
-            {
-              threshold: 0,
-              rootMargin: isHeaderHidden.value
-                ? "0px 0px 0px 0px"
-                : "-96px 0px 0px 0px",
-            }
+          const onNextTitleRe = (entry) => {
+            nextTitleVisible.value = entry.isIntersecting;
+          };
+          const debouncedOnNextTitleRe = debounce(
+            onNextTitleRe,
+            OBS_DEBOUNCE_MS
           );
+          nextTitleObserver = new IntersectionObserver(
+            (entries) => debouncedOnNextTitleRe(entries[0]),
+            { threshold: 0, rootMargin: "0px 0px 0px 0px" }
+          );
+          filterBar.value._debouncedNextTitleHandler = debouncedOnNextTitleRe;
         }
 
         // Start observing
         titleObserver.observe(sectionTitle);
-        sectionEndObserver.observe(lastCocktailItem);
+        sectionEndObserver.observe(bottomSentinel || lastCocktailItem);
         if (nextSectionTitle && nextTitleObserver) {
           nextTitleObserver.observe(nextSectionTitle);
           filterBar.value._nextTitleObserver = nextTitleObserver;
         }
 
-        // Store observers for cleanup
+        // Store observers and debounced handlers for cleanup
         filterBar.value._titleObserver = titleObserver;
         filterBar.value._sectionEndObserver = sectionEndObserver;
+        filterBar.value._debouncedTitleHandler = debouncedOnTitleRe;
+        filterBar.value._debouncedSectionEndHandler = debouncedOnSectionEndRe;
       }
     });
   }, 100); // 100ms debounce delay
@@ -622,6 +553,19 @@ onBeforeUnmount(() => {
   }
   if (filterBar.value?._nextTitleObserver) {
     filterBar.value._nextTitleObserver.disconnect();
+  }
+  // Cancel debounced handlers
+  if (filterBar.value?._debouncedTitleHandler) {
+    filterBar.value._debouncedTitleHandler.cancel?.();
+    filterBar.value._debouncedTitleHandler = null;
+  }
+  if (filterBar.value?._debouncedSectionEndHandler) {
+    filterBar.value._debouncedSectionEndHandler.cancel?.();
+    filterBar.value._debouncedSectionEndHandler = null;
+  }
+  if (filterBar.value?._debouncedNextTitleHandler) {
+    filterBar.value._debouncedNextTitleHandler.cancel?.();
+    filterBar.value._debouncedNextTitleHandler = null;
   }
 });
 </script>
