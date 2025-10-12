@@ -96,7 +96,7 @@ export default {
           es: "licor de almendra fuerte con un toque de dulzor, acidez y suavidad",
         },
         egg: true,
-        img: "/cocktails/amarettosour/0.25x.png",
+        img: "/cocktails/amarettosour",
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
       },
       {

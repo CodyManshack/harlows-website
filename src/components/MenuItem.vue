@@ -1,14 +1,26 @@
 <template>
   <div :class="['menu-item', liquor ? 'menu-item--liquor' : '']">
     <div v-if="item.img" class="menu-item__imageWrap">
-      <q-img
-        :src="item.img"
-        :alt="item.name"
-        loading="lazy"
-        ratio="1"
-        fit="cover"
-        class="menu-item__image menu-notch"
-      />
+      <template v-if="imgIsFolder">
+        <img
+          :src="imgBaseSrc"
+          :srcset="imgSrcset"
+          sizes="(min-width: 768px) 360px, 100vw"
+          :alt="displayName"
+          loading="lazy"
+          class="menu-item__image menu-notch"
+        />
+      </template>
+      <template v-else>
+        <q-img
+          :src="item.img"
+          :alt="displayName"
+          loading="lazy"
+          ratio="1"
+          fit="cover"
+          class="menu-item__image menu-notch"
+        />
+      </template>
     </div>
     <div class="menu-item__content">
       <div
@@ -124,7 +136,7 @@
 
 <script setup>
 import { useI18n } from "vue-i18n";
-import { computed } from "vue";
+import { computed, ref, onMounted, watch } from "vue";
 import FlavorProfileDots from "./FlavorProfileDots.vue";
 
 const props = defineProps({
@@ -137,6 +149,73 @@ const props = defineProps({
 });
 
 const { locale, t } = useI18n();
+const displayName = computed(() => {
+  const n = (props.item && props.item.name) || "";
+  if (typeof n === "string") return n;
+  if (n && typeof n === "object") {
+    const loc = (locale.value || "en").toString();
+    return n[loc] ?? n.en ?? Object.values(n)[0] ?? "";
+  }
+  return "";
+});
+
+// Detect if item.img is a folder path (no file extension)
+const imgIsFolder = computed(() => {
+  const p = (props.item && props.item.img) || "";
+  if (typeof p !== "string" || !p) return false;
+  return !/\.(png|jpe?g|webp|avif|gif|svg)(\?.*)?$/i.test(p);
+});
+
+const imgSrcset = ref("");
+const imgBaseSrc = ref("");
+
+async function buildSrcsetFromFolder(folderPath) {
+  if (!folderPath) return;
+  const normalized = folderPath.replace(/\/$/, "");
+  const base = normalized.split("/").pop();
+  const widths = [400, 800, 1200, 2000];
+  const candidates = widths.map((w) => ({
+    width: w,
+    url: `${normalized}/${base}-${w}.jpg`,
+  }));
+
+  const checks = await Promise.all(
+    candidates.map(async (c) => {
+      try {
+        const res = await fetch(c.url, { method: "HEAD" });
+        return res.ok ? c : null;
+      } catch (e) {
+        return null;
+      }
+    })
+  );
+  const existing = checks.filter(Boolean);
+  if (existing.length) {
+    imgSrcset.value = existing.map((c) => `${c.url} ${c.width}w`).join(", ");
+    // Choose a reasonable default src (middle size if available)
+    const preferred =
+      existing.find((c) => c.width === 800) ||
+      existing[Math.floor(existing.length / 2)];
+    imgBaseSrc.value = preferred.url;
+  } else {
+    // fallback: point to folder basename 800
+    imgSrcset.value = "";
+    imgBaseSrc.value = `${normalized}/${base}-800.jpg`;
+  }
+}
+
+onMounted(() => {
+  if (imgIsFolder.value) {
+    buildSrcsetFromFolder(props.item.img);
+  }
+});
+
+watch(
+  () => props.item && props.item.img,
+  (val) => {
+    if (val && imgIsFolder.value) buildSrcsetFromFolder(val);
+  }
+);
 function trSize(key, ctx = {}) {
   const loc = (locale.value || "en").toString();
   const map = {
