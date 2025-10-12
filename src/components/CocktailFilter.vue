@@ -146,11 +146,11 @@ const availableTags = computed(() => [
 ]);
 
 const sampleProfile = {
-  boozy: 3,
-  bitter: 2,
-  sweet: 4,
-  citrus: 2,
-  tart: 1,
+  boozy: 5,
+  bitter: 5,
+  sweet: 5,
+  citrus: 5,
+  tart: 5,
 };
 
 // Responsive bottom buffer to avoid covering the next section title.
