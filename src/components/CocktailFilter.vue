@@ -8,37 +8,6 @@
   >
     <div class="filter-content">
       <span class="filter-label">{{ t("filter.label") }}</span>
-      <q-icon
-        name="help_outline"
-        size="18px"
-        class="legend-icon q-ml-sm text-grey-7"
-        aria-label="Legend"
-      >
-        <q-tooltip class="bg-black text-white">
-          <div class="legend-container">
-            <div class="legend-row">
-              <span class="legend-swatch" style="background: #6a1b9a"></span>
-              {{ t("filter.tags.boozy") }}
-            </div>
-            <div class="legend-row">
-              <span class="legend-swatch" style="background: #d32f2f"></span>
-              {{ t("filter.tags.bitter") }}
-            </div>
-            <div class="legend-row">
-              <span class="legend-swatch" style="background: #f39c12"></span>
-              {{ t("filter.tags.sweet") }}
-            </div>
-            <div class="legend-row">
-              <span class="legend-swatch" style="background: #43a047"></span>
-              {{ t("filter.tags.citrus") }}
-            </div>
-            <div class="legend-row">
-              <span class="legend-swatch" style="background: #1976d2"></span>
-              {{ t("filter.tags.tart") }}
-            </div>
-          </div>
-        </q-tooltip>
-      </q-icon>
       <div class="filter-tags">
         <button
           v-for="tag in availableTags"
@@ -60,7 +29,12 @@
     </div>
     <!-- Flavor Profile Legend -->
     <div class="flavor-profile-legend">
-      <FlavorProfileDots :profile="sampleProfile" :show-labels="true" />
+      <FlavorProfileDots
+        :profile="sampleProfile"
+        :show-labels="true"
+        :active-keys="activeSortKeys"
+        @pick="onFlavorPick"
+      />
     </div>
   </div>
 </template>
@@ -83,7 +57,7 @@ const props = defineProps({
   cocktails: Array,
 });
 
-const emit = defineEmits(["filter-change", "sticky-change"]);
+const emit = defineEmits(["filter-change", "sticky-change", "sort-change"]);
 
 const filterBar = ref(null);
 const isSticky = ref(false);
@@ -91,6 +65,7 @@ const isVisible = ref(false);
 const nextTitleVisible = ref(false);
 const selectedTags = ref([]);
 const parentSection = ref(null);
+const activeSortKeys = ref([]); // e.g., ['boozy','bitter'] in order clicked
 
 const { t, locale } = useI18n();
 const { isHeaderHidden } = useHeaderState();
@@ -118,14 +93,13 @@ function debounce(fn, delay) {
 const availableTags = computed(() => [
   { id: "seasonal", label: t("filter.tags.seasonal") },
   { id: "egg", label: t("filter.tags.egg") },
-  { id: "boozy", label: t("filter.tags.boozy") },
-  { id: "sweet", label: t("filter.tags.sweet") },
-  { id: "strong", label: t("filter.tags.strong") },
-  { id: "citrus", label: t("filter.tags.citrus") },
+  // { id: "boozy", label: t("filter.tags.boozy") },
+  // { id: "sweet", label: t("filter.tags.sweet") },
+  // { id: "citrus", label: t("filter.tags.citrus") },
   { id: "fruity", label: t("filter.tags.fruity") },
-  { id: "bitter", label: t("filter.tags.bitter") },
+  // { id: "bitter", label: t("filter.tags.bitter") },
   { id: "spicy", label: t("filter.tags.spicy") },
-  { id: "tart", label: t("filter.tags.tart") },
+  // { id: "tart", label: t("filter.tags.tart") },
   { id: "under10", label: t("filter.tags.under10") },
   { id: "premium", label: t("filter.tags.premium") },
 ]);
@@ -243,6 +217,18 @@ const toggleTag = (tagId) => {
 const clearAllFilters = () => {
   selectedTags.value = [];
 };
+
+// Handle clicks on flavor profile legend to toggle sort key
+function onFlavorPick(key) {
+  const idx = activeSortKeys.value.indexOf(key);
+  if (idx >= 0) {
+    // Clicking again removes that key
+    activeSortKeys.value.splice(idx, 1);
+  } else {
+    activeSortKeys.value.push(key);
+  }
+  emit("sort-change", [...activeSortKeys.value]);
+}
 
 // Watch for filter changes and emit to parent
 watch(

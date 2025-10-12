@@ -16,6 +16,7 @@
         :cocktails="items"
         @filter-change="handleFilterChange"
         @sticky-change="handleStickyChange"
+        @sort-change="handleSortChange"
       />
     </div>
 
@@ -139,6 +140,7 @@ const sectionRef = ref(null);
 const cocktailFilterRef = ref(null);
 const filteredItems = ref([]);
 const filterIsSticky = ref(false);
+const activeSortKeys = ref([]); // array of flavor keys in priority order
 
 // Handle filtered cocktails from CocktailFilter component
 const handleFilterChange = (filtered) => {
@@ -148,6 +150,11 @@ const handleFilterChange = (filtered) => {
 // Handle sticky state changes from CocktailFilter component
 const handleStickyChange = (sticky) => {
   filterIsSticky.value = sticky;
+};
+
+// Handle sort key from CocktailFilter flavor legend
+const handleSortChange = (keys) => {
+  activeSortKeys.value = Array.isArray(keys) ? keys : [];
 };
 
 // Custom display order for cocktails section
@@ -193,8 +200,28 @@ const defaultCocktailOrder = [
   "Moscow Mule",
 ];
 
-const sortCocktails = (items) => {
+// Default sort uses custom sequence then alpha fallback
+const sortDefault = (items) => {
   return [...items].sort((a, b) => {
+    const ai = defaultCocktailOrder.indexOf(a.name);
+    const bi = defaultCocktailOrder.indexOf(b.name);
+    if (ai === -1 && bi === -1) return a.name.localeCompare(b.name);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+};
+
+// Sort by multiple flavor keys (descending). Final tie-break: default order, then alpha.
+const sortByFlavorsThenDefault = (items, keys) => {
+  const ks = Array.isArray(keys) ? keys.filter(Boolean) : [];
+  return [...items].sort((a, b) => {
+    for (const k of ks) {
+      const av = (a && a.profile && a.profile[k]) ?? 0;
+      const bv = (b && b.profile && b.profile[k]) ?? 0;
+      if (av !== bv) return bv - av; // higher first
+    }
+    // default sequence tie-breaker
     const ai = defaultCocktailOrder.indexOf(a.name);
     const bi = defaultCocktailOrder.indexOf(b.name);
     if (ai === -1 && bi === -1) return a.name.localeCompare(b.name);
@@ -208,7 +235,9 @@ const displayItems = computed(() => {
   if (props.sectionKey === "cocktails") {
     const items =
       filteredItems.value.length > 0 ? filteredItems.value : props.items || [];
-    return sortCocktails(items);
+    return activeSortKeys.value.length
+      ? sortByFlavorsThenDefault(items, activeSortKeys.value)
+      : sortDefault(items);
   }
   return props.items || [];
 });

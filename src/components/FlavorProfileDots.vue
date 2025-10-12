@@ -1,7 +1,17 @@
 <template>
   <div class="flavor-profile-dots">
     <div class="profile-row">
-      <div v-for="cat in profileCategories" :key="cat.key" class="dot-column">
+      <div
+        v-for="cat in profileCategories"
+        :key="cat.key"
+        class="dot-column"
+        :class="{ active: isActive(cat.key) }"
+        role="button"
+        tabindex="0"
+        :aria-pressed="isActive(cat.key)"
+        @click="$emit('pick', cat.key)"
+        @keydown.enter.stop.prevent="$emit('pick', cat.key)"
+      >
         <span v-if="showLabels" class="dot-label">{{ cat.label }}</span>
         <div class="dots" :class="'cat-color-' + cat.key">
           <i
@@ -28,7 +38,24 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  activeKey: {
+    type: String,
+    default: null,
+  },
+  activeKeys: {
+    type: Array,
+    default: () => [],
+  },
 });
+
+defineEmits(["pick"]);
+
+function isActive(key) {
+  if (Array.isArray(props.activeKeys) && props.activeKeys.length) {
+    return props.activeKeys.includes(key);
+  }
+  return props.activeKey === key;
+}
 
 const { t } = useI18n();
 
@@ -79,6 +106,13 @@ const profileCategories = computed(() => [
 }
 .dot-column:not(:has(.dot-label)) {
   justify-content: center;
+}
+.dot-column {
+  cursor: pointer;
+  user-select: none;
+}
+.dot-column.active .dot-label {
+  text-decoration: underline;
 }
 .dot-label {
   font-size: 0.65rem;
