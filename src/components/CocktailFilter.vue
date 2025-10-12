@@ -370,130 +370,8 @@ onMounted(() => {
   emit("filter-change", filteredCocktails.value);
 });
 
-// Recreate observers helper (call if layout changes significantly)
-let recreateTimeout = null;
-// Note: no header visibility watcher needed anymore
-
-// Clean up existing observers
-if (filterBar.value?._titleObserver) {
-  filterBar.value._titleObserver.disconnect();
-}
-if (filterBar.value?._sectionEndObserver) {
-  filterBar.value._sectionEndObserver.disconnect();
-}
-if (filterBar.value?._nextTitleObserver) {
-  filterBar.value._nextTitleObserver.disconnect();
-}
-// Cancel debounced handlers
-if (filterBar.value?._debouncedTitleHandler) {
-  filterBar.value._debouncedTitleHandler.cancel?.();
-  filterBar.value._debouncedTitleHandler = null;
-}
-if (filterBar.value?._debouncedSectionEndHandler) {
-  filterBar.value._debouncedSectionEndHandler.cancel?.();
-  filterBar.value._debouncedSectionEndHandler = null;
-}
-if (filterBar.value?._debouncedNextTitleHandler) {
-  filterBar.value._debouncedNextTitleHandler.cancel?.();
-  filterBar.value._debouncedNextTitleHandler = null;
-}
-
-// Wait for next tick to ensure DOM has updated, then recreate observers
-nextTick(() => {
-  const parentSection = filterBar.value?.closest?.(".menu-section");
-  if (!parentSection) return;
-
-  const sectionTitle = parentSection.querySelector(".menu-section-title");
-  const bottomSentinel = parentSection.querySelector(
-    ".cocktail-section-end-sentinel"
-  );
-  const cocktailItems = parentSection.querySelectorAll(".menu-item");
-  const lastCocktailItem = cocktailItems[cocktailItems.length - 1];
-  const nextSectionTitle = parentSection.nextElementSibling?.querySelector?.(
-    ".menu-section-title"
-  );
-
-  if (sectionTitle && (bottomSentinel || lastCocktailItem)) {
-    const onTitleRe = (entry) => {
-      const appBarHeight = 0;
-      const titleScrolledPast =
-        !entry.isIntersecting && entry.boundingClientRect.top < appBarHeight;
-      const shouldBeSticky = titleScrolledPast;
-      if (isSticky.value !== shouldBeSticky) {
-        isSticky.value = shouldBeSticky;
-        emit("sticky-change", shouldBeSticky);
-      }
-    };
-    const debouncedOnTitleRe = debounce(onTitleRe, OBS_DEBOUNCE_MS);
-    const titleObserver = new IntersectionObserver(
-      (entries) => debouncedOnTitleRe(entries[0]),
-      createObserverOptions()
-    );
-
-    const onSectionEndRe = (entry) => {
-      const sectionTitle = parentSection.querySelector?.(".menu-section-title");
-      const appBarHeight = 0;
-      const rect = sectionTitle?.getBoundingClientRect();
-      const topPassed = !!rect && rect.top <= appBarHeight;
-      const boundBottom = entry.boundingClientRect.bottom;
-      const bottomBuffer = getBottomBufferPx();
-      const bottomNotPassed = boundBottom > bottomBuffer;
-      const inSection = topPassed && bottomNotPassed;
-
-      if (isVisible.value !== inSection) {
-        isVisible.value = inSection;
-        if (!inSection && isSticky.value) {
-          isSticky.value = false;
-          emit("sticky-change", false);
-        } else if (inSection && !isSticky.value && topPassed) {
-          isSticky.value = true;
-          emit("sticky-change", true);
-        }
-      }
-    };
-    const debouncedOnSectionEndRe = debounce(onSectionEndRe, OBS_DEBOUNCE_MS);
-    const sectionEndObserver = new IntersectionObserver(
-      (entries) => debouncedOnSectionEndRe(entries[0]),
-      createObserverOptions()
-    );
-
-    // Recreate next title observer if it exists
-    let nextTitleObserver = null;
-    if (nextSectionTitle) {
-      const onNextTitleRe = (entry) => {
-        nextTitleVisible.value = entry.isIntersecting;
-      };
-      const debouncedOnNextTitleRe = debounce(onNextTitleRe, OBS_DEBOUNCE_MS);
-      nextTitleObserver = new IntersectionObserver(
-        (entries) => debouncedOnNextTitleRe(entries[0]),
-        createObserverOptions()
-      );
-      filterBar.value._debouncedNextTitleHandler = debouncedOnNextTitleRe;
-    }
-
-    // Start observing
-    titleObserver.observe(sectionTitle);
-    sectionEndObserver.observe(bottomSentinel || lastCocktailItem);
-    if (nextSectionTitle && nextTitleObserver) {
-      nextTitleObserver.observe(nextSectionTitle);
-      filterBar.value._nextTitleObserver = nextTitleObserver;
-    }
-
-    // Store observers and debounced handlers for cleanup
-    filterBar.value._titleObserver = titleObserver;
-    filterBar.value._sectionEndObserver = sectionEndObserver;
-    filterBar.value._debouncedTitleHandler = debouncedOnTitleRe;
-    filterBar.value._debouncedSectionEndHandler = debouncedOnSectionEndRe;
-  }
-});
-
 onBeforeUnmount(() => {
   console.log("🧹 Cleaning up intersection observers");
-
-  // Clear any pending recreation timeout
-  if (recreateTimeout) {
-    clearTimeout(recreateTimeout);
-  }
 
   if (filterBar.value?._titleObserver) {
     filterBar.value._titleObserver.disconnect();
@@ -546,10 +424,6 @@ onBeforeUnmount(() => {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000 !important;
-  }
-
-  &--headerHidden {
-    top: 0 !important; // when header hidden, move filter to top
   }
 
   &__content {
