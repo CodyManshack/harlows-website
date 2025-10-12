@@ -35,7 +35,7 @@
       <q-btn
         flat
         dense
-        :label="locale.toUpperCase()"
+        :label="locale.value === 'en' ? 'ES' : 'EN'"
         @click="toggleLanguage"
         class="text-white"
         style="
