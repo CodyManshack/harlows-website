@@ -117,7 +117,7 @@ export default {
           es: "licor de violeta floral con limón ácido y cereza maraschino",
         },
         img: "/cocktails/aviation",
-        profile: { boozy: 3, bitter: 0, sweet: 2, citrus: 3, tart: 4 },
+        profile: { boozy: 3, bitter: 0, sweet: 3, citrus: 3, tart: 5 },
       },
       {
         name: "Bacardi Cocktail",
@@ -156,7 +156,7 @@ export default {
           es: "negroni clásico con whisky en lugar de ginebra – sabor amargo y especiado de rye",
         },
         img: "/cocktails/boulevardier",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 4, bitter: 4, sweet: 0, citrus: 0, tart: 0 },
       },
       {
         name: "Brandy Alexander",
@@ -283,7 +283,7 @@ export default {
           en: "bourbon with subtly spiced orange",
           es: "bourbon con naranja especiada",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 4, bitter: 3, sweet: 2, citrus: 4, tart: 2 },
       },
       {
         name: "Margarita '42",
@@ -302,7 +302,7 @@ export default {
           es: "el martini seco clásico – elija su ginebra o vodka – limpio, sucio o muy sucio",
         },
         img: "/cocktails/martini",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 2, bitter: 2, sweet: 0, citrus: 2, tart: 2 },
       },
       {
         name: "Mayan Chocolate",
@@ -312,7 +312,8 @@ export default {
           es: "un Harlow’s Original: una experiencia de chocolate picante que recuerda a una salsa mole picante. Notas de canela, chocolate, cereza y chile",
         },
         seasonal: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 4, bitter: 3, sweet: 3, citrus: 1, tart: 3 },
+        spicy: true,
       },
       {
         name: "Moscow Mule",
@@ -321,7 +322,7 @@ export default {
           en: "the kick of ginger beer paired with tart lime",
           es: "el sabor de ginger beer combinada con lima ácida",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 1, bitter: 4, sweet: 4, citrus: 3, tart: 4 },
       },
       {
         name: "Negroni",
@@ -360,7 +361,7 @@ export default {
           es: "especialmente suave: zumo de naranja dulce con un poco de profundidad",
         },
         img: "/cocktails/orangeblossom",
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 0, bitter: 2, sweet: 3, citrus: 1, tart: 1 },
       },
       {
         name: "Pisco Sour",
@@ -380,7 +381,7 @@ export default {
           es: "un cóctel grande, cremoso y cítrico de 1888 con aroma de azahar",
         },
         egg: true,
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 3, bitter: 0, sweet: 1, citrus: 4, tart: 4 },
       },
       {
         name: "Rusty Nail",
@@ -399,7 +400,7 @@ export default {
           en: "the Official Cocktail of New Orleans marries the spice of rye whiskey with cognac and aromatic absinthe",
           es: "el Cóctel Oficial de Nueva Orleans marida las especias del rye whiskey con coñac y la absenta aromática",
         },
-        profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        profile: { boozy: 5, bitter: 3, sweet: 1, citrus: 1, tart: 0 },
       },
       {
         name: "Sidecar",
