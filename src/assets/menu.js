@@ -10,6 +10,7 @@ export default {
           en: "selection of 2 cured meats and 2 cheeses, served with olive oil and warm bread",
           es: "selección de 2 embutidos y 2 quesos, servido con aceite de oliva y pan caliente",
         },
+        dairy: true,
       },
       {
         name: "cheese plate",
@@ -18,6 +19,7 @@ export default {
           en: "selection of 2 cheeses, served with olive oil and warm bread",
           es: "selección de 2 quesos, servido con aceite de oliva y pan caliente",
         },
+        dairy: true,
       },
       {
         name: { en: "olives and feta", es: "aceitunas con feta" },
@@ -26,6 +28,7 @@ export default {
           en: "a mix of assorted olives and feta",
           es: "una mezcla de aceitunas y queso feta",
         },
+        dairy: true,
       },
     ],
   },
@@ -57,6 +60,7 @@ export default {
           en: "the refined flavors of porcini mushrooms and summer truffles combine into a sultry, creamy dip. Served warm",
           es: "los sabores refinados de las setas porcini y las trufas de verano se combinan en un dip suave y cremoso. Se sirve caliente",
         },
+        dairy: true,
       },
       {
         name: {
@@ -68,6 +72,7 @@ export default {
           en: "a French dip of pureed chickpeas – similar to hummus – with fresh cilantro. Served chilled",
           es: "un dip francés de puré de garbanzos – similar al hummus – con cilantro fresco. Se sirve frío",
         },
+        dairy: true,
       },
     ],
   },
@@ -160,6 +165,7 @@ export default {
           es: "postre cremoso de moscada y chocolate",
         },
         profile: { boozy: 2, bitter: 0, sweet: 5, citrus: 0, tart: 0 },
+        dairy: true,
       },
       {
         name: "Cadillac Margarita",
@@ -216,6 +222,7 @@ export default {
           es: "tras ganar un concurso de cócteles en Nueva York en 1918, este cóctel de postre con chocolate y menta ha seguido deleitando durante más de 106 años",
         },
         profile: { boozy: 1, bitter: 0, sweet: 5, citrus: 0, tart: 0 },
+        dairy: true,
       },
       {
         name: "Hemingway Special",
@@ -236,6 +243,7 @@ export default {
         },
         seasonal: true,
         profile: { boozy: 0, bitter: 0, sweet: 0, citrus: 0, tart: 0 },
+        dairy: true,
       },
       {
         name: "Jack Rose",
