@@ -6,8 +6,6 @@
     :class="{ 'cocktail-filter--collapsed': isCollapsed }"
   >
     <div class="cocktail-filter__content">
-      <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
-
       <!-- Compact row: selected chips + Filters button (opens sheet) -->
       <div class="cocktail-filter__collapsed-content">
         <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
@@ -23,7 +21,7 @@
           </button>
         </div>
         <button class="cocktail-filter__expand" @click="openFilters">
-          {{ t("filter.showFilters")
+          {{ t("filter.label")
           }}<span v-if="selectedTags.length"> ({{ selectedTags.length }})</span>
         </button>
       </div>
@@ -52,8 +50,6 @@
       :class="{ 'cocktail-filter--collapsed': isCollapsed }"
     >
       <div class="cocktail-filter__content">
-        <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
-
         <!-- Compact row: selected chips + Filters button (opens sheet) -->
         <div class="cocktail-filter__collapsed-content">
           <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
@@ -69,7 +65,7 @@
             </button>
           </div>
           <button class="cocktail-filter__expand" @click="openFilters">
-            {{ t("filter.showFilters")
+            {{ t("filter.label")
             }}<span v-if="selectedTags.length">
               ({{ selectedTags.length }})</span
             >
@@ -95,24 +91,18 @@
 
   <!-- Bottom-sheet dialog for filters -->
   <q-dialog
+    class="cf-dialog"
     v-model="sheetOpen"
     position="bottom"
     transition-show="slide-up"
     transition-hide="slide-down"
   >
-    <q-card class="cf-sheet">
-      <q-card-section class="cf-sheet__header">
-        <div class="cf-sheet__title">{{ t("filter.label") }}</div>
-        <q-btn
-          flat
-          round
-          dense
-          icon="close"
-          @click="sheetOpen = false"
-          aria-label="Close"
-        />
-      </q-card-section>
+    <q-card class="cf-sheet" v-touch-pan.y="onSheetPan">
+      <!-- Grabber / handle bar for iOS-style swipe-away -->
+      <div class="cf-sheet__grabber"></div>
+
       <q-card-section class="cf-sheet__content">
+        <div class="cf-sheet__title">{{ t("filter.label") }}</div>
         <div class="cf-sheet__grid">
           <button
             v-for="tag in availableTags"
@@ -127,14 +117,6 @@
           </button>
         </div>
       </q-card-section>
-      <q-card-actions align="right" class="cf-sheet__actions">
-        <q-btn
-          color="primary"
-          unelevated
-          :label="t('filter.done')"
-          @click="sheetOpen = false"
-        />
-      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
@@ -314,6 +296,14 @@ const clearAllFilters = () => {
 
 function openFilters() {
   sheetOpen.value = true;
+}
+
+// Minimal swipe-to-close gesture for the bottom sheet
+function onSheetPan(ev) {
+  // Close when user pans downward sufficiently and releases
+  if (ev.isFinal && ev.direction === "down" && ev.distance?.y >= 40) {
+    sheetOpen.value = false;
+  }
 }
 
 // Handle clicks on flavor profile legend to toggle sort key
@@ -591,7 +581,7 @@ onBeforeUnmount(() => {
     max-width: 900px;
     margin: 0 auto;
     display: flex;
-    gap: 0.5rem;
+    gap: 0.65rem; // slightly increased spacing
     padding: 0 12px;
     align-items: center;
     justify-content: center;
@@ -677,23 +667,22 @@ onBeforeUnmount(() => {
 
   // Collapsed state styles
   &--collapsed {
-    padding: 0.75rem 0; // Reduce padding when collapsed
+    padding: 0.55rem 0; // Further reduce padding when collapsed
 
     .cocktail-filter__content {
-      gap: 0.3rem; // Tighter spacing in collapsed mode
-    }
-
-    .cocktail-filter__label {
-      font-size: 0.8rem; // Smaller label text when collapsed
+      gap: 0.55rem; // modestly increased spacing in collapsed mode
+      flex-wrap: nowrap; // Keep chips + button on a single row
+      justify-content: space-between;
     }
   }
 
   &__collapsed-content {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.65rem; // increased spacing between chips and button
     flex-wrap: nowrap; // Keep everything on one line
-    width: 100%;
+    flex: 1 1 auto; // Take remaining space so label can sit on same row
+    width: auto; // Avoid forcing a new line
     min-height: 0; // Allow content to be as compact as possible
   }
 
@@ -715,7 +704,7 @@ onBeforeUnmount(() => {
   &__selected-tag {
     padding: 0.3rem 0.6rem;
     border: 1px solid #4c2a26;
-    border-radius: 16px;
+    border-radius: 10px; // softened corners, less pill-like
     background: #4c2a26;
     color: white;
     font-size: 0.8rem;
@@ -745,20 +734,21 @@ onBeforeUnmount(() => {
 
   &__expand,
   &__collapse {
-    padding: 0.4rem 0.7rem;
-    border: 1px solid #3498db;
-    border-radius: 16px;
-    background: white;
-    color: #3498db;
-    font-size: 0.8rem;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid #4c2a26; // theme to match menu
+    border-radius: 8px; // more square with softened corners
+    background: #4c2a26;
+    color: #ffffff;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
 
     &:hover {
-      background: #3498db;
-      color: white;
+      background: #6d3b35;
+      border-color: #6d3b35;
+      color: #ffffff;
     }
   }
 
@@ -779,21 +769,23 @@ onBeforeUnmount(() => {
       padding: 0.5rem 0; // Even more compact on mobile
 
       .cocktail-filter__content {
-        gap: 0.4rem;
+        gap: 0.5rem;
       }
 
       .cocktail-filter__collapsed-content {
-        gap: 0.4rem;
+        gap: 0.55rem;
       }
 
       .cocktail-filter__selected-tag {
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
+        border-radius: 8px;
       }
 
       .cocktail-filter__expand {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        padding: 0.45rem 0.75rem;
+        border-radius: 8px;
       }
     }
   }
@@ -825,44 +817,48 @@ onBeforeUnmount(() => {
   max-height: 75vh;
   display: flex;
   flex-direction: column;
+  background: var(--q-primary);
+  color: #fff;
 
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
+  // Grabber / handle
+  &__grabber {
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    margin: 8px auto 0;
   }
   &__title {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    padding: 6px 0 10px; // separate from grid content
   }
   &__content {
-    padding: 12px 16px 4px;
+    padding: 8px 16px 14px; // increased padding for more generous spacing
     overflow: auto;
   }
   &__grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px; // increased gap between elements
   }
   &__tag {
     font-size: 0.95rem;
     padding: 10px 12px;
-    border-radius: 999px;
-    border: 1px solid #d9d2c4;
-    background: #fff;
-    color: #2c3e50;
+    border-radius: 10px; // reduced radius for squarer look
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
     cursor: pointer;
     &.is-active {
-      background: #2c3e50;
+      background: rgba(255, 255, 255, 0.25);
       color: #fff;
-      border-color: #2c3e50;
+      border-color: rgba(255, 255, 255, 0.6);
     }
   }
-  &__actions {
-    padding: 8px 16px 12px;
-    border-top: 1px solid #eee;
-  }
+}
+
+.cf-dialog .q-dialog__backdrop {
+  background: rgba(0, 0, 0, 0.35); // slightly transparent backdrop
 }
 </style>
