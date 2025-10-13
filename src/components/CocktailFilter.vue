@@ -8,8 +8,17 @@
     <div class="cocktail-filter__content">
       <!-- Compact row: selected chips + Filters button (opens sheet) -->
       <div class="cocktail-filter__collapsed-content">
+        <q-btn
+          class="cocktail-filter__expand"
+          outline
+          color="primary"
+          @click="openFilters"
+        >
+          {{ t("filter.label")
+          }}<span v-if="selectedTags.length"> ({{ selectedTags.length }})</span>
+        </q-btn>
         <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
-          <button
+          <q-btn
             v-for="tagId in selectedTags"
             :key="'selected-' + tagId"
             class="cocktail-filter__selected-tag"
@@ -18,12 +27,8 @@
           >
             {{ availableTags.find((t) => t.id === tagId)?.label }}
             <span class="cocktail-filter__selected-tag-remove">×</span>
-          </button>
+          </q-btn>
         </div>
-        <button class="cocktail-filter__expand" @click="openFilters">
-          {{ t("filter.label")
-          }}<span v-if="selectedTags.length"> ({{ selectedTags.length }})</span>
-        </button>
       </div>
     </div>
 
@@ -52,24 +57,24 @@
       <div class="cocktail-filter__content">
         <!-- Compact row: selected chips + Filters button (opens sheet) -->
         <div class="cocktail-filter__collapsed-content">
+          <q-btn class="cocktail-filter__expand" @click="openFilters">
+            {{ t("filter.label")
+            }}<span v-if="selectedTags.length">
+              ({{ selectedTags.length }})</span
+            >
+          </q-btn>
           <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
-            <button
+            <q-btn
               v-for="tagId in selectedTags"
               :key="'sticky-selected-' + tagId"
               class="cocktail-filter__selected-tag"
               @click="toggleTag(tagId)"
               :title="availableTags.find((t) => t.id === tagId)?.label"
+              :label="availableTags.find((t) => t.id === tagId)?.label"
             >
-              {{ availableTags.find((t) => t.id === tagId)?.label }}
               <span class="cocktail-filter__selected-tag-remove">×</span>
-            </button>
+            </q-btn>
           </div>
-          <button class="cocktail-filter__expand" @click="openFilters">
-            {{ t("filter.label")
-            }}<span v-if="selectedTags.length">
-              ({{ selectedTags.length }})</span
-            >
-          </button>
         </div>
       </div>
 
@@ -102,7 +107,7 @@
       <div class="cf-sheet__grabber"></div>
 
       <q-card-section class="cf-sheet__content">
-        <div class="cf-sheet__title">{{ t("filter.label") }}</div>
+        <h3 class="cf-sheet__title">{{ t("filter.label") }}</h3>
         <div class="cf-sheet__grid">
           <button
             v-for="tag in availableTags"
@@ -704,7 +709,6 @@ onBeforeUnmount(() => {
   &__selected-tag {
     padding: 0.3rem 0.6rem;
     border: 1px solid #4c2a26;
-    border-radius: 10px; // softened corners, less pill-like
     background: #4c2a26;
     color: white;
     font-size: 0.8rem;
@@ -830,8 +834,9 @@ onBeforeUnmount(() => {
   }
   &__title {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.4rem;
     padding: 6px 0 10px; // separate from grid content
+    margin: 0;
   }
   &__content {
     padding: 8px 16px 14px; // increased padding for more generous spacing
