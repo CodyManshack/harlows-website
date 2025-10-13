@@ -48,6 +48,10 @@ export default {
   filter: {
     label: "Filtrar por:",
     clear: "Limpiar",
+    showMore: "Mostrar Más",
+    showLess: "Mostrar Menos",
+    showFilters: "Mostrar Filtros",
+    done: "Listo",
     legend: {
       caption: "Leyenda – toca una categoría para ordenar",
     },

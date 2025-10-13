@@ -1,27 +1,32 @@
 <template>
-  <div class="cocktail-filter" ref="filterBar" v-show="!isSticky">
+  <div
+    class="cocktail-filter"
+    ref="filterBar"
+    v-show="!isSticky"
+    :class="{ 'cocktail-filter--collapsed': isCollapsed }"
+  >
     <div class="cocktail-filter__content">
       <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
-      <div class="cocktail-filter__tags">
-        <button
-          v-for="tag in availableTags"
-          :key="tag.id"
-          :class="[
-            'cocktail-filter__tag',
-            { 'is-active': selectedTags.includes(tag.id) },
-          ]"
-          @click="toggleTag(tag.id)"
-        >
-          {{ tag.label }}
+
+      <!-- Compact row: selected chips + Filters button (opens sheet) -->
+      <div class="cocktail-filter__collapsed-content">
+        <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
+          <button
+            v-for="tagId in selectedTags"
+            :key="'selected-' + tagId"
+            class="cocktail-filter__selected-tag"
+            @click="toggleTag(tagId)"
+            :title="availableTags.find((t) => t.id === tagId)?.label"
+          >
+            {{ availableTags.find((t) => t.id === tagId)?.label }}
+            <span class="cocktail-filter__selected-tag-remove">×</span>
+          </button>
+        </div>
+        <button class="cocktail-filter__expand" @click="openFilters">
+          {{ t("filter.showFilters")
+          }}<span v-if="selectedTags.length"> ({{ selectedTags.length }})</span>
         </button>
       </div>
-      <button
-        v-if="selectedTags.length > 0"
-        class="cocktail-filter__clear"
-        @click="clearAllFilters"
-      >
-        {{ t("filter.clear") }}
-      </button>
     </div>
 
     <!-- Flavor Profile Legend -->
@@ -41,29 +46,35 @@
 
   <!-- Teleport sticky bar to body to avoid transformed/contained ancestors -->
   <teleport to="body">
-    <div v-if="isSticky" class="cocktail-filter cocktail-filter--sticky">
+    <div
+      v-if="isSticky"
+      class="cocktail-filter cocktail-filter--sticky"
+      :class="{ 'cocktail-filter--collapsed': isCollapsed }"
+    >
       <div class="cocktail-filter__content">
         <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
-        <div class="cocktail-filter__tags">
-          <button
-            v-for="tag in availableTags"
-            :key="tag.id"
-            :class="[
-              'cocktail-filter__tag',
-              { 'is-active': selectedTags.includes(tag.id) },
-            ]"
-            @click="toggleTag(tag.id)"
-          >
-            {{ tag.label }}
+
+        <!-- Compact row: selected chips + Filters button (opens sheet) -->
+        <div class="cocktail-filter__collapsed-content">
+          <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
+            <button
+              v-for="tagId in selectedTags"
+              :key="'sticky-selected-' + tagId"
+              class="cocktail-filter__selected-tag"
+              @click="toggleTag(tagId)"
+              :title="availableTags.find((t) => t.id === tagId)?.label"
+            >
+              {{ availableTags.find((t) => t.id === tagId)?.label }}
+              <span class="cocktail-filter__selected-tag-remove">×</span>
+            </button>
+          </div>
+          <button class="cocktail-filter__expand" @click="openFilters">
+            {{ t("filter.showFilters")
+            }}<span v-if="selectedTags.length">
+              ({{ selectedTags.length }})</span
+            >
           </button>
         </div>
-        <button
-          v-if="selectedTags.length > 0"
-          class="cocktail-filter__clear"
-          @click="clearAllFilters"
-        >
-          {{ t("filter.clear") }}
-        </button>
       </div>
 
       <!-- Flavor Profile Legend -->
@@ -81,6 +92,51 @@
       </div>
     </div>
   </teleport>
+
+  <!-- Bottom-sheet dialog for filters -->
+  <q-dialog
+    v-model="sheetOpen"
+    position="bottom"
+    transition-show="slide-up"
+    transition-hide="slide-down"
+  >
+    <q-card class="cf-sheet">
+      <q-card-section class="cf-sheet__header">
+        <div class="cf-sheet__title">{{ t("filter.label") }}</div>
+        <q-btn
+          flat
+          round
+          dense
+          icon="close"
+          @click="sheetOpen = false"
+          aria-label="Close"
+        />
+      </q-card-section>
+      <q-card-section class="cf-sheet__content">
+        <div class="cf-sheet__grid">
+          <button
+            v-for="tag in availableTags"
+            :key="'sheet-' + tag.id"
+            :class="[
+              'cf-sheet__tag',
+              { 'is-active': selectedTags.includes(tag.id) },
+            ]"
+            @click="toggleTag(tag.id)"
+          >
+            {{ tag.label }}
+          </button>
+        </div>
+      </q-card-section>
+      <q-card-actions align="right" class="cf-sheet__actions">
+        <q-btn
+          color="primary"
+          unelevated
+          :label="t('filter.done')"
+          @click="sheetOpen = false"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script setup>
@@ -113,6 +169,12 @@ const activeSortKeys = ref([]); // e.g., ['boozy','bitter'] in order clicked
 const sectionTitleEl = ref(null);
 const bottomBoundEl = ref(null);
 const nextSectionTitleEl = ref(null);
+
+// Bottom-sheet state and collapsed logic
+const sheetOpen = ref(false);
+const isCollapsed = computed(
+  () => isSticky.value || selectedTags.value.length > 0
+);
 
 const { t, locale } = useI18n();
 const $q = useQuasar();
@@ -250,6 +312,10 @@ const clearAllFilters = () => {
   selectedTags.value = [];
 };
 
+function openFilters() {
+  sheetOpen.value = true;
+}
+
 // Handle clicks on flavor profile legend to toggle sort key
 function onFlavorPick(key) {
   const idx = activeSortKeys.value.indexOf(key);
@@ -270,6 +336,8 @@ watch(
   },
   { deep: true }
 );
+
+// No manual expansion to manage; sheet visibility is independent
 
 // Intersection Observer approach for better reliability
 onMounted(() => {
@@ -607,6 +675,93 @@ onBeforeUnmount(() => {
     text-align: center;
   }
 
+  // Collapsed state styles
+  &--collapsed {
+    padding: 0.75rem 0; // Reduce padding when collapsed
+
+    .cocktail-filter__content {
+      gap: 0.3rem; // Tighter spacing in collapsed mode
+    }
+
+    .cocktail-filter__label {
+      font-size: 0.8rem; // Smaller label text when collapsed
+    }
+  }
+
+  &__collapsed-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap; // Keep everything on one line
+    width: 100%;
+    min-height: 0; // Allow content to be as compact as possible
+  }
+
+  &__selected {
+    display: flex;
+    flex-wrap: nowrap; // Keep selected tags on one line
+    gap: 0.3rem;
+    align-items: center;
+    overflow-x: auto; // Allow horizontal scroll if too many filters
+    flex: 1; // Take up available space
+    scrollbar-width: none; // Hide scrollbar on Firefox
+    -ms-overflow-style: none; // Hide scrollbar on IE/Edge
+
+    &::-webkit-scrollbar {
+      display: none; // Hide scrollbar on webkit browsers
+    }
+  }
+
+  &__selected-tag {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #4c2a26;
+    border-radius: 16px;
+    background: #4c2a26;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    &:hover {
+      background: #6d3b35;
+      border-color: #6d3b35;
+    }
+
+    &-remove {
+      font-size: 1.1rem;
+      font-weight: bold;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__expand,
+  &__collapse {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid #3498db;
+    border-radius: 16px;
+    background: white;
+    color: #3498db;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: #3498db;
+      color: white;
+    }
+  }
+
   @media (max-width: 768px) {
     &__content {
       gap: 0.6rem;
@@ -615,10 +770,31 @@ onBeforeUnmount(() => {
     &__tags {
       gap: 0.5rem;
     }
-    &__tag,
-    &__clear {
+    &__tag {
       font-size: 0.85rem;
       padding: 0.45rem 0.7rem;
+    }
+
+    &--collapsed {
+      padding: 0.5rem 0; // Even more compact on mobile
+
+      .cocktail-filter__content {
+        gap: 0.4rem;
+      }
+
+      .cocktail-filter__collapsed-content {
+        gap: 0.4rem;
+      }
+
+      .cocktail-filter__selected-tag {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .cocktail-filter__expand {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+      }
     }
   }
 }
@@ -639,5 +815,54 @@ onBeforeUnmount(() => {
   height: 10px;
   border-radius: 2px;
   display: inline-block;
+}
+</style>
+<style lang="scss">
+/* Global-ish sheet styles (unscoped to allow Quasar layout) */
+.cf-sheet {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  &__content {
+    padding: 12px 16px 4px;
+    overflow: auto;
+  }
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  &__tag {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid #d9d2c4;
+    background: #fff;
+    color: #2c3e50;
+    cursor: pointer;
+    &.is-active {
+      background: #2c3e50;
+      color: #fff;
+      border-color: #2c3e50;
+    }
+  }
+  &__actions {
+    padding: 8px 16px 12px;
+    border-top: 1px solid #eee;
+  }
 }
 </style>

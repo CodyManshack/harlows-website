@@ -48,6 +48,10 @@ export default {
   filter: {
     label: "Filter by:",
     clear: "Clear All",
+    showMore: "Show More",
+    showLess: "Show Less",
+    showFilters: "Show Filters",
+    done: "Done",
     legend: {
       caption: "Legend – tap a category to sort",
     },
