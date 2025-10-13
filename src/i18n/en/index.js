@@ -46,7 +46,7 @@ export default {
     open: "Open from {open} to {close}",
   },
   filter: {
-    label: "Filter by:",
+    label: "Filter",
     clear: "Clear All",
     showMore: "Show More",
     showLess: "Show Less",
