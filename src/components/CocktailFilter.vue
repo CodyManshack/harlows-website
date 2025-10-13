@@ -642,7 +642,7 @@ onBeforeUnmount(() => {
 
     .cocktail-filter__legend {
       padding: 16px 2rem 8px 2rem; // maintain 2rem side padding in sticky
-      margin-top: 8px; // trim extra whitespace below filter button in sticky
+      margin-top: 0; // remove extra whitespace below filter button in sticky
     }
 
     .cocktail-filter__expanded-content {
@@ -1082,7 +1082,7 @@ onBeforeUnmount(() => {
 
 /* Expanded body container: 0 in non-sticky, 2rem in sticky */
 .cocktail-filter__expanded-body {
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 .cocktail-filter--sticky .cocktail-filter__expanded-body {
