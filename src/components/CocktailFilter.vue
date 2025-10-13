@@ -11,6 +11,12 @@
         dense
         hide-expand-icon
         class="cocktail-filter__expansion"
+        header-class="cf-no-xpad"
+        :header-style="{
+          paddingLeft: '0',
+          paddingRight: '0',
+          '--q-expansion-padding': '0',
+        }"
       >
         <template v-slot:header="props">
           <div
@@ -99,6 +105,12 @@
           dense
           hide-expand-icon
           class="cocktail-filter__expansion cocktail-filter__expansion--sticky"
+          header-class="cf-xpad-2rem"
+          :header-style="{
+            paddingLeft: '2rem',
+            paddingRight: '2rem',
+            '--q-expansion-padding': '0 2rem',
+          }"
         >
           <template v-slot:header="props">
             <div
@@ -1044,6 +1056,28 @@ onBeforeUnmount(() => {
   ) {
   padding-left: 2rem !important;
   padding-right: 2rem !important;
+}
+
+/* Header-class helpers to explicitly control header x padding */
+:deep(.cf-no-xpad) {
+  --q-expansion-padding: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+:deep(.cf-xpad-2rem) {
+  --q-expansion-padding: 0 2rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+/* Strengthen non-sticky zeroing across any nested item/link wrappers */
+:deep(.cocktail-filter__expansion .q-item),
+:deep(.cocktail-filter__expansion .q-item .q-focus-helper),
+:deep(.cocktail-filter__expansion .q-link),
+:deep(.cocktail-filter__expansion .q-link .q-focus-helper) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Expanded body container: 0 in non-sticky, 2rem in sticky */
