@@ -1,17 +1,16 @@
 <template>
   <div
-    class="cocktail-filter"
+    class="cocktail-filter cocktail-filter--collapsed"
     ref="filterBar"
     v-show="!isSticky"
-    :class="{ 'cocktail-filter--collapsed': isCollapsed }"
   >
     <div class="cocktail-filter__content">
       <!-- Compact row: selected chips + Filters button (opens sheet) -->
       <div class="cocktail-filter__collapsed-content">
         <q-btn
           class="cocktail-filter__expand"
-          outline
-          color="primary"
+          flat
+          icon="mdi-filter-variant"
           @click="openFilters"
         >
           {{ t("filter.label")
@@ -24,10 +23,9 @@
             class="cocktail-filter__selected-tag"
             @click="toggleTag(tagId)"
             :title="availableTags.find((t) => t.id === tagId)?.label"
-          >
-            {{ availableTags.find((t) => t.id === tagId)?.label }}
-            <span class="cocktail-filter__selected-tag-remove">×</span>
-          </q-btn>
+            :label="availableTags.find((t) => t.id === tagId)?.label"
+            icon-right="ion-close"
+          />
         </div>
       </div>
     </div>
@@ -57,7 +55,12 @@
       <div class="cocktail-filter__content">
         <!-- Compact row: selected chips + Filters button (opens sheet) -->
         <div class="cocktail-filter__collapsed-content">
-          <q-btn class="cocktail-filter__expand" @click="openFilters">
+          <q-btn
+            class="cocktail-filter__expand"
+            flat
+            icon="mdi-filter-variant"
+            @click="openFilters"
+          >
             {{ t("filter.label")
             }}<span v-if="selectedTags.length">
               ({{ selectedTags.length }})</span
@@ -71,9 +74,8 @@
               @click="toggleTag(tagId)"
               :title="availableTags.find((t) => t.id === tagId)?.label"
               :label="availableTags.find((t) => t.id === tagId)?.label"
-            >
-              <span class="cocktail-filter__selected-tag-remove">×</span>
-            </q-btn>
+              icon-right="ion-close"
+            />
           </div>
         </div>
       </div>
@@ -689,6 +691,7 @@ onBeforeUnmount(() => {
     flex: 1 1 auto; // Take remaining space so label can sit on same row
     width: auto; // Avoid forcing a new line
     min-height: 0; // Allow content to be as compact as possible
+    margin-top: 0.5rem;
   }
 
   &__selected {
@@ -739,21 +742,21 @@ onBeforeUnmount(() => {
   &__expand,
   &__collapse {
     padding: 0.5rem 0.85rem;
-    border: 1px solid #4c2a26; // theme to match menu
-    border-radius: 8px; // more square with softened corners
-    background: #4c2a26;
-    color: #ffffff;
+    // border: 1px solid #4c2a26; // theme to match menu
+    // border-radius: 8px; // more square with softened corners
+    // background: #4c2a26;
+    color: #000;
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
 
-    &:hover {
-      background: #6d3b35;
-      border-color: #6d3b35;
-      color: #ffffff;
-    }
+    // &:hover {
+    //   background: #6d3b35;
+    //   border-color: #6d3b35;
+    //   color: #ffffff;
+    // }
   }
 
   @media (max-width: 768px) {
