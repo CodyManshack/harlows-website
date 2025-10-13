@@ -582,6 +582,10 @@ onBeforeUnmount(() => {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000 !important;
+
+    .cocktail-filter__legend {
+      padding: 16px 2rem 8px 2rem; // increased side padding for sticky mode
+    }
   }
 
   &__content {
@@ -658,7 +662,7 @@ onBeforeUnmount(() => {
   &__legend {
     background: transparent; // avoid double alpha over parent bg
     border-top: 1px solid #e9ecef;
-    padding: 16px 12px 8px 12px;
+    padding: 16px 0px 8px 0px;
     margin-top: 16px;
     max-width: 900px;
     margin-left: auto;
