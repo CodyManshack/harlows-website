@@ -91,7 +91,7 @@
             v-if="item.dairy"
             class="menu-item__allergen menu-item__allergen--dairy"
           >
-            <q-icon name="mdi-cow" size="1rem" style="opacity: 0.75">
+            <q-icon name="mdi-cow" size="1.2rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Dairy</q-tooltip
               >
@@ -101,7 +101,7 @@
             v-if="item.egg"
             class="menu-item__allergen menu-item__allergen--egg"
           >
-            <q-icon name="mdi-egg" size=".85rem" style="opacity: 0.75">
+            <q-icon name="mdi-egg" size="1rem" style="opacity: 0.75">
               <q-tooltip class="bg-black text-white"
                 >Allergen: Contains Egg White</q-tooltip
               >
