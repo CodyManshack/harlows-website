@@ -5,29 +5,69 @@
     v-show="!isSticky"
   >
     <div class="cocktail-filter__content">
-      <!-- Compact row: selected chips + Filters button (opens sheet) -->
-      <div class="cocktail-filter__collapsed-content">
-        <q-btn
-          class="cocktail-filter__expand"
-          flat
-          icon="mdi-filter-variant"
-          @click="openFilters"
-        >
-          {{ t("filter.label")
-          }}<span v-if="selectedTags.length"> ({{ selectedTags.length }})</span>
-        </q-btn>
-        <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
-          <q-btn
-            v-for="tagId in selectedTags"
-            :key="'selected-' + tagId"
-            class="cocktail-filter__selected-tag"
-            @click="toggleTag(tagId)"
-            :title="availableTags.find((t) => t.id === tagId)?.label"
-            :label="availableTags.find((t) => t.id === tagId)?.label"
-            icon-right="ion-close"
-          />
+      <!-- Quasar Expansion for non-sticky mode (single source of truth) -->
+      <q-expansion-item
+        v-model="filtersExpanded"
+        dense
+        hide-expand-icon
+        class="cocktail-filter__expansion"
+      >
+        <template v-slot:header="props">
+          <div
+            class="cocktail-filter__header-row"
+            :class="{
+              'cocktail-filter__header-row--active': selectedTags.length > 0,
+              'cocktail-filter__header-row--expanded': props.expanded,
+            }"
+            v-bind="props.togglerAttrs"
+          >
+            <div class="cocktail-filter__header-left">
+              <q-icon
+                name="mdi-filter-variant"
+                class="cocktail-filter__header-icon"
+              />
+              <span class="cocktail-filter__header-text">
+                {{ t("filter.label") }}
+                <span v-if="selectedTags.length" class="cocktail-filter__count">
+                  ({{ selectedTags.length }})
+                </span>
+              </span>
+              <div
+                v-if="selectedTags.length > 0"
+                class="cocktail-filter__active-indicator"
+              ></div>
+            </div>
+            <div class="cocktail-filter__header-right">
+              <q-icon
+                :name="props.expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                class="cocktail-filter__expand-arrow"
+              />
+            </div>
+          </div>
+        </template>
+
+        <div class="cocktail-filter__expanded-body">
+          <div class="cocktail-filter__tags-grid">
+            <q-btn
+              v-for="tag in availableTags"
+              :key="'inline-' + tag.id"
+              :class="[
+                'cocktail-filter__tag-btn',
+                {
+                  'cocktail-filter__tag-btn--active': selectedTags.includes(
+                    tag.id
+                  ),
+                },
+              ]"
+              @click.stop="toggleTag(tag.id)"
+              flat
+              size="sm"
+            >
+              {{ tag.label }}
+            </q-btn>
+          </div>
         </div>
-      </div>
+      </q-expansion-item>
     </div>
 
     <!-- Flavor Profile Legend -->
@@ -53,79 +93,89 @@
       :class="{ 'cocktail-filter--collapsed': isCollapsed }"
     >
       <div class="cocktail-filter__content">
-        <!-- Compact row: selected chips + Filters button (opens sheet) -->
-        <div class="cocktail-filter__collapsed-content">
-          <q-btn
-            class="cocktail-filter__expand"
-            flat
-            icon="mdi-filter-variant"
-            @click="openFilters"
-          >
-            {{ t("filter.label")
-            }}<span v-if="selectedTags.length">
-              ({{ selectedTags.length }})</span
+        <!-- Quasar Expansion for sticky mode (single source of truth) -->
+        <q-expansion-item
+          v-model="filtersExpanded"
+          dense
+          hide-expand-icon
+          class="cocktail-filter__expansion cocktail-filter__expansion--sticky"
+        >
+          <template v-slot:header="props">
+            <div
+              class="cocktail-filter__header-row cocktail-filter__header-row--sticky"
+              :class="{
+                'cocktail-filter__header-row--active': selectedTags.length > 0,
+                'cocktail-filter__header-row--expanded': props.expanded,
+              }"
+              v-bind="props.togglerAttrs"
             >
-          </q-btn>
-          <div v-if="selectedTags.length > 0" class="cocktail-filter__selected">
-            <q-btn
-              v-for="tagId in selectedTags"
-              :key="'sticky-selected-' + tagId"
-              class="cocktail-filter__selected-tag"
-              @click="toggleTag(tagId)"
-              :title="availableTags.find((t) => t.id === tagId)?.label"
-              :label="availableTags.find((t) => t.id === tagId)?.label"
-              icon-right="ion-close"
-            />
-          </div>
-        </div>
-      </div>
+              <div class="cocktail-filter__header-left">
+                <q-icon
+                  name="mdi-filter-variant"
+                  class="cocktail-filter__header-icon"
+                />
+                <span class="cocktail-filter__header-text">
+                  {{ t("filter.label") }}
+                  <span
+                    v-if="selectedTags.length"
+                    class="cocktail-filter__count"
+                  >
+                    ({{ selectedTags.length }})
+                  </span>
+                </span>
+                <div
+                  v-if="selectedTags.length > 0"
+                  class="cocktail-filter__active-indicator"
+                ></div>
+              </div>
+              <div class="cocktail-filter__header-right">
+                <q-icon
+                  :name="props.expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                  class="cocktail-filter__expand-arrow"
+                />
+              </div>
+            </div>
+          </template>
 
-      <!-- Flavor Profile Legend -->
-      <div class="cocktail-filter__legend">
-        <div class="cocktail-filter__legendCaption">
-          {{ t("filter.legend.caption") }}
+          <div class="cocktail-filter__expanded-body">
+            <div class="cocktail-filter__tags-grid">
+              <q-btn
+                v-for="tag in availableTags"
+                :key="'sticky-inline-' + tag.id"
+                :class="[
+                  'cocktail-filter__tag-btn',
+                  {
+                    'cocktail-filter__tag-btn--active': selectedTags.includes(
+                      tag.id
+                    ),
+                  },
+                ]"
+                @click.stop="toggleTag(tag.id)"
+                flat
+                size="sm"
+              >
+                {{ tag.label }}
+              </q-btn>
+            </div>
+          </div>
+        </q-expansion-item>
+
+        <!-- Flavor Profile Legend -->
+        <div class="cocktail-filter__legend">
+          <div class="cocktail-filter__legendCaption">
+            {{ t("filter.legend.caption") }}
+          </div>
+          <FlavorProfileDots
+            :profile="sampleProfile"
+            :show-labels="true"
+            :legend="true"
+            :active-keys="activeSortKeys"
+            @pick="onFlavorPick"
+          />
         </div>
-        <FlavorProfileDots
-          :profile="sampleProfile"
-          :show-labels="true"
-          :legend="true"
-          :active-keys="activeSortKeys"
-          @pick="onFlavorPick"
-        />
       </div>
     </div>
   </teleport>
-
-  <!-- Bottom-sheet dialog for filters -->
-  <q-dialog
-    class="cf-dialog"
-    v-model="sheetOpen"
-    position="bottom"
-    transition-show="slide-up"
-    transition-hide="slide-down"
-  >
-    <q-card class="cf-sheet" v-touch-pan.y="onSheetPan">
-      <!-- Grabber / handle bar for iOS-style swipe-away -->
-      <div class="cf-sheet__grabber"></div>
-
-      <q-card-section class="cf-sheet__content">
-        <h3 class="cf-sheet__title">{{ t("filter.label") }}</h3>
-        <div class="cf-sheet__grid">
-          <button
-            v-for="tag in availableTags"
-            :key="'sheet-' + tag.id"
-            :class="[
-              'cf-sheet__tag',
-              { 'is-active': selectedTags.includes(tag.id) },
-            ]"
-            @click="toggleTag(tag.id)"
-          >
-            {{ tag.label }}
-          </button>
-        </div>
-      </q-card-section>
-    </q-card>
-  </q-dialog>
 </template>
 
 <script setup>
@@ -159,8 +209,8 @@ const sectionTitleEl = ref(null);
 const bottomBoundEl = ref(null);
 const nextSectionTitleEl = ref(null);
 
-// Bottom-sheet state and collapsed logic
-const sheetOpen = ref(false);
+// Filter expansion state
+const filtersExpanded = ref(false);
 const isCollapsed = computed(
   () => isSticky.value || selectedTags.value.length > 0
 );
@@ -301,17 +351,12 @@ const clearAllFilters = () => {
   selectedTags.value = [];
 };
 
-function openFilters() {
-  sheetOpen.value = true;
+function toggleFiltersExpanded() {
+  filtersExpanded.value = !filtersExpanded.value;
 }
 
-// Minimal swipe-to-close gesture for the bottom sheet
-function onSheetPan(ev) {
-  // Close when user pans downward sufficiently and releases
-  if (ev.isFinal && ev.direction === "down" && ev.distance?.y >= 40) {
-    sheetOpen.value = false;
-  }
-}
+// Scroll to top function for sticky mode
+// removed scroll-to-top button per design; function no longer needed
 
 // Handle clicks on flavor profile legend to toggle sort key
 function onFlavorPick(key) {
@@ -586,17 +631,27 @@ onBeforeUnmount(() => {
     .cocktail-filter__legend {
       padding: 16px 2rem 8px 2rem; // increased side padding for sticky mode
     }
+
+    .cocktail-filter__expanded-content {
+      margin: 0;
+      border-radius: 0;
+      padding: 0 2rem;
+      background: var(--cf-bg);
+      border-top: 1px solid rgba(76, 42, 38, 0.15);
+
+      &--open {
+        padding: 1rem 2rem;
+      }
+    }
   }
 
   &__content {
     max-width: 900px;
     margin: 0 auto;
     display: flex;
-    gap: 0.65rem; // slightly increased spacing
+    flex-direction: column; // Stack header and expanded content vertically
+    gap: 0; // Remove gap since we control spacing individually
     padding: 0 12px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
   }
 
   &__label {
@@ -680,125 +735,229 @@ onBeforeUnmount(() => {
   &--collapsed {
     padding: 0.55rem 0; // Further reduce padding when collapsed
 
-    .cocktail-filter__content {
-      gap: 0.55rem; // modestly increased spacing in collapsed mode
-      flex-wrap: nowrap; // Keep chips + button on a single row
-      justify-content: space-between;
-    }
-  }
-
-  &__collapsed-content {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem; // increased spacing between chips and button
-    flex-wrap: nowrap; // Keep everything on one line
-    flex: 1 1 auto; // Take remaining space so label can sit on same row
-    width: auto; // Avoid forcing a new line
-    min-height: 0; // Allow content to be as compact as possible
-    margin-top: 0.5rem;
-  }
-
-  &__selected {
-    display: flex;
-    flex-wrap: nowrap; // Keep selected tags on one line
-    gap: 0.3rem;
-    align-items: center;
-    overflow-x: auto; // Allow horizontal scroll if too many filters
-    flex: 1; // Take up available space
-    scrollbar-width: none; // Hide scrollbar on Firefox
-    -ms-overflow-style: none; // Hide scrollbar on IE/Edge
-
-    &::-webkit-scrollbar {
-      display: none; // Hide scrollbar on webkit browsers
-    }
-  }
-
-  &__selected-tag {
-    padding: 0.3rem 0.6rem;
-    border: 1px solid #4c2a26;
-    background: #4c2a26;
-    color: white;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-
-    &:hover {
-      background: #6d3b35;
-      border-color: #6d3b35;
-    }
-
-    &-remove {
-      font-size: 1.1rem;
-      font-weight: bold;
-      opacity: 0.8;
-
-      &:hover {
-        opacity: 1;
+    // Ensure expanded content works in collapsed mode too
+    .cocktail-filter__expanded-content {
+      &--open {
+        max-height: 500px !important;
+        opacity: 1 !important;
+        padding: 1rem !important;
       }
     }
   }
 
-  &__expand,
-  &__collapse {
-    padding: 0.5rem 0.85rem;
-    // border: 1px solid #4c2a26; // theme to match menu
-    // border-radius: 8px; // more square with softened corners
-    // background: #4c2a26;
-    color: #000;
-    font-size: 0.85rem;
-    font-weight: 500;
+  // New header row styles
+  &__header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    white-space: nowrap;
+    border-radius: 8px;
+    margin-top: 0.5rem;
 
-    // &:hover {
-    //   background: #6d3b35;
-    //   border-color: #6d3b35;
-    //   color: #ffffff;
-    // }
+    &:hover {
+      background: rgba(76, 42, 38, 0.05);
+    }
+
+    &--active {
+      background: transparent; // no background highlight when active
+      border: none; // no border change when active
+    }
+
+    &--expanded {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &--sticky {
+      margin-top: 0;
+      border-radius: 0;
+      padding: 0.6rem 1rem;
+    }
   }
 
+  &__header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__header-icon {
+    font-size: 1.1rem;
+    color: #4c2a26;
+  }
+
+  &__header-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000; // set to black as requested
+  }
+
+  &__count {
+    color: #4c2a26;
+    font-weight: 700;
+  }
+
+  &__active-indicator {
+    width: 8px;
+    height: 8px;
+    background: #4c2a26;
+    border-radius: 50%;
+    margin-left: 0.3rem;
+    animation: pulse-subtle 2s infinite;
+  }
+
+  &__expand-arrow {
+    font-size: 1.2rem;
+    color: #000; // black chevron to match text
+    transition: transform 0.2s ease;
+  }
+
+  // Expanded content styles
+  &__expanded-content {
+    background: rgba(247, 245, 237, 0.8);
+    border: 1px solid rgba(76, 42, 38, 0.2);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+
+    &--open {
+      max-height: 500px !important; // Large enough to accommodate all filters
+      opacity: 1 !important;
+      padding: 1rem !important;
+    }
+  }
+
+  // Ensure non-sticky mode gets proper styles (more specific selector)
+  &:not(&--sticky) {
+    .cocktail-filter__expanded-content {
+      &--open {
+        max-height: 500px !important;
+        opacity: 1 !important;
+        padding: 1rem !important;
+      }
+    }
+  }
+
+  &__tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: flex-start;
+  }
+
+  &__tag-btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+    background: white;
+    color: #2c3e50;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #4c2a26;
+      background: rgba(76, 42, 38, 0.05);
+    }
+
+    &--active {
+      background: #4c2a26;
+      color: white;
+      border-color: #4c2a26;
+
+      &:hover {
+        background: #6d3b35;
+        border-color: #6d3b35;
+      }
+    }
+  }
+
+  &__scroll-top {
+    color: #4c2a26;
+
+    &:hover {
+      background: rgba(76, 42, 38, 0.1);
+    }
+  }
   @media (max-width: 768px) {
     &__content {
       gap: 0.6rem;
       padding: 0 12px;
     }
-    &__tags {
-      gap: 0.5rem;
-    }
-    &__tag {
-      font-size: 0.85rem;
-      padding: 0.45rem 0.7rem;
-    }
 
     &--collapsed {
-      padding: 0.5rem 0; // Even more compact on mobile
+      padding: 0.5rem 0;
+    }
 
-      .cocktail-filter__content {
-        gap: 0.5rem;
-      }
+    &__header-row {
+      padding: 0.5rem 0.6rem;
+      margin-top: 0.4rem;
 
-      .cocktail-filter__collapsed-content {
-        gap: 0.55rem;
-      }
-
-      .cocktail-filter__selected-tag {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
-        border-radius: 8px;
-      }
-
-      .cocktail-filter__expand {
-        font-size: 0.8rem;
-        padding: 0.45rem 0.75rem;
-        border-radius: 8px;
+      &--sticky {
+        padding: 0.5rem 1rem;
+        margin-top: 0;
       }
     }
+
+    &__header-text {
+      font-size: 0.85rem;
+    }
+
+    &__header-icon {
+      font-size: 1rem;
+    }
+
+    &__expanded-content {
+      padding: 0 0.8rem;
+
+      &--open {
+        padding: 0.8rem;
+      }
+    }
+
+    &__tags-grid {
+      gap: 0.5rem;
+    }
+
+    &__tag-btn {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.7rem;
+    }
+
+    &--sticky {
+      .cocktail-filter__expanded-content {
+        padding: 0 1rem;
+
+        &--open {
+          padding: 0.8rem 1rem;
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
   }
 }
 
@@ -820,57 +979,4 @@ onBeforeUnmount(() => {
   display: inline-block;
 }
 </style>
-<style lang="scss">
-/* Global-ish sheet styles (unscoped to allow Quasar layout) */
-.cf-sheet {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  max-height: 75vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--q-primary);
-  color: #fff;
-
-  // Grabber / handle
-  &__grabber {
-    width: 40px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 2px;
-    margin: 8px auto 0;
-  }
-  &__title {
-    font-weight: 600;
-    font-size: 1.4rem;
-    padding: 6px 0 10px; // separate from grid content
-    margin: 0;
-  }
-  &__content {
-    padding: 8px 16px 14px; // increased padding for more generous spacing
-    overflow: auto;
-  }
-  &__grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px; // increased gap between elements
-  }
-  &__tag {
-    font-size: 0.95rem;
-    padding: 10px 12px;
-    border-radius: 10px; // reduced radius for squarer look
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    cursor: pointer;
-    &.is-active {
-      background: rgba(255, 255, 255, 0.25);
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.6);
-    }
-  }
-}
-
-.cf-dialog .q-dialog__backdrop {
-  background: rgba(0, 0, 0, 0.35); // slightly transparent backdrop
-}
-</style>
+<style lang="scss"></style>
