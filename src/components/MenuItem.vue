@@ -277,7 +277,8 @@ function trSize(key, ctx = {}) {
     text-transform: capitalize;
     flex: 1;
     display: inline-flex;
-    align-items: baseline;
+    align-items: baseline; // keep baseline alignment for children
+    line-height: 1.2; // ensure adequate baseline for large text
   }
 
   &__price {
@@ -312,7 +313,9 @@ function trSize(key, ctx = {}) {
     background: rgba($accent, 0.1);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    display: inline-block;
+    display: inline; // inline to align baseline with surrounding text
+    vertical-align: baseline; // ensure baseline alignment
+    line-height: 1; // avoid extra box height affecting baseline
   }
 
   &__desc {
