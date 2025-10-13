@@ -629,7 +629,8 @@ onBeforeUnmount(() => {
     z-index: 1000 !important;
 
     .cocktail-filter__legend {
-      padding: 16px 2rem 8px 2rem; // increased side padding for sticky mode
+      padding: 16px 2rem 8px 2rem; // maintain 2rem side padding in sticky
+      margin-top: 8px; // trim extra whitespace below filter button in sticky
     }
 
     .cocktail-filter__expanded-content {
@@ -646,12 +647,17 @@ onBeforeUnmount(() => {
   }
 
   &__content {
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     display: flex;
     flex-direction: column; // Stack header and expanded content vertically
     gap: 0; // Remove gap since we control spacing individually
-    padding: 0 12px;
+    padding: 0;
+
+    > .q-item {
+      padding: 0 !important;
+    }
   }
 
   &__label {
@@ -717,11 +723,12 @@ onBeforeUnmount(() => {
   &__legend {
     background: transparent; // avoid double alpha over parent bg
     border-top: 1px solid #e9ecef;
-    padding: 16px 0px 8px 0px;
+    padding: 16px 0 8px 0;
     margin-top: 16px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
   }
   &__legendCaption {
     font-size: 0.95rem;
@@ -751,7 +758,7 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 0; // horizontal padding handled by expansion header wrapper
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: 8px;
@@ -774,7 +781,7 @@ onBeforeUnmount(() => {
     &--sticky {
       margin-top: 0;
       border-radius: 0;
-      padding: 0.6rem 1rem;
+      padding: 0.6rem 0; // horizontal padding handled by sticky header wrapper (2rem)
     }
   }
 
@@ -897,7 +904,7 @@ onBeforeUnmount(() => {
   @media (max-width: 768px) {
     &__content {
       gap: 0.6rem;
-      padding: 0 12px;
+      padding: 0;
     }
 
     &--collapsed {
@@ -905,11 +912,11 @@ onBeforeUnmount(() => {
     }
 
     &__header-row {
-      padding: 0.5rem 0.6rem;
+      padding: 0.5rem 0;
       margin-top: 0.4rem;
 
       &--sticky {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 2rem;
         margin-top: 0;
       }
     }
@@ -977,6 +984,76 @@ onBeforeUnmount(() => {
   height: 10px;
   border-radius: 2px;
   display: inline-block;
+}
+
+/* Remove default horizontal padding Quasar applies to the expansion header wrapper */
+:deep(.cocktail-filter__expansion .q-expansion-item__container > .q-item),
+:deep(
+    .cocktail-filter__expansion--sticky .q-expansion-item__container > .q-item
+  ),
+:deep(.cocktail-filter__expansion .q-expansion-item__header),
+:deep(.cocktail-filter__expansion--sticky .q-expansion-item__header) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Also control Quasar's header padding via its CSS variable for reliability */
+:deep(.cocktail-filter__expansion .q-expansion-item__header) {
+  --q-expansion-padding: 0 !important; /* non-sticky: 0 x padding */
+}
+:deep(
+    .cocktail-filter--sticky
+      .cocktail-filter__expansion
+      .q-expansion-item__header
+  ),
+:deep(
+    .cocktail-filter--sticky
+      .cocktail-filter__expansion--sticky
+      .q-expansion-item__header
+  ) {
+  --q-expansion-padding: 0 2rem !important; /* sticky: 2rem x padding */
+}
+
+/* Also zero any inner q-item sections for non-sticky to avoid residual x-padding */
+:deep(.cocktail-filter__expansion .q-item__section),
+:deep(.cocktail-filter__expansion .q-item__section--side),
+:deep(.cocktail-filter__expansion .q-item__section--avatar) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Sticky-only: add 2rem padding to the expansion header and body */
+:deep(
+    .cocktail-filter--sticky
+      .cocktail-filter__expansion
+      .q-expansion-item__header
+  ),
+:deep(
+    .cocktail-filter--sticky
+      .cocktail-filter__expansion--sticky
+      .q-expansion-item__header
+  ) {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+:deep(
+    .cocktail-filter--sticky
+      .q-expansion-item__container
+      .q-expansion-item__content
+  ) {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+/* Expanded body container: 0 in non-sticky, 2rem in sticky */
+.cocktail-filter__expanded-body {
+  padding: 1rem;
+}
+
+.cocktail-filter--sticky .cocktail-filter__expanded-body {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 </style>
 <style lang="scss"></style>
