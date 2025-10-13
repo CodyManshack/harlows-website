@@ -11,12 +11,7 @@
         dense
         hide-expand-icon
         class="cocktail-filter__expansion"
-        header-class="cf-no-xpad"
-        :header-style="{
-          paddingLeft: '0',
-          paddingRight: '0',
-          '--q-expansion-padding': '0',
-        }"
+        :header-class="headerClassNonSticky"
       >
         <template v-slot:header="props">
           <div
@@ -97,6 +92,7 @@
       v-if="isSticky"
       class="cocktail-filter cocktail-filter--sticky"
       :class="{ 'cocktail-filter--collapsed': isCollapsed }"
+      :style="stickyStyle"
     >
       <div class="cocktail-filter__content">
         <!-- Quasar Expansion for sticky mode (single source of truth) -->
@@ -216,6 +212,8 @@ const nextTitleVisible = ref(false);
 const selectedTags = ref([]);
 const parentSection = ref(null);
 const activeSortKeys = ref([]); // e.g., ['boozy','bitter'] in order clicked
+// Live bounds for sticky positioning to match the menu width/position
+const stickyBounds = ref({ left: 0, width: 0 });
 // Cached DOM refs for fallback computations
 const sectionTitleEl = ref(null);
 const bottomBoundEl = ref(null);
@@ -229,6 +227,24 @@ const isCollapsed = computed(
 
 const { t, locale } = useI18n();
 const $q = useQuasar();
+
+const stickyStyle = computed(() => {
+  if (!isSticky.value) return {};
+  const { left, width } = stickyBounds.value || { left: 0, width: 0 };
+  return {
+    left: `${left}px`,
+    width: `${Math.max(0, width)}px`,
+    right: "auto",
+  };
+});
+
+// Non-sticky header class to ensure desktop padding regardless of deep overrides
+const headerClassNonSticky = computed(() => {
+  // Use Quasar screen to detect desktop-like widths
+  const isDesktop =
+    $q?.screen?.gt?.sm || $q?.screen?.md || $q?.screen?.lg || $q?.screen?.xl;
+  return isDesktop ? "cf-xpad-2rem" : "cf-no-xpad";
+});
 
 // IntersectionObserver tuning
 const OBS_DEBOUNCE_MS = 60; // reduce flicker by debouncing observer callbacks
@@ -454,6 +470,7 @@ onMounted(() => {
       if (isSticky.value !== shouldBeSticky) {
         isSticky.value = shouldBeSticky;
         emit("sticky-change", shouldBeSticky);
+        if (shouldBeSticky) updateStickyBounds();
       }
     };
     const debouncedOnTitle = debounce(onTitle, OBS_DEBOUNCE_MS);
@@ -484,6 +501,7 @@ onMounted(() => {
         } else if (inSection && !isSticky.value && topPassed) {
           isSticky.value = true;
           emit("sticky-change", true);
+          updateStickyBounds();
         }
       }
     };
@@ -550,6 +568,7 @@ onMounted(() => {
       if (isVisible.value !== inSection) {
         isVisible.value = inSection;
       }
+      if (isSticky.value) updateStickyBounds();
     } catch (e) {
       // no-op
     }
@@ -572,6 +591,21 @@ onMounted(() => {
   // Run once after mount
   nextTick(() => recomputeStickyVisibility());
 });
+
+function updateStickyBounds() {
+  try {
+    const el = parentSection.value;
+    if (!el) return;
+    const container = el.closest?.(".menu-list") || el;
+    const rect = container.getBoundingClientRect();
+    stickyBounds.value = {
+      left: rect.left,
+      width: rect.width,
+    };
+  } catch (e) {
+    // ignore
+  }
+}
 
 onBeforeUnmount(() => {
   console.log("🧹 Cleaning up intersection observers");
@@ -627,10 +661,10 @@ onBeforeUnmount(() => {
   &--sticky {
     position: fixed !important;
     top: 0 !important; // No header offset
-    left: 0 !important;
-    right: 0 !important; /* allow full width without forcing 100vw */
-    width: auto !important;
-    max-width: 100vw !important; /* cap at viewport in case parent constraints apply */
+    left: 0; // will be overridden by inline style
+    right: auto; // will be overridden by inline style
+    width: auto; // will be overridden by inline style
+    max-width: 100vw; /* cap at viewport */
     box-sizing: border-box;
     margin: 0 !important;
     border-radius: 0;
@@ -777,7 +811,7 @@ onBeforeUnmount(() => {
     margin-top: 0.5rem;
 
     &:hover {
-      background: rgba(76, 42, 38, 0.05);
+      background: transparent; // no hover background
     }
 
     &--active {
@@ -968,6 +1002,27 @@ onBeforeUnmount(() => {
       }
     }
   }
+
+  // Desktop-only: add horizontal padding to non-sticky header row
+  @media (min-width: 769px) {
+    &:not(&--sticky) {
+      :deep(.cocktail-filter__expansion .q-expansion-item__header),
+      :deep(
+          .cocktail-filter__expansion .q-expansion-item__container > .q-item
+        ) {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+        --q-expansion-padding: 0 2rem !important;
+      }
+      :deep(.cocktail-filter__expansion .q-item),
+      :deep(.cocktail-filter__expansion .q-item .q-focus-helper),
+      :deep(.cocktail-filter__expansion .q-link),
+      :deep(.cocktail-filter__expansion .q-link .q-focus-helper) {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+      }
+    }
+  }
 }
 
 @keyframes pulse-subtle {
@@ -999,20 +1054,57 @@ onBeforeUnmount(() => {
 }
 
 /* Remove default horizontal padding Quasar applies to the expansion header wrapper */
-:deep(.cocktail-filter__expansion .q-expansion-item__container > .q-item),
-:deep(
-    .cocktail-filter__expansion--sticky .q-expansion-item__container > .q-item
-  ),
+@media (max-width: 768px) {
+  :deep(.cocktail-filter__expansion .q-expansion-item__container > .q-item),
+  :deep(
+      .cocktail-filter__expansion--sticky .q-expansion-item__container > .q-item
+    ),
+  :deep(.cocktail-filter__expansion .q-expansion-item__header),
+  :deep(.cocktail-filter__expansion--sticky .q-expansion-item__header) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Remove hover/active background from the Quasar header wrapper in both modes */
 :deep(.cocktail-filter__expansion .q-expansion-item__header),
 :deep(.cocktail-filter__expansion--sticky .q-expansion-item__header) {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  background: transparent !important;
+}
+
+:deep(.cocktail-filter__expansion .q-expansion-item__header:hover),
+:deep(.cocktail-filter__expansion--sticky .q-expansion-item__header:hover),
+:deep(.cocktail-filter__expansion .q-expansion-item__header.q-item--active),
+:deep(
+    .cocktail-filter__expansion--sticky .q-expansion-item__header.q-item--active
+  ),
+:deep(.cocktail-filter__expansion .q-expansion-item__header.q-hoverable:hover),
+:deep(
+    .cocktail-filter__expansion--sticky
+      .q-expansion-item__header.q-hoverable:hover
+  ),
+:deep(.cocktail-filter__expansion .q-expansion-item__header.q-item--focused),
+:deep(
+    .cocktail-filter__expansion--sticky
+      .q-expansion-item__header.q-item--focused
+  ) {
+  background: transparent !important;
+}
+
+/* Disable ripple visuals on the header to avoid overlay effects */
+:deep(
+    .cocktail-filter__expansion .q-expansion-item__header .q-ripple__container
+  ),
+:deep(
+    .cocktail-filter__expansion--sticky
+      .q-expansion-item__header
+      .q-ripple__container
+  ) {
+  display: none !important;
 }
 
 /* Also control Quasar's header padding via its CSS variable for reliability */
-:deep(.cocktail-filter__expansion .q-expansion-item__header) {
-  --q-expansion-padding: 0 !important; /* non-sticky: 0 x padding */
-}
+/* non-sticky default header padding is controlled via media queries below */
 :deep(
     .cocktail-filter--sticky
       .cocktail-filter__expansion
@@ -1071,13 +1163,15 @@ onBeforeUnmount(() => {
   padding-right: 2rem !important;
 }
 
-/* Strengthen non-sticky zeroing across any nested item/link wrappers */
-:deep(.cocktail-filter__expansion .q-item),
-:deep(.cocktail-filter__expansion .q-item .q-focus-helper),
-:deep(.cocktail-filter__expansion .q-link),
-:deep(.cocktail-filter__expansion .q-link .q-focus-helper) {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+@media (max-width: 768px) {
+  /* Strengthen non-sticky zeroing across any nested item/link wrappers */
+  :deep(.cocktail-filter__expansion .q-item),
+  :deep(.cocktail-filter__expansion .q-item .q-focus-helper),
+  :deep(.cocktail-filter__expansion .q-link),
+  :deep(.cocktail-filter__expansion .q-link .q-focus-helper) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
 /* Expanded body container: 0 in non-sticky, 2rem in sticky */
