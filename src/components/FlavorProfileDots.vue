@@ -139,17 +139,17 @@ const profileCategories = computed(() => [
   }
 
   &__label {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: #555;
+    color: #333;
     text-align: center;
-    line-height: 1;
-    margin-bottom: 4px;
+    line-height: 1.2;
+    margin-bottom: 6px;
   }
 
   &__dots {
     display: flex;
-    gap: 3px;
+    gap: 4px;
     align-items: center;
     justify-content: center;
   }

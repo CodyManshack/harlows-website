@@ -256,7 +256,7 @@ function trSize(key, ctx = {}) {
   /* Defer off-screen rendering for faster FCP/LCP while reserving space */
   content-visibility: auto;
   contain-intrinsic-size: 600px;
-  padding: 1.75rem 0;
+  padding: 2rem 0;
   border-bottom: 1px solid $h-border;
 
   &:last-child {
@@ -267,11 +267,11 @@ function trSize(key, ctx = {}) {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
   &__name {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #000;
     font-weight: 600;
     text-transform: capitalize;
@@ -281,7 +281,7 @@ function trSize(key, ctx = {}) {
   }
 
   &__price {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #000;
     font-weight: 300;
     margin-left: 1rem;
@@ -296,10 +296,10 @@ function trSize(key, ctx = {}) {
   }
 
   &__meta {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: #555;
-    margin-top: -0.25rem;
-    margin-bottom: 0.15rem;
+    margin-top: -0.15rem;
+    margin-bottom: 0.25rem;
   }
 
   &__seasonal {
@@ -316,10 +316,10 @@ function trSize(key, ctx = {}) {
   }
 
   &__desc {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: #111;
-    line-height: 1.4;
-    margin-top: 0.3rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
     font-style: normal;
     font-weight: 400;
   }
@@ -357,18 +357,18 @@ function trSize(key, ctx = {}) {
   }
 
   &--liquor {
-    padding: 0.25rem 0;
+    padding: 0.5rem 0;
 
     .menu-item__name {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
     }
     .menu-item__price {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 600;
     }
     .menu-item__desc {
-      font-size: 1rem;
+      font-size: 1.1rem;
       line-height: 1.5;
       font-weight: 400;
     }
@@ -428,25 +428,25 @@ function trSize(key, ctx = {}) {
     gap: 0;
   }
   &Header {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     color: #444;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.15rem;
   }
   &Prices {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #000;
   }
 }
 
 .menu-item__sizeLabel {
-  min-width: 64px;
+  min-width: 70px;
   text-align: center;
   display: inline-block;
 }
 .menu-item__sizePrice {
-  min-width: 64px;
+  min-width: 70px;
   text-align: center;
   display: inline-block;
 }

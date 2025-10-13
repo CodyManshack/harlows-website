@@ -1,5 +1,4 @@
 <template>
-  <!-- In-place bar keeps the ref and observers; hidden when sticky -->
   <div class="cocktail-filter" ref="filterBar" v-show="!isSticky">
     <div class="cocktail-filter__content">
       <span class="cocktail-filter__label">{{ t("filter.label") }}</span>
@@ -497,7 +496,7 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid #e8e8e8;
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   margin: 0;
   margin-top: -1rem;
   transition: all 0.3s ease;
@@ -532,7 +531,7 @@ onBeforeUnmount(() => {
   }
 
   &__label {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     color: #2c3e50;
     font-weight: 600;
     white-space: nowrap;
@@ -549,17 +548,18 @@ onBeforeUnmount(() => {
 
   &__tag {
     font-family: "Inter", "Roboto", Arial, sans-serif;
-    padding: 0.25rem 0.6rem;
+    padding: 0.5rem 0.8rem;
     border: 1px solid #d4d4d4;
-    border-radius: 4px;
+    border-radius: 6px;
     background: white;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     color: #2c3e50;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
     flex: 0 0 auto;
     text-align: center;
+    font-weight: 500;
 
     &:hover {
       border-color: #3498db;
@@ -573,15 +573,16 @@ onBeforeUnmount(() => {
   }
 
   &__clear {
-    padding: 0.25rem 0.6rem;
+    padding: 0.5rem 0.8rem;
     border: 1px solid #e74c3c;
     border-radius: 16px;
     background: white;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: #e74c3c;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    font-weight: 500;
 
     &:hover {
       background: #e74c3c;
@@ -592,14 +593,14 @@ onBeforeUnmount(() => {
   &__legend {
     background: transparent; // avoid double alpha over parent bg
     border-top: 1px solid #e9ecef;
-    padding-top: 12px;
-    margin-top: 12px;
+    padding: 16px 12px 8px 12px;
+    margin-top: 16px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
   }
   &__legendCaption {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     color: #2c3e50; /* align with filter label */
     font-weight: 600; /* align with filter label */
     margin-bottom: 12px;
@@ -608,16 +609,16 @@ onBeforeUnmount(() => {
 
   @media (max-width: 768px) {
     &__content {
-      gap: 0.5rem;
-      padding: 0 8px;
+      gap: 0.6rem;
+      padding: 0 12px;
     }
     &__tags {
-      gap: 0.3rem;
+      gap: 0.5rem;
     }
     &__tag,
     &__clear {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
+      font-size: 0.85rem;
+      padding: 0.45rem 0.7rem;
     }
   }
 }
