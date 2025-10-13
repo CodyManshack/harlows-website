@@ -399,10 +399,27 @@ function onFlavorPick(key) {
 }
 
 // Watch for filter changes and emit to parent
+
+function scrollToCocktailAnchor() {
+  // Use the same anchor as menu-section-cocktails
+  const el = document.getElementById("menu-section-cocktails");
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
 watch(
   selectedTags,
   () => {
     emit("filter-change", filteredCocktails.value);
+    scrollToCocktailAnchor();
+  },
+  { deep: true }
+);
+
+watch(
+  activeSortKeys,
+  () => {
+    emit("sort-change", [...activeSortKeys.value]);
+    scrollToCocktailAnchor();
   },
   { deep: true }
 );
