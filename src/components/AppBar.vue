@@ -235,9 +235,22 @@ const goToHome = () => {
   router.push({ name: "home", params: { locale: loc } });
 };
 
-const goToMenuPage = () => {
+const goToMenuAnchor = async (anchor) => {
+  drawer.value = false;
   const loc = router.currentRoute.value.params.locale || locale.value || "es";
-  router.push({ name: "menu", params: { locale: loc } });
+  const isMenu = router.currentRoute.value.name === "menu";
+  if (!isMenu) {
+    await router.push({ name: "menu", params: { locale: loc } });
+    // Wait for next tick so DOM is ready
+    setTimeout(() => {
+      const el = document.getElementById(anchor);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 250);
+  } else {
+    // Already on menu page
+    const el = document.getElementById(anchor);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
 };
 
 const slugify = (str) =>
