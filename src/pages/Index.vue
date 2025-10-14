@@ -162,6 +162,36 @@ useMeta(() => ({
         t("page.description") ||
         "Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.",
     },
+    // Open Graph tags for social sharing
+    "og:title": {
+      property: "og:title",
+      content: t("page.title") || "Harlow's Bar – Classic Cocktail Lounge",
+    },
+    "og:description": {
+      property: "og:description",
+      content:
+        t("page.description") ||
+        "Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.",
+    },
+    "og:image": {
+      property: "og:image",
+      content: absoluteUrl("/icons/favicon-128x128.png"),
+    },
+    "og:url": {
+      property: "og:url",
+      content: absoluteUrl(`/${route.params.locale || locale.value || "es"}`),
+    },
+    "og:type": {
+      property: "og:type",
+      content: "restaurant",
+    },
+    "og:locale": {
+      property: "og:locale",
+      content:
+        (route.params.locale || locale.value || "es") === "es"
+          ? "es_ES"
+          : "en_US",
+    },
   },
   link: [
     { rel: "alternate", hreflang: "es", href: absoluteUrl("/es") },

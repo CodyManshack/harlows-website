@@ -33,6 +33,13 @@ export function buildRestaurantJsonLd({ locale = "es", origin } = {}) {
     },
     telephone: "+34 692 940 844",
     servesCuisine: ["Cocktails", "Liquor", "Wine", "Beer", "Tapas"],
+    hasMenu: {
+      "@type": "Menu",
+      url: absoluteUrl(`/${locale}/menu`, origin),
+    },
+    acceptsReservations: "False",
+    paymentAccepted: "Cash, Credit Card",
+    currenciesAccepted: "EUR",
     openingHoursSpecification: Object.entries(businessHoursByDay)
       .filter(([_, hours]) => hours && hours.trim() !== "")
       .map(([day, hours]) => {

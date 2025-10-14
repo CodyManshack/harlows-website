@@ -12,9 +12,10 @@ export default {
     view: "Ver la carta",
     condensed: "La carta",
     meta: {
-      title: "Carta – Harlow's Bar",
+      title:
+        "Carta de Cócteles | Harlow's Bar Valencia - Bebidas Clásicas y Tapas",
       description:
-        "Descubre nuestra carta de cócteles, cervezas y vinos con especiales de temporada.",
+        "Consulta la carta de Harlow's con cócteles clásicos de la época de la prohibición, cervezas artesanales, vinos y tapas. Coctelería experta en Valencia, España.",
     },
   },
   navigation: {
@@ -31,9 +32,9 @@ export default {
       "Cócteles clásicos de la época de la prohibición con un enfoque que se mantiene fiel a las recetas originales",
   },
   page: {
-    title: "Harlow's Bar – Cóctel Lounge Clásico",
+    title: "Harlow's Bar Valencia | Cócteles Clásicos y Salón de los Años 20",
     description:
-      "Cócteles clásicos vintage de la época de la prohibición en un salón relajado de los años 20.",
+      "Harlow's Bar Valencia - Cócteles clásicos de la época de la prohibición en un salón vintage de los años 20. Coctelería artesanal, bebidas craft y tapas en el corazón de Valencia, España.",
   },
   contact: {
     address: "Dirección",

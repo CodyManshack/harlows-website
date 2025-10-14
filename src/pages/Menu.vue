@@ -29,6 +29,38 @@ useMeta(() => ({
         t("menu.meta.description") ||
         "Explore our cocktail, beer, and wine menu with seasonal specials.",
     },
+    // Open Graph tags for social sharing
+    "og:title": {
+      property: "og:title",
+      content: t("menu.meta.title") || "Menu – Harlow's Bar",
+    },
+    "og:description": {
+      property: "og:description",
+      content:
+        t("menu.meta.description") ||
+        "Explore our cocktail, beer, and wine menu with seasonal specials.",
+    },
+    "og:image": {
+      property: "og:image",
+      content: absoluteUrl("/icons/favicon-128x128.png"),
+    },
+    "og:url": {
+      property: "og:url",
+      content: absoluteUrl(
+        `/${route.params.locale || locale.value || "es"}/menu`
+      ),
+    },
+    "og:type": {
+      property: "og:type",
+      content: "restaurant.menu",
+    },
+    "og:locale": {
+      property: "og:locale",
+      content:
+        (route.params.locale || locale.value || "es") === "es"
+          ? "es_ES"
+          : "en_US",
+    },
   },
   link: [
     { rel: "alternate", hreflang: "es", href: absoluteUrl("/es/menu") },

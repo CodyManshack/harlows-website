@@ -12,9 +12,9 @@ export default {
     view: "View the menu",
     condensed: "Menu",
     meta: {
-      title: "Menu – Harlow's Bar",
+      title: "Cocktail Menu | Harlow's Bar Valencia - Classic Drinks & Tapas",
       description:
-        "Explore our cocktail, beer, and wine menu with seasonal specials.",
+        "Browse Harlow's cocktail menu featuring classic prohibition-era drinks, craft beers, wines, and tapas. Expert mixology in Valencia, Spain.",
     },
   },
   navigation: {
@@ -31,9 +31,9 @@ export default {
       "Classic prohibition-era cocktails with a focus on staying true to the original recipes",
   },
   page: {
-    title: "Harlow's Bar – Classic Cocktail Lounge",
+    title: "Harlow's Bar Valencia | Classic Cocktails & 1920s Speakeasy Lounge",
     description:
-      "Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.",
+      "Harlow's Bar Valencia - Classic prohibition-era cocktails in a vintage 1920s lounge. Expert mixology, craft drinks, and tapas in the heart of Valencia, Spain.",
   },
   contact: {
     address: "Address",
