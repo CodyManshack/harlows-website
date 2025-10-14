@@ -235,6 +235,11 @@ const goToHome = () => {
   router.push({ name: "home", params: { locale: loc } });
 };
 
+const goToMenuPage = () => {
+  const loc = router.currentRoute.value.params.locale || locale.value || "es";
+  router.push({ name: "menu", params: { locale: loc } });
+};
+
 const goToMenuAnchor = async (anchor) => {
   drawer.value = false;
   const loc = router.currentRoute.value.params.locale || locale.value || "es";
