@@ -35,6 +35,7 @@
       <q-btn
         flat
         dense
+        icon="language"
         :label="nextLanguage.toUpperCase()"
         @click="toggleLanguage"
         class="text-white"
@@ -46,6 +47,7 @@
           font-size: 0.8rem;
           min-height: 32px;
         "
+        aria-label="Switch language"
       />
     </q-toolbar>
     <q-bar :class="['hours-bar']">

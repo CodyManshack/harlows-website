@@ -25,13 +25,36 @@ export default defineRouter((/* { store, ssrContext } */) => {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
+  // Helper function to detect browser language
+  function getBrowserLocale() {
+    if (typeof navigator === "undefined") return "es"; // SSR fallback
+
+    // Get browser language (e.g., "en-US", "es-ES", "es")
+    const browserLang = navigator.language || navigator.userLanguage || "es";
+
+    console.log("Browser language detected:", browserLang);
+
+    // Extract the primary language code (e.g., "en" from "en-US")
+    const langCode = browserLang.toLowerCase().split("-")[0];
+
+    console.log("Language code extracted:", langCode);
+
+    // Return 'en' or 'es' based on browser language, default to 'es'
+    const finalLocale = ["en", "es"].includes(langCode) ? langCode : "es";
+
+    console.log("Final locale chosen:", finalLocale);
+
+    return finalLocale;
+  }
+
   // Sync route param :locale with i18n and <html lang>
   Router.beforeEach((to, from, next) => {
     const loc = to.params.locale;
+
+    console.log("Router beforeEach - to.path:", to.path, "locale param:", loc);
+
     if (!loc) {
-      // if navigating without locale param, redirect to default
-      if (to.path === "/") return next("/es");
-      // allow 404 and other routes
+      // Allow routes without locale param (e.g., 404)
       return next();
     }
     try {
