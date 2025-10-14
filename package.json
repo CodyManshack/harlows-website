@@ -11,6 +11,9 @@
     "test:watch": "vitest",
     "dev": "quasar dev",
     "build": "quasar build",
+    "dev:nuxt": "nuxt dev",
+    "build:nuxt": "nuxt build",
+    "generate": "nuxt generate",
     "postinstall": "quasar prepare"
   },
   "dependencies": {
@@ -26,6 +29,8 @@
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@quasar/app-vite": "^2.4.0",
     "autoprefixer": "^10.4.21",
+    "nuxt": "^3.13.0",
+    "nuxt-quasar-ui": "^2.1.0",
     "postcss": "^8.5.6",
     "vitest": "^1.6.0"
   },

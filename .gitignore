@@ -2,6 +2,10 @@
 .thumbs.db
 node_modules
 
+# Nuxt related build directories
+.nuxt
+.output
+
 # Quasar core related directories
 .quasar
 /dist
