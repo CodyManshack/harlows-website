@@ -11,7 +11,7 @@
       />
       <router-link :to="`/${currentLocale}`" aria-label="Home">
         <q-img
-          src="~/assets/logo-0.1x.png"
+          src="/logo-0.1x.png"
           :width="
             $q.screen.xs
               ? '160px'
