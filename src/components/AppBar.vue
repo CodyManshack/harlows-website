@@ -9,7 +9,7 @@
         @click="drawer = !drawer"
         aria-label="Menu"
       />
-      <router-link :to="{ name: 'home' }" aria-label="Home">
+      <router-link :to="`/${currentLocale}`" aria-label="Home">
         <q-img
           src="~/assets/logo-0.1x.png"
           :width="
@@ -131,12 +131,13 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuasar } from "quasar";
 import menu from "src/menu.js";
 
 const router = useRouter();
+const route = useRoute();
 const $q = useQuasar();
 const { t, locale } = useI18n({ useScope: "global" });
 const drawer = ref(false);
@@ -215,39 +216,43 @@ const dayHourCombos = computed(() => {
     });
 });
 
+const currentLocale = computed(() => {
+  return (route.params.locale || locale.value || "es").toString();
+});
+
 const toggleLanguage = () => {
   const next = nextLanguage.value;
   locale.value = next;
-  const name = router.currentRoute.value.name;
-  const params = { ...router.currentRoute.value.params, locale: next };
-  const query = router.currentRoute.value.query;
-  if (name) {
-    router.push({ name, params, query });
-  } else {
-    router.push({ path: `/${next}` });
-  }
+  // Always navigate using path based routing for Nuxt
+  const path = route.name === "menu" ? `/${next}/menu` : `/${next}`;
+  router.push(path);
 };
 
 const nextLanguage = computed(() => (locale.value === "en" ? "es" : "en"));
 
 const goToHome = () => {
-  const loc = router.currentRoute.value.params.locale || locale.value || "es";
-  router.push({ name: "home", params: { locale: loc } });
+  const loc = currentLocale.value;
+  router.push(`/${loc}`);
+};
+
+const goToMenuPage = () => {
+  drawer.value = false;
+  const loc = currentLocale.value;
+  router.push(`/${loc}/menu`);
 };
 
 const goToMenuAnchor = async (anchor) => {
   drawer.value = false;
-  const loc = router.currentRoute.value.params.locale || locale.value || "es";
-  const isMenu = router.currentRoute.value.name === "menu";
+  const loc = currentLocale.value;
+  const isMenu = route.name === "menu";
   if (!isMenu) {
-    await router.push({ name: "menu", params: { locale: loc } });
-    // Wait for next tick so DOM is ready
+    await router.push(`/${loc}/menu`);
+    // Wait a tick for DOM
     setTimeout(() => {
       const el = document.getElementById(anchor);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }, 250);
   } else {
-    // Already on menu page
     const el = document.getElementById(anchor);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   }
@@ -268,7 +273,7 @@ const menuSectionLinks = computed(() => {
     // Use label if present, else key. Support {en, es} object via t-like fallback
     let label = section?.label ?? key;
     if (label && typeof label === "object") {
-      const loc = (locale.value || "en").toString();
+      const loc = currentLocale.value || "en";
       label = label[loc] ?? label.en ?? Object.values(label)[0] ?? key;
     }
     sections.push({ label, anchor: `menu-section-${slugify(key)}` });
