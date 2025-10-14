@@ -8,39 +8,38 @@ body, html {
   font-display: swap;
   font-family: "neue-kabel", "Segoe UI", "Arial", "Helvetica Neue", Helvetica, sans-serif;
 }
-@media (max-width: $breakpoint-sm-max) {
+// Ensure min-height so background covers viewport
+html, body, #__nuxt, #__layout {
+  min-height: 100%;
+}
+// Base dark body background fallback (smallest image or color)
+body.body--dark {
+  /* Use existing asset (adjust if higher-res versions added). Using !important to override Quasar dark page color */
+  background: #000 url("@/assets/location/bar/0.5x.png") no-repeat center top / cover fixed !important;
+  background-attachment: fixed;
+}
+// Responsive higher-resolution background swaps
+@media (min-width: $breakpoint-sm-min) and (max-width: $breakpoint-md-max) {
   body.body--dark {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-      url("/bar/bar-400.jpg") no-repeat fixed;
+    background-image: linear-gradient(180deg, rgba(0,0,0,.4), rgba(0,0,0,.6)), url("/bar/bar-800.jpg") !important;
     background-position: 57% 0%;
-    background-size: cover;
-    background-attachment: fixed;
   }
 }
-@media (max-width: $breakpoint-md-max) {
+@media (min-width: $breakpoint-md-min) and (max-width: $breakpoint-lg-max) {
   body.body--dark {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-      url("/bar/bar-800.jpg") no-repeat fixed;
+    background-image: linear-gradient(180deg, rgba(0,0,0,.4), rgba(0,0,0,.6)), url("/bar/bar-1200.jpg") !important;
     background-position: 57% 0%;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-}
-@media (max-width: $breakpoint-lg-max) {
-  body.body--dark {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-      url("/bar/bar-1200.jpg") no-repeat fixed;
-    background-position: 57% 0%;
-    background-size: cover;
-    background-attachment: fixed;
   }
 }
 @media (min-width: $breakpoint-xl-min) {
   body.body--dark {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-      url("/bar/bar-2000.jpg") no-repeat fixed;
+    background-image: linear-gradient(180deg, rgba(0,0,0,.4), rgba(0,0,0,.6)), url("/bar/bar-2000.jpg") !important;
     background-position: 57% 45%;
-    background-size: cover;
-    background-attachment: fixed;
+  }
+}
+// iOS Safari fallback: avoid fixed attachment causing jank
+@supports (-webkit-touch-callout: none) {
+  body.body--dark {
+    background-attachment: scroll;
   }
 }
