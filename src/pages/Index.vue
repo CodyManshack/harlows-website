@@ -12,11 +12,11 @@
           <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 col-xl-4">
             <div class="hero-separation-card text-center">
               <div class="hero-text-overlay">
-                <h1 :class="headlineClasses">
+                <h1 class="text-h2 hero-seasons">
                   {{ t("hero.headline") }}
                 </h1>
                 <h2
-                  class="text-h6 text-weight-regular q-mt-md q-mb-xl hero-subtitle"
+                  class="text-h6 text-weight-light q-mt-md q-mb-xl hero-subtitle"
                 >
                   {{ t("hero.subtitle") }}
                 </h2>
@@ -145,14 +145,6 @@ const heroContentClasses = computed(() => [
   "row full-width hero-content",
 ]);
 
-const headlineClasses = computed(() => [
-  $q.screen.gt.xs ? "text-h2" : "text-h3",
-  "text-weight-regular text-italic",
-]);
-
-// Optimize meta setup
-// absoluteUrl imported from utils
-
 useMeta(() => ({
   title: t("page.title") || "Harlow's Bar – Classic Cocktail Lounge",
   meta: {
@@ -249,6 +241,11 @@ const goToMenu = () => {
   }
 }
 
+.hero-seasons {
+  font-family: "the-seasons", sans-serif;
+  font-weight: 700;
+}
+
 .hero-separation-card {
   background: rgba(0, 0, 0, 0.85);
   border-radius: 16px;
@@ -269,13 +266,11 @@ const goToMenu = () => {
     color: white !important;
     margin-top: 0;
     margin-bottom: 1rem;
-    font-weight: 300;
     letter-spacing: 1px;
   }
 
   h2 {
     color: rgba(255, 255, 255, 0.9) !important;
-    font-weight: 300;
     line-height: 1.4;
   }
 }
