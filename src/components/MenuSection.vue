@@ -14,8 +14,7 @@
       v-if="sectionKey === 'cocktails' && items && items.length > 0"
       class="filter-container"
     >
-      <!-- Sticky placeholder to prevent content jump -->
-      <div v-if="filterIsSticky" class="filter-placeholder"></div>
+      <!-- No placeholder needed - filter stays in layout with visibility:hidden when sticky -->
       <CocktailFilter
         ref="cocktailFilterRef"
         :cocktails="items"
@@ -101,7 +100,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch, nextTick } from "vue";
 import MenuItem from "./MenuItem.vue";
 import CocktailFilter from "./CocktailFilter.vue";
 import DiamondDivider from "./DiamondDivider.vue";
@@ -417,14 +416,9 @@ function getHeaderSizes(items) {
   display: inline-block;
 }
 
-/* Filter container and placeholder for sticky behavior */
+/* Filter container for sticky behavior */
 .filter-container {
   position: relative;
-}
-
-.filter-placeholder {
-  height: 80px; /* Approximate height of the filter when sticky */
-  width: 100%;
 }
 
 /* Smooth reordering animation for menu items */

@@ -1,8 +1,8 @@
 <template>
   <div
     class="cocktail-filter cocktail-filter--collapsed"
+    :class="{ 'cocktail-filter--hidden': isSticky }"
     ref="filterBar"
-    v-show="!isSticky"
   >
     <div class="cocktail-filter__content">
       <!-- Quasar Expansion for non-sticky mode (single source of truth) -->
@@ -674,6 +674,12 @@ onBeforeUnmount(() => {
   margin-top: -1rem;
   transition: all 0.3s ease;
   z-index: 100;
+
+  &--hidden {
+    /* Keep in layout but make invisible - prevents jump */
+    visibility: hidden;
+    pointer-events: none;
+  }
 
   &--sticky {
     position: fixed !important;
