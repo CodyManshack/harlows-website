@@ -16,6 +16,7 @@ export default {
       description:
         "Browse Harlow's cocktail menu featuring classic prohibition-era drinks, craft beers, wines, and tapas. Expert mixology in Valencia, Spain.",
     },
+    ogImageAlt: "Menu preview from Harlow's Bar: cocktails, beer and wine",
   },
   navigation: {
     navigate: "Navigate",
@@ -34,6 +35,7 @@ export default {
     title: "Harlow's Bar Valencia | Classic Cocktails & 1920s Speakeasy Lounge",
     description:
       "Harlow's Bar Valencia - Classic prohibition-era cocktails in a vintage 1920s lounge. Expert mixology, craft drinks, and tapas in the heart of Valencia, Spain.",
+    ogImageAlt: "Signature cocktails at Harlow's Bar in Valencia, Spain",
   },
   contact: {
     address: "Address",

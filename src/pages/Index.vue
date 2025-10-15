@@ -163,11 +163,29 @@ useMeta(() => ({
       property: "og:description",
       content:
         t("page.description") ||
-        "Vintage, prohibition-era classic cocktails in a relaxed 1920s lounge.",
+        "1920s cocktails made according to the original recipes — Valencia, Spain",
     },
     "og:image": {
       property: "og:image",
-      content: absoluteUrl("/icons/favicon-128x128.png"),
+      content: absoluteUrl("/icons/og-image.png"),
+    },
+    "og:image:secure_url": {
+      property: "og:image:secure_url",
+      content: absoluteUrl("/icons/og-image.png"),
+    },
+    "og:image:alt": {
+      property: "og:image:alt",
+      content:
+        t("page.ogImageAlt") ||
+        "Signature cocktails at Harlow's Bar in Valencia, Spain",
+    },
+    "og:image:width": {
+      property: "og:image:width",
+      content: "1200",
+    },
+    "og:image:height": {
+      property: "og:image:height",
+      content: "630",
     },
     "og:url": {
       property: "og:url",
@@ -177,12 +195,44 @@ useMeta(() => ({
       property: "og:type",
       content: "restaurant",
     },
+    "og:site_name": {
+      property: "og:site_name",
+      content: "Harlow's Bar",
+    },
     "og:locale": {
       property: "og:locale",
       content:
         (route.params.locale || locale.value || "es") === "es"
           ? "es_ES"
           : "en_US",
+    },
+    // Locale alternates to help platforms understand available translations
+    "og:locale:alternate:es": {
+      property: "og:locale:alternate",
+      content: "es_ES",
+    },
+    "og:locale:alternate:en": {
+      property: "og:locale:alternate",
+      content: "en_US",
+    },
+    // Twitter Card tags (mirror OG)
+    "twitter:card": {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    "twitter:title": {
+      name: "twitter:title",
+      content: t("page.title") || "Harlow's Bar – Classic Cocktail Lounge",
+    },
+    "twitter:description": {
+      name: "twitter:description",
+      content:
+        t("page.description") ||
+        "1920s cocktails made according to the original recipes — Valencia, Spain",
+    },
+    "twitter:image": {
+      name: "twitter:image",
+      content: absoluteUrl("/icons/og-image.png"),
     },
   },
   link: [

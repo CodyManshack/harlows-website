@@ -38,11 +38,29 @@ useMeta(() => ({
       property: "og:description",
       content:
         t("menu.meta.description") ||
-        "Explore our cocktail, beer, and wine menu with seasonal specials.",
+        "1920s cocktails made according to the original recipes — Valencia, Spain",
     },
     "og:image": {
       property: "og:image",
-      content: absoluteUrl("/icons/favicon-128x128.png"),
+      content: absoluteUrl("/icons/og-image.png"),
+    },
+    "og:image:secure_url": {
+      property: "og:image:secure_url",
+      content: absoluteUrl("/icons/og-image.png"),
+    },
+    "og:image:alt": {
+      property: "og:image:alt",
+      content:
+        t("menu.ogImageAlt") ||
+        "Menu preview from Harlow's Bar: cocktails, beer and wine",
+    },
+    "og:image:width": {
+      property: "og:image:width",
+      content: "1200",
+    },
+    "og:image:height": {
+      property: "og:image:height",
+      content: "630",
     },
     "og:url": {
       property: "og:url",
@@ -54,12 +72,43 @@ useMeta(() => ({
       property: "og:type",
       content: "restaurant.menu",
     },
+    "og:site_name": {
+      property: "og:site_name",
+      content: "Harlow's Bar",
+    },
     "og:locale": {
       property: "og:locale",
       content:
         (route.params.locale || locale.value || "es") === "es"
           ? "es_ES"
           : "en_US",
+    },
+    "og:locale:alternate:es": {
+      property: "og:locale:alternate",
+      content: "es_ES",
+    },
+    "og:locale:alternate:en": {
+      property: "og:locale:alternate",
+      content: "en_US",
+    },
+    // Twitter Card tags (mirror OG)
+    "twitter:card": {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    "twitter:title": {
+      name: "twitter:title",
+      content: t("menu.meta.title") || "Menu – Harlow's Bar",
+    },
+    "twitter:description": {
+      name: "twitter:description",
+      content:
+        t("menu.meta.description") ||
+        "1920s cocktails made according to the original recipes — Valencia, Spain",
+    },
+    "twitter:image": {
+      name: "twitter:image",
+      content: absoluteUrl("/icons/og-image.png"),
     },
   },
   link: [
