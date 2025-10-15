@@ -1,15 +1,20 @@
 <template>
   <div class="appbar bg-primary">
-    <q-toolbar class="app-toolbar justify-center">
+    <q-toolbar class="appbar__toolbar">
       <q-btn
         flat
         dense
         icon="menu"
-        style="position: absolute; left: 14px; top: 14px"
+        class="appbar__menu-btn"
         @click="drawer = !drawer"
         aria-label="Menu"
       />
-      <router-link :to="{ name: 'home' }" aria-label="Home">
+
+      <router-link
+        :to="{ name: 'home' }"
+        aria-label="Home"
+        class="appbar__logo"
+      >
         <q-img
           src="~/assets/logo-0.1x.png"
           :width="
@@ -24,67 +29,42 @@
               : '260px'
           "
           alt="Harlow's Bar Logo"
-          :style="{
-            marginTop: $q.screen.gt.sm ? '6px' : '0',
-            marginBottom: $q.screen.gt.sm ? '6px' : '0',
-          }"
         />
       </router-link>
 
-      <!-- Language Toggle in top right -->
       <q-btn
         flat
         dense
         icon="language"
         :label="nextLanguage.toUpperCase()"
         @click="toggleLanguage"
-        class="text-white"
-        style="
-          position: absolute;
-          right: 14px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 0.8rem;
-          min-height: 32px;
-        "
+        class="appbar__language-switch"
         aria-label="Switch language"
       />
     </q-toolbar>
-    <q-bar :class="['hours-bar']">
-      <div
-        :class="[
-          $q.screen.gt.sm ? 'text-body1' : 'text-caption',
-          'row no-wrap full-width justify-evenly hours-content items-center',
-        ]"
-      >
+
+    <q-bar class="appbar__hours-bar">
+      <div class="appbar__hours-content">
         <div
           v-for="group in dayHourCombos"
           :key="group.label + group.hours"
-          :class="['hours-item', { 'is-today': group.isToday }]"
+          :class="['appbar__hours-item', { 'is-today': group.isToday }]"
         >
-          <span
-            :class="[
-              $q.screen.lt.sm ? 'q-pr-xs' : 'q-pr-md',
-              group.isToday ? 'hours-today' : 'hours-other',
-            ]"
-          >
-            {{ group.label }}
-          </span>
-          <span :class="group.isToday ? 'hours-today' : 'hours-other'">{{
-            group.hours
-          }}</span>
+          <span class="appbar__hours-label">{{ group.label }}</span>
+          <span class="appbar__hours-value">{{ group.hours }}</span>
         </div>
       </div>
     </q-bar>
   </div>
+
   <q-drawer
     v-model="drawer"
-    class="bg-primary"
+    class="appbar__drawer bg-primary"
     :width="$q.screen.gt.sm ? 280 : 240"
     dark
     behavior="mobile"
   >
-    <q-list padding>
+    <q-list padding class="appbar__nav">
       <!-- Navigation -->
       <q-item-label header class="text-body1">Navigation</q-item-label>
 
@@ -113,7 +93,7 @@
         v-ripple
         @click="goToMenuAnchor(link.anchor)"
         v-close-popup
-        class="q-pl-lg"
+        class="appbar__menu-section-link"
       >
         <q-item-section>
           <q-item-label class="text-h6 text-weight-regular">{{
@@ -123,14 +103,13 @@
       </q-item>
     </q-list>
 
-    <div class="full-width text-center" style="position: fixed; bottom: 12px">
-      <div class="text-caption text-grey-6">
+    <div class="appbar__copyright">
+      <div class="text-caption">
         © {{ new Date().getFullYear() }} Harlow's Bar
       </div>
     </div>
   </q-drawer>
 </template>
-
 <script setup>
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -285,51 +264,118 @@ const menuSectionLinks = computed(() => {
 </script>
 
 <style lang="scss">
-.hours-other {
-  font-size: 0.7rem;
-  opacity: 0.8;
-}
-.hours-today {
-  color: #fff !important;
-  font-size: 0.75rem;
-  font-weight: bold;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-}
-.q-item__label::first-letter {
-  text-transform: capitalize;
-}
+// AppBar BEM & nesting refactor
+.appbar {
+  &.bg-primary {
+    width: 100%;
+    transition: background-color 0.3s;
+  }
 
-// Normal-flow app bar (scrolls with content)
-.appbar.bg-primary {
-  width: 100%;
-  transition: background-color 0.3s;
-}
-/* Increased header and hours bar sizes for breathing room */
-.app-toolbar {
-  min-height: 64px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-.hours-bar {
-  min-height: 30px;
-}
-.hours-item {
-  display: flex;
-  align-items: center;
-}
-.hours-item.is-today::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #fff;
-  margin-right: 2px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
-}
+  &__toolbar {
+    min-height: 64px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
 
-/* Tighter baseline and consistent line height to avoid vertical shift */
-.hours-content {
-  line-height: 1.3;
+  &__menu-btn {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+  }
+
+  &__logo {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__language-switch {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    min-height: 32px;
+    color: #fff;
+  }
+
+  &__hours-bar {
+    min-height: 30px;
+  }
+
+  &__hours-content {
+    line-height: 1.3;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__hours-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    opacity: 0.85;
+
+    &.is-today {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      opacity: 1;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #fff;
+        margin-right: 2px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  &__hours-label {
+    margin-right: 6px;
+  }
+
+  &__drawer {
+    .appbar__nav {
+      .q-item__label {
+        &::first-letter {
+          text-transform: capitalize;
+        }
+      }
+    }
+
+    .appbar__menu-section-link {
+      padding-left: 1.5rem;
+    }
+
+    .appbar__copyright {
+      position: fixed;
+      bottom: 12px;
+      width: 100%;
+      text-align: center;
+      .text-caption {
+        color: #888;
+      }
+    }
+  }
 }
 </style>
