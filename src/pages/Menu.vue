@@ -115,7 +115,10 @@ useMeta(() => ({
     { rel: "alternate", hreflang: "en", href: absoluteUrl("/en/menu") },
     { rel: "alternate", hreflang: "es", href: absoluteUrl("/es/menu") },
     { rel: "alternate", hreflang: "x-default", href: absoluteUrl("/en/menu") },
-    { rel: "canonical", href: absoluteUrl("/en/menu") },
+    {
+      rel: "canonical",
+      href: absoluteUrl(`/${route.params.locale || locale.value || "es"}/menu`),
+    },
   ],
   script: [
     {
