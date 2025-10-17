@@ -1,48 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <!-- Spanish homepage -->
+  <!-- Home -->
   <url>
-    <loc>https://harlows.bar/es/</loc>
-    <lastmod>2025-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/es/" />
+    <loc>https://harlows.bar/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/en"/>
   </url>
-  
-  <!-- English homepage -->
   <url>
-    <loc>https://harlows.bar/en/</loc>
-    <lastmod>2025-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/es/" />
+    <loc>https://harlows.bar/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/en"/>
   </url>
-  
-  <!-- Spanish menu page -->
-  <url>
-    <loc>https://harlows.bar/es/menu</loc>
-    <lastmod>2025-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es/menu" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en/menu" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/es/menu" />
-  </url>
-  
-  <!-- English menu page -->
+
+  <!-- Menu -->
   <url>
     <loc>https://harlows.bar/en/menu</loc>
-    <lastmod>2025-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es/menu" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en/menu" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/es/menu" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es/menu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/en/menu"/>
+  </url>
+  <url>
+    <loc>https://harlows.bar/es/menu</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://harlows.bar/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://harlows.bar/es/menu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://harlows.bar/en/menu"/>
   </url>
 </urlset>
 
