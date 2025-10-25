@@ -311,11 +311,16 @@ function trSize(key, ctx = {}) {
     margin-top: 0;
     margin-left: 0.5rem;
     background: rgba($accent, 0.1);
+    // Symmetric padding for visually centered text inside the badge
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    display: inline; // inline to align baseline with surrounding text
-    vertical-align: baseline; // ensure baseline alignment
-    line-height: 1; // avoid extra box height affecting baseline
+    // Inline flex to center the text vertically within the badge
+    display: inline-flex;
+    align-items: center;
+    line-height: 1; // compact internal line box so padding handles the height
+    // Shift the badge up by the bottom padding amount so the bottom edge sits on the baseline
+    position: relative;
+    bottom: 0.2rem;
   }
 
   &__desc {
@@ -412,7 +417,8 @@ function trSize(key, ctx = {}) {
     }
 
     &__seasonal {
-      align-self: flex-start;
+      /* Let it participate in the parent's baseline alignment */
+      align-self: auto;
       width: auto;
       max-width: fit-content;
     }
