@@ -170,6 +170,7 @@ const handleSortChange = (keys) => {
 
 // Custom display order for cocktails section
 const defaultCocktailOrder = [
+  "Mulled Wine",
   "Hot Buttered Rum",
   "Pisco Sour",
   "Espresso Martini",
