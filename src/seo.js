@@ -77,8 +77,10 @@ export function buildMenuJsonLd({ locale = "es", currency = "EUR" } = {}) {
     v && typeof v === "object"
       ? v[locale] ?? v.en ?? Object.values(v)[0] ?? ""
       : v ?? "";
+  const visible = (arr) =>
+    Array.isArray(arr) ? arr.filter((it) => !(it && it.hidden === true)) : [];
   const sections = Object.entries(menuData).map(([key, section]) => {
-    const items = section.items || [];
+    const items = visible(section.items || []);
     const subsections = Object.entries(section)
       .filter(
         ([k, v]) =>
@@ -109,7 +111,7 @@ export function buildMenuJsonLd({ locale = "es", currency = "EUR" } = {}) {
     const subSections = subsections.map(({ key: subKey, data: sub }) => ({
       "@type": "MenuSection",
       name: tr(sub.label ?? sub.title ?? subKey),
-      hasMenuItem: (sub.items || []).map((it) => ({
+      hasMenuItem: visible(sub.items || []).map((it) => ({
         "@type": "MenuItem",
         name: tr(it.name),
         description: tr(it.description),

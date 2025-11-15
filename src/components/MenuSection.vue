@@ -11,13 +11,13 @@
 
     <!-- Cocktail Filter -->
     <div
-      v-if="sectionKey === 'cocktails' && items && items.length > 0"
+      v-if="sectionKey === 'cocktails' && visibleSectionItems.length > 0"
       class="filter-container"
     >
       <!-- No placeholder needed - filter stays in layout with visibility:hidden when sticky -->
       <CocktailFilter
         ref="cocktailFilterRef"
-        :cocktails="items"
+        :cocktails="visibleSectionItems"
         @filter-change="handleFilterChange"
         @sticky-change="handleStickyChange"
         @sort-change="handleSortChange"
@@ -45,7 +45,7 @@
     </transition-group>
     <!-- Bottom sentinel for cocktails section to stop sticky filter before next section title -->
     <div
-      v-if="sectionKey === 'cocktails' && items && items.length > 0"
+      v-if="sectionKey === 'cocktails' && visibleSectionItems.length > 0"
       class="cocktail-section-end-sentinel"
       aria-hidden="true"
     />
@@ -57,16 +57,16 @@
       >
         <div
           class="menu-subsection-title-row"
-          :class="{ 'has-sizes': getHeaderSizes(sub.items).length }"
+          :class="{ 'has-sizes': getHeaderSizes(visible(sub.items)).length }"
         >
           <h3 class="menu-subsection-title">
             {{ tr(sub.label ?? sub.title ?? subkey) }}
           </h3>
-          <template v-if="getHeaderSizes(sub.items).length">
+          <template v-if="getHeaderSizes(visible(sub.items)).length">
             <div class="menu-subsection-sizes">
               <div class="menu-item-sizes-row menu-item-sizes-header">
                 <span
-                  v-for="size in getHeaderSizes(sub.items)"
+                  v-for="size in getHeaderSizes(visible(sub.items))"
                   :key="size"
                   class="menu-item-size-label"
                   >{{
@@ -81,7 +81,7 @@
           {{ tr(sub.subtitle) }}
         </div>
         <MenuItem
-          v-for="item in sub.items"
+          v-for="item in visible(sub.items)"
           :key="tr(item.name)"
           :item="{
             ...item,
@@ -89,8 +89,8 @@
             description: tr(item.description),
           }"
           :liquor="sectionKey === 'liquors' || subkey === 'gin'"
-          :hideSizes="getHeaderSizes(sub.items).length > 0"
-          :headerSizes="getHeaderSizes(sub.items)"
+          :hideSizes="getHeaderSizes(visible(sub.items)).length > 0"
+          :headerSizes="getHeaderSizes(visible(sub.items))"
           :sectionKey="sectionKey"
           :subsectionKey="subkey"
         />
@@ -243,15 +243,24 @@ const sortByFlavorsThenDefault = (items, keys) => {
   });
 };
 
+// Visibility helpers
+const visible = (arr) =>
+  Array.isArray(arr) ? arr.filter((it) => !(it && it.hidden === true)) : [];
+
+const visibleSectionItems = computed(() => visible(props.items));
+
 const displayItems = computed(() => {
   if (props.sectionKey === "cocktails") {
-    const items =
-      filteredItems.value.length > 0 ? filteredItems.value : props.items || [];
+    // If CocktailFilter provided a filtered list, it is already based on visible items
+    const base =
+      filteredItems.value.length > 0
+        ? filteredItems.value
+        : visibleSectionItems.value;
     return activeSortKeys.value.length
-      ? sortByFlavorsThenDefault(items, activeSortKeys.value)
-      : sortDefault(items);
+      ? sortByFlavorsThenDefault(base, activeSortKeys.value)
+      : sortDefault(base);
   }
-  return props.items || [];
+  return visibleSectionItems.value;
 });
 
 // Determine index of first item with an image for LCP priority

@@ -333,11 +333,12 @@ export default {
         price: 7,
         description: {
           en: "the oldest wintertime beverage, mulled wine is made with a semi-fruity red wine, spices, and a touch of brandy",
-          es: "la bebida alcohólica caliente más antigua, Mulled Wine – el vino caliente – se elabora con un vino tinto semiafrutado, especias y un toque de brandy"
+          es: "la bebida alcohólica caliente más antigua, Mulled Wine – el vino caliente – se elabora con un vino tinto semiafrutado, especias y un toque de brandy",
         },
         profile: { boozy: 2, bitter: 1, sweet: 3, citrus: 2, tart: 1 },
         seasonal: true,
-        tags: ["fruity"]
+        tags: ["fruity"],
+        hidden: true,
       },
       {
         name: "Negroni",
