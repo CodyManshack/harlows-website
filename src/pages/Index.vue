@@ -129,7 +129,7 @@ const contactButtons = [
     icon: "logo-whatsapp",
     title: "whatsapp",
     subtitle: "(+34) 692 940 844",
-    href: "https://wa.me/34657123456",
+    href: "https://wa.me/34692940844",
   },
   {
     icon: "mail",
