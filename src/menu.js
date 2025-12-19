@@ -275,8 +275,8 @@ export default {
         name: "Manhattan",
         price: 11,
         description: {
-          en: "sweet bourbon with bitter notes",
-          es: "rye whiskey con matices dulces y amargos",
+          en: "rye whiskey with spicy and bitter notes",
+          es: "rye whiskey con matices especiados y amargos",
         },
         profile: { boozy: 5, bitter: 4, sweet: 1, citrus: 0, tart: 1 },
       },
