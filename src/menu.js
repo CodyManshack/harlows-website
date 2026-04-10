@@ -247,6 +247,7 @@ export default {
           es: "un pequeño y dulce capricho, la perfecta copa nocturna. Ron negro caliente especiado con mantequilla dulce, nata montada, canela y nuez moscada",
         },
         seasonal: true,
+        hidden: true,
         profile: { boozy: 1, bitter: 2, sweet: 5, citrus: 0, tart: 0 },
         dairy: true,
         img: "/cocktails/hotbutteredrum",
@@ -337,6 +338,7 @@ export default {
         },
         profile: { boozy: 2, bitter: 1, sweet: 3, citrus: 2, tart: 1 },
         seasonal: true,
+        hidden: true,
         tags: ["fruity"],
       },
       {
