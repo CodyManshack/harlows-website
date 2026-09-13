@@ -735,24 +735,24 @@ export default {
         },
       ],
     },
-    "local • Emi": {
-      subtitle: {
-        en: "Emi craft beers are local, from our very own neighborhood (el botànic)!",
-        es: "¡Las cervezas artesanales Emi son locales, de nuestro propio barrio (el botànic)!",
-      },
-      items: [
-        {
-          name: "La Canya",
-          type: "Brown Ale",
-          price: 5,
-        },
-        {
-          name: "Tira-Li Golden Ale",
-          type: "Golden Ale",
-          price: 5,
-        },
-      ],
-    },
+    // "local • Emi": {
+    //   subtitle: {
+    //     en: "Emi craft beers are local, from our very own neighborhood (el botànic)!",
+    //     es: "¡Las cervezas artesanales Emi son locales, de nuestro propio barrio (el botànic)!",
+    //   },
+    //   items: [
+    //     {
+    //       name: "La Canya",
+    //       type: "Brown Ale",
+    //       price: 5,
+    //     },
+    //     {
+    //       name: "Tira-Li Golden Ale",
+    //       type: "Golden Ale",
+    //       price: 5,
+    //     },
+    //   ],
+    // },
     bottles: {
       label: { en: "bottles", es: "botellas" },
       items: [
