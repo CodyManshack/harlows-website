@@ -113,11 +113,11 @@ export default {
         name: "Aviation",
         price: 10,
         description: {
-          en: "floral violet liqueur with tart lemon and maraschino cherry",
-          es: "licor de violeta floral con limón ácido y cereza maraschino",
+          en: "floral violet liqueur with tart lemon and maraschino cherry (not sweet)",
+          es: "licor de violeta floral con limón ácido y cereza maraschino (no dulce)",
         },
         img: "/cocktails/aviation",
-        profile: { boozy: 3, bitter: 0, sweet: 3, citrus: 3, tart: 5 },
+        profile: { boozy: 3, bitter: 0, sweet: 0, citrus: 3, tart: 5 },
       },
       {
         name: "Bacardi Cocktail",
@@ -247,7 +247,7 @@ export default {
           es: "un pequeño y dulce capricho, la perfecta copa nocturna. Ron negro caliente especiado con mantequilla dulce, nata montada, canela y nuez moscada",
         },
         seasonal: true,
-        hidden: true,
+        hidden: false,
         profile: { boozy: 1, bitter: 2, sweet: 5, citrus: 0, tart: 0 },
         dairy: true,
         img: "/cocktails/hotbutteredrum",
@@ -316,7 +316,7 @@ export default {
           en: "a spicy chocolate experience reminiscent of a spicy mole sauce. Notes of cinnamon, chocolate, cherry, and chili pepper",
           es: "un Harlow’s Original: una experiencia de chocolate picante que recuerda a una salsa mole picante. Notas de canela, chocolate, cereza y chile",
         },
-        seasonal: true,
+        seasonal: false,
         profile: { boozy: 4, bitter: 3, sweet: 3, citrus: 1, tart: 3 },
         spicy: true,
       },
@@ -591,7 +591,7 @@ export default {
     vodka: {
       items: [
         {
-          name: "Heredero",
+          name: "Tito's Handmade",
           price: 5.5,
         },
         {
@@ -652,8 +652,8 @@ export default {
           price: 7,
         },
         {
-          name: "Wild Turkey Longbranch",
-          price: 9.5,
+          name: "Four Roses",
+          price: 7,
         },
       ],
     },
@@ -667,17 +667,21 @@ export default {
           name: "Hibiki Harmony Master's Select",
           price: 25,
         },
+        {
+          name: "Hinotori 5 Year Blend",
+          price: 10,
+        },
       ],
     },
     scotch: {
       items: [
         {
-          name: "Monkey Shoulder",
-          price: 7,
+          name: "Balvenie: Creation of a Classic",
+          price: 17,
         },
         {
-          name: "Johnnie Walker Island Green",
-          price: 10,
+          name: "Monkey Shoulder",
+          price: 7,
         },
         {
           name: "Macallan 12",
@@ -692,7 +696,7 @@ export default {
           price: 6.5,
         },
         {
-          name: "Volcan Blanco",
+          name: "Herradura Reposado",
           price: 9.5,
         },
         {
@@ -762,6 +766,15 @@ export default {
           description: {
             en: "a Mediterranean lager brewed in Barcelona since 1876",
             es: "una cerveza lager mediterránea elaborada en Barcelona desde 1876",
+          },
+          price: 3.5,
+        },
+        {
+          name: "Turia Stark",
+          type: "Blonde",
+          description: {
+            en: "a light and refreshing blonde beer brewed in Valencia since 1947",
+            es: "una cerveza rubia ligera y refrescante elaborada en Valencia desde 1947",
           },
           price: 3.5,
         },
